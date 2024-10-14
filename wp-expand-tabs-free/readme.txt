@@ -2,8 +2,8 @@
 Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: tabs, vertical tabs, nested tabs, woocommerce tabs, custom product tabs
 Requires at least: 4.7
-Tested up to: 6.6.1
-Stable tag: 2.2.5
+Tested up to: 6.6.2
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -240,6 +240,12 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 2.2.6 - Oct 14, 2024 =
+* Fix: A few strings were not translatable.
+* Fix: The PHP 7.2 compatibility issue.
+* Updated: The language (.pot) file.
+* Tested: WordPress 6.6.2 compatibility.
 
 = 2.2.5 - Aug 27, 2024 =
 * Fix: The warning when the tab title border width is set to 0 or empty.

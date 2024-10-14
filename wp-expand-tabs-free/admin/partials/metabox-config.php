@@ -138,7 +138,7 @@ SP_WP_TABS::createSection(
 							__( 'Make it Deep-Linking (Pro)', 'wp-expand-tabs-free' ),
 							__( 'Check to enable the ability to associate a direct link or URL with a specific tab', 'wp-expand-tabs-free' ),
 							__( 'Open Docs', 'wp-expand-tabs-free' ),
-							__( 'Live Demo', 'wp-expand-tabs-free' ),
+							__( 'Live Demo', 'wp-expand-tabs-free' )
 						),
 						'default'    => false,
 						'class'      => 'sp-tab__tab-linking',
@@ -197,13 +197,13 @@ SP_WP_TABS::createSection(
 					__( 'Tabs Layout', 'wp-expand-tabs-free' ),
 					__( 'Choose a layout from five individual layout styles to customize how your tabs are displayed in the frontend.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'desc'       => sprintf(
 					/* translators: 1: start link and bold tag, 2: close tag. */
 					__( 'To unlock Horizontal Bottom, Vertical (Left & Right), Tabs Carousel, and more settings, %1$sUpgrade To Pro!%2$s', 'wp-expand-tabs-free' ),
 					'<a href="https://wptabs.com/pricing/?ref=1"  target="_blank"><b>',
-					'</b></a>',
+					'</b></a>'
 				),
 				'options'    => array(
 					'horizontal'        => array(
@@ -253,7 +253,7 @@ SP_WP_TABS::createSection(
 					__( 'Tabs Alignment', 'wp-expand-tabs-free' ),
 					__( 'Choose where you want your tabs to appear – at the top, right, bottom, or left of your content, allowing you to customize their position to best suit your layout and design.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'options'    => array(
 					'tab-horizontal-alignment-left'      => array(
@@ -291,7 +291,7 @@ SP_WP_TABS::createSection(
 					__( 'Activator Event', 'wp-expand-tabs-free' ),
 					__( 'Set an event to switch between tabs with Autoplay, On Click, or Mouse Hover.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'options'    => array(
 					'tabs-activator-event-click' => __( 'On Click', 'wp-expand-tabs-free' ),
@@ -373,7 +373,7 @@ SP_WP_TABS::createSection(
 					/* translators: 1: start link and blod tag, 2: close tag. */
 					__( 'To unlock the following essential Tabs Icon options, %1$sUpgrade To Pro!%2$s', 'wp-expand-tabs-free' ),
 					'<a href="https://wptabs.com/pricing/?ref=1" target="_blank"><b>',
-					'</b></a>',
+					'</b></a>'
 				),
 			),
 			array(
@@ -465,7 +465,7 @@ SP_WP_TABS::createSection(
 					__( 'Icon Position (Pro)', 'wp-expand-tabs-free' ),
 					__( 'This option allows you to specify the position of icons within your tab interface. You can place icons to the Top, Right, Bottom and Left of tab\'s title.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'options'    => array(
 					'tab-icon-position-left'  => array(
@@ -602,7 +602,7 @@ SP_WP_TABS::createSection(
 					__( 'Active Tab Style (Pro)', 'wp-expand-tabs-free' ),
 					__( 'Choose how the currently selected tab looks. You can add a line to the Top or Bottom of tab\'s title to make it stand out.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'options'    => array(
 					'horizontal-active-tab-normal'      => array(
@@ -687,7 +687,7 @@ SP_WP_TABS::createSection(
 					__( 'Flat Tab Style (Pro)', 'wp-expand-tabs-free' ),
 					__( 'Select the Underline option to enhance your tabs with flat underline positioned below the tab navigation for a clean and modern look.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'options'    => array(
 					'horizontal-flat-tab-normal'    => array(
@@ -724,7 +724,7 @@ SP_WP_TABS::createSection(
 					'<b>',
 					'</b>',
 					'<a href="https://wptabs.com/pricing/?ref=1" target="_blank"><b>',
-					'</b></a>',
+					'</b></a>'
 				),
 			),
 			array(
@@ -756,7 +756,7 @@ SP_WP_TABS::createSection(
 					__( 'Tabs Mode on Small Screen', 'wp-expand-tabs-free' ),
 					__( 'Choose how your tabs behave on small screens, such as mobile devices. You can select "Full Width" to maintain the current layout or "Accordion" to switch to a collapsible format, ensuring the best user experience on mobile.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'options'    => array(
 					'full_widht'     => __( 'Full Width', 'wp-expand-tabs-free' ),
@@ -789,7 +789,7 @@ SP_WP_TABS::createSection(
 					__( 'Animation', 'wp-expand-tabs-free' ),
 					__( 'You can select animation to enhance your tab with over 50+ fascinating animations to add dynamic and eye-catching effects to your content.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
-					__( 'Live Demo', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
 				),
 				'text_on'    => __( 'Enabled', 'wp-expand-tabs-free' ),
 				'text_off'   => __( 'Disabled', 'wp-expand-tabs-free' ),
@@ -878,7 +878,7 @@ SP_WP_TABS::createSection(
 					'<strong>',
 					'</strong>',
 					'<a href="https://wptabs.com/pricing/?ref=1" target="_blank"><b>',
-					'</b></a>',
+					'</b></a>'
 				),
 			),
 		),
@@ -904,7 +904,7 @@ SP_WP_TABS::createSection(
 					'<a href="https://wptabs.com/pricing/?ref=1" target="_blank"><b>',
 					'</b></a>',
 					'<b class="sptpro-notice-typo-exception">',
-					'</b>',
+					'</b>'
 				),
 			),
 			array(

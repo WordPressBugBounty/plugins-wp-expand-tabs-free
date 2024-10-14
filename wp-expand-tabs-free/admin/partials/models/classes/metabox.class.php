@@ -359,7 +359,7 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 
 			echo '</div>';
 
-			echo '<a class="btn btn-success" id="sp-tab-show-preview" data-id="' . esc_attr( $post->ID ) . '"href=""> <i class="fa fa-eye" aria-hidden="true"></i> ' . esc_html( 'Show Preview' ) . '</a>';
+			echo '<a class="btn btn-success" id="sp-tab-show-preview" data-id="' . esc_attr( $post->ID ) . '"href=""> <i class="fa fa-eye" aria-hidden="true"></i> ' . esc_html__( 'Show Preview', 'wp-expand-tabs-free' ) . '</a>';
 
 			echo '<div class="clear"></div>';
 

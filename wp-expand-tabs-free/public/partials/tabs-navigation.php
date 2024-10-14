@@ -22,12 +22,12 @@
 			$tabs_aria_controls_for_id = 'tab-' . $post_id . $sptpro_data_count;
 			?>
 			<li class="sp-tab__nav-item" role="tab">
-				<span class="sp-tab__nav-link<?php echo esc_attr( $sptpro_active_class ); ?>" data-sptoggle="tab" for="#<?php echo esc_attr( $tabs_aria_controls_for_id ); ?>" role="tab" <?php echo sprintf( esc_attr( $title_data_attr ), esc_attr( $tabs_aria_controls_for_id ) ); ?>>
+				<span class="sp-tab__nav-link<?php echo esc_attr( $sptpro_active_class ); ?>" data-sptoggle="tab" for="#<?php echo esc_attr( $tabs_aria_controls_for_id ); ?>" role="tab" <?php printf( esc_attr( $title_data_attr ), esc_attr( $tabs_aria_controls_for_id ) ); ?>>
 					<span class="tab_title_area"><?php echo wp_kses_post( $tabs_content_title ); ?></span>
 		</span>
 			</li>
 			<?php
-			$sptpro_data_count++;
+			++$sptpro_data_count;
 		}
 	}
 	?>

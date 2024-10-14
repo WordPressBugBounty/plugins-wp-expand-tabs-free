@@ -78,7 +78,14 @@ class WP_Tabs_Admin_Menu {
 		$screen = get_current_screen();
 		if ( 'sp_wp_tabs' === $screen->post_type ) {
 			$url  = 'https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post';
-			$text = sprintf( wp_kses_post( 'Enjoying <strong>WP Tabs?</strong> Please rate us <span class="sptabs-footer-text-star">★★★★★</span> <a href="%s" target="_blank">WordPress.org</a>. Your positive feedback will help us grow more. Thank you! 😊', 'wp-expand-tabs-free' ), esc_url( $url ) );
+			$text = sprintf(
+				/* translators: 1: start strong tag, 2: close strong tag, 3: start a tag, 4: close a tag. */
+				__( 'Enjoying %1$sWP Tabs?%2$s Please rate us %3$sWordPress.org%4$s. Your positive feedback will help us grow more. Thank you! 😊', 'wp-expand-tabs-free' ),
+				'<strong>',
+				'</strong>',
+				'<span class="sptabs-footer-text-star">★★★★★</span> <a href="' . esc_url( $url ) . '" target="_blank">',
+				'</a>'
+			);
 		}
 
 		return $text;

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Tabs 2.2.0\n"
-"POT-Creation-Date: 2024-08-15 12:47+0600\n"
+"POT-Creation-Date: 2024-10-01 11:05+0600\n"
 "PO-Revision-Date: 2023-10-02 10:14+0600\n"
 "Last-Translator: \n"
 "Language-Team: ShapedPlugin <support@shapedplugin.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: admin/GutenbergBlock/src/index.js:17 admin/GutenbergBlock/src/index.js:79
 #: admin/GutenbergBlock/src/index.js:111 admin/help-page/help.php:107
 #: admin/help-page/help.php:114 admin/partials/metabox-config.php:53
-#: includes/class-wp-tabs-cpt.php:77
+#: includes/class-wp-tabs-cpt.php:76
 msgid "WP Tabs"
 msgstr ""
 
@@ -67,19 +67,19 @@ msgstr ""
 msgid "Select a tabs group"
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:100
+#: admin/class-wp-tabs-admin.php:98
 msgid "No tabs to duplicate has been supplied!"
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:117
+#: admin/class-wp-tabs-admin.php:115
 msgid "No shortcode to duplicate has been supplied!"
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:181
+#: admin/class-wp-tabs-admin.php:179
 msgid "Tabs creation failed, could not find original tabs: "
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:195
+#: admin/class-wp-tabs-admin.php:193
 msgid "Duplicate"
 msgstr ""
 
@@ -1005,6 +1005,10 @@ msgstr ""
 msgid "No option provided by developer."
 msgstr ""
 
+#: admin/partials/models/classes/metabox.class.php:362
+msgid "Show Preview"
+msgstr ""
+
 #: admin/partials/models/classes/metabox.class.php:371
 msgid "Restore"
 msgstr ""
@@ -1189,7 +1193,7 @@ msgid "No data provided for this option type."
 msgstr ""
 
 #: admin/partials/models/fields/group/group.php:51
-#: includes/class-wp-tabs-cpt.php:68
+#: includes/class-wp-tabs-cpt.php:67
 msgid "Add New"
 msgstr ""
 
@@ -1536,91 +1540,108 @@ msgstr ""
 msgid "Import JSON File To Upload"
 msgstr ""
 
-#: includes/class-wp-tabs-admin-menu.php:62
+#: includes/class-wp-tabs-admin-menu.php:61
 msgid "Add Tabs"
 msgstr ""
 
-#: includes/class-wp-tabs-admin-menu.php:64
+#: includes/class-wp-tabs-admin-menu.php:63
 msgid "Go Pro!"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:66 includes/class-wp-tabs-cpt.php:78
+#: includes/class-wp-tabs-admin-menu.php:83
+#, php-format
+msgid ""
+"Enjoying %1$sWP Tabs?%2$s Please rate us %3$sWordPress.org%4$s. Your "
+"positive feedback will help us grow more. Thank you! 😊"
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:65 includes/class-wp-tabs-cpt.php:77
 msgid "Tab Groups"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:67
+#: includes/class-wp-tabs-cpt.php:66
 msgid "Tabs"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:69
+#: includes/class-wp-tabs-cpt.php:68
 msgid "Add New Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:70
+#: includes/class-wp-tabs-cpt.php:69
 msgid "Edit Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:71
+#: includes/class-wp-tabs-cpt.php:70
 msgid "New Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:72
+#: includes/class-wp-tabs-cpt.php:71
 msgid "View Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:73
+#: includes/class-wp-tabs-cpt.php:72
 msgid "Search Tabs"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:74
+#: includes/class-wp-tabs-cpt.php:73
 msgid "No Tab Group found."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:75
+#: includes/class-wp-tabs-cpt.php:74
 msgid "No Tab Group found in trash."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:76
+#: includes/class-wp-tabs-cpt.php:75
 msgid "Parent Item:"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:131
+#: includes/class-wp-tabs-cpt.php:130
 msgid "Tabs updated."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:134
+#: includes/class-wp-tabs-cpt.php:133
 msgid " updated."
 msgstr ""
 
 #: includes/class-wp-tabs-cpt.php:136
-msgid "Tabs published."
-msgstr ""
-
-#: includes/class-wp-tabs-cpt.php:137
-msgid "Tabs saved."
-msgstr ""
-
-#: includes/class-wp-tabs-cpt.php:138
-msgid "Tabs submitted."
+#, php-format
+msgid "Tabs restored to revision from %s"
 msgstr ""
 
 #: includes/class-wp-tabs-cpt.php:139
-msgid "M j, Y @ G:i"
+msgid "Tabs published."
 msgstr ""
 
 #: includes/class-wp-tabs-cpt.php:140
+msgid "Tabs saved."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:141
+msgid "Tabs submitted."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:144
+#, php-format
+msgid "Tabs scheduled for: %1$s %2$s %3$s."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:146
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:149
 msgid "Tabs draft updated."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:154
+#: includes/class-wp-tabs-cpt.php:163
 msgid "Name"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:155
+#: includes/class-wp-tabs-cpt.php:164
 msgid "Shortcode"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:156
+#: includes/class-wp-tabs-cpt.php:165
 msgid "Date"
 msgstr ""
 

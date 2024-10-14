@@ -46,7 +46,6 @@ class WP_Tabs_CPT {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
 	}
 
 	/**
@@ -115,7 +114,6 @@ class WP_Tabs_CPT {
 			)
 		);
 		register_post_type( 'sp_wp_tabs', $args );
-
 	}
 
 	/**
@@ -126,17 +124,28 @@ class WP_Tabs_CPT {
 	 */
 	public function sptpro_updated_messages( $messages ) {
 		global $post, $post_ID;
+
 		$messages['sp_wp_tabs'] = array(
 			0  => '', // Unused. Messages start at index 1.
 			1  => sprintf( __( 'Tabs updated.', 'wp-expand-tabs-free' ) ),
 			2  => '',
 			3  => '',
 			4  => __( ' updated.', 'wp-expand-tabs-free' ),
-			5  => isset( $_GET['revision'] ) ? sprintf( esc_html( 'Tabs restored to revision from %s' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			5  => isset( $_GET['revision'] ) ? sprintf(
+				/* translators: 1: post revision title. */
+				__( 'Tabs restored to revision from %s', 'wp-expand-tabs-free' ),
+				wp_post_revision_title( (int) $_GET['revision'], false )
+			) : false,
 			6  => sprintf( __( 'Tabs published.', 'wp-expand-tabs-free' ) ),
 			7  => __( 'Tabs saved.', 'wp-expand-tabs-free' ),
 			8  => sprintf( __( 'Tabs submitted.', 'wp-expand-tabs-free' ) ),
-			9  => sprintf( wp_kses_post( 'Tabs scheduled for: <strong>%1$s</strong>.', 'wp-expand-tabs-free' ), date_i18n( __( 'M j, Y @ G:i', 'wp-expand-tabs-free' ), strtotime( $post->post_date ) ) ),
+			9  => sprintf(
+				/* translators: 1: start strong tag, 2: date time, 3: close strong tag. */
+				__( 'Tabs scheduled for: %1$s %2$s %3$s.', 'wp-expand-tabs-free' ),
+				'<strong>',
+				date_i18n( 'M j, Y @ G:i', strtotime( $post->post_date ) ),
+				'</strong>'
+			),
 			10 => sprintf( __( 'Tabs draft updated.', 'wp-expand-tabs-free' ) ),
 		);
 		return $messages;
@@ -173,5 +182,4 @@ class WP_Tabs_CPT {
 				echo '';
 		}
 	}
-
 }
