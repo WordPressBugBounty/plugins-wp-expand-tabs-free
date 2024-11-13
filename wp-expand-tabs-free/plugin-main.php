@@ -11,7 +11,7 @@
  * Plugin Name:       WP Tabs
  * Plugin URI:        https://wptabs.com/?ref=1
  * Description:       WP Tabs is the most user-friendly, highly customizable, responsive WordPress tabs plugin to display your content in a clean organized tabbed navigation.
- * Version:           2.2.6
+ * Version:           2.2.7
  * Author:            ShapedPlugin LLC
  * Author URI:        https://shapedplugin.com/
  * License:           GPL-2.0+
@@ -31,7 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'WP_TABS_NAME', 'WP Tabs' );
-define( 'WP_TABS_VERSION', '2.2.6' );
+define( 'WP_TABS_VERSION', '2.2.7' );
 define( 'WP_TABS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WP_TABS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_TABS_URL', plugin_dir_url( __FILE__ ) );

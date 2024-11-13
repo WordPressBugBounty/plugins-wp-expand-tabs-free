@@ -426,7 +426,11 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 								if ( ! empty( $field['sanitize'] ) ) {
 									$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
 								} else {
-									$data[ $field_id ] = $field_value;
+									if ( $field_value && is_array( $field_value ) ) {
+										$data[ $field_id ] = wp_kses_post_deep( $field_value );
+									} else {
+										$data[ $field_id ] = $field_value ? wp_kses_post( $field_value ) : $field_value;
+									}
 								}
 
 								// Validate "post" request of field.

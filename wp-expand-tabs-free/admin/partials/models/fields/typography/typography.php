@@ -399,7 +399,7 @@ if ( ! class_exists( 'SP_WP_TABS_Field_typography' ) ) {
 				echo '<div class="wptabspro--title">' . esc_html__( 'Margin Bottom', 'wp-expand-tabs-free' ) . '</div>';
 				echo '<div class="wptabspro--blocks">';
 				echo '<div class="wptabspro--block wptabspro--unit"><i class="fa fa-long-arrow-down"></i></div>';
-				echo '<div class="wptabspro--block"><input type="number" name="' . $this->field_name( '[margin-bottom]' ) . '" class="wptabspro--margin-bottom wptabspro--input wptabspro-number" value="' . $this->value['margin-bottom'] . '" /></div>';// phpcs:ignore
+				echo '<div class="wptabspro--block"><input type="number" name="' . esc_attr( $this->field_name( '[margin-bottom]' ) ) . '" class="wptabspro--margin-bottom wptabspro--input wptabspro-number" value="' . esc_attr( $this->value['margin-bottom'] ) . '" /></div>';
 				echo '<div class="wptabspro--block wptabspro--unit">' . wp_kses_post( $args['unit'] ) . '</div>';
 				echo '</div>';
 				echo '</div>';
