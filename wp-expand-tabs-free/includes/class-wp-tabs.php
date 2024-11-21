@@ -190,6 +190,7 @@ class SP_WP_Tabs_Free {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'public/class-wp-tabs-public.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/partials/notices/review.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/partials/notices/offer-banner.php';
 		require_once plugin_dir_path( __DIR__ ) . 'admin/partials/class-wp-tabs-widget.php';
 
 		$this->loader = new WP_Tabs_Loader();
@@ -248,6 +249,10 @@ class SP_WP_Tabs_Free {
 		$plugin_review_notice = new WP_Tabs_Review( WP_TABS_NAME, WP_TABS_VERSION );
 		$this->loader->add_action( 'admin_notices', $plugin_review_notice, 'display_admin_notice' );
 		$this->loader->add_action( 'wp_ajax_sp-wptabs-never-show-review-notice', $plugin_review_notice, 'dismiss_review_notice' );
+		// Admin Offer Banner.
+		$admin_offer_banner = new WP_Tabs_Offer_Banner( WP_TABS_NAME, WP_TABS_VERSION );
+		$this->loader->add_action( 'admin_notices', $admin_offer_banner, 'display_admin_offer_banner' );
+		$this->loader->add_action( 'wp_ajax_sp_wptabs-hide-offer-banner', $admin_offer_banner, 'dismiss_offer_banner' );
 
 		// Export Import.
 		$import_export = new Wp_Tabs_Import_Export( WP_TABS_NAME, WP_TABS_VERSION );
