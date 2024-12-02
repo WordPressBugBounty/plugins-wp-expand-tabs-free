@@ -2,8 +2,8 @@
 Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: tabs, vertical tabs, nested tabs, woocommerce tabs, custom product tabs
 Requires at least: 4.7
-Tested up to: 6.7
-Stable tag: 2.2.8
+Tested up to: 6.7.1
+Stable tag: 2.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -240,6 +240,10 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 2.2.9 - Dec 02, 2024 =
+* Fix: The text domain-related deprecated warning was found with WP 6.7.1.
+* Tested: WP 6.7.1 compatibility.
 
 = 2.2.8 - Nov 21, 2024 =
 * Fix: The plugin style issue for RTL sites.

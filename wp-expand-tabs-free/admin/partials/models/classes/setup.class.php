@@ -86,8 +86,8 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 			do_action( 'wptabspro_init' );
 
 			// Init translation in framework.
-			self::textdomain();
-
+			// self::textdomain();
+			add_action( 'init', array( 'SP_WP_TABS', 'textdomain' ) );
 			// set constants.
 			self::constants();
 
@@ -99,7 +99,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 			add_action( 'switch_theme', array( 'SP_WP_TABS', 'setup' ) );
 			add_action( 'admin_enqueue_scripts', array( 'SP_WP_TABS', 'add_admin_enqueue_scripts' ), 20 );
 			add_action( 'admin_head', array( 'SP_WP_TABS', 'add_admin_head_css' ), 99 );
-
 		}
 
 		/**
@@ -158,7 +157,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 			}
 
 			do_action( 'wptabspro_loaded' );
-
 		}
 
 		/**
@@ -206,7 +204,7 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 		public static function constants() {
 
 			// we need this path-finder code for set URL of framework.
-			$dirname        = wp_normalize_path( dirname( dirname( __FILE__ ) ) );
+			$dirname        = wp_normalize_path( dirname( __DIR__ ) );
 			$theme_dir      = wp_normalize_path( get_parent_theme_file_path() );
 			$plugin_dir     = wp_normalize_path( WP_PLUGIN_DIR );
 			$located_plugin = ( preg_match( '#' . self::sanitize_dirname( $plugin_dir ) . '#', self::sanitize_dirname( $dirname ) ) ) ? true : false;
@@ -218,7 +216,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 
 			self::$dir = $dirname;
 			self::$url = $directory_uri . $foldername;
-
 		}
 
 		/**
@@ -263,7 +260,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 				return self::$dir . '/' . $file;
 
 			}
-
 		}
 
 		/**
@@ -313,7 +309,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 			self::include_plugin_file( 'classes/fields.class.php' );
 			self::include_plugin_file( 'classes/options.class.php' );
 			self::include_plugin_file( 'classes/metabox.class.php' );
-
 		}
 
 		/**
@@ -357,7 +352,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 					}
 				}
 			}
-
 		}
 
 		/**
@@ -443,7 +437,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 
 				do_action( 'wptabspro_enqueue' );
 			}
-
 		}
 
 		/**
@@ -478,7 +471,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
         </style>';
 
 			}
-
 		}
 
 		/**
@@ -578,9 +570,7 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 			echo ( ! empty( $field['title'] ) || ! empty( $field['fancy_title'] ) ) ? '</div>' : '';
 			echo '<div class="clear"></div>';
 			echo '</div>';
-
 		}
-
 	}
 
 	SP_WP_TABS::init();
