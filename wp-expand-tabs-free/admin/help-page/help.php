@@ -152,6 +152,7 @@ class WP_Tabs_Help_Page {
 					'num_ratings',
 					'short_description',
 					'author',
+					'icons',
 				),
 			);
 			$request = array(
@@ -181,6 +182,7 @@ class WP_Tabs_Help_Page {
 								'rating'            => $pl->rating,
 								'num_ratings'       => $pl->num_ratings,
 								'short_description' => $pl->short_description,
+								'icons'             => $pl->icons['2x'],
 							);
 						}
 					}
@@ -195,23 +197,15 @@ class WP_Tabs_Help_Page {
 
 			foreach ( $plugins_arr as $plugin ) {
 				$plugin_slug = $plugin['slug'];
-				$image_type  = 'png';
+				$plugin_icon = $plugin['icons'];
+				// Skip WP Expand Tabs Free plugin.
+				if ( 'wp-expand-tabs-free' === $plugin_slug ) {
+					continue;
+				}
 				if ( isset( self::$plugins[ $plugin_slug ] ) ) {
 					$plugin_file = self::$plugins[ $plugin_slug ];
 				} else {
 					$plugin_file = $plugin_slug . '.php';
-				}
-
-				switch ( $plugin_slug ) {
-					case 'styble':
-						$image_type = 'jpg';
-						break;
-					case 'location-weather':
-					case 'testimonial-free':
-					case 'easy-accordion-free':
-					case 'gallery-slider-for-woocommerce':
-						$image_type = 'gif';
-						break;
 				}
 
 				$details_link = network_admin_url( 'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] . '&amp;TB_iframe=true&amp;width=600&amp;height=550' );
@@ -222,7 +216,7 @@ class WP_Tabs_Help_Page {
 							<h3>
 								<a class="thickbox" title="<?php echo esc_attr( $plugin['name'] ); ?>" href="<?php echo esc_url( $details_link ); ?>">
 						<?php echo esc_html( $plugin['name'] ); ?>
-									<img src="<?php echo esc_url( 'https://ps.w.org/' . $plugin_slug . '/assets/icon-256x256.' . $image_type ); ?>" class="plugin-icon"/>
+									<img src="<?php echo esc_url( $plugin_icon ); ?>" class="plugin-icon"/>
 								</a>
 							</h3>
 						</div>
@@ -403,7 +397,16 @@ class WP_Tabs_Help_Page {
 			<!-- Header section start -->
 			<section class="sptabs__help header">
 				<div class="sptabs-header-area-top">
-					<p>You’re currently using <b>WP Tabs Lite</b>. To access additional features, consider <a target="_blank" href="https://wptabs.com/pricing/?ref=1" ><b>upgrading to Pro!</b></a> 🚀</p>
+				<p>
+				<?php
+					printf(
+						/* translators: %1$s is the plugin name in bold, %2$s is the upgrade link in bold */
+						esc_html__( 'You’re currently using %1$s. To access additional features, consider %2$s', 'wp-expand-tabs-free' ),
+						'<b>' . esc_html__( 'WP Tabs Lite', 'wp-expand-tabs-free' ) . '</b>',
+						'<a target="_blank" href="https://wptabs.com/pricing/?ref=1" ><b>' . esc_html__( 'upgrading to Pro!', 'wp-expand-tabs-free' ) . '</b></a>'
+					);
+				?>
+				🚀</p>
 				</div>
 				<div class="sptabs-header-area">
 					<div class="sptabs-container">
@@ -420,10 +423,10 @@ class WP_Tabs_Help_Page {
 					<div class="sptabs-container">
 						<div class="sptabs-header-nav-menu">
 							<ul>
-								<li><a class="active" data-id="get-start-tab"  href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#get-start' ); ?>"><i class="sptabs-icon-play"></i> Get Started</a></li>
-								<li><a href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#recommended' ); ?>" data-id="recommended-tab"><i class="sptabs-icon-recommended"></i> Recommended</a></li>
-								<li><a href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#lite-to-pro' ); ?>" data-id="lite-to-pro-tab"><i class="sptabs-icon-lite-to-pro-icon"></i> Lite Vs Pro</a></li>
-								<li><a href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#about-us' ); ?>" data-id="about-us-tab"><i class="sptabs-icon-info-circled-alt"></i> About Us</a></li>
+								<li><a class="active" data-id="get-start-tab"  href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#get-start' ); ?>"><i class="sptabs-icon-play"></i> <?php esc_html_e( 'Get Started', 'wp-expand-tabs-free' ); ?></a></li>
+								<li><a href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#recommended' ); ?>" data-id="recommended-tab"><i class="sptabs-icon-recommended"></i> <?php esc_html_e( 'Recommended', 'wp-expand-tabs-free' ); ?></a></li>
+								<li><a href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#lite-to-pro' ); ?>" data-id="lite-to-pro-tab"><i class="sptabs-icon-lite-to-pro-icon"></i> <?php esc_html_e( 'Lite Vs Pro', 'wp-expand-tabs-free' ); ?></a></li>
+								<li><a href="<?php echo esc_url( home_url( '' ) . '/wp-admin/edit.php?post_type=sp_wp_tabs&page=tabs_help#about-us' ); ?>" data-id="about-us-tab"><i class="sptabs-icon-info-circled-alt"></i> <?php esc_html_e( 'About Us', 'wp-expand-tabs-free' ); ?></a></li>
 							</ul>
 						</div>
 					</div>
@@ -436,36 +439,36 @@ class WP_Tabs_Help_Page {
 				<div class="sptabs-container">
 					<div class="sptabs-start-page-wrap">
 						<div class="sptabs-video-area">
-							<h2 class='sptabs-section-title'>Welcome to WP Tabs!</h2>
-							<span class='sptabs-normal-paragraph'>Thank you for installing WP Tabs! This video will help you get started with the plugin. Enjoy!</span>
+							<h2 class='sptabs-section-title'><?php esc_html_e( 'Welcome to WP Tabs!', 'wp-expand-tabs-free' ); ?></h2>
+							<span class='sptabs-normal-paragraph'><?php esc_html_e( 'Thank you for installing WP Tabs! This video will help you get started with the plugin. Enjoy!', 'wp-expand-tabs-free' ); ?></span>
 							<iframe width="724" height="405" src="https://www.youtube.com/embed/m7UmdIzoGhA?si=coxtD6y-ttX1d6I5" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
 							<ul>
 								<li><a class='sptabs-medium-btn' href="<?php echo esc_url( home_url( '/' ) . 'wp-admin/post-new.php?post_type=sp_wp_tabs' ); ?>">Create a Tab Group</a></li>
-								<li><a target="_blank" class='sptabs-medium-btn' href="https://wptabs.com/wp-tabs-lite-version-demos/">Live Demo</a></li>
-								<li><a target="_blank" class='sptabs-medium-btn arrow-btn' href="https://wptabs.com/">Explore WP Tabs <i class="sptabs-icon-button-arrow-icon"></i></a></li>
+								<li><a target="_blank" class='sptabs-medium-btn' href="https://wptabs.com/wp-tabs-lite-version-demos/"><?php esc_html_e( 'Live Demo', 'wp-expand-tabs-free' ); ?></a></li>
+								<li><a target="_blank" class='sptabs-medium-btn arrow-btn' href="https://wptabs.com/"><?php esc_html_e( 'Explore WP Tabs', 'wp-expand-tabs-free' ); ?> <i class="sptabs-icon-button-arrow-icon"></i></a></li>
 							</ul>
 						</div>
 						<div class="sptabs-start-page-sidebar">
 							<div class="sptabs-start-page-sidebar-info-box">
 								<div class="sptabs-info-box-title">
-									<h4><i class="sptabs-icon-doc-icon"></i> Documentation</h4>
+									<h4><i class="sptabs-icon-doc-icon"></i> <?php esc_html_e( 'Documentation', 'wp-expand-tabs-free' ); ?></h4>
 								</div>
-								<span class='sptabs-normal-paragraph'>Explore WP Tabs plugin capabilities in our enriched documentation.</span>
+								<span class='sptabs-normal-paragraph'><?php esc_html_e( 'Explore WP Tabs plugin capabilities in our enriched documentation.', 'wp-expand-tabs-free' ); ?></span>
 								<a target="_blank" class='sptabs-small-btn' href="https://docs.shapedplugin.com/docs/wp-tabs/overview/">Browse Now</a>
 							</div>
 							<div class="sptabs-start-page-sidebar-info-box">
 								<div class="sptabs-info-box-title">
-									<h4><i class="sptabs-icon-support"></i> Technical Support</h4>
+									<h4><i class="sptabs-icon-support"></i> <?php esc_html_e( 'Technical Support', 'wp-expand-tabs-free' ); ?></h4>
 								</div>
-								<span class='sptabs-normal-paragraph'>For personalized assistance, reach out to our skilled support team for prompt help.</span>
-								<a target="_blank" class='sptabs-small-btn' href="https://shapedplugin.com/create-new-ticket/">Ask Now</a>
+								<span class='sptabs-normal-paragraph'><?php esc_html_e( 'For personalized assistance, reach out to our skilled support team for prompt help.', 'wp-expand-tabs-free' ); ?></span>
+								<a target="_blank" class='sptabs-small-btn' href="https://shapedplugin.com/create-new-ticket/"><?php esc_html_e( 'Ask Now', 'wp-expand-tabs-free' ); ?></a>
 							</div>
 							<div class="sptabs-start-page-sidebar-info-box">
 								<div class="sptabs-info-box-title">
-									<h4><i class="sptabs-icon-team-icon"></i> Join The Community</h4>
+									<h4><i class="sptabs-icon-team-icon"></i> <?php esc_html_e( 'Join The Community', 'wp-expand-tabs-free' ); ?></h4>
 								</div>
-								<span class='sptabs-normal-paragraph'>Join the official ShapedPlugin Facebook group to share your experiences, thoughts, and ideas.</span>
-								<a target="_blank" class='sptabs-small-btn' href="https://www.facebook.com/groups/ShapedPlugin/">Join Now</a>
+								<span class='sptabs-normal-paragraph'><?php esc_attr_e( 'Join the official ShapedPlugin Facebook group to share your experiences, thoughts, and ideas.', 'wp-expand-tabs-free' ); ?></span>
+								<a target="_blank" class='sptabs-small-btn' href="https://www.facebook.com/groups/ShapedPlugin/"><?php esc_html_e( 'Join Now', 'wp-expand-tabs-free' ); ?></a>
 							</div>
 						</div>
 					</div>
@@ -476,227 +479,240 @@ class WP_Tabs_Help_Page {
 			<section class="sptabs__help lite-to-pro-page" id="lite-to-pro-tab">
 				<div class="sptabs-container">
 					<div class="sptabs-call-to-action-top">
-						<h2 class="sptabs-section-title">Lite vs Pro Comparison</h2>
-						<a target="_blank" href="https://wptabs.com/pricing/?ref=1" class='sptabs-big-btn'>Upgrade to Pro Now!</a>
+						<h2 class="sptabs-section-title"><?php esc_html_e( 'Lite vs Pro Comparison', 'wp-expand-tabs-free' ); ?></h2>
+						<a target="_blank" href="https://wptabs.com/pricing/?ref=1" class='sptabs-big-btn'><?php esc_html_e( 'Upgrade to Pro Now!', 'wp-expand-tabs-free' ); ?></a>
 					</div>
 					<div class="sptabs-lite-to-pro-wrap">
 						<div class="sptabs-features">
 							<ul>
 								<li class='sptabs-header'>
-									<span class='sptabs-title'>FEATURES</span>
-									<span class='sptabs-free'>Lite</span>
-									<span class='sptabs-pro'><i class='sptabs-icon-pro'></i> PRO</span>
+									<span class='sptabs-title'><?php esc_html_e( 'FEATURES', 'wp-expand-tabs-free' ); ?></span>
+									<span class='sptabs-free'><?php esc_html_e( 'Lite', 'wp-expand-tabs-free' ); ?></span>
+									<span class='sptabs-pro'><i class='sptabs-icon-pro'></i> <?php esc_html_e( 'PRO', 'wp-expand-tabs-free' ); ?></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>All Free Version Features</span>
+									<span class='sptabs-title'><?php esc_html_e( 'All Free Version Features', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-check-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Tabs Layout Presets (Horizontal Top, Bottom, Vertical Left, Right, and Tabs Carousel)</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Tabs Layout Presets (Horizontal Top, Bottom, Vertical Left, Right, and Tabs Carousel)', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free'><b>1</b></span>
 									<span class='sptabs-pro'><b>5</b></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Flexible Tabs Position </span>
+									<span class='sptabs-title'><?php esc_html_e( 'Flexible Tabs Position', 'wp-expand-tabs-free' ); ?> </span>
 									<span class='sptabs-free'><b>2</b></span>
 									<span class='sptabs-pro'><b>20</b></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Unlimited Multi-level or Nested Tabs <i class="sptabs-hot">Hot</i> </span>
+									<span class='sptabs-title'><?php esc_html_e( 'Unlimited Multi-level or Nested Tabs', 'wp-expand-tabs-free' ); ?> <i class="sptabs-hot"><?php esc_html_e( 'Hot', 'wp-expand-tabs-free' ); ?></i> </span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Supports HTML content, images, shortcodes, video, audio, forms, maps, iframe, slider, galleries, etc.</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Supports HTML content, images, shortcodes, video, audio, forms, maps, iframe, slider, galleries, etc.', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>WooCommerce Additional Custom Tab <i class="sptabs-hot">Hot</i>  </span>
+									<span class='sptabs-title'><?php esc_html_e( 'WooCommerce Additional Custom Tab', 'wp-expand-tabs-free' ); ?> <i class="sptabs-hot"><?php esc_html_e( 'Hot', 'wp-expand-tabs-free' ); ?></i>  </span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Create Tabs from Posts, Pages, Products, Custom Post Types, Taxonomies, etc.</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Create Tabs from Posts, Pages, Products, Custom Post Types, Taxonomies, etc.', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Add Tabs Subtitle</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Add Tabs Subtitle', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Add Tabs Title Icon from Icon Library/Custom Image Icons</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Add Tabs Title Icon from Icon Library/Custom Image Icons', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Deep Linking/Custom Linking Tabs <i class="sptabs-new">New</i> </span>
+									<span class='sptabs-title'><?php esc_html_e( 'Deep Linking/Custom Linking Tabs', 'wp-expand-tabs-free' ); ?> <i class="sptabs-new"><?php esc_html_e( 'New', 'wp-expand-tabs-free' ); ?></i> </span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Make any Tab Item Inactive </span>
+									<span class='sptabs-title'><?php esc_html_e( 'Make any Tab Item Inactive', 'wp-expand-tabs-free' ); ?> </span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Tabs AutoPlay Activator Event</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Tabs AutoPlay Activator Event', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Set Custom Tabs Number to be Opened on Page Load</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Set Custom Tabs Number to be Opened on Page Load', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Enable Scrollable Tabs Variable Width and Loop <i class="sptabs-new">New</i> <i class="sptabs-hot">Hot</i> </span>
+									<span class='sptabs-title'><?php esc_html_e( 'Enable Scrollable Tabs Variable Width and Loop', 'wp-expand-tabs-free' ); ?> <i class="sptabs-new"><?php esc_html_e( 'New', 'wp-expand-tabs-free' ); ?></i> <i class="sptabs-hot"><?php esc_html_e( 'Hot', 'wp-expand-tabs-free' ); ?></i> </span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Hide Tabs hash URL from Site URL/Browser URL</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Hide Tabs hash URL from Site URL/Browser URL', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free'><b>1</b></span>
 									<span class='sptabs-pro'><b>18</b></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Stylize Tabs Icon, Icon Size, Color, Active Color, Position etc.</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Stylize Tabs Icon, Icon Size, Color, Active Color, Position etc.', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Show Active Tab Indicator Arrow <i class="sptabs-new">new</i> </span>
+									<span class='sptabs-title'><?php esc_html_e( 'Show Active Tab Indicator Arrow', 'wp-expand-tabs-free' ); ?> <i class="sptabs-new"><?php esc_html_e( 'new', 'wp-expand-tabs-free' ); ?></i> </span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Tabs Title Gradient Background Color</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Tabs Title Gradient Background Color', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Active Tab Top Line Border</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Active Tab Top Line Border', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Tabs Title and Description Border, Padding, etc.</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Tabs Title and Description Border, Padding, etc.', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-check-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Flat Underline Tabs</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Flat Underline Tabs', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Strip Tabs Description Content HTML Tags</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Strip Tabs Description Content HTML Tags', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Tabs Custom Content Height</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Tabs Custom Content Height', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Change Tabs to Accordion on Small Devices</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Change Tabs to Accordion on Small Devices', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-check-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Tabs Description Animation</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Tabs Description Animation', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free'><b>2</b></span>
 									<span class='sptabs-pro'><b>55+</b></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Import/Export Tabs Groups</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Import/Export Tabs Groups', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-check-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Stylize your Tabs Typography with 1500+ Google Fonts</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Stylize your Tabs Typography with 1500+ Google Fonts', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>All Premium Features, Security Enhancements, and Compatibility</span>
+									<span class='sptabs-title'><?php esc_html_e( 'All Premium Features, Security Enhancements, and Compatibility', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 								<li class='sptabs-body'>
-									<span class='sptabs-title'>Priority Top-notch Support</span>
+									<span class='sptabs-title'><?php esc_html_e( 'Priority Top-notch Support', 'wp-expand-tabs-free' ); ?></span>
 									<span class='sptabs-free sptabs-close-icon'></span>
 									<span class='sptabs-pro sptabs-check-icon'></span>
 								</li>
 							</ul>
 						</div>
 						<div class="sptabs-upgrade-to-pro">
-							<h2 class='sptabs-section-title'>Upgrade To PRO & Enjoy Advanced Features!</h2>
-							<span class='sptabs-section-subtitle'>Already, <b>15000+</b> people are using WP Tabs on their websites to create beautiful showcase, why won’t you!</span>
+							<h2 class='sptabs-section-title'><?php esc_html_e( 'Upgrade To PRO & Enjoy Advanced Features!', 'wp-expand-tabs-free' ); ?></h2>
+							<span class='sptabs-section-subtitle'>
+								<?php
+								printf(
+									/* translators: %1$s Opening <b> tag, %2$s Closing <b> tag */
+									esc_html__( 'Already, %1$s15000+%2$s people are using WP Tabs on their websites to create beautiful showcase, why won\'t you!', 'wp-expand-tabs-free' ),
+									'<b>',
+									'</b>'
+								);
+								?>
+							</span>
 							<div class="sptabs-upgrade-to-pro-btn">
 								<div class="sptabs-action-btn">
-									<a target="_blank" href="https://wptabs.com/pricing/?ref=1" class='sptabs-big-btn'>Upgrade to Pro Now!</a>
-									<span class='sptabs-small-paragraph'>14-Day No-Questions-Asked <a target="_blank" href="https://shapedplugin.com/refund-policy/">Refund Policy</a></span>
+									<a target="_blank" href="https://wptabs.com/pricing/?ref=1" class='sptabs-big-btn'><?php esc_html_e( 'Upgrade to Pro Now!', 'wp-expand-tabs-free' ); ?></a>
+									<span class='sptabs-small-paragraph'><?php esc_html_e( '14-Day No-Questions-Asked', 'wp-expand-tabs-free' ); ?> <a target="_blank" href="https://shapedplugin.com/refund-policy/"><?php esc_html_e( 'Refund Policy', 'wp-expand-tabs-free' ); ?></a></span>
 								</div>
-								<a target="_blank" href="https://wptabs.com" class='sptabs-big-btn-border'>See All Features</a>
-								<a target="_blank" href="https://wptabs.com/horizontal-tabs/" class='sptabs-big-btn-border sptabs-pro-live-demo'>Pro Live Demo</a>
+								<a target="_blank" href="https://wptabs.com" class='sptabs-big-btn-border'><?php esc_html_e( 'See All Features', 'wp-expand-tabs-free' ); ?></a>
+								<a target="_blank" href="https://wptabs.com/horizontal-tabs/" class='sptabs-big-btn-border sptabs-pro-live-demo'><?php esc_html_e( 'Pro Live Demo', 'wp-expand-tabs-free' ); ?></a>
 							</div>
 						</div>
 					</div>
 					<div class="sptabs-testimonial">
 						<div class="sptabs-testimonial-title-section">
-							<span class='sptabs-testimonial-subtitle'>NO NEED TO TAKE OUR WORD FOR IT</span>
-							<h2 class="sptabs-section-title">Our Users Love WP Tabs Pro!</h2>
+							<span class='sptabs-testimonial-subtitle'>
+								<?php echo esc_html__( 'NO NEED TO TAKE OUR WORD FOR IT', 'wp-expand-tabs-free' ); ?>
+							</span>
+							<h2 class="sptabs-section-title">
+								<?php echo esc_html__( 'Our Users Love WP Tabs Pro!', 'wp-expand-tabs-free' ); ?>
+							</h2>
 						</div>
 						<div class="sptabs-testimonial-wrap">
 							<div class="sptabs-testimonial-area">
 								<div class="sptabs-testimonial-content">
-									<p>I’ve tried 3 other Gallery / Carousel plugins and this one is by far the easiest, lightweight and does exactly what I want! I had a minor glitch and support was very quick to fix it. Very happy and highly rec...</p>
+									<p><?php echo esc_html__( 'I’ve tried 3 other Gallery / Carousel plugins and this one is by far the easiest, lightweight and does exactly what I want! I had a minor glitch and support was very quick to fix it. Very happy and highly rec...', 'wp-expand-tabs-free' ); ?></p>
 								</div>
 								<div class="sptabs-testimonial-info">
 									<div class="sptabs-img">
 										<img src="<?php echo esc_url( WP_TABS_URL . 'admin/help-page/img/joyce.png' ); ?>" alt="">
 									</div>
 									<div class="sptabs-info">
-										<h3>Joyce van den Berg</h3>
+										<h3><?php echo esc_html__( 'Joyce van den Berg', 'wp-expand-tabs-free' ); ?></h3>
 										<div class="sptabs-star">
-											<i>★★★★★</i>
+											<i><?php echo esc_html__( '★★★★★', 'wp-expand-tabs-free' ); ?></i>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="sptabs-testimonial-area">
 								<div class="sptabs-testimonial-content">
-									<p>The plugin works great and is a great addition to my site. The support has been tremendously! Fast and easy! They even helped with JS errors from other plugins. THANKS!...</p>
+									<p><?php echo esc_html__( 'The plugin works great and is a great addition to my site. The support has been tremendously! Fast and easy! They even helped with JS errors from other plugins. THANKS!...', 'wp-expand-tabs-free' ); ?></p>
 								</div>
 								<div class="sptabs-testimonial-info">
 									<div class="sptabs-img">
 										<img src="<?php echo esc_url( WP_TABS_URL . 'admin/help-page/img/sksposcho.png' ); ?>" alt="">
 									</div>
 									<div class="sptabs-info">
-										<h3>Sksposcho</h3>
+										<h3><?php echo esc_html__( 'Sksposcho', 'wp-expand-tabs-free' ); ?></h3>
 										<div class="sptabs-star">
-											<i>★★★★★</i>
+											<i><?php echo esc_html__( '★★★★★', 'wp-expand-tabs-free' ); ?></i>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="sptabs-testimonial-area">
 								<div class="sptabs-testimonial-content">
-									<p>The new WP-Tabs is a tab menu for people who love more features. First of all you have to be playful when creating the tabs. If – then the Pro Version includes the things that make creating them reall...</p>
+									<p><?php echo esc_html__( 'The new WP-Tabs is a tab menu for people who love more features. First of all you have to be playful when creating the tabs. If – then the Pro Version includes the things that make creating them reall...', 'wp-expand-tabs-free' ); ?></p>
 								</div>
 								<div class="sptabs-testimonial-info">
 									<div class="sptabs-img">
 										<img src="<?php echo esc_url( WP_TABS_URL . 'admin/help-page/img/wegerl.png' ); ?>" alt="">
 									</div>
 									<div class="sptabs-info">
-										<h3>Wegerl</h3>
+										<h3><?php echo esc_html__( 'Wegerl', 'wp-expand-tabs-free' ); ?></h3>
 										<div class="sptabs-star">
-											<i>★★★★★</i>
+											<i><?php echo esc_html__( '★★★★★', 'wp-expand-tabs-free' ); ?></i>
 										</div>
 									</div>
 								</div>
@@ -709,7 +725,7 @@ class WP_Tabs_Help_Page {
 			<!-- Recommended Page -->
 			<section id="recommended-tab" class="sptabs-recommended-page">
 				<div class="sptabs-container">
-					<h2 class="sptabs-section-title">Enhance your Website with our Free Robust Plugins</h2>
+					<h2 class="sptabs-section-title"><?php esc_html_e( 'Enhance your Website with our Free Robust Plugins', 'wp-expand-tabs-free' ); ?></h2>
 					<div class="sptabs-wp-list-table plugin-install-php">
 						<div class="sptabs-recommended-plugins" id="the-list">
 							<?php
@@ -725,93 +741,112 @@ class WP_Tabs_Help_Page {
 				<div class="sptabs-container">
 					<div class="sptabs-about-box">
 						<div class="sptabs-about-info">
-							<h3>A Highly Customizable WordPress Tabs plugin from the WP Tabs Team, ShapedPlugin, LLC</h3>
-							<p>At <b>ShapedPlugin LLC</b>, we have been looking for the best way to display WordPress content in a clean, organized tabbed navigation. Unfortunately, we couldn't find any suitable plugin that met our needs. Hence, we set a simple goal: to develop a responsive and drag & drop tabs builder plugin for WordPress with many customization options.</p>
-							<p>The WP Tabs plugin provides a convenient way to create visually appealing Tabs sections and WooCommerce custom tabs. Check it out now and experience the difference!</p>
+							<h3><?php esc_html_e( 'A Highly Customizable WordPress Tabs plugin from the WP Tabs Team, ShapedPlugin, LLC', 'wp-expand-tabs-free' ); ?></h3>
+							<?php
+								printf(
+									/* translators: %1$s Opening <p> tag, %2$s Opening <b> tag, %3$s Closing <b> tag, %4$s Closing <p> tag */
+									esc_html__( '%1$sAt %2$sShapedPlugin LLC%3$s, we have been looking for the best way to display WordPress content in a clean, organized tabbed navigation. Unfortunately, we couldn\'t find any suitable plugin that met our needs. Hence, we set a simple goal: to develop a responsive and drag & drop tabs builder plugin for WordPress with many customization options.%4$s', 'wp-expand-tabs-free' ),
+									'<p>',
+									'<b>',
+									'</b>',
+									'</p>'
+								);
+							?>
+							
+							<p><?php esc_html_e( 'The WP Tabs plugin provides a convenient way to create visually appealing Tabs sections and WooCommerce custom tabs. Check it out now and experience the difference!', 'wp-expand-tabs-free' ); ?></p>
 							<div class="sptabs-about-btn">
-								<a target="_blank" href="https://wptabs.com" class='sptabs-medium-btn'>Explore WP Tabs</a>
-								<a target="_blank" href="https://shapedplugin.com/about-us/" class='sptabs-medium-btn sptabs-arrow-btn'>More About Us <i class="sptabs-icon-button-arrow-icon"></i></a>
+								<a target="_blank" href="https://wptabs.com" class='sptabs-medium-btn'><?php esc_html_e( 'Explore WP Tabs', 'wp-expand-tabs-free' ); ?></a>
+								<a target="_blank" href="https://shapedplugin.com/about-us/" class='sptabs-medium-btn sptabs-arrow-btn'><?php esc_html_e( 'More About Us', 'wp-expand-tabs-free' ); ?> <i class="sptabs-icon-button-arrow-icon"></i></a>
 							</div>
 						</div>
 						<div class="sptabs-about-img">
 							<img src="https://shapedplugin.com/wp-content/uploads/2024/01/shapedplugin-team.jpg" alt="">
-							<span>Team ShapedPlugin LLC at WordCamp Sylhet</span>
+							<span><?php esc_html_e( 'Team ShapedPlugin LLC at WordCamp Sylhet', 'wp-expand-tabs-free' ); ?></span>
 						</div>
 					</div>
+					<?php
+					$plugins_arr = get_transient( 'sptabs_plugins' );
+					$plugin_icon = array();
+					if ( is_array( $plugins_arr ) && ( count( $plugins_arr ) > 0 ) ) {
+						foreach ( $plugins_arr as $plugin ) {
+							$plugin_icon[ $plugin['slug'] ] = $plugin['icons'];
+						}
+					}
+					?>
 					<div class="sptabs-our-plugin-list">
-						<h3 class="sptabs-section-title">Upgrade your Website with our High-quality Plugins!</h3>
+						<h3 class="sptabs-section-title"><?php esc_html_e( 'Upgrade your Website with our High-quality Plugins!', 'wp-expand-tabs-free' ); ?></h3>
 						<div class="sptabs-our-plugin-list-wrap">
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://wpcarousel.io/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://wpcarousel.io/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/wp-carousel-free/assets/icon-256x256.png" alt="">
-								<h4>WP Carousel</h4>
-								<p>The most powerful and user-friendly multi-purpose carousel, slider, & gallery plugin for WordPress.</p>
+								<img src="<?php echo esc_url( $plugin_icon['wp-carousel-free'] ); ?>" alt="WP Carousel">
+								<h4><?php esc_html_e( 'WP Carousel', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php esc_html_e( 'The most powerful and user-friendly multi-purpose carousel, slider, & gallery plugin for WordPress.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://realtestimonials.io/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://realtestimonials.io/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/testimonial-free/assets/icon-256x256.gif" alt="">
-								<h4>Real Testimonials</h4>
-								<p>Simply collect, manage, and display Testimonials on your website and boost conversions.</p>
+								<img src="<?php echo esc_url( $plugin_icon['testimonial-free'] ); ?>" alt="Real Testimonials">
+								<h4><?php esc_html_e( 'Real Testimonials', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php esc_html_e( 'Simply collect, manage, and display Testimonials on your website and boost conversions.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://smartpostshow.com/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://smartpostshow.com/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/post-carousel/assets/icon-256x256.png" alt="">
-								<h4>Smart Post Show</h4>
-								<p>Filter and display posts (any post types), pages, taxonomy, custom taxonomy, and custom field, in beautiful layouts.</p>
+								<img src="<?php echo esc_url( $plugin_icon['post-carousel'] ); ?>" alt="Smart Post Show">
+								<h4><?php esc_html_e( 'Smart Post Show', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php esc_html_e( 'Filter and display posts (any post types), pages, taxonomy, custom taxonomy, and custom field, in beautiful layouts.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" href="https://wooproductslider.io/" class="sptabs-our-plugin-list-box">
+							<a target="_blank" href="https://wooproductslider.io/?ref=1" class="sptabs-our-plugin-list-box">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/woo-product-slider/assets/icon-256x256.png" alt="">
-								<h4>Product Slider for WooCommerce</h4>
-								<p>Boost sales by interactive product Slider, Grid, and Table in your WooCommerce website or store.</p>
+								<img src="<?php echo esc_url( $plugin_icon['woo-product-slider'] ); ?>" alt="Product Slider for WooCommerce">
+								<h4><?php esc_html_e( 'Product Slider for WooCommerce', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php esc_html_e( 'Boost sales by interactive product Slider, Grid, and Table in your WooCommerce website or store.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://woogallery.io/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://woogallery.io/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/gallery-slider-for-woocommerce/assets/icon-256x256.gif" alt="">
-								<h4>WooGallery</h4>
-								<p>Product gallery slider and additional variation images gallery for WooCommerce and boost your sales.</p>
+								<img src="<?php echo esc_url( $plugin_icon['gallery-slider-for-woocommerce'] ); ?>" alt="WooGallery">
+								<h4><?php esc_html_e( 'WooGallery', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php esc_html_e( 'Product gallery slider and additional variation images gallery for WooCommerce and boost your sales.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://getwpteam.com/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://getwpteam.com/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/team-free/assets/icon-256x256.png" alt="">
-								<h4>WP Team</h4>
-								<p>Display your team members smartly who are at the heart of your company or organization!</p>
+								<img src="<?php echo esc_url( $plugin_icon['team-free'] ); ?>" alt="WP Team">
+								<h4><?php esc_html_e( 'WP Team', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php esc_html_e( 'Display your team members smartly who are at the heart of your company or organization!', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://logocarousel.com/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://logocarousel.com/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/logo-carousel-free/assets/icon-256x256.png" alt="">
-								<h4>Logo Carousel</h4>
-								<p>Showcase a group of logo images with Title, Description, Tooltips, Links, and Popup as a grid or in a carousel.</p>
+								<img src="<?php echo esc_url( $plugin_icon['logo-carousel-free'] ); ?>" alt="<?php echo esc_attr__( 'Logo Carousel', 'wp-expand-tabs-free' ); ?>">
+								<h4><?php echo esc_html__( 'Logo Carousel', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php echo esc_html__( 'Showcase a group of logo images with Title, Description, Tooltips, Links, and Popup as a grid or in a carousel.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://easyaccordion.io/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://easyaccordion.io/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/easy-accordion-free/assets/icon-256x256.png" alt="">
-								<h4>Easy Accordion</h4>
-								<p>Minimize customer support by offering comprehensive FAQs and increasing conversions.</p>
+								<img src="<?php echo esc_url( $plugin_icon['easy-accordion-free'] ); ?>" alt="<?php echo esc_attr__( 'Easy Accordion', 'wp-expand-tabs-free' ); ?>">
+								<h4><?php echo esc_html__( 'Easy Accordion', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php echo esc_html__( 'Minimize customer support by offering comprehensive FAQs and increasing conversions.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://shapedplugin.com/woocategory/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://shapedplugin.com/woocategory/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/woo-category-slider-grid/assets/icon-256x256.png" alt="">
-								<h4>WooCategory</h4>
-								<p>Display by filtering the list of categories aesthetically and boosting sales.</p>
+								<img src="<?php echo esc_url( $plugin_icon['woo-category-slider-grid'] ); ?>" alt="<?php echo esc_attr__( 'WooCategory', 'wp-expand-tabs-free' ); ?>">
+								<h4><?php echo esc_html__( 'WooCategory', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php echo esc_html__( 'Display by filtering the list of categories aesthetically and boosting sales.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://wptabs.com/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://wptabs.com/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/wp-expand-tabs-free/assets/icon-256x256.png" alt="">
-								<h4>WP Tabs</h4>
-								<p>Display tabbed content smartly & quickly on your WordPress site without coding skills.</p>
+								<img src="<?php echo esc_url( $plugin_icon['wp-expand-tabs-free'] ); ?>" alt="<?php echo esc_attr__( 'WP Tabs', 'wp-expand-tabs-free' ); ?>">
+								<h4><?php echo esc_html__( 'WP Tabs', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php echo esc_html__( 'Display tabbed content smartly & quickly on your WordPress site without coding skills.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://shapedplugin.com/plugin/woocommerce-quick-view-pro/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://locationweather.io/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/woo-quickview/assets/icon-256x256.png" alt="">
-								<h4>Quick View for WooCommerce</h4>
-								<p>Quickly view product information with smooth animation via AJAX in a nice Modal without opening the product page.</p>
+								<img src="<?php echo esc_url( $plugin_icon['location-weather'] ); ?>" alt="<?php echo esc_attr__( 'Location Weather', 'wp-expand-tabs-free' ); ?>">
+								<h4><?php echo esc_html__( 'Location Weather', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php echo esc_html__( 'Best WordPress Weather Forecast plugin to Show Current Temperature & Weather, Daily & Hourly, Detailed Forecast up to 16 Days, and Weather Map.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
-							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://shapedplugin.com/plugin/smart-brands-for-woocommerce/">
+							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://shapedplugin.com/plugin/smart-brands-for-woocommerce/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="https://ps.w.org/smart-brands-for-woocommerce/assets/icon-256x256.png" alt="">
-								<h4>Smart Brands for WooCommerce</h4>
-								<p>Smart Brands for WooCommerce Pro helps you display product brands in an attractive way on your online store.</p>
+								<img src="<?php echo esc_url( $plugin_icon['smart-brands-for-woocommerce'] ); ?>" alt="<?php echo esc_attr__( 'Smart Brands for WooCommerce', 'wp-expand-tabs-free' ); ?>">
+								<h4><?php echo esc_html__( 'Smart Brands for WooCommerce', 'wp-expand-tabs-free' ); ?></h4>
+								<p><?php echo esc_html__( 'Smart Brands for WooCommerce Pro helps you display product brands in an attractive way on your online store.', 'wp-expand-tabs-free' ); ?></p>
 							</a>
 						</div>
 					</div>
@@ -821,8 +856,19 @@ class WP_Tabs_Help_Page {
 			<!-- Footer Section -->
 			<section class="sptabs-footer">
 				<div class="sptabs-footer-top">
-					<p><span>Made With <i class="sptabs-icon-heart"></i> </span> By the <a target="_blank" href="https://shapedplugin.com/">ShapedPlugin LLC</a> Team</p>
-					<p>Get connected with</p>
+					<?php
+						/** Translators: %1$s Opening <span> tag, %2$s Closing <span> tag */
+						printf(
+							'<p><span>%1$s <i class="sptabs-icon-heart"></i></span> %2$s</p>',
+							esc_html__( 'Made With', 'wp-expand-tabs-free' ),
+							sprintf(
+								esc_html__( 'By the %1$sShapedPlugin LLC%2$s Team', 'wp-expand-tabs-free' ),
+								'<a target="_blank" href="https://shapedplugin.com/">',
+								'</a>'
+							)
+						);
+					?>
+					<p><?php echo esc_html__( 'Get connected with', 'wp-expand-tabs-free' ); ?></p>
 					<ul>
 						<li><a target="_blank" href="https://www.facebook.com/ShapedPlugin/"><i class="sptabs-icon-fb"></i></a></li>
 						<li><a target="_blank" href="https://twitter.com/intent/follow?screen_name=ShapedPlugin"><i class="sptabs-icon-x"></i></a></li>

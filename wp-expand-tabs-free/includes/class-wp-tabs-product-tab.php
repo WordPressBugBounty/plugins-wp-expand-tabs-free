@@ -94,13 +94,25 @@ class WP_Tabs_Product_Tab {
 							}
 							++$sptpro_tab_priority;
 
+							// Check if WPML is active.
+							if ( function_exists( 'icl_object_id' ) ) {
+								// Get the language details for this product ID.
+								$language_product_info   = apply_filters( 'wpml_post_language_details', null, $product_id );
+								$language_shortcode_info = apply_filters( 'wpml_post_language_details', null, $sptpro_woo_tab_shortcode_id );
+
+								$product_lang   = $language_product_info['language_code'];
+								$shortcode_lang = $language_shortcode_info['language_code'];
+							}
+
 							if ( ! empty( $sptpro_tab ) && is_array( $sptpro_tab ) ) {
-								$tabs[ 'sptpro_tab_' . $sptpro_tab_priority . $key ] = array(
-									'title'    => __( $sptpro_tab['tabs_content_title'], 'woocommerce' ),
-									'priority' => '50',
-									'callback' => array( $this, 'sptpro_product_tabs_panel_content' ),
-									'content'  => $sptpro_tab['tabs_content_description'],
-								);
+								if ( ! function_exists( 'icl_object_id' ) || $product_lang === $shortcode_lang ) {
+									$tabs[ 'sptpro_tab_' . $sptpro_tab_priority . $key ] = array(
+										'title'    => $sptpro_tab['tabs_content_title'],
+										'priority' => '50',
+										'callback' => array( $this, 'sptpro_product_tabs_panel_content' ),
+										'content'  => $sptpro_tab['tabs_content_description'],
+									);
+								}
 							}
 						}
 					}

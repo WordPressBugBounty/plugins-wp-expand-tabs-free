@@ -11,7 +11,7 @@
  * Plugin Name:       WP Tabs
  * Plugin URI:        https://wptabs.com/?ref=1
  * Description:       WP Tabs is the most user-friendly, highly customizable, responsive WordPress tabs plugin to display your content in a clean organized tabbed navigation.
- * Version:           2.2.9
+ * Version:           2.2.10
  * Author:            ShapedPlugin LLC
  * Author URI:        https://shapedplugin.com/
  * License:           GPL-2.0+
@@ -31,7 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'WP_TABS_NAME', 'WP Tabs' );
-define( 'WP_TABS_VERSION', '2.2.9' );
+define( 'WP_TABS_VERSION', '2.2.10' );
 define( 'WP_TABS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WP_TABS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_TABS_URL', plugin_dir_url( __FILE__ ) );
@@ -50,21 +50,24 @@ function is_wp_tabs_pro() {
 	}
 }
 
+require plugin_dir_path( __FILE__ ) . 'includes/class-wp-tabs.php';
+
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wp-tabs.php';
+function wp_tabs_pro_initialize_files() {
+	if ( ! function_exists( 'is_wp_tabs_pro' ) || ! is_wp_tabs_pro() ) {
+		return;
+	}
 
-if ( is_wp_tabs_pro() ) {
-	/**
-	 * Require all metabox file.
-	 */
+	// Require all necessary files.
 	require_once WP_TABS_PATH . '/admin/partials/models/classes/setup.class.php';
 	require_once WP_TABS_PATH . '/admin/partials/metabox-config.php';
 	require_once WP_TABS_PATH . '/admin/partials/option-config.php';
 	require_once WP_TABS_PATH . '/admin/partials/tools-config.php';
 }
+add_action( 'after_setup_theme', 'wp_tabs_pro_initialize_files' );
 
 /**
  * Begins execution of the plugin.
