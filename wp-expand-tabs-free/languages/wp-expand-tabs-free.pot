@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Tabs 2.2.10\n"
-"POT-Creation-Date: 2025-03-24 14:25+0600\n"
+"Project-Id-Version: WP Tabs 2.2.11\n"
+"POT-Creation-Date: 2025-04-14 17:34+0600\n"
 "PO-Revision-Date: 2023-10-02 10:14+0600\n"
 "Last-Translator: \n"
 "Language-Team: ShapedPlugin <support@shapedplugin.com>\n"
@@ -19,8 +19,8 @@ msgstr ""
 #: admin/ElementorAddons/widgets/shortcode.php:49
 #: admin/GutenbergBlock/src/index.js:17 admin/GutenbergBlock/src/index.js:79
 #: admin/GutenbergBlock/src/index.js:111 admin/help-page/help.php:107
-#: admin/help-page/help.php:114 admin/help-page/help.php:833
-#: admin/help-page/help.php:834 admin/partials/metabox-config.php:53
+#: admin/help-page/help.php:114 admin/help-page/help.php:835
+#: admin/help-page/help.php:836 admin/partials/metabox-config.php:53
 #: includes/class-wp-tabs-cpt.php:76
 msgid "WP Tabs"
 msgstr ""
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Duplicate"
 msgstr ""
 
-#: admin/help-page/help.php:108 admin/help-page/help.php:434
+#: admin/help-page/help.php:108 admin/help-page/help.php:427
 msgid "Recommended"
 msgstr ""
 
@@ -99,71 +99,71 @@ msgstr ""
 msgid "Get Help"
 msgstr ""
 
-#: admin/help-page/help.php:242
+#: admin/help-page/help.php:235
 msgid "Activate"
 msgstr ""
 
-#: admin/help-page/help.php:249
+#: admin/help-page/help.php:242
 msgid "Install Now"
 msgstr ""
 
-#: admin/help-page/help.php:255
+#: admin/help-page/help.php:248
 msgid "More Details"
 msgstr ""
 
-#: admin/help-page/help.php:287
+#: admin/help-page/help.php:280
 msgid "Version:"
 msgstr ""
 
-#: admin/help-page/help.php:296
+#: admin/help-page/help.php:289
 msgid "+ Active Installations"
 msgstr ""
 
-#: admin/help-page/help.php:304
+#: admin/help-page/help.php:297
 msgid "Last Updated:"
 msgstr ""
 
-#: admin/help-page/help.php:305
+#: admin/help-page/help.php:298
 msgid "ago"
 msgstr ""
 
-#: admin/help-page/help.php:411
+#: admin/help-page/help.php:404
 #, php-format
 msgid ""
 "You’re currently using %1$s. To access additional features, consider %2$s"
 msgstr ""
 
-#: admin/help-page/help.php:412
+#: admin/help-page/help.php:405
 msgid "WP Tabs Lite"
 msgstr ""
 
-#: admin/help-page/help.php:413
+#: admin/help-page/help.php:406
 msgid "upgrading to Pro!"
 msgstr ""
 
-#: admin/help-page/help.php:433
+#: admin/help-page/help.php:426
 msgid "Get Started"
 msgstr ""
 
-#: admin/help-page/help.php:435
+#: admin/help-page/help.php:428
 msgid "Lite Vs Pro"
 msgstr ""
 
-#: admin/help-page/help.php:436
+#: admin/help-page/help.php:429
 msgid "About Us"
 msgstr ""
 
-#: admin/help-page/help.php:449
+#: admin/help-page/help.php:442
 msgid "Welcome to WP Tabs!"
 msgstr ""
 
-#: admin/help-page/help.php:450
+#: admin/help-page/help.php:443
 msgid ""
 "Thank you for installing WP Tabs! This video will help you get started with "
 "the plugin. Enjoy!"
 msgstr ""
 
-#: admin/help-page/help.php:454 admin/partials/metabox-config.php:141
+#: admin/help-page/help.php:447 admin/partials/metabox-config.php:141
 #: admin/partials/metabox-config.php:200 admin/partials/metabox-config.php:256
 #: admin/partials/metabox-config.php:294 admin/partials/metabox-config.php:468
 #: admin/partials/metabox-config.php:526 admin/partials/metabox-config.php:538
@@ -173,284 +173,284 @@ msgstr ""
 msgid "Live Demo"
 msgstr ""
 
-#: admin/help-page/help.php:455 admin/help-page/help.php:765
+#: admin/help-page/help.php:448 admin/help-page/help.php:758
 msgid "Explore WP Tabs"
 msgstr ""
 
-#: admin/help-page/help.php:461
+#: admin/help-page/help.php:454
 msgid "Documentation"
 msgstr ""
 
-#: admin/help-page/help.php:463
+#: admin/help-page/help.php:456
 msgid "Explore WP Tabs plugin capabilities in our enriched documentation."
 msgstr ""
 
-#: admin/help-page/help.php:468
+#: admin/help-page/help.php:461
 msgid "Technical Support"
 msgstr ""
 
-#: admin/help-page/help.php:470
+#: admin/help-page/help.php:463
 msgid ""
 "For personalized assistance, reach out to our skilled support team for "
 "prompt help."
 msgstr ""
 
-#: admin/help-page/help.php:471
+#: admin/help-page/help.php:464
 msgid "Ask Now"
 msgstr ""
 
-#: admin/help-page/help.php:475
+#: admin/help-page/help.php:468
 msgid "Join The Community"
 msgstr ""
 
-#: admin/help-page/help.php:477
+#: admin/help-page/help.php:470
 msgid ""
 "Join the official ShapedPlugin Facebook group to share your experiences, "
 "thoughts, and ideas."
 msgstr ""
 
-#: admin/help-page/help.php:478
+#: admin/help-page/help.php:471
 msgid "Join Now"
 msgstr ""
 
-#: admin/help-page/help.php:489
+#: admin/help-page/help.php:482
 msgid "Lite vs Pro Comparison"
 msgstr ""
 
-#: admin/help-page/help.php:490 admin/help-page/help.php:661
+#: admin/help-page/help.php:483 admin/help-page/help.php:654
 msgid "Upgrade to Pro Now!"
 msgstr ""
 
-#: admin/help-page/help.php:496
+#: admin/help-page/help.php:489
 msgid "FEATURES"
 msgstr ""
 
-#: admin/help-page/help.php:497
+#: admin/help-page/help.php:490
 msgid "Lite"
 msgstr ""
 
-#: admin/help-page/help.php:498
+#: admin/help-page/help.php:491
 msgid "PRO"
 msgstr ""
 
-#: admin/help-page/help.php:501
+#: admin/help-page/help.php:494
 msgid "All Free Version Features"
 msgstr ""
 
-#: admin/help-page/help.php:506
+#: admin/help-page/help.php:499
 msgid ""
 "Tabs Layout Presets (Horizontal Top, Bottom, Vertical Left, Right, and Tabs "
 "Carousel)"
 msgstr ""
 
-#: admin/help-page/help.php:511
+#: admin/help-page/help.php:504
 msgid "Flexible Tabs Position"
 msgstr ""
 
-#: admin/help-page/help.php:516
+#: admin/help-page/help.php:509
 msgid "Unlimited Multi-level or Nested Tabs"
 msgstr ""
 
-#: admin/help-page/help.php:516 admin/help-page/help.php:526
-#: admin/help-page/help.php:566
+#: admin/help-page/help.php:509 admin/help-page/help.php:519
+#: admin/help-page/help.php:559
 msgid "Hot"
 msgstr ""
 
-#: admin/help-page/help.php:521
+#: admin/help-page/help.php:514
 msgid ""
 "Supports HTML content, images, shortcodes, video, audio, forms, maps, "
 "iframe, slider, galleries, etc."
 msgstr ""
 
-#: admin/help-page/help.php:526
+#: admin/help-page/help.php:519
 msgid "WooCommerce Additional Custom Tab"
 msgstr ""
 
-#: admin/help-page/help.php:531
+#: admin/help-page/help.php:524
 msgid ""
 "Create Tabs from Posts, Pages, Products, Custom Post Types, Taxonomies, etc."
 msgstr ""
 
-#: admin/help-page/help.php:536
+#: admin/help-page/help.php:529
 msgid "Add Tabs Subtitle"
 msgstr ""
 
-#: admin/help-page/help.php:541
+#: admin/help-page/help.php:534
 msgid "Add Tabs Title Icon from Icon Library/Custom Image Icons"
 msgstr ""
 
-#: admin/help-page/help.php:546
+#: admin/help-page/help.php:539
 msgid "Deep Linking/Custom Linking Tabs"
 msgstr ""
 
-#: admin/help-page/help.php:546 admin/help-page/help.php:566
+#: admin/help-page/help.php:539 admin/help-page/help.php:559
 msgid "New"
 msgstr ""
 
-#: admin/help-page/help.php:551
+#: admin/help-page/help.php:544
 msgid "Make any Tab Item Inactive"
 msgstr ""
 
-#: admin/help-page/help.php:556
+#: admin/help-page/help.php:549
 msgid "Tabs AutoPlay Activator Event"
 msgstr ""
 
-#: admin/help-page/help.php:561
+#: admin/help-page/help.php:554
 msgid "Set Custom Tabs Number to be Opened on Page Load"
 msgstr ""
 
-#: admin/help-page/help.php:566
+#: admin/help-page/help.php:559
 msgid "Enable Scrollable Tabs Variable Width and Loop"
 msgstr ""
 
-#: admin/help-page/help.php:571
+#: admin/help-page/help.php:564
 msgid "Hide Tabs hash URL from Site URL/Browser URL"
 msgstr ""
 
-#: admin/help-page/help.php:576
+#: admin/help-page/help.php:569
 msgid "Stylize Tabs Icon, Icon Size, Color, Active Color, Position etc."
 msgstr ""
 
-#: admin/help-page/help.php:581
+#: admin/help-page/help.php:574
 msgid "Show Active Tab Indicator Arrow"
 msgstr ""
 
-#: admin/help-page/help.php:581
+#: admin/help-page/help.php:574
 msgid "new"
 msgstr ""
 
-#: admin/help-page/help.php:586
+#: admin/help-page/help.php:579
 msgid "Tabs Title Gradient Background Color"
 msgstr ""
 
-#: admin/help-page/help.php:591
+#: admin/help-page/help.php:584
 msgid "Active Tab Top Line Border"
 msgstr ""
 
-#: admin/help-page/help.php:596
+#: admin/help-page/help.php:589
 msgid "Tabs Title and Description Border, Padding, etc."
 msgstr ""
 
-#: admin/help-page/help.php:601
+#: admin/help-page/help.php:594
 msgid "Flat Underline Tabs"
 msgstr ""
 
-#: admin/help-page/help.php:606
+#: admin/help-page/help.php:599
 msgid "Strip Tabs Description Content HTML Tags"
 msgstr ""
 
-#: admin/help-page/help.php:611
+#: admin/help-page/help.php:604
 msgid "Tabs Custom Content Height"
 msgstr ""
 
-#: admin/help-page/help.php:616
+#: admin/help-page/help.php:609
 msgid "Change Tabs to Accordion on Small Devices"
 msgstr ""
 
-#: admin/help-page/help.php:621
+#: admin/help-page/help.php:614
 msgid "Tabs Description Animation"
 msgstr ""
 
-#: admin/help-page/help.php:626
+#: admin/help-page/help.php:619
 msgid "Import/Export Tabs Groups"
 msgstr ""
 
-#: admin/help-page/help.php:631
+#: admin/help-page/help.php:624
 msgid "Stylize your Tabs Typography with 1500+ Google Fonts"
 msgstr ""
 
-#: admin/help-page/help.php:636
+#: admin/help-page/help.php:629
 msgid "All Premium Features, Security Enhancements, and Compatibility"
 msgstr ""
 
-#: admin/help-page/help.php:641
+#: admin/help-page/help.php:634
 msgid "Priority Top-notch Support"
 msgstr ""
 
-#: admin/help-page/help.php:648
+#: admin/help-page/help.php:641
 msgid "Upgrade To PRO & Enjoy Advanced Features!"
 msgstr ""
 
-#: admin/help-page/help.php:653
+#: admin/help-page/help.php:646
 #, php-format
 msgid ""
 "Already, %1$s15000+%2$s people are using WP Tabs on their websites to create "
 "beautiful showcase, why won't you!"
 msgstr ""
 
-#: admin/help-page/help.php:662
+#: admin/help-page/help.php:655
 msgid "14-Day No-Questions-Asked"
 msgstr ""
 
-#: admin/help-page/help.php:662
+#: admin/help-page/help.php:655
 msgid "Refund Policy"
 msgstr ""
 
-#: admin/help-page/help.php:664
+#: admin/help-page/help.php:657
 msgid "See All Features"
 msgstr ""
 
-#: admin/help-page/help.php:665
+#: admin/help-page/help.php:658
 msgid "Pro Live Demo"
 msgstr ""
 
-#: admin/help-page/help.php:672
+#: admin/help-page/help.php:665
 msgid "NO NEED TO TAKE OUR WORD FOR IT"
 msgstr ""
 
-#: admin/help-page/help.php:675
+#: admin/help-page/help.php:668
 msgid "Our Users Love WP Tabs Pro!"
 msgstr ""
 
-#: admin/help-page/help.php:681
+#: admin/help-page/help.php:674
 msgid ""
 "I’ve tried 3 other Gallery / Carousel plugins and this one is by far the "
 "easiest, lightweight and does exactly what I want! I had a minor glitch and "
 "support was very quick to fix it. Very happy and highly rec..."
 msgstr ""
 
-#: admin/help-page/help.php:688
+#: admin/help-page/help.php:681
 msgid "Joyce van den Berg"
 msgstr ""
 
-#: admin/help-page/help.php:690 admin/help-page/help.php:706
-#: admin/help-page/help.php:722
+#: admin/help-page/help.php:683 admin/help-page/help.php:699
+#: admin/help-page/help.php:715
 msgid "★★★★★"
 msgstr ""
 
-#: admin/help-page/help.php:697
+#: admin/help-page/help.php:690
 msgid ""
 "The plugin works great and is a great addition to my site. The support has "
 "been tremendously! Fast and easy! They even helped with JS errors from other "
 "plugins. THANKS!..."
 msgstr ""
 
-#: admin/help-page/help.php:704
+#: admin/help-page/help.php:697
 msgid "Sksposcho"
 msgstr ""
 
-#: admin/help-page/help.php:713
+#: admin/help-page/help.php:706
 msgid ""
 "The new WP-Tabs is a tab menu for people who love more features. First of "
 "all you have to be playful when creating the tabs. If – then the Pro Version "
 "includes the things that make creating them reall..."
 msgstr ""
 
-#: admin/help-page/help.php:720
+#: admin/help-page/help.php:713
 msgid "Wegerl"
 msgstr ""
 
-#: admin/help-page/help.php:735
+#: admin/help-page/help.php:728
 msgid "Enhance your Website with our Free Robust Plugins"
 msgstr ""
 
-#: admin/help-page/help.php:751
+#: admin/help-page/help.php:744
 msgid ""
 "A Highly Customizable WordPress Tabs plugin from the WP Tabs Team, "
 "ShapedPlugin, LLC"
 msgstr ""
 
-#: admin/help-page/help.php:755
+#: admin/help-page/help.php:748
 #, php-format
 msgid ""
 "%1$sAt %2$sShapedPlugin LLC%3$s, we have been looking for the best way to "
@@ -460,141 +460,141 @@ msgid ""
 "builder plugin for WordPress with many customization options.%4$s"
 msgstr ""
 
-#: admin/help-page/help.php:763
+#: admin/help-page/help.php:756
 msgid ""
 "The WP Tabs plugin provides a convenient way to create visually appealing "
 "Tabs sections and WooCommerce custom tabs. Check it out now and experience "
 "the difference!"
 msgstr ""
 
-#: admin/help-page/help.php:766
+#: admin/help-page/help.php:759
 msgid "More About Us"
 msgstr ""
 
-#: admin/help-page/help.php:771
+#: admin/help-page/help.php:764
 msgid "Team ShapedPlugin LLC at WordCamp Sylhet"
 msgstr ""
 
-#: admin/help-page/help.php:775
+#: admin/help-page/help.php:777
 msgid "Upgrade your Website with our High-quality Plugins!"
 msgstr ""
 
-#: admin/help-page/help.php:780
+#: admin/help-page/help.php:782
 msgid "WP Carousel"
 msgstr ""
 
-#: admin/help-page/help.php:781
+#: admin/help-page/help.php:783
 msgid ""
 "The most powerful and user-friendly multi-purpose carousel, slider, & "
 "gallery plugin for WordPress."
 msgstr ""
 
-#: admin/help-page/help.php:786
+#: admin/help-page/help.php:788
 msgid "Real Testimonials"
 msgstr ""
 
-#: admin/help-page/help.php:787
+#: admin/help-page/help.php:789
 msgid ""
 "Simply collect, manage, and display Testimonials on your website and boost "
 "conversions."
 msgstr ""
 
-#: admin/help-page/help.php:792
+#: admin/help-page/help.php:794
 msgid "Smart Post Show"
 msgstr ""
 
-#: admin/help-page/help.php:793
+#: admin/help-page/help.php:795
 msgid ""
 "Filter and display posts (any post types), pages, taxonomy, custom taxonomy, "
 "and custom field, in beautiful layouts."
 msgstr ""
 
-#: admin/help-page/help.php:798
+#: admin/help-page/help.php:800
 msgid "Product Slider for WooCommerce"
 msgstr ""
 
-#: admin/help-page/help.php:799
+#: admin/help-page/help.php:801
 msgid ""
 "Boost sales by interactive product Slider, Grid, and Table in your "
 "WooCommerce website or store."
 msgstr ""
 
-#: admin/help-page/help.php:804
+#: admin/help-page/help.php:806
 msgid "WooGallery"
 msgstr ""
 
-#: admin/help-page/help.php:805
+#: admin/help-page/help.php:807
 msgid ""
 "Product gallery slider and additional variation images gallery for "
 "WooCommerce and boost your sales."
 msgstr ""
 
-#: admin/help-page/help.php:810
+#: admin/help-page/help.php:812
 msgid "WP Team"
 msgstr ""
 
-#: admin/help-page/help.php:811
+#: admin/help-page/help.php:813
 msgid ""
 "Display your team members smartly who are at the heart of your company or "
 "organization!"
 msgstr ""
 
-#: admin/help-page/help.php:815 admin/help-page/help.php:816
+#: admin/help-page/help.php:817 admin/help-page/help.php:818
 msgid "Logo Carousel"
 msgstr ""
 
-#: admin/help-page/help.php:817
+#: admin/help-page/help.php:819
 msgid ""
 "Showcase a group of logo images with Title, Description, Tooltips, Links, "
 "and Popup as a grid or in a carousel."
 msgstr ""
 
-#: admin/help-page/help.php:821 admin/help-page/help.php:822
+#: admin/help-page/help.php:823 admin/help-page/help.php:824
 msgid "Easy Accordion"
 msgstr ""
 
-#: admin/help-page/help.php:823
+#: admin/help-page/help.php:825
 msgid ""
 "Minimize customer support by offering comprehensive FAQs and increasing "
 "conversions."
 msgstr ""
 
-#: admin/help-page/help.php:827 admin/help-page/help.php:828
+#: admin/help-page/help.php:829 admin/help-page/help.php:830
 msgid "WooCategory"
 msgstr ""
 
-#: admin/help-page/help.php:829
+#: admin/help-page/help.php:831
 msgid ""
 "Display by filtering the list of categories aesthetically and boosting sales."
 msgstr ""
 
-#: admin/help-page/help.php:835
+#: admin/help-page/help.php:837
 msgid ""
 "Display tabbed content smartly & quickly on your WordPress site without "
 "coding skills."
 msgstr ""
 
-#: admin/help-page/help.php:839 admin/help-page/help.php:840
-msgid "Quick View for WooCommerce"
+#: admin/help-page/help.php:841 admin/help-page/help.php:842
+msgid "Location Weather"
 msgstr ""
 
-#: admin/help-page/help.php:841
+#: admin/help-page/help.php:843
 msgid ""
-"Quickly view product information with smooth animation via AJAX in a nice "
-"Modal without opening the product page."
+"Best WordPress Weather Forecast plugin to Show Current Temperature & "
+"Weather, Daily & Hourly, Detailed Forecast up to 16 Days, and Weather Map."
 msgstr ""
 
-#: admin/help-page/help.php:845 admin/help-page/help.php:846
+#: admin/help-page/help.php:847 admin/help-page/help.php:848
 msgid "Smart Brands for WooCommerce"
 msgstr ""
 
-#: admin/help-page/help.php:847
+#: admin/help-page/help.php:849
 msgid ""
 "Smart Brands for WooCommerce Pro helps you display product brands in an "
 "attractive way on your online store."
 msgstr ""
 
-#: admin/help-page/help.php:864
+#: admin/help-page/help.php:863
 msgid "Made With"
 msgstr ""
 

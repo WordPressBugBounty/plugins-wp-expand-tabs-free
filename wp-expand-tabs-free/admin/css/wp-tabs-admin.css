@@ -9,7 +9,7 @@
  	background-color: #fff;
  	border-radius: 5px;
  	margin: 20px 20px 0 0;
-	clear: both;
+ 	clear: both;
  	box-shadow: 0 0 20px 0 rgba(36, 39, 50, .08);
  }
 
@@ -111,7 +111,6 @@
  	color: #11b916;
  	font-weight: 700;
  } */
-
  #adminmenu #menu-posts-sp_wp_tabs li:nth-child(7) a {
  	color: #f9be48;
  }
@@ -137,6 +136,10 @@
  	padding: 0;
  	line-height: 24px;
  	max-width: 100%;
+ }
+
+ .sptabfree-gutenberg-shortcode.editor-styles-wrapper:after {
+ 	display: none;
  }
 
  .editor-styles-wrapper>select.sptabfree-shortcode-selector {

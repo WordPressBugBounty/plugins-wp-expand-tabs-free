@@ -62,8 +62,8 @@ class WP_Tabs_CPT {
 		$labels     = apply_filters(
 			'sp_wp_tabs_post_type_labels',
 			array(
-				'name'               => esc_html_x( 'Tab Groups', 'wp-expand-tabs-free' ),
-				'singular_name'      => esc_html_x( 'Tabs', 'wp-expand-tabs-free' ),
+				'name'               => esc_html__( 'Tab Groups', 'wp-expand-tabs-free' ),
+				'singular_name'      => esc_html__( 'Tabs', 'wp-expand-tabs-free' ),
 				'add_new'            => esc_html__( 'Add New', 'wp-expand-tabs-free' ),
 				'add_new_item'       => esc_html__( 'Add New Tab Group', 'wp-expand-tabs-free' ),
 				'edit_item'          => esc_html__( 'Edit Tab Group', 'wp-expand-tabs-free' ),

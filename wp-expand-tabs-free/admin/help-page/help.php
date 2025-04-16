@@ -862,6 +862,7 @@ class WP_Tabs_Help_Page {
 							'<p><span>%1$s <i class="sptabs-icon-heart"></i></span> %2$s</p>',
 							esc_html__( 'Made With', 'wp-expand-tabs-free' ),
 							sprintf(
+								/* translators: %1$s Opening <a> tag, %2$s Closing <a> tag */
 								esc_html__( 'By the %1$sShapedPlugin LLC%2$s Team', 'wp-expand-tabs-free' ),
 								'<a target="_blank" href="https://shapedplugin.com/">',
 								'</a>'
