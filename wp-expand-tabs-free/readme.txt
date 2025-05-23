@@ -2,8 +2,8 @@
 Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: tabs, vertical tabs, nested tabs, woocommerce tabs, custom product tabs
 Requires at least: 4.7
-Tested up to: 6.8
-Stable tag: 2.2.11
+Tested up to: 6.8.1
+Stable tag: 2.2.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -241,6 +241,10 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 == Changelog ==
 
+= 2.2.12 - May 23, 2025 =
+* Improved: The plugin security for the import export feature.
+* Tested: WordPress 6.8.1 compatibility.
+
 = 2.2.11 - Apr 16, 2025 =
 * Fix: The mismatched text domain issue.
 * Fix: The extra gap issue below the WP Tabs block select option.
@@ -248,7 +252,7 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 * Tested: WordPress 6.8 compatibility.
 
 = 2.2.10 - Mar 27, 2025 =
-* Improved: The Woo Product Tabs feature will show translated versions of tabs on the translated product page. 
+* Improved: The Woo Product Tabs feature will show translated versions of tabs on the translated product page.
 * Fix: The Notice:  Function _load_textdomain_just_in_time was called incorrectly.
 * Fix: The recommended plugins logo issue.
 * Updated: The language (.pot) file.

@@ -59,7 +59,36 @@ class Wp_Tabs_Import_Export {
 			return $export;
 		}
 	}
-
+	/**
+	 * Retrieve all field IDs and their sanitize callbacks from a given metabox.
+	 *
+	 * @param string $metabox_id The ID of the metabox.
+	 * @return array List of field ID and sanitize callback pairs.
+	 */
+	public function sp_get_metabox_field_ids_with_sanitizers( $metabox_id ) {
+		if ( ! class_exists( 'SP_WP_TABS' ) ) {
+			return array();
+		}
+		$sections = SP_WP_TABS::$args['sections'][ $metabox_id ] ?? null;
+		if ( empty( $sections ) || ! is_array( $sections ) ) {
+			return array();
+		}
+		$field_data = array();
+		foreach ( $sections as $section ) {
+			if ( empty( $section['fields'] ) || ! is_array( $section['fields'] ) ) {
+				continue;
+			}
+			foreach ( $section['fields'] as $field ) {
+				if ( isset( $field['id'] ) ) {
+					$field_data[] = array(
+						'id'       => $field['id'],
+						'sanitize' => $field['sanitize'] ?? null,
+					);
+				}
+			}
+		}
+		return $field_data;
+	}
 	/**
 	 * Export tabs by ajax.
 	 *
@@ -122,16 +151,20 @@ class Wp_Tabs_Import_Export {
 
 				if ( isset( $shortcode['meta'] ) && is_array( $shortcode['meta'] ) ) {
 					foreach ( $shortcode['meta'] as $key => $value ) {
-						update_post_meta(
-							$new_tabs_id,
-							$key,
-							maybe_unserialize( str_replace( '{#ID#}', $new_tabs_id, $value ) )
-						);
+						if ( 'sp_tab_source_options' === $key || 'sp_tab_shortcode_options' === $key ) {
+							$sanitize_value = $this->sanitize_and_collect_metabox_data( $key, maybe_unserialize( str_replace( '{#ID#}', $new_tabs_id, $value ) ) );
+
+							update_post_meta(
+								$new_tabs_id,
+								$key,
+								$sanitize_value
+							);
+
+						}
 					}
 				}
 			} catch ( Exception $e ) {
 				array_push( $errors[ $index ], $e->getMessage() );
-
 				// If there was a failure somewhere, clean up.
 				wp_trash_post( $new_tabs_id );
 			}
@@ -147,6 +180,41 @@ class Wp_Tabs_Import_Export {
 
 		$errors = reset( $errors );
 		return isset( $errors[0] ) ? new WP_Error( 'import_tabs_error', $errors[0] ) : $shortcodes;
+	}
+
+	/**
+	 * Sanitize and process metabox form data.
+	 *
+	 * @param  string $metabox_key Unique metabox identifier.
+	 * @param  array  $request_data Data submitted via the form ($_POST or similar).
+	 * @return array Sanitized metabox data.
+	 */
+	public function sanitize_and_collect_metabox_data( $metabox_key, $request_data ) {
+		$sanitized_data = array();
+
+		// Retrieve the list of fields with their respective sanitization callbacks.
+		$metabox_fields = $this->sp_get_metabox_field_ids_with_sanitizers( $metabox_key );
+
+		foreach ( $metabox_fields as $field ) {
+			// Ensure the field has a valid ID.
+			if ( empty( $field['id'] ) ) {
+				continue;
+			}
+
+			$field_id    = sanitize_key( $field['id'] );
+			$field_value = isset( $request_data[ $field_id ] ) ? $request_data[ $field_id ] : '';
+
+			// If a custom sanitizer function is provided, use it.
+			if ( ! empty( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
+				$sanitized_data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
+			} elseif ( is_array( $field_value ) ) {
+				$sanitized_data[ $field_id ] = wp_kses_post_deep( $field_value );
+			} else {
+				$sanitized_data[ $field_id ] = $field_value ? wp_kses_post( $field_value ) : null;
+			}
+		}
+
+		return $sanitized_data;
 	}
 
 	/**
