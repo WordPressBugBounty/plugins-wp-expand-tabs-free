@@ -3,7 +3,7 @@ Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: tabs, vertical tabs, nested tabs, woocommerce tabs, custom product tabs
 Requires at least: 4.7
 Tested up to: 6.8.1
-Stable tag: 2.2.12
+Stable tag: 2.2.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -240,6 +240,9 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 2.2.13 - Jun 05, 2025 =
+* Improved: The plugin security has been improved.
 
 = 2.2.12 - May 23, 2025 =
 * Improved: The plugin security for the import export feature.

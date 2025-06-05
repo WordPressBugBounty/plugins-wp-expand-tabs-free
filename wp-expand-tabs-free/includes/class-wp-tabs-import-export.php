@@ -152,7 +152,12 @@ class Wp_Tabs_Import_Export {
 				if ( isset( $shortcode['meta'] ) && is_array( $shortcode['meta'] ) ) {
 					foreach ( $shortcode['meta'] as $key => $value ) {
 						if ( 'sp_tab_source_options' === $key || 'sp_tab_shortcode_options' === $key ) {
-							$sanitize_value = $this->sanitize_and_collect_metabox_data( $key, maybe_unserialize( str_replace( '{#ID#}', $new_tabs_id, $value ) ) );
+							$value = str_replace( '{#ID#}', $new_tabs_id, $value );
+							if ( is_serialized( $value ) ) {
+								// If the value is serialized, we need to unserialize it.
+								$value = unserialize( $value, array( 'allowed_classes' => false ) );
+							}
+							$sanitize_value = $this->sanitize_and_collect_metabox_data( $key, $value );
 
 							update_post_meta(
 								$new_tabs_id,

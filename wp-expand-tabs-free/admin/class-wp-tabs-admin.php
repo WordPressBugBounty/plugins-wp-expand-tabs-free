@@ -167,7 +167,11 @@ class WP_Tabs_Admin {
 			// Duplicate all post meta just.
 			foreach ( $post_meta_infos as $key => $values ) {
 				foreach ( $values as $value ) {
-					$value = wp_slash( maybe_unserialize( $value ) ); // Unserialize data to avoid conflicts.
+					if ( is_serialized( $value ) ) {
+						// If the value is serialized, we need to unserialize it.
+						$value = unserialize( $value, array( 'allowed_classes' => false ) );
+					}
+					$value = wp_slash( $value );
 					add_post_meta( $new_post_id, $key, $value );
 				}
 			}
