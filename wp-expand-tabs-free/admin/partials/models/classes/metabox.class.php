@@ -219,7 +219,6 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 			if ( ! in_array( $post_type, $this->args['exclude_post_types'], true ) ) {
 				add_meta_box( $this->unique, wp_kses_post( $this->args['title'] ), array( &$this, 'add_meta_box_content' ), $this->post_type, $this->args['context'], $this->args['priority'], $this->args );
 			}
-
 		}
 
 		/**
@@ -234,7 +233,6 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 			$default = ( isset( $this->args['defaults'][ $field['id'] ] ) ) ? $this->args['defaults'][ $field['id'] ] : $default;
 
 			return $default;
-
 		}
 
 		/**
@@ -264,7 +262,6 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 			$value   = ( isset( $value ) ) ? $value : $default;
 
 			return $value;
-
 		}
 
 		/**
@@ -307,7 +304,7 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 
 					echo '<li><a href="#" data-section="' . esc_attr( $this->unique . '_' . $tab_key ) . '">' . wp_kses_post( $tab_icon . $section['title'] . $tab_error ) . '</a></li>';
 
-					$tab_key++;
+					++$tab_key;
 				}
 				echo '</ul>';
 
@@ -353,7 +350,7 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 
 				echo '</div>';
 
-				$count++;
+				++$count;
 
 			}
 
@@ -384,7 +381,6 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 			echo '</div>';
 
 			echo '</div>';
-
 		}
 
 		/**
@@ -407,6 +403,7 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach.
+			// @codingStandardsIgnoreLine
 			$request = ( ! empty( $_POST[ $this->unique ] ) ) ? $_POST[ $this->unique ] : array();
 
 			if ( ! empty( $request ) ) {
@@ -425,12 +422,10 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 								// Sanitize "post" request of field.
 								if ( ! empty( $field['sanitize'] ) ) {
 									$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
-								} else {
-									if ( $field_value && is_array( $field_value ) ) {
+								} elseif ( $field_value && is_array( $field_value ) ) {
 										$data[ $field_id ] = wp_kses_post_deep( $field_value );
-									} else {
-										$data[ $field_id ] = $field_value ? wp_kses_post( $field_value ) : $field_value;
-									}
+								} else {
+									$data[ $field_id ] = $field_value ? wp_kses_post( $field_value ) : $field_value;
 								}
 
 								// Validate "post" request of field.
@@ -450,7 +445,7 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 						}
 					}
 
-					$count++;
+					++$count;
 
 				}
 			}
@@ -486,7 +481,6 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 			do_action( "wptabspro_{$this->unique}_saved", $data, $post_id, $this );
 
 			do_action( "wptabspro_{$this->unique}_save_after", $data, $post_id, $this );
-
 		}
 	}
 }

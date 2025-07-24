@@ -837,8 +837,6 @@ SP_WP_TABS::createSection(
 					'rotateInDownRight' => __( 'rotateInDownRight (Pro)', 'wp-expand-tabs-free' ),
 					'rotateInUpLeft'    => __( 'rotateInUpLeft (Pro)', 'wp-expand-tabs-free' ),
 					'rotateInUpRight'   => __( 'rotateInUpRight (Pro)', 'wp-expand-tabs-free' ),
-					'rotateInDownLeft'  => __( 'rotateInDownLeft (Pro)', 'wp-expand-tabs-free' ),
-					'rotateInDownRight' => __( 'rotateInDownRight (Pro)', 'wp-expand-tabs-free' ),
 					'backInDown'        => __( 'backInDown (Pro)', 'wp-expand-tabs-free' ),
 					'backInLeft'        => __( 'backInLeft (Pro)', 'wp-expand-tabs-free' ),
 					'flash'             => __( 'flash (Pro)', 'wp-expand-tabs-free' ),
@@ -1057,8 +1055,65 @@ SP_WP_TABS::createSection(
 	array(
 		'fields' => array(
 			array(
-				'type'  => 'shortcode',
-				'class' => 'sp-tab__admin-sidebar',
+				'type'      => 'shortcode',
+				'shortcode' => 'manage_view',
+				'class'     => 'sp-tab__admin-sidebar',
+			),
+		),
+	)
+);
+
+//
+// Create a metabox.
+//
+SP_WP_TABS::createMetabox(
+	'sp_tab_support_builder_sidebar',
+	array(
+		'title'     => __( 'Page Builders Ready', 'wp-expand-tabs-free' ),
+		'post_type' => 'sp_wp_tabs',
+		'context'   => 'side',
+	)
+);
+
+//
+// Create a section.
+//
+SP_WP_TABS::createSection(
+	'sp_tab_support_builder_sidebar',
+	array(
+		'fields' => array(
+			array(
+				'type'      => 'shortcode',
+				'shortcode' => false,
+				'class'     => 'sp-tab__admin-sidebar',
+			),
+		),
+	)
+);
+
+//
+// Create a metabox.
+//
+SP_WP_TABS::createMetabox(
+	'sp_tab_promotional_notice_sidebar',
+	array(
+		'title'     => __( 'Page Builders', 'wp-expand-tabs-free' ),
+		'post_type' => 'sp_wp_tabs',
+		'context'   => 'side',
+	)
+);
+
+//
+// Create a section.
+//
+SP_WP_TABS::createSection(
+	'sp_tab_promotional_notice_sidebar',
+	array(
+		'fields' => array(
+			array(
+				'type'      => 'shortcode',
+				'shortcode' => 'pro_notice',
+				'class'     => 'sp-tab__admin-sidebar',
 			),
 		),
 	)

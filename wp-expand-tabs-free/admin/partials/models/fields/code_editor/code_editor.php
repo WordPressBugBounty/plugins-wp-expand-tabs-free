@@ -71,7 +71,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_code_editor' ) ) {
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo '<textarea name="' . esc_attr( $this->field_name() ) . '"' . $this->field_attributes() . ' data-editor="' . esc_attr( wp_json_encode( $settings ) ) . '">' . $this->value . '</textarea>';
 			echo $this->field_after(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
 		}
 
 		/**
@@ -80,7 +79,7 @@ if ( ! class_exists( 'SP_WP_TABS_Field_code_editor' ) ) {
 		 * @return void
 		 */
 		public function enqueue() {
-
+			// phpcs:ignore -- Safe usage: only reads $_GET['page'] to conditionally enqueue assets.
 			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 
 			// Do not loads CodeMirror in revslider page.
@@ -95,8 +94,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_code_editor' ) ) {
 			if ( ! wp_style_is( 'wptabspro-codemirror' ) ) {
 				wp_enqueue_style( 'wptabspro-codemirror', esc_url( $this->cdn_url . $this->version . '/lib/codemirror.min.css' ), array(), $this->version );
 			}
-
 		}
-
 	}
 }

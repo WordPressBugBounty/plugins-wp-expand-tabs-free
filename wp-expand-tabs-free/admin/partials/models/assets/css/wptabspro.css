@@ -94,13 +94,13 @@
 #sp_tab_shortcode_options .handlediv,
 #sp_tab_source_options .handlediv,
 #sp_tab_source_options .hndle,
-#sp_tab_display_shortcode_sidebar .handlediv,
-#sp_tab_display_shortcode_sidebar .postbox-header .handle-actions .handle-order-higher,
-#sp_tab_display_shortcode_sidebar .postbox-header .handle-actions .handle-order-lower {
+div:is(#sp_tab_display_shortcode_sidebar,#sp_tab_support_builder_sidebar) .handlediv,
+div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .postbox-header .handle-actions .handle-order-higher,
+div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .postbox-header .handle-actions .handle-order-lower {
 	display: none;
 }
 
-#sp_tab_display_shortcode_sidebar .postbox-header h2 {
+div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .postbox-header h2 {
 	color: #1D2327;
 	font-size: 14px;
 	font-style: normal;
@@ -4610,3 +4610,212 @@ a.wptabs-demo-icon:focus {
   font-weight: 500;
   color: #08a683;
 }
+
+/* Update to pro promotional notice */
+.sp-tab-notice-wrapper {
+	border-width: 1px;
+	border-radius: 5px;
+	padding-top: 8px;
+	padding-bottom: 10px;
+}
+
+#sp_tab_promotional_notice_sidebar .postbox-header {
+	display: none;
+}
+
+#sp_tab_display_shortcode_sidebar .postbox-header {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_tab_display_shortcode_sidebar) .wptabspro-content,
+div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_tab_display_shortcode_sidebar).postbox {
+	border-radius: 3px;
+}
+
+.sp-tab-notice-wrapper {
+	border-width: 1px;
+	border-radius: 5px;
+	text-align: left;
+}
+
+.sp-tab-notice-heading {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+	color: rgba(0, 0, 0, 1);
+}
+
+.sp-tab-notice-heading span {
+	color: #0C6E63;
+}
+
+.sp-tab-notice-desc {
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 20px;
+	color: rgba(101, 105, 118, 1);
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+.sp-tab-notice-wrapper ul li {
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 20px;
+	color: rgba(0, 0, 0, 1);
+	display: inline-flex;
+	gap: 10px;
+}
+
+.sp-tab-notice-wrapper .sp-tab-notice-button {
+	position: relative;
+	font-size: 16px;
+	border-radius: 5px;
+	color: #ffffff;
+	border: 1px solid transparent;
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	overflow: hidden;
+	z-index: 0;
+	transition: border-color 0.5s ease;
+}
+
+.sp-tab-notice-wrapper .sp-tab-notice-button::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, rgb(24, 90, 157) 0%, rgb(67, 206, 162) 100%);
+	z-index: -1;
+	transition: opacity 0.6s ease;
+	opacity: 1;
+}
+
+.sp-tab-notice-wrapper .sp-tab-notice-button::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, rgb(67, 206, 162) 0%, rgb(24, 90, 157) 100%);
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.6s ease;
+}
+
+.sp-tab-notice-wrapper .sp-tab-notice-button:hover::before,
+.sp-tab-notice-wrapper .sp-tab-notice-button:hover::after {
+	opacity: 1;
+}
+
+.sp-tab-notice-wrapper .sp-tab-notice-button a {
+	color: #ffffff;
+	text-decoration: none;
+	padding: 14px 30px 14px 30px;
+	position: relative;
+	z-index: 1;
+}
+
+.sp-tab-notice-wrapper .sp-tab-notice-button a:focus {
+	box-shadow: none;
+	outline: none;
+}
+
+.sp-tab-notice-button i {
+	font-size: 16px;
+}
+
+.sp-tab-notice-wrapper ul li i {
+	color: rgba(74, 184, 102, 1);
+	font-size: 11px;
+}
+
+
+
+/*=======================================================
+ * Tabs Pro - Support Builder
+ *=======================================================*/
+ @font-face {
+ 	font-family: 'sp-tab-fontello';
+ 	src: url('../font/fontello.eot?59003652');
+ 	src: url('../font/fontello.eot?59003652#iefix') format('embedded-opentype'),
+ 		url('../font/fontello.woff2?59003652') format('woff2'),
+ 		url('../font/fontello.woff?59003652') format('woff'),
+ 		url('../font/fontello.ttf?59003652') format('truetype'),
+ 		url('../font/fontello.svg?59003652#fontello') format('svg');
+ 	font-weight: normal;
+ 	font-style: normal;
+ }
+
+ /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+ /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+ /*
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+	@font-face {
+	  font-family: 'fontello';
+	  src: url('../font/fontello.svg?59003652#fontello') format('svg');
+	}
+  }
+  */
+ [class^="sp-tab-icon-"]:before,
+ [class*=" sp-tab-icon-"]:before {
+ 	font-family: "sp-tab-fontello";
+ 	font-style: normal;
+ 	font-weight: normal;
+ 	speak: never;
+
+ 	display: inline-block;
+ 	text-decoration: inherit;
+ 	width: 1em;
+ 	margin-right: .2em;
+ 	text-align: center;
+ 	/* opacity: .8; */
+
+ 	/* For safety - reset parent styles, that can break glyph codes*/
+ 	font-variant: normal;
+ 	text-transform: none;
+
+ 	/* fix buttons height, for twitter bootstrap */
+ 	line-height: 1em;
+
+ 	/* Animation center compensation - margins should be symmetric */
+ 	/* remove if not needed */
+ 	margin-left: .2em;
+
+ 	/* you can be more comfortable with increased icons size */
+ 	/* font-size: 120%; */
+
+ 	/* Font smoothing. That was taken from TWBS */
+ 	-webkit-font-smoothing: antialiased;
+ 	-moz-osx-font-smoothing: grayscale;
+
+ 	/* Uncomment for 3D effect */
+ 	/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+ }
+
+ .sp-tab-icon-code:before {
+ 	content: '\e885';
+ }
+
+ /* '' */
+ .sp-tab-icon-advanced:before {
+ 	content: '\e886';
+ }
+
+ /* '' */
+ .sp-tab-icon-key-01:before {
+ 	content: '\e887';
+ }
+
+ /* '' */
+ .sp-tab-icon-shuttle_2285485-1:before {
+ 	content: '\e8bd';
+ }
+
+ /* '' */
+ .sp-tab-icon-check-icon:before {
+ 	content: '\e8be';
+ }
+
+ /* '' */

@@ -48,7 +48,7 @@ SP_WP_TABS::createSection(
 	$prefix,
 	array(
 		'title'  => __( 'Advanced Settings', 'wp-expand-tabs-free' ),
-		'icon'   => 'fa fa-cogs',
+		'icon'   => 'fa sp-tab-icon-advanced',
 		'fields' => array(
 			array(
 				'id'         => 'sptpro_data_remove',
@@ -185,7 +185,7 @@ SP_WP_TABS::createSection(
 	array(
 		'id'     => 'custom_css_section',
 		'title'  => __( 'Additional CSS', 'wp-expand-tabs-free' ),
-		'icon'   => 'fa fa-css3',
+		'icon'   => 'fa sp-tab-icon-code',
 		'fields' => array(
 			array(
 				'id'       => 'sptpro_custom_css',

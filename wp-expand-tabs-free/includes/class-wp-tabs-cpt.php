@@ -131,9 +131,11 @@ class WP_Tabs_CPT {
 			2  => '',
 			3  => '',
 			4  => __( ' updated.', 'wp-expand-tabs-free' ),
+			// phpcs:ignore -- Safe: only reads $_GET['revision'] to display admin notice
 			5  => isset( $_GET['revision'] ) ? sprintf(
 				/* translators: 1: post revision title. */
 				__( 'Tabs restored to revision from %s', 'wp-expand-tabs-free' ),
+				// phpcs:ignore -- Safe: admin-side display only.
 				wp_post_revision_title( (int) $_GET['revision'], false )
 			) : false,
 			6  => sprintf( __( 'Tabs published.', 'wp-expand-tabs-free' ) ),

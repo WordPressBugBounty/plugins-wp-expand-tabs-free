@@ -174,7 +174,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 
 			// wp enqeueu for typography and output css.
 			parent::__construct();
-
 		}
 
 		/**
@@ -206,7 +205,7 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 					$parents[ $section['parent'] ][] = $section;
 					unset( $sections[ $key ] );
 				}
-				$count++;
+				++$count;
 			}
 
 			foreach ( $sections as $key => $section ) {
@@ -215,7 +214,7 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 					$section['subs'] = wp_list_sort( $parents[ $section['id'] ], array( 'priority' => 'ASC' ), 'ASC', true );
 				}
 				$result[] = $section;
-				$count++;
+				++$count;
 			}
 
 			return wp_list_sort( $result, array( 'priority' => 'ASC' ), 'ASC', true );
@@ -313,7 +312,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 					);
 				}
 			}
-
 		}
 
 		/**
@@ -335,7 +333,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 					)
 				);
 			}
-
 		}
 
 		/**
@@ -350,7 +347,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			$default = ( isset( $this->args['defaults'][ $field['id'] ] ) ) ? $this->args['defaults'][ $field['id'] ] : $default;
 
 			return $default;
-
 		}
 
 		/**
@@ -371,7 +367,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			if ( $this->args['save_defaults'] && empty( $tmp_options ) ) {
 				$this->save_options( $this->options );
 			}
-
 		}
 
 		/**
@@ -385,6 +380,7 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach. see #L337 - #L341.
+			// @codingStandardsIgnoreLine
 			$response = ( $ajax && ! empty( $_POST['data'] ) ) ? json_decode( wp_unslash( trim( $_POST['data'] ) ), true ) : $_POST;
 
 			// Set variables.
@@ -507,7 +503,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			}
 
 			return false;
-
 		}
 
 		/**
@@ -529,7 +524,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			}
 
 			do_action( "wptabspro_{$this->unique}_saved", $data, $this );
-
 		}
 
 		/**
@@ -554,7 +548,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			}
 
 			return $this->options;
-
 		}
 
 		/**
@@ -588,7 +581,7 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 							$tab_key += ( count( $section['subs'] ) - 1 );
 						}
 
-						$tab_key++;
+						++$tab_key;
 
 					}
 
@@ -602,7 +595,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			}
 
 			add_action( 'load-' . $menu_page, array( &$this, 'add_page_on_load' ) );
-
 		}
 
 		/**
@@ -622,7 +614,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 					$screen->set_help_sidebar( $this->args['contextual_help_sidebar'] );
 				}
 			}
-
 		}
 
 		/**
@@ -753,7 +744,7 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 
 							echo '<li class="wptabspro-tab-depth-1"><a id="wptabspro-tab-link-' . esc_attr( $tab_key ) . '" href="#tab=' . esc_attr( $tab_key ) . '">' . wp_kses_post( $sub_icon . $sub['title'] . $sub_error ) . '</a></li>';
 
-							$tab_key++;
+							++$tab_key;
 
 						}
 
@@ -765,7 +756,7 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 
 						echo '<li class="wptabspro-tab-depth-0"><a id="wptabspro-tab-link-' . esc_attr( $tab_key ) . '" href="#tab=' . esc_attr( $tab_key ) . '">' . wp_kses_post( $tab_icon . $tab['title'] . $tab_error ) . '</a></li>';
 
-						$tab_key++;
+						++$tab_key;
 
 					}
 				}
@@ -818,7 +809,7 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 
 				echo '</div>';
 
-				$section_key++;
+				++$section_key;
 
 			}
 
@@ -843,7 +834,6 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			echo '</div>';
 
 			do_action( 'wptabspro_options_after' );
-
 		}
 	}
 }

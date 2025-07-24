@@ -82,6 +82,11 @@ class WP_Tabs_Product_Tab {
 			$sptpro_woo_tab_shortcode_ids = isset( $sptpro_woo_set_tab['sptpro_woo_tab_shortcode'] ) ? $sptpro_woo_set_tab['sptpro_woo_tab_shortcode'] : array();
 
 			if ( ! empty( $sptpro_woo_tab_shortcode_ids ) ) {
+				// If the shortcode IDs are not an array, convert it to an array.
+				if ( ! is_array( $sptpro_woo_tab_shortcode_ids ) ) {
+					$sptpro_woo_tab_shortcode_ids = explode( ',', $sptpro_woo_tab_shortcode_ids );
+				}
+
 				foreach ( $sptpro_woo_tab_shortcode_ids as $key => $sptpro_woo_tab_shortcode_id ) {
 					$sptpro_data_src = get_post_meta( $sptpro_woo_tab_shortcode_id, 'sp_tab_source_options', true );
 					$sptpro_tab_type = ( isset( $sptpro_data_src['sptpro_tab_type'] ) ? $sptpro_data_src['sptpro_tab_type'] : '' );
@@ -141,7 +146,7 @@ class WP_Tabs_Product_Tab {
 		}
 
 		$tab_title_html = '<h2 class="sptpro-woo-tab-title sptpro-woo-tab-title-' . urldecode( sanitize_title( $tab['title'] ) ) . '">' . $tab['title'] . '</h2>';
-		echo apply_filters( 'sptpro_repeatable_product_tabs_heading', $tab_title_html, $tab );
-		echo apply_filters( 'sptpro_repeatable_product_tabs_content', $content, $tab );
+		echo wp_kses_post( apply_filters( 'sptpro_repeatable_product_tabs_heading', $tab_title_html, $tab ) );
+		echo apply_filters( 'sptpro_repeatable_product_tabs_content', $content, $tab ); // @codingStandardsIgnoreLine
 	}
 }

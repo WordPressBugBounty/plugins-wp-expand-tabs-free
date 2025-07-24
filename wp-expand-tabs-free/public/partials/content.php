@@ -46,8 +46,8 @@ if ( is_array( $sptpro_data_src ) || is_object( $sptpro_data_src ) ) {
 				$aria_expanded               = $sptpro_show_class ? 'true' : 'false';
 				?>
 				<div id="<?php echo esc_attr( $tabs_pane_variable_id ); ?>" class="sp-tab__card sp-tab__tab-pane <?php echo esc_attr( $sptpro_active_class ); ?>" role="tabpanel" aria-labelledby="aria-<?php echo esc_attr( $tabs_pane_variable_id ); ?>">
-					<span class="<?php echo esc_attr( $sptpro_active_tab_class ); ?>" data-sptoggle="collapse" for="#<?php echo esc_attr( $tabs_pane_variable_controls ); ?>" aria-expanded="<?php echo esc_attr( $aria_expanded ); ?>" aria-controls="<?php echo esc_attr( $tabs_pane_variable_controls ); ?>">
-						<div class="sp-tab__card-header" role="sptab" id="<?php echo esc_attr( $tabs_pane_variable_heading ); ?>"><?php echo esc_html( $tabs_content_title ); ?></div>
+					<span class="<?php echo esc_attr( $sptpro_active_tab_class ); ?>" data-sptoggle="collapse" for="#<?php echo esc_attr( $tabs_pane_variable_controls ); ?>" aria-expanded="<?php echo esc_attr( $aria_expanded ); ?>" aria-controls="<?php echo esc_attr( $tabs_pane_variable_controls ); ?>" tabindex="0" role="button" aria-label="<?php echo esc_attr( $tabs_content_title ); ?>">
+						<div class="sp-tab__card-header" id="<?php echo esc_attr( $tabs_pane_variable_heading ); ?>"><?php echo esc_html( $tabs_content_title ); ?></div>
 					</span>
 
 					<div id="<?php echo esc_attr( $tabs_pane_variable_controls ); ?>" class="sp-tab__collapse <?php echo esc_attr( $sptpro_show_class ); ?>" data-parent="#content" role="tabpanel" aria-labelledby="<?php echo esc_attr( $tabs_pane_variable_heading ); ?>">
@@ -59,7 +59,7 @@ if ( is_array( $sptpro_data_src ) || is_object( $sptpro_data_src ) ) {
 				<?php
 				break;
 		}
-		$sptpro_cont_count++;
+		++$sptpro_cont_count;
 	}
 }
 ?>
