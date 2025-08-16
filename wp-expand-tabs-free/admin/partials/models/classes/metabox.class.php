@@ -111,7 +111,7 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 
 			if ( ! empty( $this->page_templates ) || ! empty( $this->post_formats ) || ! empty( $this->args['class'] ) ) {
 				foreach ( $this->post_type as $post_type ) {
-						add_filter( 'postbox_classes_' . $post_type . '_' . $this->unique, array( &$this, 'add_metabox_classes' ) );
+					add_filter( 'postbox_classes_' . $post_type . '_' . $this->unique, array( &$this, 'add_metabox_classes' ) );
 				}
 			}
 
@@ -187,7 +187,7 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 
 			if ( ! empty( $this->page_templates ) ) {
 
-					$saved_template = ( is_object( $post ) && ! empty( $post->page_template ) ) ? $post->page_template : 'default';
+				$saved_template = ( is_object( $post ) && ! empty( $post->page_template ) ) ? $post->page_template : 'default';
 
 				$classes[] = 'wptabspro-page-templates';
 
@@ -256,6 +256,8 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 					$meta  = get_post_meta( $post->ID, $this->unique, true );
 					$value = ( isset( $meta[ $field['id'] ] ) ) ? $meta[ $field['id'] ] : null;
 				}
+			} elseif ( 'tabbed' === $field['type'] ) {
+				$value = get_post_meta( $post->ID, $this->unique, true );
 			}
 
 			$default = ( isset( $field['id'] ) ) ? $this->get_default( $field ) : '';
@@ -349,19 +351,15 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 				}
 
 				echo '</div>';
-
 				++$count;
-
 			}
-
 			echo '</div>';
 
-			echo '<a class="btn btn-success" id="sp-tab-show-preview" data-id="' . esc_attr( $post->ID ) . '"href=""> <i class="fa fa-eye" aria-hidden="true"></i> ' . esc_html__( 'Show Preview', 'wp-expand-tabs-free' ) . '</a>';
-
+			if ( 'sp_products_tabs' !== $post->post_type ) {
+				echo '<a class="btn btn-success" id="sp-tab-show-preview" data-id="' . esc_attr( $post->ID ) . '"href=""> <i class="fa fa-eye" aria-hidden="true"></i> ' . esc_html__( 'Show Preview', 'wp-expand-tabs-free' ) . '</a>';
+			}
 			echo '<div class="clear"></div>';
-
 			if ( ! empty( $this->args['show_restore'] ) ) {
-
 				echo '<div class="wptabspro-restore-wrapper">';
 				echo '<label>';
 				echo '<input type="checkbox" name="' . esc_attr( $this->unique ) . '[_restore]" />';
@@ -369,17 +367,12 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 				echo '<span class="button wptabspro-button-cancel">' . sprintf( '<small>( %s )</small> %s', esc_html__( 'update post for restore ', 'wp-expand-tabs-free' ), esc_html__( 'Cancel', 'wp-expand-tabs-free' ) ) . '</span>';
 				echo '</label>';
 				echo '</div>';
-
 			}
 
 			echo '</div>';
-
 			echo ( $has_nav ) ? '<div class="wptabspro-nav-background"></div>' : '';
-
 			echo '<div class="clear"></div>';
-
 			echo '</div>';
-
 			echo '</div>';
 		}
 
@@ -413,10 +406,46 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 					if ( ! empty( $section['fields'] ) ) {
 
 						foreach ( $section['fields'] as $field ) {
+							if ( 'tabbed' === $field['type'] ) {
+								$tabs = $field['tabs'];
+								foreach ( $tabs as $fields ) {
+									$fields = $fields['fields'];
+									foreach ( $fields as $field ) {
+										$field_id = isset( $field['id'] ) ? $field['id'] : '';
+										if ( ! empty( $field['ignore_db'] ) ) {
+											continue;
+										}
+										$field_value = isset( $request[ $field_id ] ) ? $request[ $field_id ] : '';
+										// Sanitize "post" request of field.
+										if ( ! isset( $field['sanitize'] ) ) {
+											if ( is_array( $field_value ) ) {
+												$data[ $field_id ] = wp_kses_post_deep( $field_value );
+											} else {
+												$data[ $field_id ] = wp_kses_post( $field_value );
+											}
+										} elseif ( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
+											$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
+										} else {
+											$data[ $field_id ] = $field_value;
+										}
 
-							if ( ! empty( $field['id'] ) ) {
+										// Validate "post" request of field.
+										if ( isset( $field['validate'] ) && is_callable( $field['validate'] ) ) {
+											$has_validated = call_user_func( $field['validate'], $field_value );
+											if ( ! empty( $has_validated ) ) {
+												$errors['sections'][ $count ]  = true;
+												$errors['fields'][ $field_id ] = $has_validated;
+												$data[ $field_id ]             = $this->get_meta_value( $field );
+											}
+										}
+									}
+								}
+							} elseif ( ! empty( $field['id'] ) ) {
 
-								$field_id    = ! empty( $field['id'] ) ? sanitize_key( $field['id'] ) : '';
+								$field_id = ! empty( $field['id'] ) ? sanitize_key( $field['id'] ) : '';
+								if ( ! empty( $field['ignore_db'] ) ) {
+									continue;
+								}
 								$field_value = isset( $request[ $field_id ] ) ? $request[ $field_id ] : '';
 
 								// Sanitize "post" request of field.

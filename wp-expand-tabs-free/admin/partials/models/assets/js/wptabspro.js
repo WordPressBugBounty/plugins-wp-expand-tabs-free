@@ -489,7 +489,6 @@
     return this.each(function () {
 
       var $titles = $(this).find('.wptabspro-accordion-title');
-
       $titles.on('click', function () {
 
         var $title = $(this),
@@ -503,18 +502,15 @@
         }
 
         if (!$content.data('opened')) {
-
           $content.wptabspro_reload_script();
           $content.data('opened', true);
-
         }
 
         $content.toggleClass('wptabspro-accordion-open');
-
       });
-
     });
   };
+
 
   //
   // Field: backup
@@ -547,17 +543,13 @@
             message: message_text,
             loading: true
           }));
-
         }
-
       };
 
       $reset.on('click', function (e) {
-
         e.preventDefault();
 
         if (SP_WP_TABS.vars.is_confirm) {
-
           base.notification(window.wptabspro_vars.i18n.reset_notification);
 
           window.wp.ajax.post('wptabspro-reset', {
@@ -571,13 +563,10 @@
               alert(response.error);
               wp.customize.notifications.remove('wptabspro_field_backup_notification');
             });
-
         }
-
       });
 
       $import.on('click', function (e) {
-
         e.preventDefault();
 
         if (SP_WP_TABS.vars.is_confirm) {
@@ -596,9 +585,7 @@
           });
 
         }
-
       });
-
     });
   };
 
@@ -886,6 +873,39 @@
       $wrapper.children('.wptabspro-cloneable-item').children('.wptabspro-cloneable-helper').on('click', '.wptabspro-cloneable-remove', event_remove);
       $group.children('.wptabspro-cloneable-hidden').children('.wptabspro-cloneable-helper').on('click', '.wptabspro-cloneable-remove', event_remove);
 
+    });
+  };
+
+  //
+  // Field: tabbed.
+  //
+  $.fn.wptabspro_field_tabbed = function () {
+    return this.each(function () {
+      var $this = $(this),
+        $links = $this.find('.wptabspro-tabbed-nav a'),
+        $sections = $this.find('.wptabspro-tabbed-section');
+
+      $links.on('click', function (e) {
+        e.preventDefault();
+        var $link = $(this),
+          index = $link.index(),
+          $section = $sections.eq(index);
+
+        // Store the active tab index in a cookie
+        SP_WP_TABS.helper.set_cookie('activeTabIndex', index);
+
+        $link.addClass('wptabspro-tabbed-active').siblings().removeClass('wptabspro-tabbed-active');
+        $section.wptabspro_reload_script();
+        $section.removeClass('hidden').siblings().addClass('hidden');
+      });
+      // Check if there's a stored active tab index in the cookie
+      var activeTabIndex = SP_WP_TABS.helper.get_cookie('activeTabIndex');
+      // Check if the cookie exists
+      if (activeTabIndex !== null) {
+        $links.eq(activeTabIndex).trigger('click');
+      } else {
+        $links.first().trigger('click');
+      }
     });
   };
 
@@ -1690,8 +1710,11 @@
         wp_media_frame;
 
       $upload_button.on('click', function (e) {
-
         e.preventDefault();
+        // Do not open media frame if pro/disable icon field is clicked.
+        if ($this.hasClass('tabs-custom-icon-pro')) {
+          return;
+        }
 
         if (typeof window.wp === 'undefined' || !window.wp.media || !window.wp.media.gallery) {
           return;
@@ -2619,37 +2642,28 @@
   //
   $.fn.wptabspro_siblings = function () {
     return this.each(function () {
-
       var $this = $(this),
         $siblings = $this.find('.wptabspro--sibling'),
         multiple = $this.data('multiple') || false;
 
       $siblings.on('click', function () {
-
         var $sibling = $(this);
 
         if (multiple) {
           if ($sibling.hasClass('wptabspro--active')) {
             $sibling.removeClass('wptabspro--active');
             $sibling.find('input').prop('checked', false).trigger('change');
-          }
-          else {
-            if ($sibling.hasClass('free-feature')) {
-              $sibling.addClass('wptabspro--active');
-              $sibling.find('input').prop('checked', true).trigger('change');
-            }
+          } else {
+            $sibling.addClass('wptabspro--active');
+            $sibling.find('input').prop('checked', true).trigger('change');
           }
         } else {
-          if ($sibling.hasClass('free-feature')) {
-            $this.find('input').prop('checked', false);
-            $sibling.find('input').prop('checked', true).trigger('change');
-            $sibling.addClass('wptabspro--active').siblings().removeClass('wptabspro--active');
-          }
+          $this.find('input').prop('checked', false);
+          $sibling.find('input').prop('checked', true).trigger('change');
+          $sibling.addClass('wptabspro--active').siblings().removeClass('wptabspro--active');
         }
       });
-
     });
-
   };
 
   //
@@ -2671,22 +2685,25 @@
           }
           $tooltip = $('<div class="wptabspro-tooltip ' + $class + '"></div>').html($this.find('.wptabspro-help-text').html()).appendTo('body');
           offset_left = (SP_WP_TABS.vars.is_rtl) ? ($this.offset().left + 36) : ($this.offset().left + 36);
+          var $top = $this.offset().top - ($tooltip.outerHeight() / 2 - 14);
+
+          // this block used for support tooltip.
+          if ($this.find('.wptabspro-support').length > 0) {
+            $top = $this.offset().top + 51;
+            offset_left = $this.offset().left - 212;
+          }
 
           $tooltip.css({
-            top: $this.offset().top - (($tooltip.outerHeight() / 2) - 14),
+            top: $top,
             left: offset_left,
             textAlign: 'left',
           });
-
         },
         mouseleave: function () {
-
           if (!$tooltip.is(':hover')) {
             $tooltip.remove();
           }
-
         }
-
       });
       // Event delegation to handle tooltip removal when the cursor leaves the tooltip itself.
       $('body').on('mouseleave', '.wptabspro-tooltip', function () {
@@ -2841,6 +2858,7 @@
         $this.children('.wptabspro-field-fieldset').wptabspro_field_fieldset();
         $this.children('.wptabspro-field-group').wptabspro_field_group();
         $this.children('.wptabspro-field-media').wptabspro_field_media();
+        $this.children('.wptabspro-field-tabbed').wptabspro_field_tabbed();
         $this.children('.wptabspro-field-repeater').wptabspro_field_repeater();
         $this.children('.wptabspro-field-slider').wptabspro_field_slider();
         $this.children('.wptabspro-field-sortable').wptabspro_field_sortable();
@@ -2903,6 +2921,7 @@
     $('.wptabspro-confirm').wptabspro_confirm();
     $('.wptabspro-expand-all').wptabspro_expand_all();
     $('.wptabspro-onload').wptabspro_reload_script();
+    $('.sp-tab__admin-header').find('.wptabspro-support-area').wptabspro_help();
 
   });
 
@@ -3119,14 +3138,245 @@
     }
   });
 
-  $(document).on('keyup change', '.sp_wp_tabs_page_tabs_settings #wptabspro-form', function (e) {
+  $(document).on('keyup change', '.sp_wp_tabs_page_tabs_settings #wptabspro-form,.sp-woo_product_tabs__options #wptabspro-form', function (e) {
     e.preventDefault();
     var $button = $(this).find('.wptabspro-save');
     $button.css({ "background-color": "#00C263", "pointer-events": "initial" }).val('Save Settings');
   });
-  $('.sp_wp_tabs_page_tabs_settings .wptabspro-save').on('click', function (e) {
+  $('.sp_wp_tabs_page_tabs_settings .wptabspro-save,.sp-woo_product_tabs__options .wptabspro-save').on('click', function (e) {
     e.preventDefault();
     $(this).css({ "background-color": "#C5C5C6", "pointer-events": "none" }).val('Changes Saved');
   })
+
+  /**
+   * Initializes sortable functionality for the admin post rows of `sp_products_tabs`.
+   *
+   * Uses jQuery UI Sortable to allow drag-and-drop reordering of table rows.
+   * On update, it sends an AJAX request to save the new menu order.
+   */
+  function changeProductTabPostsOrder($tbody) {
+    // Fixes the visual layout glitch when dragging table rows
+    const fixHelperModified = function (e, tr) {
+      const $originals = tr.children();
+      const $helper = tr.clone();
+      $helper.children().each(function (index) {
+        $(this).width($originals.eq(index).width());
+      });
+      return $helper;
+    }
+
+    // Initialize sortable on the tbody element
+    $tbody.sortable({
+      handle: '.drag-handle',
+      items: 'tr',
+      cursor: 'move',
+      axis: 'y',
+      helper: fixHelperModified,
+      update: function () {
+        let order = [];
+
+        $tbody.find('tr').each(function (index) {
+          const id = $(this).attr('id');
+          if (id) {
+            const post_id = id.replace('post-', '');
+            order.push(post_id);
+          }
+        });
+
+        // Send AJAX request to update order
+        $.post(wptabspro_vars.ajax_url, {
+          action: 'sp_save_tabs_order',
+          order: order,
+          nonce: wptabspro_vars.tabs_order_nonce,
+        }, function (response) {
+          if (!response.success) {
+            alert('Order saving failed.');
+          }
+        });
+      }
+    });
+  }
+
+  const $tbody = $('table.wp-list-table tbody');
+  if ($tbody.length > 0) {
+    changeProductTabPostsOrder($tbody);
+  }
+
+  // Iterate over each custom switcher on the page.
+  $('.sp-tabs-custom-switcher').each(function () {
+    var $container = $(this);
+    var switcherId = $container.data('product_tabs_id'); // Get the unique ID of the switcher.
+    var $switcher = $container.find('.wptabspro--switcher');
+    var ajaxurl = wptabspro_vars.ajax_url;
+    var tabsToggleNonce = wptabspro_vars.tabs_toggle_nonce;
+
+    // Retrieve the saved state from local storage using the switcher's unique ID.
+    var savedState = localStorage.getItem('switcherState_' + switcherId);
+
+    // If a saved state exists, apply it to the switcher.
+    if (savedState) {
+      updateSwitcherState($switcher, switcherId, savedState);
+    } else {
+      // If no saved state exists, initialize the switcher state based on the current UI state.
+      var initialState = $switcher.hasClass('wptabspro--active') ? 'enabled' : 'disabled';
+      localStorage.setItem('switcherState_' + switcherId, initialState);
+      $switcher.attr('data-state', initialState);
+    }
+
+    $switcher.on('click', function () {
+      var currentState = $(this).attr('data-state');
+      var newState = currentState === 'enabled' ? 'disabled' : 'enabled';
+
+      // Update the switcher UI and hidden input value.
+      updateSwitcherState($(this), switcherId, newState);
+
+      // Save the state to local storage with the unique key.
+      localStorage.setItem('switcherState_' + switcherId, newState);
+
+      // Send AJAX request to save the state in the database.
+      $.ajax({
+        url: ajaxurl, // WordPress AJAX URL.
+        type: 'POST',
+        data: {
+          action: 'save_tabs_custom_button_state',
+          state: newState,
+          nonce: tabsToggleNonce,
+          switcher_id: switcherId // Pass the unique ID to distinguish between switchers
+        },
+        success: function () { },
+        error: function (xhr, status, error) {
+          console.error('AJAX error:', error);
+        }
+      });
+    });
+  });
+
+  /**
+    * Update the UI and hidden input field based on the switcher's state.
+    * 
+    * @param {object} $switcher - The switcher element being updated.
+    * @param {string} state - The state ('enabled' or 'disabled').
+    */
+  function updateSwitcherState($switcher, switcherId, state) {
+    var $input = $switcher.find('input[name="show_product_tabs_' + switcherId + '"]');
+
+    if (state === 'enabled') {
+      $switcher.attr('data-state', 'enabled');
+      $switcher.addClass('wptabspro--active');
+      $input.val('1'); // Value for enabled state
+    } else {
+      $switcher.attr('data-state', 'disabled');
+      $switcher.removeClass('wptabspro--active');
+      $input.val('0'); // Value for disabled state
+    }
+  }
+
+  // Move the "Back to Product Tabs" button before the title in the admin product tabs page.
+  const $title = $('.wrap > h1.wp-heading-inline');
+  const $button = $('.sptpro-back-top-product-tabs.button');
+  if ($title.length && $button.length) {
+    $button.show();
+    $title.before($button); // Move before title
+  }
+
+  /**
+   * Function to handle the visibility of pro text based on selected values.
+   * @param {string} containerSelector - The selector for the container where the inputs are located.
+   * @param {Array} hiddenValues - An array of values that should hide the pro text description.
+   * @returns {void}
+   */
+  function handleProTextVisibility(containerSelector, hiddenValues = []) {
+    const $container = $(containerSelector);
+
+    function toggleVisibility() {
+      const selectedVal = $container.find('input:checked').val();
+      const $desc = $container.find('.wptabspro-text-desc');
+
+      if (hiddenValues.includes(selectedVal)) {
+        $desc.css('opacity', 0);
+      } else {
+        $desc.css('opacity', 1);
+      }
+    }
+    // Initial check
+    toggleVisibility();
+
+    // On change event
+    $container.on('change', () => {
+      setTimeout(toggleVisibility, 100); // Delay to ensure correct input is selected
+    });
+  }
+
+  /*
+  * Apply the pro text visibility function to the relevant containers.
+  */
+  handleProTextVisibility('.sp_wp_tabs_layout', ['horizontal', 'horizontal-bottom']);
+  //  handleProTextVisibility('.sp_tabs_content_type', 'text');
+
+
+  // Change tab position images based on the selected tabs layout.
+  $('.sptpro_product_tabs_layout').on('change', '.wptabspro--sibling', function () {
+    var tabsLayout = $(this).find('input').val();
+    const layoutIsAccordion = tabsLayout === 'tabs-accordion';
+
+    // Always trigger first sibling click to apply tab styling defaults.
+    $('.accordion_templates').find('.wptabspro--sibling:first-child').trigger('click');
+
+    // Define tab image sources based on layout type.
+    const imageSources = layoutIsAccordion
+      ? ['bellow_product_details.svg', 'bellow_product_information.svg']
+      : ['below-details.svg', 'below-info.svg'];
+
+    // Apply the correct image to each tab position option.
+    $('.smart_tabs_position .wptabspro--image-group')
+      .find('.wptabspro--image')
+      .each(function (index) {
+        const $img = $(this).find('img');
+        const fileName = imageSources[index] || imageSources[0];
+        const basePath = wptabspro_vars.adminImgUrl + '/';
+        $img.attr('src', basePath + fileName);
+      });
+  });
+
+  const activeLayout = $('.sptpro_product_tabs_layout .wptabspro--sibling input:checked').val();
+  const layoutIsAccordion = activeLayout === 'tabs-accordion';
+  const imageSources = layoutIsAccordion
+    ? ['bellow_product_details.svg', 'bellow_product_information.svg']
+    : ['below-details.svg', 'below-info.svg'];
+  $('.smart_tabs_position .wptabspro--image-group')
+    .find('.wptabspro--image')
+    .each(function (index) {
+      const $img = $(this).find('img');
+      const fileName = imageSources[index] || imageSources[0];
+      const basePath = wptabspro_vars.adminImgUrl + '/';
+      $img.attr('src', basePath + fileName);
+    });
+
+  /**
+   * Handle visual feedback for the custom "Save Tab" button.
+   * Triggers when the #post form is submitted within the admin 'Save Tab' button on edit screen.
+   * Shows a loading spinner and disables the button to prevent duplicate submissions.
+   * Applies only when editing the 'sp_products_tabs' post type.
+   */
+  $('#post').on('submit', function () {
+    if ($('#post_type').val() !== 'sp_products_tabs') {
+      return;
+    }
+
+    var $saveBtn = $('#sp-save-tab-button');
+    var $spinner = $saveBtn.find('.sp_tab-spinner-icon');
+    var $label = $saveBtn.find('.sp_tab-button-label');
+    // Check if the button is already disabled to prevent multiple clicks
+    $spinner.fadeIn(150);
+    $label.css({ opacity: 0.5 });
+    $saveBtn.prop('disabled', true).addClass('disabled');
+  });
+
+  // const proFeatures = $('.sp_wp_tabs_layout').find('.wptabspro--image.pro-feature');
+  // if (proFeatures.length && false ) {
+  //   const wrapper = $('<div class="wptabspro--pro-wrapper"></div>');
+  //   proFeatures.first().before(wrapper);
+  //   proFeatures.appendTo(wrapper);
+  // }
 
 })(jQuery, window, document);

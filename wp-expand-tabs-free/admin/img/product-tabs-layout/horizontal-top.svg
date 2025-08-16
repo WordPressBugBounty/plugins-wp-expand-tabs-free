@@ -1,0 +1,18 @@
+<svg width="100" height="80" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.75" y="0.75" width="98.5" height="78.5" rx="2.25" fill="white"/>
+<rect x="0.75" y="0.75" width="98.5" height="78.5" rx="2.25" stroke="#CCCCCC" stroke-width="1.5"/>
+<mask id="path-2-outside-1_1347_7491" maskUnits="userSpaceOnUse" x="14.5" y="12.5" width="72" height="9" fill="black">
+<rect fill="white" x="14.5" y="12.5" width="72" height="9"/>
+<path d="M14.5 12.5H86.5V20.5H14.5V12.5Z"/>
+</mask>
+<path d="M86.5 20.5V19.7H14.5V20.5V21.3H86.5V20.5Z" fill="#B5BEC4" mask="url(#path-2-outside-1_1347_7491)"/>
+<mask id="path-4-outside-2_1347_7491" maskUnits="userSpaceOnUse" x="14.5" y="12.5" width="19" height="9" fill="black">
+<rect fill="white" x="14.5" y="12.5" width="19" height="9"/>
+<path d="M14.5 12.5H33.5V20.5H14.5V12.5Z"/>
+</mask>
+<path d="M14.5 12.5H33.5V20.5H14.5V12.5Z" fill="#65747F"/>
+<path d="M33.5 20.5V19.5H14.5V20.5V21.5H33.5V20.5Z" fill="#293035" mask="url(#path-4-outside-2_1347_7491)"/>
+<path d="M35.5 12.5H54.5V20.5H35.5V12.5Z" fill="#B5BEC4"/>
+<path d="M56.5 12.5H75.5V20.5H56.5V12.5Z" fill="#B5BEC4"/>
+<rect x="14.5" y="24.5" width="72" height="42" fill="#E6E9EB"/>
+</svg>

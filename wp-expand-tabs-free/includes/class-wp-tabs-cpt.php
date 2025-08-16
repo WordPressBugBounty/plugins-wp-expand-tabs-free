@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Define the custom post type functionality.
  *
@@ -16,6 +17,7 @@
  * Define the custom post type functionality.
  */
 class WP_Tabs_CPT {
+
 
 	/**
 	 * The ID of this plugin.
@@ -73,7 +75,7 @@ class WP_Tabs_CPT {
 				'not_found'          => esc_html__( 'No Tab Group found.', 'wp-expand-tabs-free' ),
 				'not_found_in_trash' => esc_html__( 'No Tab Group found in trash.', 'wp-expand-tabs-free' ),
 				'parent_item_colon'  => esc_html__( 'Parent Item:', 'wp-expand-tabs-free' ),
-				'menu_name'          => esc_html__( 'WP Tabs', 'wp-expand-tabs-free' ),
+				'menu_name'          => esc_html__( 'Smart Tabs', 'wp-expand-tabs-free' ),
 				'all_items'          => esc_html__( 'Tab Groups', 'wp-expand-tabs-free' ),
 			)
 		);
@@ -117,6 +119,46 @@ class WP_Tabs_CPT {
 	}
 
 	/**
+	 * Custom Post type of Woo Product Tabs.
+	 */
+	public function sp_product_tabs_post_type() {
+		$capability = apply_filters( 'sp_wp_tab_pro_ui_permission', 'manage_options' );
+		$show_ui    = current_user_can( $capability ) ? true : false;
+
+		$labels = array(
+			'name'               => esc_html__( 'Product Tabs', 'wp-expand-tabs-free' ),
+			'singular_name'      => esc_html__( 'Tabs', 'wp-expand-tabs-free' ),
+			'add_new'            => esc_html__( 'Add New', 'wp-expand-tabs-free' ),
+			'add_new_item'       => esc_html__( 'Add New Tab', 'wp-expand-tabs-free' ),
+			'edit_item'          => esc_html__( 'Edit Tab', 'wp-expand-tabs-free' ),
+			'new_item'           => esc_html__( 'New Tab', 'wp-expand-tabs-free' ),
+			'view_item'          => esc_html__( 'View Tab', 'wp-expand-tabs-free' ),
+			'search_items'       => esc_html__( 'Search', 'wp-expand-tabs-free' ),
+			'not_found'          => esc_html__( 'No tabs found.', 'wp-expand-tabs-free' ),
+			'not_found_in_trash' => esc_html__( 'No tabs found in trash.', 'wp-expand-tabs-free' ),
+			'parent_item_colon'  => esc_html__( 'Parent Item:', 'wp-expand-tabs-free' ),
+			'menu_name'          => esc_html__( 'Product Tabs', 'wp-expand-tabs-free' ),
+			'all_items'          => __( 'Product Tabs', 'wp-expand-tabs-free' ) . '<span class="sp-tabs-menu-new-indicator" style="color: #f18200;font-size: 9px; padding-left: 3px;">' . __( ' NEW!', 'wp-expand-tabs-free' ) . '</span>',
+		);
+
+		$args = array(
+			'labels'              => $labels,
+			'public'              => false,
+			'hierarchical'        => false,
+			'exclude_from_search' => true,
+			'show_ui'             => $show_ui,
+			'show_in_menu'        => 'edit.php?post_type=sp_wp_tabs', // This is the key line!
+			'show_in_admin_bar'   => false,
+			'capability_type'     => 'post',
+			'rewrite'             => false,
+			'query_var'           => false,
+			'supports'            => array( 'page-attributes' ),
+		);
+
+		register_post_type( 'sp_products_tabs', $args );
+	}
+
+	/**
 	 * Change Tabs updated messages.
 	 *
 	 * @param string $messages The Update messages.
@@ -124,6 +166,7 @@ class WP_Tabs_CPT {
 	 */
 	public function sptpro_updated_messages( $messages ) {
 		global $post, $post_ID;
+		$revision_id = isset( $_GET['revision'] ) ? absint( $_GET['revision'] ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Safe read-only access
 
 		$messages['sp_wp_tabs'] = array(
 			0  => '', // Unused. Messages start at index 1.
@@ -131,12 +174,10 @@ class WP_Tabs_CPT {
 			2  => '',
 			3  => '',
 			4  => __( ' updated.', 'wp-expand-tabs-free' ),
-			// phpcs:ignore -- Safe: only reads $_GET['revision'] to display admin notice
-			5  => isset( $_GET['revision'] ) ? sprintf(
-				/* translators: 1: post revision title. */
+			5  => $revision_id ? sprintf(
+				/* translators: %s: post ID. */
 				__( 'Tabs restored to revision from %s', 'wp-expand-tabs-free' ),
-				// phpcs:ignore -- Safe: admin-side display only.
-				wp_post_revision_title( (int) $_GET['revision'], false )
+				wp_post_revision_title( $revision_id, false )
 			) : false,
 			6  => sprintf( __( 'Tabs published.', 'wp-expand-tabs-free' ) ),
 			7  => __( 'Tabs saved.', 'wp-expand-tabs-free' ),
@@ -150,6 +191,26 @@ class WP_Tabs_CPT {
 			),
 			10 => sprintf( __( 'Tabs draft updated.', 'wp-expand-tabs-free' ) ),
 		);
+
+		// Messages for 'sp_products_tabs'.
+		$messages['sp_products_tabs'] = array(
+			0  => '',
+			1  => '',
+			2  => '',
+			3  => '',
+			4  => __( 'Product tab updated.', 'wp-expand-tabs-free' ),
+			// translators: %s: Revision date and time.
+			5  => $revision_id ? sprintf( __( 'Product tab restored to revision from %s.', 'wp-expand-tabs-free' ), wp_post_revision_title( $revision_id, false ) ) : false,
+			6  => __( 'Product tab published.', 'wp-expand-tabs-free' ),
+			7  => __( 'Product tab saved.', 'wp-expand-tabs-free' ),
+			8  => __( 'Product tab submitted.', 'wp-expand-tabs-free' ),
+			// translators: %s: Scheduled date and time.
+			9  => sprintf( __( 'Product tab scheduled for: <strong>%1$s</strong>.', 'wp-expand-tabs-free' ), date_i18n( __( 'M j, Y @ G:i', 'wp-expand-tabs-free' ), strtotime( $post->post_date ) ) ),
+			10 => __( 'Product tab draft updated.', 'wp-expand-tabs-free' ),
+			11 => __( 'tab moved to the Trash.', 'wp-expand-tabs-free' ),
+			12 => __( 'tab restored from the Trash.', 'wp-expand-tabs-free' ),
+		);
+
 		return $messages;
 	}
 
@@ -183,5 +244,19 @@ class WP_Tabs_CPT {
 			default:
 				echo '';
 		}
+	}
+
+	/**
+	 * Outputs a "Back to All Tabs" button at the top of the admin edit screen for 'sp_products_tabs' post type.
+	 *
+	 * @param WP_Post $post The current post object being edited.
+	 */
+	public function sptpro_back_to_all_product_tabs( $post ) {
+		if ( 'sp_products_tabs' !== $post->post_type ) {
+			return;
+		}
+
+		$back_url = admin_url( 'edit.php?post_type=sp_products_tabs' );
+		echo '<a href="' . esc_url( $back_url ) . '" class="sptpro-back-top-product-tabs button" style="margin-bottom: 10px;display:none;">❮ Back to "Product Tabs"</a>';
 	}
 }

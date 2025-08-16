@@ -71,6 +71,7 @@ class WP_Tabs_Elementor_Addons {
 		wp_enqueue_script( 'sptpro-tab' );
 		wp_enqueue_script( 'sptpro-collapse' );
 		wp_enqueue_script( 'sptpro-script' );
+		wp_enqueue_script( 'sptpro-tabs-type' );
 	}
 
 	/**

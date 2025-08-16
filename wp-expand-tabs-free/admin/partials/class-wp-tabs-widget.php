@@ -21,7 +21,7 @@ class WP_Tabs_Widget extends WP_Widget {
 			'classname'   => 'wptabs_widget',
 			'description' => esc_html__( 'Create and display tabs', 'wp-expand-tabs-free' ),
 		);
-		parent::__construct( 'wptabs_widget', 'WP Tabs', $widget_ops );
+		parent::__construct( 'wptabs_widget', 'Smart Tabs', $widget_ops );
 	}
 
 	/**

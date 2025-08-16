@@ -39,6 +39,20 @@ class SP_WP_Tabs_Free {
 	protected $loader;
 
 	/**
+	 * Stores the general tab settings loaded from the WordPress options table.
+	 *
+	 * @var array
+	 */
+	protected static $general_tab_settings = array();
+
+	/**
+	 * Stores the general tab settings loaded from the WordPress options table.
+	 *
+	 * @var array
+	 */
+	protected static $is_product_tabs_enabled = true;
+
+	/**
 	 * The unique identifier of this plugin.
 	 *
 	 * @since    2.0.0
@@ -72,9 +86,12 @@ class SP_WP_Tabs_Free {
 			$this->version = WP_TABS_VERSION;
 		} else {
 
-			$this->version = '2.0.0';
+			$this->version = '3.0.0';
 		}
 		$this->plugin_name = 'wp-expand-tabs-free';
+
+		self::$general_tab_settings    = get_option( 'sp-tab__settings' );
+		self::$is_product_tabs_enabled = self::get_general_setting( 'enable_product_tabs', true );
 
 		$this->load_dependencies();
 		// $this->set_locale();
@@ -84,27 +101,55 @@ class SP_WP_Tabs_Free {
 	}
 
 	/**
+	 * Check if WooCommerce is active.
+	 *
+	 * @since 2.2.13
+	 *
+	 * @return bool True if WooCommerce is active, false otherwise.
+	 */
+	public static function is_woocommerce_active() {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+		return is_plugin_active( 'woocommerce/woocommerce.php' ) || is_plugin_active_for_network( 'woocommerce/woocommerce.php' );
+	}
+
+	/**
 	 * Register WooCommerce hooks.
 	 *
 	 * @since 2.0.2
 	 * @access private
 	 */
 	private function sptpro_wc_tab() {
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		$settings       = get_option( 'sp-tab__settings' );
-		$sptpro_woo_tab = isset( $settings['sptpro_woo_tab'] ) ? $settings['sptpro_woo_tab'] : false;
-
-		if ( ( $sptpro_woo_tab ) && ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_plugin_active_for_network( 'woocommerce/woocommerce.php' ) ) ) {
-			$sptpro_woo_set_tabs = isset( $settings['sptpro_woo_set_tab'] ) ? $settings['sptpro_woo_set_tab'] : array();
-			if ( $sptpro_woo_set_tabs ) {
-				foreach ( $sptpro_woo_set_tabs as $sptpro_woo_set_tab ) {
-					// Product tab.
-					$product_tab = new WP_Tabs_Product_Tab( $sptpro_woo_set_tab );
-
-					$this->loader->add_filter( 'woocommerce_product_tabs', $product_tab, 'sptpro_woo_tab', 10, 2 );
-				}
-			}
+		// Return if WooCommerce is not active.
+		if ( ! self::is_woocommerce_active() ) {
+			return;
 		}
+
+		$product_tab = new WP_Tabs_Product_Tab();
+
+		// WooCommerce product tabs (Frontend).
+		if ( self::$is_product_tabs_enabled ) {
+			// Add the product tabs filter.
+			$this->loader->add_filter( 'woocommerce_product_tabs', $product_tab, 'sptpro_woo_tab', 10, 2 );
+		}
+
+		$is_tab_group_enabled  = self::get_general_setting( 'sptpro_woo_tab', false );
+		$is_version_compatible = version_compare( WP_TABS_FIRST_VERSION, '3.0.0', '<' );
+		if ( $is_tab_group_enabled && $is_version_compatible ) {
+			// Product tab.
+			$this->loader->add_filter( 'woocommerce_product_tabs', $product_tab, 'sptpro_woo_tab_group', 10, 2 );
+		}
+	}
+
+	/**
+	 * Get General Tab Settings.
+	 *
+	 * @param string $key The setting key to retrieve.
+	 * @param mixed  $option_default The default value to return if the key does not exist.
+	 * @return mixed The value of the setting if it exists, otherwise the default value.
+	 */
+	public static function get_general_setting( $key, $option_default = null ) {
+		return self::$general_tab_settings[ $key ] ?? $option_default;
 	}
 
 	/**
@@ -161,6 +206,7 @@ class SP_WP_Tabs_Free {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'admin/class-wp-tabs-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-smart-tabs-free-admin.php';
 
 		/**
 		 * The class responsible for help page
@@ -230,10 +276,23 @@ class SP_WP_Tabs_Free {
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'register_wptabs_widget' );
 		$this->loader->add_action( 'admin_action_sp_duplicate_tabs', $plugin_admin, 'duplicate_wp_tabs' );
 		$this->loader->add_filter( 'post_row_actions', $plugin_admin, 'sp_duplicate_tabs_link', 10, 2 );
+		// Redirect after active.
+		$this->loader->add_action( 'activated_plugin', $plugin_admin, 'sp_tabs_redirect_after_activation', 10, 2 );
 
 		// Plugin admin custom post types.
 		$plugin_admin_cpt = new WP_Tabs_CPT( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $plugin_admin_cpt, 'sptpro_post_type' );
+
+		/**
+		 * If WooCommerce product tabs is enabled, then register the custom post type and the main class for product tabs.
+		 */
+		if ( self::$is_product_tabs_enabled && self::is_woocommerce_active() ) {
+			$smart_tabs_admin = new Smart_Tabs_Free_Admin();
+			// Register custom post type for product tabs.
+			$this->loader->add_action( 'init', $plugin_admin_cpt, 'sp_product_tabs_post_type' );
+			$this->loader->add_action( 'edit_form_top', $plugin_admin_cpt, 'sptpro_back_to_all_product_tabs' );
+		}
+
 		$this->loader->add_filter( 'post_updated_messages', $plugin_admin_cpt, 'sptpro_updated_messages', 10, 2 );
 		$this->loader->add_filter( 'manage_sp_wp_tabs_posts_columns', $plugin_admin_cpt, 'sptpro_admin_column' );
 		$this->loader->add_action( 'manage_sp_wp_tabs_posts_custom_column', $plugin_admin_cpt, 'sptpro_admin_field', 10, 2 );
@@ -243,8 +302,6 @@ class SP_WP_Tabs_Free {
 		$this->loader->add_filter( 'plugin_action_links', $plugin_admin_menu, 'sptpro_plugin_action_links', 10, 2 );
 		$this->loader->add_filter( 'admin_footer_text', $plugin_admin_menu, 'sptpro_review_text', 10, 2 );
 		$this->loader->add_filter( 'update_footer', $plugin_admin_menu, 'sptpro_version_text', 11 );
-		// Redirect after active.
-		$this->loader->add_action( 'activated_plugin', $plugin_admin, 'sp_tabs_redirect_after_activation', 10, 2 );
 
 		$plugin_review_notice = new WP_Tabs_Review( WP_TABS_NAME, WP_TABS_VERSION );
 		$this->loader->add_action( 'admin_notices', $plugin_review_notice, 'display_admin_notice' );

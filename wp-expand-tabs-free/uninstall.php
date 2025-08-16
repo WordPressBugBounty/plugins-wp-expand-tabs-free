@@ -41,7 +41,16 @@ function sp_wptabspro_delete_plugin_data() {
 	delete_option( $option_name );
 	delete_site_option( $option_name ); // For site options in Multisite.
 
-	// Delete member post type.
+	// Delete product tab style option settings.
+	$product_tabs_style_options = 'sptabs_product_tabs_settings';
+	delete_option( $product_tabs_style_options );
+	delete_site_option( $product_tabs_style_options ); // For site options in Multisite.
+	// Delete product tab style option settings.
+	$product_tabs_advanced_tab_options = 'sp_products_tabs_advanced';
+	delete_option( $product_tabs_advanced_tab_options );
+	delete_site_option( $product_tabs_advanced_tab_options ); // For site options in Multisite.
+
+	// Delete tabs group post type.
 	$tab_posts = get_posts(
 		array(
 			'numberposts' => -1,
@@ -54,13 +63,26 @@ function sp_wptabspro_delete_plugin_data() {
 		wp_delete_post( $post->ID, true );
 	}
 
+	// Delete product tabs post type.
+	$product_tab_posts = get_posts(
+		array(
+			'numberposts' => -1,
+			'post_type'   => 'sp_products_tabs',
+			'post_status' => 'any',
+		)
+	);
+
+	foreach ( $product_tab_posts as $tab_post ) {
+		wp_delete_post( $tab_post->ID, true );
+	}
+
 	// Delete Team post meta.
 	delete_post_meta_by_key( 'sp_tab_source_options' );
 	delete_post_meta_by_key( 'sp_tab_shortcode_options' );
 	delete_post_meta_by_key( 'sp_tab_display_shortcode_sidebar' );
 }
 
-// Load WP Tabs file.
+// Load Smart Tabs file.
 require plugin_dir_path( __FILE__ ) . '/plugin-main.php';
 $spwptabspro_plugin_settings = get_option( 'sp-tab__settings' );
 $spwptabspro_data_delete     = $spwptabspro_plugin_settings['sptpro_data_remove'];

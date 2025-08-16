@@ -73,7 +73,7 @@ class WP_Tabs_Admin {
 		$current_screen        = get_current_screen();
 		$the_current_post_type = $current_screen->post_type;
 		if ( 'sp_wp_tabs' === $the_current_post_type ) {
-			wp_enqueue_style( 'font-awesome', WP_TABS_URL . '/public/css/font-awesome.min.css', array(), WP_TABS_VERSION, 'all' );
+			wp_enqueue_style( 'font-awesome', WP_TABS_URL . '/public/assets/css/font-awesome.min.css', array(), WP_TABS_VERSION, 'all' );
 		}
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-tabs-admin.min.css', array(), $this->version, 'all' );
 	}

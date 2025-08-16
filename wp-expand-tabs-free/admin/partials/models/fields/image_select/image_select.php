@@ -72,11 +72,11 @@ if ( ! class_exists( 'SP_WP_TABS_Field_image_select' ) ) {
 					if ( ! empty( $option['image'] ) ) {
 						echo '<img src="' . esc_url( $option['image'] ) . '" alt="img-' . esc_attr( $num++ ) . '" />';
 					} else {
-						echo '<img src="' . esc_url( $option ) . '" alt="img-' . esc_attr( $num++ ) . '" />';
+						echo '<i class="' . esc_attr( $option['icon'] ) . '"></i>';
 					}
 					echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name( $extra ) ) . '" value="' . esc_attr( $key ) . '"' . $this->field_attributes() . esc_attr( $checked ) . '/>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					if ( ! empty( $option['option_name'] ) && ! empty( $option['option_demo_url'] ) ) {
-						echo '<p class="wptabs-image-name"><b>' . esc_html( $option['option_name'] ) . '</b> <a href="' . esc_url( $option['option_demo_url'] ) . '" tooltip="Demo" class="wptabs-demo-icon" target="_blank"><span class="fa fa-external-link"></span></a></p>';
+						echo '<p class="wptabs-image-name"><b>' . esc_html( $option['option_name'] ) . '</b> <a href="' . esc_url( $option['option_demo_url'] ) . '" tooltip="Demo" class="wptabs-demo-icon" target="_blank"><span class="icon-layout-external_link"></span></a></p>';
 					} elseif ( ! empty( $option['option_name'] ) ) {
 						echo '<p class="wptabs-image-name"><b>' . esc_html( $option['option_name'] ) . '</b></p>';
 					}

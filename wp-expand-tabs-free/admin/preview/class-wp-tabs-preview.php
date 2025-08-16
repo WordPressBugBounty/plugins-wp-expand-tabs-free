@@ -61,12 +61,11 @@ class WP_Tabs_Preview {
 		WP_Tabs_Shortcode::sp_tabs_html_show( $post_id, $sptpro_data_src, $sptpro_shortcode_options, $main_section_title );
 
 		?>
-		<script src="<?php echo esc_url( WP_TABS_URL . 'public/js/collapse.min.js' ); ?>" ></script>
-		<script src="<?php echo esc_url( WP_TABS_URL . 'public/js/tab.min.js' ); ?>" ></script>
-		<script src="<?php echo esc_url( WP_TABS_URL . 'public/js/wp-tabs-public.min.js' ); ?>" ></script>
+		<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/collapse.min.js' ); ?>" ></script>
+		<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/tab.min.js' ); ?>" ></script>
+		<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/wp-tabs-public.min.js' ); ?>" ></script>
 		<?php
 		die();
 	}
-
 }
 new WP_Tabs_Preview();

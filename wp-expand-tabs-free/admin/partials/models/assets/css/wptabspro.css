@@ -40,6 +40,7 @@
  *     03. 25. Field: sorter
  *     03. 26. Field: spinner
  *     03. 27. Field: switcher
+  *    03. 28. Field: tabbed
  *     03. 29. Field: text
  *     03. 30. Field: textarea
  *     03. 31. Field: typography
@@ -88,25 +89,26 @@
 }
 
 /* #sp_tab_display_shortcode_sidebar .postbox-header, */
+.post-type-sp_products_tabs .postbox-header,
 #sp_tab_shortcode_options .postbox-header,
 #sp_tab_source_options .postbox-header,
 #sp_tab_shortcode_options .hndle,
 #sp_tab_shortcode_options .handlediv,
 #sp_tab_source_options .handlediv,
 #sp_tab_source_options .hndle,
-div:is(#sp_tab_display_shortcode_sidebar,#sp_tab_support_builder_sidebar) .handlediv,
+div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .handlediv,
 div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .postbox-header .handle-actions .handle-order-higher,
 div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .postbox-header .handle-actions .handle-order-lower {
-	display: none;
+  display: none;
 }
 
 div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .postbox-header h2 {
-	color: #1D2327;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: 18px;
-	pointer-events: none;
+  color: #1D2327;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  pointer-events: none;
 }
 
 #wptabspro-section-sp_tab_source_options_1 .sp-tab__admin-header {
@@ -115,12 +117,17 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
   background-image: -ms-linear-gradient(0deg, rgb(24, 90, 157) 0%, rgb(67, 206, 162) 100%);
   padding: 17px 26px;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #wptabspro-section-sp_tab_source_options_1 .sp-tab__admin-header img {
   vertical-align: middle;
-  margin-top: 3px;
-  height: 26px;
+}
+
+.wptabspro-field-heading.sp-tab__admin-header img {
+  max-width: 180px;
 }
 
 #wptabspro-section-sp_tab_source_options_1 .sp-tab__admin-header .support {
@@ -128,12 +135,13 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
   float: right;
 }
 
-#wptabspro-section-sp_tab_source_options_1 .sp-tab__admin-header .support a {
+#wptabspro-section-sp_tab_source_options_1 .sp-tab__admin-header .support {
   color: #ffffff;
   text-decoration: none;
   line-height: 35px;
   font-size: 15px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 #wptabspro-section-sp_tab_source_options_1 .wptabspro-field-button_set {
@@ -160,10 +168,14 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
 }
 
 .wptabspro-header-inner h1 img {
-  height: 22px;
+  height: 28px;
   vertical-align: middle;
   margin-right: 8px;
   margin-top: -3px;
+}
+
+.sp-woo_product_tabs__options .wptabspro-header-inner h1 img {
+  height: 28px;
 }
 
 .wptabspro-header-inner h1 small {
@@ -263,11 +275,12 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
   text-shadow: none;
   border-radius: 4px;
   height: 38px;
-  width: 75px;
+  width: 140px;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 
+.sp-woo_product_tabs__options .wptabspro-buttons .button.wptabspro-save-ajax,
 .sp_wp_tabs_page_tabs_settings .wptabspro-buttons .button.wptabspro-save-ajax {
   background-color: #c5c5c6;
   border-color: transparent;
@@ -724,6 +737,10 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
   margin-bottom: 6px;
 }
 
+.override_tab_checkbox .wptabspro-help .wptabspro-info-label {
+  text-transform: normal;
+}
+
 .wptabspro-tooltip .wptabspro-open-docs {
   margin-top: 10px;
 }
@@ -763,6 +780,7 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
 .wptabspro-tooltip.support-tooltip a.wptabspro-open-docs.support {
   background: #fff;
   color: #000;
+  margin-bottom: 10px;
 }
 
 .wptabspro-tooltip.support-tooltip a.wptabspro-open-docs.support:hover {
@@ -774,6 +792,8 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
   color: #1d81f9;
   border: 2px solid #1d81f9;
   text-transform: none;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
 .wptabspro-tooltip.support-tooltip a.wptabspro-open-docs.feature-request:hover {
@@ -786,7 +806,7 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
   text-transform: none;
 }
 
-.wptabspro-tooltip:before {
+.wptabspro-tooltip:not(.support-tooltip):before {
   content: '';
   width: 0;
   position: absolute;
@@ -798,6 +818,16 @@ div:is(#sp_tab_display_shortcode_sidebar, #sp_tab_support_builder_sidebar) .post
   border-right: 10px solid rgba(12, 25, 36, .95);
   left: -10px;
   top: calc(50% - 7px);
+}
+
+.sp-tab__admin-header .support::before {
+  content: '';
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  top: 80%;
+  z-index: 10;
+  cursor: pointer;
 }
 
 span.tooltip-icon {
@@ -1024,7 +1054,7 @@ span.tooltip-icon {
 
 .wptabspro-field .wptabspro-title {
   position: relative;
-  width: 25%;
+  width: 20%;
   float: left;
 }
 
@@ -1036,6 +1066,15 @@ span.tooltip-icon {
 
 .wptabspro-field .wptabspro-fieldset {
   float: right;
+  width: calc(80% - 20px);
+}
+
+/* Title and field spacing in Tab group in Display Settings tab. */
+.wptabspro-field.wptabspro-field-tabbed .wptabspro-field .wptabspro-title {
+  width: 25%;
+}
+
+.wptabspro-field.wptabspro-field-tabbed .wptabspro-field .wptabspro-fieldset {
   width: calc(75% - 20px);
 }
 
@@ -1124,11 +1163,6 @@ span.tooltip-icon {
   margin-right: 6px;
 }
 
-.wptabspro-field-background .wptabspro--title {
-  color: #777;
-  font-size: 12px;
-}
-
 .wptabspro-field-background .wptabspro--background-colors {
   display: flex;
 }
@@ -1150,6 +1184,16 @@ span.tooltip-icon {
 .wptabspro-field-background .wptabspro--attributes-hidden {
   display: none;
 }
+
+.wptabspro-field.wptabspro-field-image_select.sp_product_tabs_content_type.full-width {
+  padding-bottom: 8px;
+  padding-top: 0;
+}
+
+/* 
+#sptpro_woo_product_tabs_settings .wptabspro-field-wp_editor.full-width {
+  padding-top: 5px;
+} */
 
 /**
  * 03. 04. Field: backup
@@ -1272,12 +1316,12 @@ span.tooltip-icon {
   z-index: 1;
   float: left;
   cursor: pointer;
-  padding: 7px 14px;
+  padding: 10px 14px;
   min-width: 40px;
   text-align: center;
   color: #555;
   border: 1px solid #cccccc;
-  background-color: #f7f7f7;
+  background-color: #fff;
   user-select: none;
   -webkit-user-select: none;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -1295,7 +1339,7 @@ span.tooltip-icon {
   margin-left: -1px;
 }
 
-.wptabspro-field-button_set .wptabspro--button:hover {
+.wptabspro-field-button_set .wptabspro--button:not(.wptabspro--active):hover {
   background-color: #eee;
 }
 
@@ -1303,8 +1347,8 @@ span.tooltip-icon {
 .wptabspro-field-button_set .wptabspro--active {
   z-index: 2;
   color: #fff;
-  border-color: #1A74E4;
-	background-color: #1A74E4;
+  border-color: #1a74e4;
+  background-color: #1a74e4;
 }
 
 .wptabspro-field-button_set input {
@@ -1386,26 +1430,8 @@ span.tooltip-icon {
   margin-bottom: 5px;
 }
 
-.wptabspro-field-color_group .wptabspro--title {
-  color: #999;
-  margin-bottom: 5px;
-}
-
-/**
- * 03. 11. Field: fieldset
- */
-.wptabspro-field-fieldset .wptabspro-fieldset-content {
-  border: 1px solid #ccd0d4;
-  background-color: #fff;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-}
-
-.wptabspro-field-fieldset .wptabspro-fieldset-content>.wptabspro-field {
-  padding: 15px;
-}
-
-.wptabspro-field-fieldset .wptabspro-field-subheading {
-  font-size: 13px;
+.wptabspro-field.wptabspro-field-color_group.tab_name_bg_color {
+  margin-top: 24px;
 }
 
 /**
@@ -1434,7 +1460,7 @@ span.tooltip-icon {
 }
 
 .wptabspro-field-group .wptabspro-cloneable-content {
-  border: 1px solid #ccd0d4;
+  border: 1px solid #d0d7db;
   background-color: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
@@ -1532,8 +1558,8 @@ span.tooltip-icon {
 }
 
 .wptabspro-field-group .button.wptabspro-cloneable-add {
-  background: #206f9e;
-  border-color: #206f9e;
+  background: #1a74e4;
+  border-color: #1a74e4;
   font-size: 15px;
   line-height: 39px;
   height: 40px;
@@ -1549,14 +1575,14 @@ span.tooltip-icon {
 .wptabspro-field-group .wptabspro-cloneable-title:active,
 .wptabspro-field-group .wptabspro-cloneable-title:focus,
 .wptabspro-field-group .wptabspro-cloneable-title:hover {
-  border: 1px solid #d4e6e1;
-  background: #eef9f6;
+  border: 1px solid #d0d7db;
+  background: #f6f7f7;
   outline: 0;
 }
 
 #wptabspro-section-sp_tab_source_options_1 .wptabspro-field-group .wptabspro-field-text input {
   width: 100%;
-  min-height: 36px;
+  min-height: 38px;
 }
 
 #wptabspro-section-sp_tab_source_options_1 .wptabspro-field-group .wptabspro-field-icon .wptabspro-icon-preview i {
@@ -1583,64 +1609,76 @@ span.tooltip-icon {
   position: relative;
   display: inline-block;
   max-width: 100%;
-  margin: 0 5px -5px 0;
+  margin: 0 5px 0 0;
   vertical-align: bottom;
   border: 2px solid transparent;
   background-color: #fff;
   user-select: none;
   -webkit-user-select: none;
-  -moz-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
 }
 
-.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image img {
-  width: 94px;
+.wptabspro-field-image_select.sp_wp_tabs_layout img {
+  vertical-align: top;
+  width: 112px;
   cursor: pointer;
 }
 
-.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature img {
+/* .wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature img {
   width: 94px;
   cursor: default;
+} */
+
+.wptabspro-field-image_select.common-size .wptabspro--image img {
+  width: 74px;
 }
 
+.wptabspro-field-image_select .wptabspro--image {
+  position: relative;
+}
+
+.wptabspro-field-image_select.pro-preset-style .wptabspro--image.pro-feature {
+  pointer-events: none;
+}
 
 .wptabspro-field-image_select .wptabspro--image:before {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 5px;
+  right: 4px;
   text-align: center;
-  font-size: 10px;
-  font-family: "Font Awesome 5 Pro", "Font Awesome 5 Free", "FontAwesome";
-  font-weight: 900;
-  content: "\f00c";
-  width: 16px;
-  height: 16px;
+  font-size: 15px;
+  font-family: dashicons;
+  content: "\f12a";
+  padding-right: 0;
+  text-align: center;
+  border-radius: 50%;
   line-height: 14px;
   opacity: 0;
   color: #fff;
-  /* background-color: #3ec0a1; */
-  transition: opacity .2s;
+  background-color: #222;
+}
+
+.wptabspro-field-image_select .wptabspro--image:before {
+  background-color: transparent;
 }
 
 .wptabspro-field-image_select .wptabspro--active img {
   opacity: 1;
-  outline: 3px solid #3ec0a1;
-  outline-offset: -3px;
+  outline: 2px solid #1a74e4;
+  outline-offset: -2px;
+  border-radius: 3px;
 }
 
-.wptabspro-field-image_select .wptabspro--active:before {
+/* .wptabspro-field-image_select .wptabspro--active:before {
   opacity: 1;
-}
+} */
 
 .wptabspro-field-image_select .wptabs-image-name {
-  margin-top: 7px;
+  margin-top: 3px;
 }
 
-.wptabspro-field-image_select img {
+.sptpro_tabs_horizontal_alignment.wptabspro-field-image_select .wptabspro--sibling img {
   vertical-align: top;
-  width: 74px;
+  width: 94px;
   cursor: pointer;
 }
 
@@ -1661,11 +1699,20 @@ span.tooltip-icon {
   margin-bottom: 5px;
 }
 
+.wptabspro-field-color_group .wptabspro--title,
 .wptabspro-field-spacing .wptabspro--title,
+.wptabspro-field-background .wptabspro--title,
 .wptabspro-field-link_color .wptabspro--title,
 .wptabspro-field.wptabspro-field-border .wptabspro--title {
-  color: #777;
-  margin-bottom: 5px;
+  position: absolute;
+  top: 10px;
+  color: #666;
+}
+
+.sp_wp_tabs_page_tab_styles .wptabspro-field-spacing .wptabspro--title,
+.sp_wp_tabs_page_tab_styles .wptabspro-field-border .wptabspro--title,
+.sp_wp_tabs_page_tab_styles .wptabspro-field-color_group .wptabspro--title {
+  top: 0;
 }
 
 /**
@@ -2283,12 +2330,106 @@ span.tooltip-icon {
 }
 
 /**
+ * 03. 28. Field: tabbed
+ */
+.wptabspro-field-tabbed .wptabspro-tabbed-nav {
+  width: 330px;
+  border-right: 1px solid rgba(221, 221, 221, 1);
+}
+
+.wptabspro-field-tabbed.wptabspro-field {
+  display: flex;
+  margin: 20px;
+  border: 1px solid rgba(221, 221, 221, 1);
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-sections {
+  float: left;
+  width: 100%;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-section {
+  border: none;
+  background: #fff;
+}
+
+.wptabspro-field-tabbed.wptabspro-field:not(.hidden) {
+  padding: 0 !important;
+  border: 1px solid rgba(221, 221, 221, 1) !important;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-section>.wptabspro-field {
+  padding: 30px;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav .wptabspro--icon {
+  padding-right: 5px;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a {
+  display: block;
+  padding: 12px 15px;
+  margin-top: 0;
+  position: relative;
+  text-decoration: none;
+  color: #343434;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(204, 204, 204, 1);
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  overflow: hidden;
+  background: rgba(245, 245, 245, 1);
+  text-transform: uppercase;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a:last-child {
+  margin-bottom: 0px;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a:hover {
+  background-color: #f9f9f9;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.wptabspro-field-tabbed .wptabspro-pros-tabbed-nav a:focus,
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a.wptabspro-tabbed-active {
+  background-color: #fff;
+  -webkit-box-shadow: inset 3px 0 #08A683;
+  box-shadow: inset 3px 0 #08A683;
+  color: #08A683;
+  font-weight: 600;
+  border-right-color: #fff;
+  margin-right: -1px;
+  border-right: none;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a:last-child.wptabspro-tabbed-active {
+  margin-bottom: -1px;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a>i.fa {
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+/**
  * 03. 29. Field: text
  */
 .wptabspro-field-text input {
   width: 50%;
   max-width: 100%;
   margin: 0;
+}
+
+.wptabspro-field-text.sp-tabs-advanced-text-field input {
+  width: 30%;
+  min-height: 38px;
 }
 
 /**
@@ -2465,6 +2606,11 @@ span.tooltip-icon {
   z-index: 2;
 }
 
+.wptabspro-field-wp_editor .wp-media-buttons #insert-media-button {
+  color: #1a74e4;
+  border-color: #1a74e4;
+}
+
 .wptabspro-field-wp_editor .wp-editor-tabs {
   position: relative;
   z-index: 1;
@@ -2500,6 +2646,59 @@ span.tooltip-icon {
   color: #23282d;
   background-color: #f5f5f5;
 }
+
+.wptabspro-field-heading.sp-tab__admin-header {
+  background-color: #1595ce;
+  padding: 18px 26px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #1565D0 0%, #008FF0 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sp-tab__admin-header .heading-wrapper {
+  display: flex;
+  min-width: 300px;
+  gap: 10px;
+  align-items: center;
+}
+
+.sp-tab__admin-header .sp-product-tabs-version {
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  font-size: 12px;
+  padding: 4px 10px 4px 10px;
+  border-radius: 17px;
+  line-height: 15px;
+  height: 15px;
+  font-weight: 600;
+}
+
+.wptabspro-field-heading.sp-tab__admin-header img {
+  max-width: 165px;
+}
+
+.wptabspro-field-heading.sp-tab__admin-header .support {
+  margin-left: 16px;
+  float: right;
+}
+
+.wptabspro-field-heading.sp-tab__admin-header .support a {
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 35px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sp-tab__admin-header.wptabspro-field::after,
+.sp-tab__admin-header.wptabspro-field::before,
+.sp-tab__admin-header .clear,
+.wptabspro-help-text.wptabspro-support {
+  display: none;
+}
+
 
 /**
  * 03. 35. Field: subheading
@@ -3270,7 +3469,13 @@ span.tooltip-icon {
   width: 100%;
   margin-top: 10px;
   font-weight: 400;
-  color: #222;
+  color: #000;
+  font-style: normal;
+  font-size: 14px;
+}
+
+.sp_product_tabs_content_type .wptabspro-text-desc {
+  margin-top: 14px;
 }
 
 .wptabspro-text-success {
@@ -3817,8 +4022,8 @@ span.tooltip-icon {
 
 .chosen-container-multi .chosen-choices li.search-choice {
   position: relative;
-  margin: 3px 5px 3px 0;
-  padding: 3px 20px 3px 6px;
+  margin: 5px 5px 3px 0;
+  padding: 5px 20px 5px 6px;
   border: 1px solid #aaa;
   max-width: 100%;
   border-radius: 3px;
@@ -3976,6 +4181,14 @@ span.tooltip-icon {
   max-width: 400px;
 }
 
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  height: 36px;
+}
+
 /*
  * Shortcode footer.
  */
@@ -4081,20 +4294,24 @@ span.tooltip-icon {
   border-right: 0;
 }
 
-#sp_tab_shortcode_options .wptabspro-nav {
+.sp-woo_product_tabs__options .wptabspro-wrapper {
+  margin-top: 25px;
+}
+
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav {
   float: none;
   width: 100%;
   background: #f1f1f1;
 }
 
-#sp_tab_shortcode_options .wptabspro-nav ul li {
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav ul li {
   display: inline-block;
   margin-bottom: -1px;
 }
 
-#sp_tab_shortcode_options .wptabspro-nav ul li a {
-  background-color: #00b18b;
-  border-top: 1px solid #00b18b;
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav ul li a {
+  background-color: #08A683;
+  border-top: 1px solid #08A683;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #e2e2e1;
   color: #fff;
@@ -4105,27 +4322,29 @@ span.tooltip-icon {
   text-transform: uppercase;
 }
 
-#sp_tab_shortcode_options .wptabspro-nav ul li .wptabspro-section-active {
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav ul li .wptabspro-section-active {
   border-bottom: 1px solid transparent;
-  border-top: 1px solid #00b18b;
+  border-top: 1px solid #08A683;
   background-color: #fff;
   color: #000;
-  box-shadow: 0 3px 0 0 #00b18b inset;
+  box-shadow: 0 3px 0 0 #08A683 inset;
   border-right: 1px solid transparent;
 }
 
-#sp_tab_shortcode_options .wptabspro-nav ul li .wptabspro-section-active .fa {
-  color: #00b18b;
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav ul li .wptabspro-section-active .fa {
+  color: #08A683;
 }
 
-#sp_tab_shortcode_options .wptabspro-nav-background {
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav-background {
   display: none;
 }
 
-#sp_tab_shortcode_options .wptabspro-content {
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-content {
   margin-left: 0;
-  border-top: 1px solid #ccd0d4;
-  border-right: 1px solid #ccd0d4;
+}
+
+.post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav ul li a:not(.wptabspro-section-active):hover {
+  color: #fff;
 }
 
 /* preloader */
@@ -4136,6 +4355,38 @@ span.tooltip-icon {
   background-repeat: no-repeat;
   background-color: #fff;
   background-position: center;
+}
+
+/* Sortable UI style */
+.post-type-sp_products_tabs #the-list.ui-sortable {
+  position: relative;
+  box-sizing: border-box;
+}
+
+#the-list.ui-sortable .ui-sortable-helper {
+  border: 1px dashed #0073aa !important;
+  opacity: 0.8;
+  position: absolute;
+}
+
+#the-list.ui-sortable .ui-sortable-placeholder {
+  background: #f1f1f1 !important;
+  border: 1px dashed #aaa !important;
+  height: 85px !important;
+  visibility: visible !important;
+}
+
+.post-type-sp_products_tabs .column-order {
+  width: 70px;
+  text-align: center;
+  cursor: move;
+}
+
+.post-type-sp_products_tabs .drag-handle {
+  font-size: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: move;
 }
 
 /**
@@ -4158,44 +4409,65 @@ span.tooltip-icon {
   padding-right: 0px;
 }
 
-.sp-tab__content_wrapper .wptabspro-field.wptabspro-field-media.tabs-custom-icon-pro {
+.wptabspro-field.wptabspro-field-media.tabs-custom-icon-pro {
   float: left;
-  margin-top: 26px;
-  pointer-events: none;
-  opacity: .7;
+  margin-top: 28px;
 }
 
-.sp-tab__content_wrapper .wptabspro-field.wptabspro-field-media.tabs-custom-icon-pro .wptabspro--button {
+.tabs_title_section .tabs-custom-icon-pro.wptabspro-field.wptabspro-field-media {
+  padding-left: 0px;
+  margin-top: 6px;
+  padding-bottom: 2px;
+}
+
+.sp-tab__content_wrapper .wptabspro-field.wptabspro-field-media.tabs-custom-icon-pro {
+  padding-bottom: 8px;
+}
+
+.sp-tab__content_wrapper .wptabspro-field.wptabspro-field-wp_editor {
+  padding-top: 0;
+}
+
+.wptabspro-field.wptabspro-field-media.tabs-custom-icon-pro .wptabspro--button {
   line-height: 36px;
+  border-color: #1a74e4;
+  background-color: #1a74e4;
+  background-color: #1a74e4;
 }
 
-.sp-tab__content_wrapper .wptabspro-field.wptabspro-field-media.tabs-custom-icon-pro:nth-last-child(2)::after {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: #d4d4d4;
-  font-weight: 500;
-  padding: 0 4px;
-  content: 'PRO';
-  text-align: center;
-  font-size: 8px;
-  font-weight: 500;
+.wp-core-ui .wptabspro-field-media.tabs-custom-icon-pro .button-primary.focus,
+.wp-core-ui .wptabspro-field-media.tabs-custom-icon-pro .button-primary:focus {
+  box-shadow: unset;
 }
 
 .wptabspro-field.only-for-pro>.wptabspro-fieldset,
 .wptabspro-field-spacing.only_pro_spacing,
 .only_pro_spinner>.wptabspro-fieldset,
-.only_pro_tabs_icon_section>.wptabspro-fieldset .wptabspro--sibling:not(:first-child),
+.only_pro_tabs_icon_section>.wptabspro-fieldset .wptabspro--sibling,
 .only_pro_tabs_icon_section.tab_icon_position>.wptabspro-fieldset,
 .only_pro_checkbox .wptabspro-checkbox,
-.only_pro_fixed_height .wptabspro-fieldset .wptabspro--button:nth-child(2),
 .tab_alignment_pro .wptabspro-fieldset .wptabspro--button:nth-child(3),
 .tab_alignment_pro .wptabspro-fieldset .wptabspro--button:nth-child(4),
 .only_for_pro .wptabspro-fieldset li:nth-child(2),
 .only_for_pro_event .wptabspro-fieldset li:nth-child(3),
-.sp-tab__content_wrapper .tabs-custom-text-pro {
+.post-type-sp_wp_tabs .tabs-custom-text-pro>.wptabspro-fieldset {
   pointer-events: none;
-  opacity: .7;
+  opacity: .4;
+}
+
+.sp-tabs-advanced-text-field>.wptabspro-title h4,
+.sp-tab__tab-linking>.wptabspro-title h4,
+.override_tab_checkbox>.wptabspro-title h4,
+.only_pro_tabs_icon_section>.wptabspro-title h4,
+.wptabspro-field.only-for-pro>.wptabspro-title h4,
+.wptabspro-field-typography.disable-typos>.wptabspro-title h4,
+.wptabspro-field.only_pro_switcher>.wptabspro-title h4,
+.wptabspro-field.only_pro_spinner>.wptabspro-title h4 {
+  opacity: .5;
+}
+
+.wptabspro-field-image_select.common-size .wptabspro--active img {
+  outline: 0;
 }
 
 .wptabspro-field.wptabspro-field-notice.only_pro_notice {
@@ -4211,36 +4483,30 @@ span.tooltip-icon {
   font-style: normal;
 }
 
+.wptabspro-field.wptabspro-field-notice.only_pro_notice.middle_notice { 
+  padding: 0 30px;
+}
+
+.wptabspro-field.wptabspro-field-notice.only_pro_notice.middle_notice .wptabspro-notice {
+  margin-top: 0;
+}
+
 .wptabspro-field.wptabspro-field-notice.tab-icon-top-notice,
-.wptabspro-field.wptabspro-field-notice.only_pro_notice_typo{
+.wptabspro-field.wptabspro-field-notice.only_pro_notice_typo {
   padding-bottom: 0;
   padding-top: 12px;
 }
 
 .wptabspro-field.wptabspro-field-notice.only_pro_notice_typo,
-.wptabspro-field.wptabspro-field-notice.bottom_notice{
+.wptabspro-field.wptabspro-field-notice.bottom_notice {
   padding-top: 0;
-}
-
-.sptpro_tabs_bg_color_type .wptabspro--sibling:nth-of-type(2)::after,
-.only_pro_fixed_height .wptabspro-fieldset .wptabspro--button:nth-child(2)::after,
-.tab_alignment_pro .wptabspro-fieldset .wptabspro--button:nth-child(4)::after {
-  content: 'PRO';
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  font-size: 8px;
-  color: #5e6e7d;
-  background-color: #cbd6df;
-  padding: 0 3px;
-  font-weight: 500;
 }
 
 .only_pro_tabs_icon_section .wptabspro--switcher,
 .only_pro_switcher .wptabspro--switcher {
-  background-color: rgb(176, 188, 196);
-	pointer-events: none;
-	color: rgb(135, 150, 161);
+  background-color: rgb(176 188 196 / 40%);
+  pointer-events: none;
+  color: rgb(135, 150, 161);
 }
 
 .only_pro_switcher .wptabspro--switcher .wptabspro--ball::after {
@@ -4269,16 +4535,24 @@ span.tooltip-icon {
   cursor: default;
 }
 
+.pro-preset-style .wptabspro--image.pro-feature,
+.wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2),
+.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2),
+.wptabspro-field.override_tab_checkbox .wptabspro-fieldset .wptabspro-checkbox,
 .wptabspro-field-spinner.only_pro_spinner .ui-spinner {
   position: relative;
 }
 
+.wptabspro-field.pro-preset-style .pro-feature::after,
+.wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2):after,
+.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2):after,
+.wptabspro-field.override_tab_checkbox .wptabspro-fieldset .wptabspro-checkbox::after,
 .wptabspro-field.only-for-pro .wptabspro-fieldset::after,
 .only_pro_spinner span.ui-spinner.ui-corner-all.ui-widget.ui-widget-content::after {
   content: "PRO";
   position: absolute;
-  color: #5e6e7d;
-  background-color: #cbd6df;
+  color: #fff;
+  background-color: #12a10d;
   padding: 2px 4px;
   font-size: 8px;
   border-radius: 2px;
@@ -4286,6 +4560,21 @@ span.tooltip-icon {
   margin-top: 8px;
   font-weight: 600;
   right: -32px;
+  line-height: 12px;
+}
+
+.wptabspro-field.pro-preset-style .pro-feature:after,
+.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2):after,
+.wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2):after {
+  right: 0;
+  top: 0;
+  margin: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.wptabspro-field.override_tab_checkbox .wptabspro-fieldset .wptabspro-checkbox::after {
+  top: -7px;
 }
 
 .wptabspro-field.only-for-pro .wptabspro-fieldset .chosen-container {
@@ -4340,41 +4629,38 @@ span.tooltip-icon {
   cursor: default;
 }
 
-.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2)::after,
-.sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(2)::after,
-.sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(3)::after,
-.sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(4)::after,
-.sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(5)::after,
-.sptpro_tabs_horizontal_alignment .wptabspro--sibling:nth-of-type(3)::after,
-.sptpro_tabs_horizontal_alignment .wptabspro--sibling:nth-of-type(4)::after {
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  color: #5e6e7d;
-  background-color: #cbd6df;
-  font-weight: 500;
-  padding: 0 4px;
-  content: 'PRO';
-  text-align: center;
-  font-size: 8px;
-  cursor: default;
+.wptabspro-field-image_select.smart_tabs_position .wptabspro--image.pro-feature .wptabs-image-name,
+.wptabspro-field-image_select.smart_tabs_position .wptabspro--image.pro-feature img,
+.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature .wptabs-image-name>b {
+  opacity: .4;
 }
 
-.sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(2)::after {
+/* .sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(2)::after {
   right: 10px;
   border-top-right-radius: 2px;
-}
+} */
 
+.wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2),
+.wptabspro-field-image_select.smart_tabs_position .wptabspro--image.pro-feature img,
+.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature img,
 #wptabspro-section-sp_tab_shortcode_options_3 .wptabspro--switcher {
   pointer-events: none;
 }
 
-.sptpro_tabs_bg_color_type .wptabspro--sibling:nth-of-type(2),
-.wptabspro-field-typography .wptabspro--blocks.wptabspro--blocks-inputs,
+.wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2),
+.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2),
+.wptabspro-field-typography .wptabspro--blocks.wptabspro--blocks-inputs .wptabspro--block:not(:first-child),
 .wptabspro-field-typography .wptabspro--blocks.wptabspro--blocks-selects,
-.wptabspro-field-typography.disable-color-picker .wptabspro-field-color {
+.wptabspro-field-typography.disable-typos .wptabspro-field-color,
+.wptabspro-field-typography.disable-typos .wptabspro--block {
   pointer-events: none;
-  opacity: .7;
+  opacity: .4;
+}
+
+.wptabspro-field-typography .wptabspro--blocks-inputs input::-webkit-outer-spin-button,
+.wptabspro-field-typography .wptabspro--blocks-inputs input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .wptabspro-field.wptabspro-field-checkbox.sp-tab__tab-linking {
@@ -4384,17 +4670,25 @@ span.tooltip-icon {
   float: left;
 }
 
+.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.wptabspro--active::before {
+  z-index: 2;
+  color: #1a74e4;
+  opacity: 1;
+}
+
 /* style for option deep linking  */
 .wptabspro-field-group .wptabspro-cloneable-content>.wptabspro-field.sp-tab__tab-linking {
-  padding-top: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 #sp_tab_shortcode_options .wptabspro-field.vertical-gap {
   padding-bottom: 25px;
 }
 
+.wptabspro-field-checkbox.override_tab_checkbox>.wptabspro-fieldset,
 .wptabspro-field.wptabspro-field-checkbox.sp-tab__tab-linking>.wptabspro-fieldset {
-  opacity: 0.7;
+  opacity: 0.4;
   pointer-events: none;
 }
 
@@ -4523,11 +4817,33 @@ span.tooltip-icon {
   color: #23282d;
 }
 
+/* Product tabs custom show/hide button style */
+.sp-tabs-custom-switcher.wptabspro-field-switcher .wptabspro--switcher {
+  background-color: #B0BCC4;
+  height: 24px;
+  border-radius: 20px;
+}
+
+.sp-tabs-custom-switcher.wptabspro-field-switcher .wptabspro--active {
+  background-color: #00C263;
+  width: 50px;
+}
+
+.sp-tabs-custom-switcher.wptabspro-field-switcher .wptabspro--ball {
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.sp-tabs-custom-switcher.wptabspro-field-switcher .wptabspro--active .wptabspro--ball {
+  margin-left: -22px;
+}
 
 /* demo external link icon styles */
 /* component name image_select.php  */
-.sp_wp_tabs_layout .wptabspro--sibling.wptabspro--image {
-  margin: 0px 30px 0px 0px;
+.sp_wp_tabs_layout .wptabspro--sibling.wptabspro--image:not(.pro-feature) {
+  margin: 0px 10px 6px 0px;
 }
 
 .wptabs-demo-icon[tooltip]:hover {
@@ -4538,15 +4854,19 @@ span.tooltip-icon {
   cursor: default;
 }
 
+.sptpro_product_tabs_layout .wptabspro--image a.wptabs-demo-icon,
 .sp_wp_tabs_layout .wptabspro--image a.wptabs-demo-icon {
   opacity: 0;
   pointer-events: none;
   position: absolute;
 }
 
+.sptpro_product_tabs_layout .wptabspro--image:hover a.wptabs-demo-icon,
+.sptpro_product_tabs_layout .wptabspro--image.wptabspro--active a.wptabs-demo-icon,
 .sp_wp_tabs_layout .wptabspro--image:hover a.wptabs-demo-icon,
 .sp_wp_tabs_layout .wptabspro--image.wptabspro--active a.wptabs-demo-icon {
   opacity: 1;
+  z-index: 999;
   pointer-events: painted;
   transition: all 0.2s linear;
 }
@@ -4602,155 +4922,812 @@ a.wptabs-demo-icon:focus {
 }
 
 .sp_wp_tabs_layout a.wptabs-demo-icon {
-  padding-left: 6px;
+  padding-left: 2px;
 }
 
 .wptabs-image-name a.wptabs-demo-icon>span {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  color: #08a683;
+  color: #1a74e4;
 }
 
 /* Update to pro promotional notice */
 .sp-tab-notice-wrapper {
-	border-width: 1px;
-	border-radius: 5px;
-	padding-top: 8px;
-	padding-bottom: 10px;
+  border-width: 1px;
+  border-radius: 5px;
+  padding-top: 8px;
+  padding-bottom: 10px;
 }
 
 #sp_tab_promotional_notice_sidebar .postbox-header {
-	display: none;
+  display: none;
 }
 
 #sp_tab_display_shortcode_sidebar .postbox-header {
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_tab_display_shortcode_sidebar) .wptabspro-content,
 div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_tab_display_shortcode_sidebar).postbox {
-	border-radius: 3px;
+  border-radius: 3px;
 }
 
 .sp-tab-notice-wrapper {
-	border-width: 1px;
-	border-radius: 5px;
-	text-align: left;
+  border-width: 1px;
+  border-radius: 5px;
+  text-align: left;
 }
 
 .sp-tab-notice-heading {
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 20px;
-	color: rgba(0, 0, 0, 1);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 1);
 }
 
 .sp-tab-notice-heading span {
-	color: #0C6E63;
+  color: #0C6E63;
 }
 
 .sp-tab-notice-desc {
-	font-weight: 400;
-	font-size: 13px;
-	line-height: 20px;
-	color: rgba(101, 105, 118, 1);
-	margin-bottom: 20px;
-	margin-top: 10px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: rgba(101, 105, 118, 1);
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .sp-tab-notice-wrapper ul li {
-	font-weight: 500;
-	font-size: 13px;
-	line-height: 20px;
-	color: rgba(0, 0, 0, 1);
-	display: inline-flex;
-	gap: 10px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 1);
+  display: inline-flex;
+  gap: 10px;
 }
 
 .sp-tab-notice-wrapper .sp-tab-notice-button {
-	position: relative;
-	font-size: 16px;
-	border-radius: 5px;
-	color: #ffffff;
-	border: 1px solid transparent;
-	margin-top: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	overflow: hidden;
-	z-index: 0;
-	transition: border-color 0.5s ease;
+  position: relative;
+  font-size: 16px;
+  border-radius: 5px;
+  color: #ffffff;
+  border: 1px solid transparent;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 0;
+  transition: border-color 0.5s ease;
 }
 
 .sp-tab-notice-wrapper .sp-tab-notice-button::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(90deg, rgb(24, 90, 157) 0%, rgb(67, 206, 162) 100%);
-	z-index: -1;
-	transition: opacity 0.6s ease;
-	opacity: 1;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(24, 90, 157) 0%, rgb(67, 206, 162) 100%);
+  z-index: -1;
+  transition: opacity 0.6s ease;
+  opacity: 1;
 }
 
 .sp-tab-notice-wrapper .sp-tab-notice-button::after {
-	content: '';
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(90deg, rgb(67, 206, 162) 0%, rgb(24, 90, 157) 100%);
-	z-index: -1;
-	opacity: 0;
-	transition: opacity 0.6s ease;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(67, 206, 162) 0%, rgb(24, 90, 157) 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
 .sp-tab-notice-wrapper .sp-tab-notice-button:hover::before,
 .sp-tab-notice-wrapper .sp-tab-notice-button:hover::after {
-	opacity: 1;
+  opacity: 1;
 }
 
 .sp-tab-notice-wrapper .sp-tab-notice-button a {
-	color: #ffffff;
-	text-decoration: none;
-	padding: 14px 30px 14px 30px;
-	position: relative;
-	z-index: 1;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 14px 30px 14px 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .sp-tab-notice-wrapper .sp-tab-notice-button a:focus {
-	box-shadow: none;
-	outline: none;
+  box-shadow: none;
+  outline: none;
 }
 
 .sp-tab-notice-button i {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 .sp-tab-notice-wrapper ul li i {
-	color: rgba(74, 184, 102, 1);
-	font-size: 11px;
+  color: rgba(74, 184, 102, 1);
+  font-size: 11px;
+}
+
+@media only screen and (max-width: 1520px) {
+
+  .wptabspro-field-tabbed .sptpro_tabs_border .wptabspro-fieldset .wptabspro--title,
+  .wptabspro-field-tabbed .wptabspro-field-spacing .wptabspro-fieldset .wptabspro--title {
+    position: unset;
+  }
+
+  .wptabspro-field-tabbed .sptpro_tabs_border .wptabspro-fieldset,
+  .wptabspro-field-tabbed .wptabspro-field-spacing .wptabspro-fieldset {
+    margin-top: -10px;
+  }
+}
+
+.wptabspro-field-tabbed .sptpro_tabs_border .wptabspro-fieldset .wptabspro--inputs.border-radius {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tabs content type style. */
+.post-type-sp_products_tabs .postbox {
+  border-radius: 4px;
+}
+
+.post-type-sp_products_tabs #poststuff .inside {
+  margin: 8px 0 0 0;
+}
+
+.wptabspro-field.wptabspro-field-image_select.sp_tabs_content_type {
+  clear: both;
+}
+
+.sp_tabs_content_type .wptabspro-siblings.wptabspro--image-group,
+.sp_product_tabs_content_type .wptabspro-siblings.wptabspro--image-group {
+  display: inline-flex;
 }
 
 
+.sp_tabs_content_type .wptabspro--sibling.wptabspro--image,
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: #2c3333;
+  padding: 10px 5px;
+  border-radius: 2px;
+  background: #e8ecefb3;
+  border: 2px solid #a3b1b9;
+}
+
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image i {
+  font-size: 16px;
+}
+
+.sp_tabs_content_type .wptabspro--sibling.wptabspro--image,
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image {
+  width: auto;
+  transition: none;
+  padding: 10px 12px;
+}
+
+.sp_tabs_content_type .wptabspro--sibling.wptabspro--image.wptabspro--active,
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image.wptabspro--active {
+  color: #1A74E4;
+  border-color: #1A74E4;
+}
+
+.sp_tabs_content_type .wptabspro--sibling.wptabspro--image .wptabs-image-name,
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image .wptabs-image-name {
+  margin-top: 0;
+  font-weight: 500;
+}
+
+/* .wptabspro-field-fieldset.tabs_title_section {
+  padding: 24px 30px 0;
+} */
+
+.tabs_title_section .wptabspro-field.wptabspro-field-text.tabs_content-title {
+  padding: 0;
+  padding-right: 15px;
+}
+
+.tabs_title_section .wptabspro-fieldset-content {
+  display: flex;
+}
+
+.wptabspro-field.wptabspro-field-text.tabs_content-title {
+  width: 380px;
+}
+
+.tabs_title_section .wptabspro-fieldset {
+  width: 100%;
+  margin-top: 10px;
+  float: left;
+}
+
+.post-type-sp_products_tabs .wptabspro-field-text .wptabspro-fieldset>input {
+  width: 100%;
+  min-height: 38px;
+}
+
+.sp_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature,
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature {
+  pointer-events: none;
+  border: none;
+  border-color: #a3b1b95c;
+  background-color: #fff;
+}
+
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature>img {
+  background-color: #fff;
+  width: 578px;
+}
+
+/* .sp_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature>* {
+  opacity: 0.4;
+} */
+
+.sp_product_tabs_content_type .wptabspro--sibling.pro-feature::after {
+  opacity: 1;
+}
+
+.sp_wp_tabs_layout .wptabspro--image-group .wptabspro--pro-wrapper {
+  position: relative;
+}
+
+.sp_wp_tabs_layout .wptabspro--image-group .pro-feature img {
+  width: 305px !important;
+  margin-left: 8px;
+}
+
+.sp_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature,
+.sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature {
+  padding: 0;
+}
+
+.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image-group {
+  display: flex;
+}
+
+.wptabspro-field-notice.product-tabs-notice {
+  background-color: transparent;
+  padding: 0px 0px 20px 30px;
+}
+
+.wptabspro-field-notice.product-tabs-notice .wptabspro-notice {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* style for the tabs type and description field */
+#sptpro_woo_product_tabs_settings .full-width .wptabspro-title {
+  width: 100%;
+}
+
+#sptpro_woo_product_tabs_settings .full-width .wptabspro-fieldset {
+  float: left;
+  margin-top: 12px;
+}
+
+/* 
+* Product tabs admin table style. 
+*/
+.post-type-sp_products_tabs .wrap:not(.sp_woo_product_settings_tabbed) {
+  padding: 25px;
+  margin-top: 22px;
+  border-radius: 4px;
+  border: 1px solid #C3C4C7;
+  background-color: #fff;
+}
+
+.post-type-sp_products_tabs .tablenav .actions #doaction2,
+.post-type-sp_products_tabs .tablenav .actions #doaction,
+.post-type-sp_products_tabs .tablenav .actions select,
+.post-type-sp_products_tabs .tablenav .actions #post-query-submit {
+  float: left;
+  margin-right: 6px;
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 14px;
+  font-weight: 600;
+  padding-right: 72px;
+  border-radius: 3px;
+  background-color: #fff;
+  border: 1px solid #8796A1;
+}
+
+.post-type-sp_products_tabs .tablenav .actions select#bulk-action-selector-top {
+  padding-right: 56px;
+  text-transform: capitalize;
+}
+
+.post-type-sp_products_tabs .subsubsub li.publish a,
+.post-type-sp_products_tabs .subsubsub li.trash a {
+  color: #2278FB;
+}
+
+.post-type-sp_products_tabs .tablenav .actions #delete_all {
+  padding: 12px 15px;
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 14px;
+  font-weight: 600;
+  border-radius: 3px;
+  background-color: #fff;
+  border: 1px solid #8796A1;
+}
+
+.post-type-sp_products_tabs .tablenav .actions {
+  padding: 0;
+}
+
+.post-type-sp_products_tabs .tablenav .actions #post-query-submit {
+  padding: 12px 15px;
+}
+
+.post-type-sp_products_tabs a.page-title-action,
+.post-type-sp_products_tabs a.page-title-action:active {
+  color: #1A74E4;
+  padding: 10px 24px;
+  border-radius: 5px;
+  border: 2px solid #C3C4C7;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  background-color: #fff;
+}
+
+.post-type-sp_products_tabs a.page-title-action:hover {
+  color: #1A74E4;
+  border-color: #1A74E4;
+  transition: all 0.3s linear;
+  background-color: #fff;
+}
+
+.post-type-sp_products_tabs input#post-search-input:hover {
+  border-color: #1A74E4;
+}
+
+
+.post-type-sp_products_tabs input#post-search-input {
+  width: 184px;
+  font-weight: 600;
+  padding: 4px 8px;
+}
+
+.post-type-sp_products_tabs input#search-submit {
+  line-height: 18px;
+  padding: 8px 12px;
+}
+
+.post-type-sp_products_tabs .tablenav .actions #doaction2,
+.post-type-sp_products_tabs .tablenav .actions #doaction {
+  padding: 12px 14px;
+  color: #2278FB;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid #2278FB;
+}
+
+.post-type-sp_products_tabs .search-box input#search-submit,
+.post-type-sp_products_tabs .tablenav .actions #post-query-submit {
+  color: #2278FB;
+  font-weight: 500;
+  border-radius: 3px;
+  background-color: #fff;
+  border: 1px solid #2278FB;
+}
+
+.post-type-sp_products_tabs .wrap tfoot {
+  display: none;
+}
+
+.type-sp_products_tabs td a.row-title {
+  color: #1A74E4;
+}
+
+.post-type-sp_products_tabs .type-sp_products_tabs.sp-woo-default-tab td a.row-title {
+  color: #50575e;
+  pointer-events: none;
+}
+
+.post-type-sp_products_tabs .wp-list-table thead th,
+.post-type-sp_products_tabs .wp-list-table thead td {
+  padding: 10px 0;
+}
+
+.post-type-sp_products_tabs .wp-list-table thead td input {
+  margin-left: 8px;
+}
+
+.post-type-sp_products_tabs .wp-list-table th.manage-column,
+.post-type-sp_products_tabs tr td:not(.last_modified) .product-tabs-table-data {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #343434;
+}
+
+.post-type-sp_products_tabs #the-list tr.sp-woo-default-tab th.check-column {
+  border-bottom: 1px solid #C3C4C7;
+}
+
+.post-type-sp_products_tabs .type-sp_products_tabs td.last_modified .product-tabs-table-data {
+  color: #8B9494;
+}
+
+.post-type-sp_products_tabs .tablenav.top {
+  padding-bottom: 18px;
+  margin: 6px 0 12px;
+}
+
+.post-type-sp_products_tabs .wrap h1.wp-heading-inline {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.post-type-sp_products_tabs table.widefat {
+  border: 1px solid #C3C4C7;
+}
+
+.post-type-sp_products_tabs .wp-list-table th#show_tabs {
+  padding-left: 82px;
+}
+
+.post-type-sp_products_tabs td {
+  border-bottom: 1px solid #C3C4C7;
+}
+
+.post-type-sp_products_tabs tr:not(:last-child, .sp-woo-default-tab) .check-column label {
+  border-bottom: 1px solid #C3C4C7;
+}
+
+.post-type-sp_products_tabs tr:not(:last-child) .check-column label:focus,
+.post-type-sp_products_tabs tr:not(:last-child) .check-column label:hover {
+  outline: 0;
+  background: none;
+}
+
+.post-type-sp_products_tabs thead .check-column label:hover,
+.post-type-sp_products_tabs thead .check-column input:hover+label {
+  background: none;
+}
+
+.widefat .check-column {
+  width: 5.2em !important;
+}
+
+
+.post-type-sp_products_tabs tbody .check-column label:hover,
+.post-type-sp_products_tabs tbody .check-column input:hover+label {
+  background: #fff;
+}
+
+.post-type-sp_products_tabs thead {
+  background-color: #F0F0F1;
+}
+
+.post-type-sp_products_tabs tbody#the-list>tr,
+.post-type-sp_products_tabs tbody#the-list>tr.type-sp_products_tabs {
+  background-color: #fff;
+}
+
+.post-type-sp_products_tabs .wp-list-table tbody tr th.check-column,
+.post-type-sp_products_tabs .wp-list-table tbody tr td,
+.post-type-sp_products_tabs .wp-list-table tbody tr th {
+  line-height: 20px;
+  padding: 26px 10px 10px 0;
+}
+
+.post-type-sp_products_tabs .wp-list-table tbody tr td.colspanchange {
+  font-weight: 600;
+  padding-left: 20px;
+  padding-bottom: 30px;
+}
+
+.post-type-sp_products_tabs .wp-list-table tbody tr.sp-woo-default-tab th.check-column,
+.post-type-sp_products_tabs .wp-list-table tbody tr.sp-woo-default-tab td {
+  padding-bottom: 25px;
+}
+
+.post-type-sp_products_tabs .wp-list-table tbody tr td.page-title {
+  padding-left: 8px;
+}
+
+.post-type-sp_products_tabs .wp-list-table tbody tr td.show_tabs .sp-tabs-custom-switcher {
+  padding-left: 82px;
+}
+
+.post-type-sp_products_tabs .widefat.wp-list-table th.check-column {
+  width: 4em !important;
+}
+
+.post-type-sp_products_tabs .wptabspro-field-switcher.sp-tabs-custom-switcher {
+  padding: 0;
+}
+
+
+.post-type-sp_products_tabs .column-order {
+  width: 70px;
+  text-align: center;
+  cursor: move;
+}
+
+.post-type-sp_products_tabs .drag-handle {
+  font-size: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: move;
+}
+
+/* Smart tabs header styles */
+.sp_woo_product_settings_tabbed .nav-tab-wrapper,
+.wrap h2.nav-tab-wrapper {
+  height: 49px !important;
+}
+
+.sp_woo_product_settings_tabbed .nav-tab-wrapper a.nav-tab {
+  padding: 11px 23px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.72;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  border: 1px solid #0085BA;
+  background-color: #0085BA;
+}
+
+.sp_woo_product_settings_tabbed .nav-tab-wrapper a.nav-tab.nav-tab-active {
+  background-color: #F0F0F1;
+  color: #000;
+  border-bottom: 0;
+  border-color: #AAA;
+  border-bottom: 2px solid #F0F0F1;
+  border-bottom-left-radius: 2px;
+  z-index: 2;
+  border-bottom-right-radius: 2px;
+}
+
+.sp_woo_product_settings_tabbed .nav-tab-wrapper i.wptabspro-tabbed-icon {
+  margin-right: 5px;
+}
+
+.sp_woo_product_settings_tabbed a.nav-tab:active,
+.sp_woo_product_settings_tabbed a.nav-tab:focus {
+  box-shadow: none !important;
+}
+
+/* Styles for back to all product tabs button */
+.wp-admin .sptpro-back-top-product-tabs {
+  color: #1A74E4;
+  font-weight: 600;
+  font-size: 13px;
+  width: 180px;
+  border: none;
+  display: block;
+  padding-left: 0;
+  text-transform: uppercase;
+  background: transparent;
+}
+
+.wp-admin .sptpro-back-top-product-tabs:focus,
+.wp-admin .sptpro-back-top-product-tabs:hover {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  color: #1A74E4;
+  background: transparent;
+}
+
+
+/* styles for Custom save button for products tabs */
+.post-type-sp_products_tabs #poststuff #post-body.columns-2 {
+  margin-right: 0;
+}
+
+.post-type-sp_products_tabs #post-body.columns-2 #postbox-container-1 {
+  display: none;
+  float: none;
+}
+
+.post-type-sp_products_tabs div#sp_product_tabs_save_button {
+  border: 0;
+  box-shadow: none;
+}
+
+.post-type-sp_products_tabs div#sp_product_tabs_save_button .inside {
+  padding: 0;
+}
+
+.post-type-sp_products_tabs #sp_product_tabs_save_button button.sp-product-tabs-save-button {
+  border: 0;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  border-radius: 4px;
+  background-color: #1a74e4;
+  padding: 0px 20px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-type-sp_products_tabs button.sp-product-tabs-save-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.sp-product-tabs-save-button .sp_tab-spinner-icon {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007cba;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  animation: sp-save-button-spin 1s linear infinite;
+}
+
+@keyframes sp-save-button-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.post-type-sp_products_tabs #sp_product_tabs_save_button button.sp-product-tabs-save-button:hover {
+  background-color: #136cdae6;
+}
+
+.wptabspro-fieldset-content .wptabspro-field-icon .button,
+.wptabspro-fieldset-content .wptabspro-field-media.tabs-custom-icon .button,
+.sp-tab__content_wrapper .wptabspro-field-icon .button,
+.sp-tab__content_wrapper .tabs-custom-icon .button {
+  line-height: 34px;
+  background: #1a74e4;
+  border-color: #1a74e4;
+}
+
+
+/* Product Tabs pro notice style */
+.wptabspro-field.wptabspro-field-fieldset.sp_smart_tabs_pro_fields_preview {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0 30px 20px;
+  width: calc(80% - 20px);
+  border-radius: 4px;
+}
+
+#sp_tab_source_options .wptabspro-field.wptabspro-field-fieldset.sp_smart_tabs_pro_fields_preview {
+  margin: 0 15px 20px;
+}
+
+.wptabspro-field.wptabspro-field-fieldset.sp_smart_tabs_pro_fields_preview .wptabspro-fieldset-content {
+  border: 1px solid #E9D9C4;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  order: 1;
+  border-top: 0;
+  cursor: default;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-field-image_select.disabled-content-preview {
+  opacity: .5;
+}
+
+.wptabspro-field.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc {
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #E9D9C4;
+  background-color: #FFF1DF;
+  margin-top: 0;
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc p:first-child {
+  margin-top: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #5C5143;
+  margin-bottom: 8px;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc span.sp-notice-additional-text {
+  display: block;
+  color: #5C5143;
+  margin-bottom: 18px;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-documentation-button,
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-video-tutorial-button,
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-upgrade-to-pro-button {
+  padding: 10px 16px;
+  border-radius: 4px;
+  background: #EE8700;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-block;
+  margin-right: 10px;
+  -webkit-transition: background-color .2s;
+  transition: background-color .2s;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-upgrade-to-pro-button:hover {
+  background-color: #db7d03;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-documentation-button {
+  background-color: #1A74E4;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-documentation-button:hover {
+  background-color: #0f67d4;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-video-tutorial-button {
+  background-color: #04BA68;
+}
+
+.sp_smart_tabs_pro_fields_preview .wptabspro-text-desc a.sp-tabs-video-tutorial-button:hover {
+  background-color: #04a85e;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a:last-child {
+  position: relative;
+}
+
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a:last-child::after {
+  content: "PRO";
+  position: absolute;
+  color: #fff;
+  background-color: #12a10d;
+  padding: 2px 4px;
+  font-size: 8px;
+  border-radius: 2px;
+  height: 11px;
+  margin-top: 8px;
+  font-weight: 600;
+  top: 6px;
+  margin-left: 6px;
+}
 
 /*=======================================================
  * Tabs Pro - Support Builder
  *=======================================================*/
- @font-face {
- 	font-family: 'sp-tab-fontello';
- 	src: url('../font/fontello.eot?59003652');
- 	src: url('../font/fontello.eot?59003652#iefix') format('embedded-opentype'),
- 		url('../font/fontello.woff2?59003652') format('woff2'),
- 		url('../font/fontello.woff?59003652') format('woff'),
- 		url('../font/fontello.ttf?59003652') format('truetype'),
- 		url('../font/fontello.svg?59003652#fontello') format('svg');
- 	font-weight: normal;
- 	font-style: normal;
- }
+@font-face {
+  font-family: 'sp-tab-fontello';
+  src: url('../font/fontello.eot?59003652');
+  src: url('../font/fontello.eot?59003652#iefix') format('embedded-opentype'),
+    url('../font/fontello.woff2?59003652') format('woff2'),
+    url('../font/fontello.woff?59003652') format('woff'),
+    url('../font/fontello.ttf?59003652') format('truetype'),
+    url('../font/fontello.svg?59003652#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
- /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
- /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
- /*
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
   @media screen and (-webkit-min-device-pixel-ratio:0) {
 	@font-face {
 	  font-family: 'fontello';
@@ -4758,64 +5735,64 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
 	}
   }
   */
- [class^="sp-tab-icon-"]:before,
- [class*=" sp-tab-icon-"]:before {
- 	font-family: "sp-tab-fontello";
- 	font-style: normal;
- 	font-weight: normal;
- 	speak: never;
+[class^="sp-tab-icon-"]:before,
+[class*=" sp-tab-icon-"]:before {
+  font-family: "sp-tab-fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
 
- 	display: inline-block;
- 	text-decoration: inherit;
- 	width: 1em;
- 	margin-right: .2em;
- 	text-align: center;
- 	/* opacity: .8; */
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
 
- 	/* For safety - reset parent styles, that can break glyph codes*/
- 	font-variant: normal;
- 	text-transform: none;
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
 
- 	/* fix buttons height, for twitter bootstrap */
- 	line-height: 1em;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
 
- 	/* Animation center compensation - margins should be symmetric */
- 	/* remove if not needed */
- 	margin-left: .2em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
 
- 	/* you can be more comfortable with increased icons size */
- 	/* font-size: 120%; */
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
 
- 	/* Font smoothing. That was taken from TWBS */
- 	-webkit-font-smoothing: antialiased;
- 	-moz-osx-font-smoothing: grayscale;
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
- 	/* Uncomment for 3D effect */
- 	/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
- }
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
 
- .sp-tab-icon-code:before {
- 	content: '\e885';
- }
+.sp-tab-icon-code:before {
+  content: '\e885';
+}
 
- /* '' */
- .sp-tab-icon-advanced:before {
- 	content: '\e886';
- }
+/* '' */
+.sp-tab-icon-advanced:before {
+  content: '\e886';
+}
 
- /* '' */
- .sp-tab-icon-key-01:before {
- 	content: '\e887';
- }
+/* '' */
+.sp-tab-icon-key-01:before {
+  content: '\e887';
+}
 
- /* '' */
- .sp-tab-icon-shuttle_2285485-1:before {
- 	content: '\e8bd';
- }
+/* '' */
+.sp-tab-icon-shuttle_2285485-1:before {
+  content: '\e8bd';
+}
 
- /* '' */
- .sp-tab-icon-check-icon:before {
- 	content: '\e8be';
- }
+/* '' */
+.sp-tab-icon-check-icon:before {
+  content: '\e8be';
+}
 
- /* '' */
+/* '' */

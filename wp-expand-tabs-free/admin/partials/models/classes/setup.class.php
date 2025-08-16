@@ -364,7 +364,7 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 
 			$current_screen        = get_current_screen();
 			$the_current_post_type = $current_screen->post_type;
-			if ( 'sp_wp_tabs' === $the_current_post_type ) {
+			if ( 'sp_wp_tabs' === $the_current_post_type || 'sp_products_tabs' === $the_current_post_type ) {
 
 				// check for developer mode.
 				$min = ( apply_filters( 'wptabspro_dev_mode', false ) || WP_DEBUG ) ? '' : '.min';
@@ -378,7 +378,7 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 
 				// font awesome 4 and 5.
 				if ( apply_filters( 'wptabspro_fa4', false ) ) {
-					wp_enqueue_style( 'wptabspro-fa', WP_TABS_URL . 'public/css/font-awesome.min.css', array(), '4.7.0', 'all' );
+					wp_enqueue_style( 'wptabspro-fa', WP_TABS_URL . 'public/assets/css/font-awesome.min.css', array(), '4.7.0', 'all' );
 				} else {
 					wp_enqueue_style( 'wptabspro-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all' . $min . '.css', array(), WP_TABS_VERSION, 'all' );
 					wp_enqueue_style( 'wptabspro-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/v4-shims' . $min . '.css', array(), WP_TABS_VERSION, 'all' );
@@ -386,6 +386,7 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 
 				// framework core styles.
 				wp_enqueue_style( 'wptabspro', self::include_plugin_url( 'assets/css/wptabspro' . $min . '.css' ), array(), WP_TABS_VERSION, 'all' );
+				wp_enqueue_style( 'wptabspro-product-tabs-icons', self::include_plugin_url( 'assets/css/fontello' . $min . '.css' ), array(), WP_TABS_VERSION, 'all' );
 
 				// rtl styles.
 				if ( is_rtl() ) {
@@ -400,9 +401,13 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 					'wptabspro',
 					'wptabspro_vars',
 					array(
-						'pluginsUrl'    => WP_TABS_URL,
-						'color_palette' => apply_filters( 'wptabspro_color_palette', array() ),
-						'i18n'          => array(
+						'pluginsUrl'        => WP_TABS_URL,
+						'adminImgUrl'       => WP_TABS_URL . 'admin/img/woo-tabs-position',
+						'ajax_url'          => admin_url( 'admin-ajax.php' ),
+						'tabs_order_nonce'  => wp_create_nonce( 'sp-product-tabs-order-nonce-verification' ),
+						'tabs_toggle_nonce' => wp_create_nonce( 'sp-product-tabs-nonce-verification' ),
+						'color_palette'     => apply_filters( 'wptabspro_color_palette', array() ),
+						'i18n'              => array(
 							// global localize.
 							'confirm'             => esc_html__( 'Are you sure?', 'wp-expand-tabs-free' ),
 							'reset_notification'  => esc_html__( 'Restoring options.', 'wp-expand-tabs-free' ),

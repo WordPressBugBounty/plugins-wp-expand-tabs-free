@@ -104,14 +104,14 @@ if ( ! class_exists( 'WP_Tabs_Free_Gutenberg_Block_Init' ) ) {
 			/**
 			 * Register block editor js file enqueue for backend.
 			 */
-			wp_register_script( 'sptpro-script', esc_url( WP_TABS_URL . 'public/js/wp-tabs-public' . $this->min . '.js' ), array( 'jquery' ), WP_TABS_VERSION, true );
+			wp_register_script( 'sptpro-script', esc_url( WP_TABS_URL . 'public/assets/js/wp-tabs-public' . $this->min . '.js' ), array( 'jquery' ), WP_TABS_VERSION, true );
 
 			wp_localize_script(
 				'sptpro-script',
 				'sp_tab_free_gb_block',
 				array(
 					'url'           => WP_TABS_URL,
-					'loadPublic'    => WP_TABS_URL . 'public/js/wp-tabs-public.min.js',
+					'loadPublic'    => WP_TABS_URL . 'public/assets/js/wp-tabs-public.min.js',
 					'link'          => admin_url( 'post-new.php?post_type=sp_wp_tabs' ),
 					'shortCodeList' => $this->sptabfree_post_list(),
 				)
@@ -150,6 +150,7 @@ if ( ! class_exists( 'WP_Tabs_Free_Gutenberg_Block_Init' ) ) {
 						'sptpro-tab',
 						'sptpro-collapse',
 						'sptpro-script',
+						'sptpro-tabs-type',
 					),
 					// Enqueue blocks.editor.build.css in the editor only.
 					'editor_style'    => array(),

@@ -60,7 +60,7 @@ class WP_Tabs_Admin_Menu {
 			$new_links = array(
 				sprintf( '<a href="%s">%s</a>', admin_url( 'post-new.php?post_type=sp_wp_tabs' ), __( 'Add Tabs', 'wp-expand-tabs-free' ) ),
 			);
-			$links[]   = '<a href="https://wptabs.com/pricing/?ref=1" style="color: #35b747; font-weight: 700;">' . __( 'Go Pro!', 'wp-expand-tabs-free' ) . '</a>';
+			$links[]   = '<a href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" style="color: #35b747; font-weight: 700;">' . __( 'Go Pro!', 'wp-expand-tabs-free' ) . '</a>';
 
 			return array_merge( $new_links, $links );
 		}
@@ -80,7 +80,7 @@ class WP_Tabs_Admin_Menu {
 			$url  = 'https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post';
 			$text = sprintf(
 				/* translators: 1: start strong tag, 2: close strong tag, 3: start a tag, 4: close a tag. */
-				__( 'Enjoying %1$sWP Tabs?%2$s Please rate us %3$sWordPress.org%4$s. Your positive feedback will help us grow more. Thank you! 😊', 'wp-expand-tabs-free' ),
+				__( 'Enjoying %1$sSmart Tabs?%2$s Please rate us %3$sWordPress.org%4$s. Your positive feedback will help us grow more. Thank you! 😊', 'wp-expand-tabs-free' ),
 				'<strong>',
 				'</strong>',
 				'<span class="sptabs-footer-text-star">★★★★★</span> <a href="' . esc_url( $url ) . '" target="_blank">',
@@ -100,7 +100,7 @@ class WP_Tabs_Admin_Menu {
 	public function sptpro_version_text( $text ) {
 		$screen = get_current_screen();
 		if ( 'sp_wp_tabs' === $screen->post_type ) {
-			$text = 'WP Tabs ' . $this->version;
+			$text = 'Smart Tabs ' . $this->version;
 		}
 		return $text;
 	}

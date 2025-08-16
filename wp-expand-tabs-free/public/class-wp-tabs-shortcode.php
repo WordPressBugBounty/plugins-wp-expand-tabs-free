@@ -61,10 +61,8 @@ class WP_Tabs_Shortcode {
 			if ( get_site_option( $option_key ) ) {
 				delete_site_option( $option_key );
 			}
-		} else {
-			if ( get_option( 'sp_tab_page_id' . $post_ID ) ) {
+		} elseif ( get_option( 'sp_tab_page_id' . $post_ID ) ) {
 				delete_option( 'sp_tab_page_id' . $post_ID );
-			}
 		}
 	}
 
@@ -94,6 +92,7 @@ class WP_Tabs_Shortcode {
 	public static function sp_tabs_html_show( $post_id, $sptpro_data_src, $sptpro_shortcode_options, $main_section_title ) {
 		$sptpro_data_src             = isset( $sptpro_data_src['sptpro_content_source'] ) ? $sptpro_data_src['sptpro_content_source'] : null;
 		$sptpro_preloader            = isset( $sptpro_shortcode_options['sptpro_preloader'] ) ? $sptpro_shortcode_options['sptpro_preloader'] : false;
+		$sptpro_tabs_layout          = isset( $sptpro_shortcode_options['sptpro_tabs_layout'] ) ? $sptpro_shortcode_options['sptpro_tabs_layout'] : 'horizontal';
 		$sptpro_tabs_activator_event = isset( $sptpro_shortcode_options['sptpro_tabs_activator_event'] ) ? $sptpro_shortcode_options['sptpro_tabs_activator_event'] : '';
 		$sptpro_tab_opened           = 1;
 		$sptpro_tabs_on_small_screen = isset( $sptpro_shortcode_options['sptpro_tabs_on_small_screen'] ) ? $sptpro_shortcode_options['sptpro_tabs_on_small_screen'] : '';
@@ -107,6 +106,11 @@ class WP_Tabs_Shortcode {
 		$wrapper_class   = 'sp-tab__lay-default';
 		$content_class   = 'sp-tab__lay-default';
 		$title_data_attr = '';
+
+		$sptpro_tabs_position_bottom = '';
+		if ( 'horizontal-bottom' === $sptpro_tabs_layout ) {
+			$sptpro_tabs_position_bottom = ' sp-tab__horizontal-bottom';
+		}
 
 		switch ( $sptpro_tabs_on_small_screen ) {
 			case 'full_widht':
@@ -122,7 +126,7 @@ class WP_Tabs_Shortcode {
 		wp_enqueue_script( 'sptpro-script' );
 		include WP_TABS_PATH . 'public/partials/section-title.php';
 		?>
-		<div id="sp-wp-tabs-wrapper_<?php echo esc_attr( $post_id ); ?>" class="<?php echo esc_html( $wrapper_class ); ?>" data-preloader="<?php echo esc_html( $sptpro_preloader ); ?>" data-activemode="<?php echo esc_html( $sptpro_tabs_activator_event ); ?>">
+		<div id="sp-wp-tabs-wrapper_<?php echo esc_attr( $post_id ); ?>" class="<?php echo esc_html( $wrapper_class . $sptpro_tabs_position_bottom ); ?>" data-preloader="<?php echo esc_html( $sptpro_preloader ); ?>" data-activemode="<?php echo esc_html( $sptpro_tabs_activator_event ); ?>">
 		<?php
 		include WP_TABS_PATH . '/public/preloader.php';
 		include WP_TABS_PATH . '/public/partials/tabs-navigation.php';
@@ -171,5 +175,4 @@ class WP_Tabs_Shortcode {
 		self::sp_tabs_html_show( $post_id, $sptpro_data_src, $sptpro_shortcode_options, $main_section_title );
 		return ob_get_clean();
 	}
-
 }

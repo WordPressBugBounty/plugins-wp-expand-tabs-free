@@ -168,8 +168,8 @@ if ( ! class_exists( 'SP_WP_TABS_Field_border' ) ) {
 
 			if ( ! empty( $args['border_radius'] ) ) {
 				$placeholder = ( ! empty( $args['all_placeholder'] ) ) ? $args['all_placeholder'] : '';
-				echo '<div class="wptabspro--title">' . esc_html__( 'Border Radius', 'wp-expand-tabs-free' ) . '</div>';
 				echo '<div class="wptabspro--inputs border-radius">';
+				echo '<div class="wptabspro--title">' . esc_html__( 'Radius', 'wp-expand-tabs-free' ) . '</div>';
 				echo '<div class="wptabspro--input">';
 				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="wptabspro--label wptabspro--icon">' . wp_kses_post( $args['all_icon'] ) . '</span>' : '';
 				echo '<input type="number" name="' . esc_attr( $this->field_name( '[border_radius]' ) ) . '" value="' . esc_attr( $value['border_radius'] ) . '" placeholder="' . esc_attr( $placeholder ) . '" class="wptabspro-input-number wptabspro--is-unit" step="any" />';
@@ -191,7 +191,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_border' ) ) {
 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
 
 		/**

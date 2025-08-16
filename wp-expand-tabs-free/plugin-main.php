@@ -8,16 +8,17 @@
  * @link              https://shapedplugin.com/
  * @package           WP_Tabs
  *
- * Plugin Name:       WP Tabs
+ * Plugin Name:       Smart Tabs
  * Plugin URI:        https://wptabs.com/?ref=1
- * Description:       WP Tabs is the most user-friendly, highly customizable, responsive WordPress tabs plugin to display your content in a clean organized tabbed navigation.
- * Version:           2.2.14
+ * Description:       Smart Tabs (formerly WP Tabs) is a powerful, highly customizable plugin to build and manage WooCommerce Product Tabs and WordPress Tabs — perfect for store owners, agencies, and developers alike.
+ * Version:           3.0.0
  * Author:            ShapedPlugin LLC
  * Author URI:        https://shapedplugin.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wp-expand-tabs-free
  * Domain Path:       /languages
+ * Requires PHP: 7.2
  */
 
 // If this file is called directly, abort.
@@ -30,13 +31,17 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WP_TABS_NAME', 'WP Tabs' );
-define( 'WP_TABS_VERSION', '2.2.14' );
+define( 'WP_TABS_NAME', 'Smart Tabs' );
+define( 'WP_TABS_VERSION', '3.0.0' );
 define( 'WP_TABS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WP_TABS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_TABS_URL', plugin_dir_url( __FILE__ ) );
 define( 'WP_TABS_DIRNAME', dirname( plugin_basename( __FILE__ ) ) );
 define( 'WP_TABS_SLUG', dirname( plugin_basename( __FILE__ ) ) );
+define( 'SP_TABS_FREE_ADMIN_IMAGES', plugin_dir_url( __FILE__ ) . 'admin/img' );
+define( 'SP_SMART_TABS_PRO_LINK', 'https://wptabs.com/pricing/?ref=1' );
+define( 'SP_TABS_DYNAMIC_STYLES_DIR', plugin_dir_path( __FILE__ ) . 'public/assets/css/dynamic' );
+define( 'WP_TABS_FIRST_VERSION', get_option( 'wp_tabs_first_version' ) );
 
 /**
  * Pro version check.

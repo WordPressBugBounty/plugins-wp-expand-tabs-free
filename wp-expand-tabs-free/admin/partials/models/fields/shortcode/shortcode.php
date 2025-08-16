@@ -75,14 +75,14 @@ if ( ! class_exists( 'SP_WP_TABS_Field_shortcode' ) ) {
 					echo '</ul>';
 
 					echo '<div class="sp-tab-notice-button">';
-					echo '<a class="sp-tab-open-live-demo" href="https://wptabs.com/pricing/?ref=1" target="_blank">';
+					echo '<a class="sp-tab-open-live-demo" href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" target="_blank">';
 					echo esc_html__( 'Upgrade to Pro Now', 'wp-expand-tabs-free' ) . ' <i class="sp-tab-icon-shuttle_2285485-1"></i>';
 					echo '</a>';
 					echo '</div>';
 					echo '</div>';
 				}
 			} else {
-				echo ( ! empty( $post_id ) ) ? '<div class="sp-tab__scode-scode-wrap"><p>WP Tabs integrates seamlessly with Gutenberg, Classic Editor, <strong>Elementor,</strong> Divi, Bricks, Beaver, Oxygen, WPBakery Builder, and more.</p></div>' : '';
+				echo ( ! empty( $post_id ) ) ? '<div class="sp-tab__scode-scode-wrap"><p>Smart Tabs integrates seamlessly with Gutenberg, Classic Editor, <strong>Elementor,</strong> Divi, Bricks, Beaver, Oxygen, WPBakery Builder, etc.</p></div>' : '';
 			}
 		}
 	}

@@ -437,8 +437,11 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 					foreach ( $this->pre_fields as $field ) {
 
 						if ( ! empty( $field['id'] ) ) {
-
-							$field_id    = $field['id'];
+							$field_id = $field['id'];
+							// If field is ignored, skip it.
+							if ( ! empty( $field['ignore_db'] ) ) {
+								continue;
+							}
 							$field_value = isset( $options[ $field_id ] ) ? $options[ $field_id ] : '';
 
 							// Ajax and Importing doing wp_unslash already.
@@ -661,16 +664,17 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 		 */
 		public function add_options_html() {
 
-			$has_nav       = ( count( $this->pre_tabs ) > 1 ) ? true : false;
-			$show_buttons  = isset( $this->args['show_buttons'] ) ? $this->args['show_buttons'] : true;
-			$show_all      = ( ! $has_nav ) ? ' wptabspro-show-all' : '';
-			$ajax_class    = ( $this->args['ajax_save'] ) ? ' wptabspro-save-ajax' : '';
-			$sticky_class  = ( $this->args['sticky_header'] ) ? ' wptabspro-sticky-header' : '';
-			$wrapper_class = ( $this->args['framework_class'] ) ? ' ' . $this->args['framework_class'] : '';
-			$theme         = ( $this->args['theme'] ) ? ' wptabspro-theme-' . $this->args['theme'] : '';
-			$class         = ( $this->args['class'] ) ? ' ' . $this->args['class'] : '';
-			$notice_class  = ( ! empty( $this->notice ) ) ? 'wptabspro-form-show' : '';
-			$notice_text   = ( ! empty( $this->notice ) ) ? $this->notice : '';
+			$has_nav           = ( count( $this->pre_tabs ) > 1 ) ? true : false;
+			$show_buttons      = isset( $this->args['show_buttons'] ) ? $this->args['show_buttons'] : true;
+			$smart_tabs_button = isset( $this->args['smart_tabs_button'] ) ? $this->args['smart_tabs_button'] : true;
+			$show_all          = ( ! $has_nav ) ? ' wptabspro-show-all' : '';
+			$ajax_class        = ( $this->args['ajax_save'] ) ? ' wptabspro-save-ajax' : '';
+			$sticky_class      = ( $this->args['sticky_header'] ) ? ' wptabspro-sticky-header' : '';
+			$wrapper_class     = ( $this->args['framework_class'] ) ? ' ' . $this->args['framework_class'] : '';
+			$theme             = ( $this->args['theme'] ) ? ' wptabspro-theme-' . $this->args['theme'] : '';
+			$class             = ( $this->args['class'] ) ? ' ' . $this->args['class'] : '';
+			$notice_class      = ( ! empty( $this->notice ) ) ? 'wptabspro-form-show' : '';
+			$notice_text       = ( ! empty( $this->notice ) ) ? $this->notice : '';
 			do_action( 'wptabspro_options_before' );
 
 			echo '<div class="wptabspro wptabspro-options' . esc_attr( $theme . $class . $wrapper_class ) . '" data-slug="' . esc_attr( $this->args['menu_slug'] ) . '" data-unique="' . esc_attr( $this->unique ) . '">';
@@ -688,11 +692,14 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 			echo '<div class="wptabspro-header' . esc_attr( $sticky_class ) . '">';
 			echo '<div class="wptabspro-header-inner">';
 			echo '<div class="wptabspro-header-left">';
-			if ( $show_buttons ) {
+			if ( $show_buttons && $smart_tabs_button ) {
+				echo '<h1><img src="' . esc_attr( WP_TABS_URL . '/admin/img/smart-tabs-logo.svg' ) . '" alt="">' . esc_html( $this->args['framework_title'] ) . '</h1>';
+			} elseif ( $show_buttons ) {
 				echo '<h1><img src="' . esc_attr( WP_TABS_URL . '/admin/img/tab-icon.svg' ) . '" alt="">' . esc_html( $this->args['framework_title'] ) . '</h1>';
 			} else {
 				echo '<h1><img src="' . esc_attr( WP_TABS_URL . '/admin/img/import-export.svg' ) . '" alt="">' . esc_html( $this->args['framework_title'] ) . '</h1>';
 			}
+
 			echo '</div>';
 
 			echo '<div class="wptabspro-header-right">';

@@ -46,7 +46,7 @@ class WP_Tabs_Free_Eelementor_Shortcode_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'WP Tabs', 'wp-expand-tabs-free' );
+		return esc_html__( 'Smart Tabs', 'wp-expand-tabs-free' );
 	}
 
 	/**
@@ -131,7 +131,7 @@ class WP_Tabs_Free_Eelementor_Shortcode_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'sp_wp_tabs_shortcode',
 			array(
-				'label'       => __( 'WP Tabs Shortcode(s)', 'wp-expand-tabs-free' ),
+				'label'       => __( 'Smart Tabs Shortcode(s)', 'wp-expand-tabs-free' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
 				'label_block' => true,
 				'default'     => '',
@@ -182,9 +182,9 @@ class WP_Tabs_Free_Eelementor_Shortcode_Widget extends \Elementor\Widget_Base {
 
 			WP_Tabs_Shortcode::sp_tabs_html_show( $post_id, $sptpro_data_src, $sptpro_shortcode_options, $main_section_title );
 			?>
-			<script src="<?php echo esc_url( WP_TABS_URL . 'public/js/collapse.min.js' ); ?>" ></script>
-			<script src="<?php echo esc_url( WP_TABS_URL . 'public/js/tab.min.js' ); ?>" ></script>
-			<script src="<?php echo esc_url( WP_TABS_URL . 'public/js/wp-tabs-public.min.js' ); ?>" ></script>
+			<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/collapse.min.js' ); ?>" ></script>
+			<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/tab.min.js' ); ?>" ></script>
+			<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/wp-tabs-public.min.js' ); ?>" ></script>
 			<?php
 		} else {
 			echo do_shortcode( '[wptabs id="' . $generator_id . '"]' );

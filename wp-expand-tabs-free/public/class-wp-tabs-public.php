@@ -116,6 +116,7 @@ class WP_Tabs_Public {
 			wp_enqueue_style( 'admin-sptpro-style' );
 			wp_enqueue_style( 'sptpro-animate-css' );
 		}
+		wp_enqueue_style( 'sp_tabs_global_style', WP_TABS_URL . 'admin/css/elementor-icon.css', array(), WP_TABS_VERSION, 'all' );
 	}
 
 	/**
@@ -127,17 +128,35 @@ class WP_Tabs_Public {
 		/**
 		 *  Register all the styles for the public-facing side of the site.
 		 */
-		wp_register_style( 'sptpro-accordion-style', esc_url( WP_TABS_URL . 'public/css/sptpro-accordion' . $this->min . '.css' ), array(), $this->version, 'all' );
-		wp_register_style( 'sptpro-style', esc_url( WP_TABS_URL . 'public/css/wp-tabs-public' . $this->min . '.css' ), array(), $this->version, 'all' );
-		wp_register_style( 'admin-sptpro-style', esc_url( WP_TABS_URL . 'public/css/wp-tabs-public' . $this->min . '.css' ), array(), $this->version, 'all' );
-		wp_register_style( 'sptpro-animate-css', WP_TABS_URL . 'public/css/animate' . $this->min . '.css', array(), $this->version, 'all' );
+		wp_register_style( 'sptpro-accordion-style', esc_url( WP_TABS_URL . 'public/assets/css/sptpro-accordion' . $this->min . '.css' ), array(), $this->version, 'all' );
+		wp_register_style( 'sptpro-style', esc_url( WP_TABS_URL . 'public/assets/css/wp-tabs-public' . $this->min . '.css' ), array(), $this->version, 'all' );
+		wp_register_style( 'admin-sptpro-style', esc_url( WP_TABS_URL . 'public/assets/css/wp-tabs-public' . $this->min . '.css' ), array(), $this->version, 'all' );
+		wp_register_style( 'sptpro-animate-css', WP_TABS_URL . 'public/assets/css/animate' . $this->min . '.css', array(), $this->version, 'all' );
 
 		/**
 		 * Register all the Scripts for the public-facing side of the site.
 		 */
-		wp_register_script( 'sptpro-tab', esc_url( WP_TABS_URL . 'public/js/tab' . $this->min . '.js' ), array( 'jquery' ), $this->version, false );
-		wp_register_script( 'sptpro-collapse', esc_url( WP_TABS_URL . 'public/js/collapse' . $this->min . '.js' ), array( 'jquery' ), $this->version, false );
-		wp_register_script( 'sptpro-script', esc_url( WP_TABS_URL . 'public/js/wp-tabs-public' . $this->min . '.js' ), array( 'jquery' ), $this->version, true );
+		wp_register_script( 'sptpro-tab', esc_url( WP_TABS_URL . 'public/assets/js/tab' . $this->min . '.js' ), array( 'jquery' ), $this->version, false );
+		wp_register_script( 'sptpro-collapse', esc_url( WP_TABS_URL . 'public/assets/js/collapse' . $this->min . '.js' ), array( 'jquery' ), $this->version, false );
+		wp_register_script( 'sptpro-script', esc_url( WP_TABS_URL . 'public/assets/js/wp-tabs-public' . $this->min . '.js' ), array( 'jquery' ), $this->version, true );
+
+		wp_register_script( 'sptpro-tabs-type', WP_TABS_URL . 'public/assets/js/tabs-type' . $this->min . '.js', array( 'jquery' ), $this->version, true );
+
+		$product_tabs_settings        = get_option( 'sptabs_product_tabs_settings' );
+		$product_tabs_activator_event = $product_tabs_settings['product_tabs_activator_event'] ?? 'tabs-activator-event-click';
+		$product_tabs_layout          = $product_tabs_settings['product_tabs_layout'] ?? 'horizontal';
+		$preloader                    = $sp_woo_tabs_settings['sptpro_preloader'] ?? true;
+
+		wp_localize_script(
+			'sptpro-tabs-type',
+			'sp_tabs_ajax',
+			array(
+				'ajax_url'        => admin_url( 'admin-ajax.php' ),
+				'activator_event' => $product_tabs_activator_event,
+				'tabs_layout'     => $product_tabs_layout,
+				'tabs_preloader'  => $preloader,
+			)
+		);
 	}
 
 	/**
@@ -158,7 +177,7 @@ class WP_Tabs_Public {
 			foreach ( $found_shortcode_id as $post_id ) {
 				if ( $post_id && is_numeric( $post_id ) && get_post_status( $post_id ) !== 'trash' ) {
 					$sptpro_shortcode_options = get_post_meta( $post_id, 'sp_tab_shortcode_options', true );
-					include WP_TABS_PATH . 'public/dynamic_style.php';
+					include SP_TABS_DYNAMIC_STYLES_DIR . '/dynamic_style.php';
 					if ( ! $accordion_mode && 'accordion_mode' === $sptpro_tabs_on_small_screen ) {
 						$accordion_mode = true;
 					}
@@ -167,7 +186,7 @@ class WP_Tabs_Public {
 		} else {
 			$post_id                  = $found_shortcode_id;
 			$sptpro_shortcode_options = $shortcode_data;
-			include WP_TABS_PATH . 'public/dynamic_style.php';
+			include SP_TABS_DYNAMIC_STYLES_DIR . '/dynamic_style.php';
 			if ( ! $accordion_mode && 'accordion_mode' === $sptpro_tabs_on_small_screen ) {
 				$accordion_mode = true;
 			}

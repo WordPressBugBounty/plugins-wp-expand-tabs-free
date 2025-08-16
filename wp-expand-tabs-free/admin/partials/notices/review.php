@@ -52,11 +52,11 @@ class WP_Tabs_Review {
 		?>
 		<div id="sp-wptabs-review-notice" class="sp-wptabs-review-notice">
 			<div class="sp-wptabs-plugin-icon">
-				<img src="<?php echo esc_url( WP_TABS_URL . 'admin/img/images/wp-tabs.svg' ); ?>" alt="WP Tabs">
+				<img src="<?php echo esc_url( WP_TABS_URL . 'admin/img/images/wp-tabs.svg' ); ?>" alt="Smart Tabs">
 			</div>
 			<div class="sp-wptabs-notice-text">
-				<h3>Enjoying <strong>WP Tabs</strong>?</h3>
-				<p>We hope you had a wonderful experience using <strong>WP Tabs</strong>. Please take a moment to leave a review on <a href="https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a>.
+				<h3>Enjoying <strong>Smart Tabs</strong>?</h3>
+				<p>We hope you had a wonderful experience using <strong>Smart Tabs</strong>. Please take a moment to leave a review on <a href="https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a>.
 				Your positive review will help us improve. Thank you! 😊</p>
 
 				<p class="sp-wptabs-review-actions">

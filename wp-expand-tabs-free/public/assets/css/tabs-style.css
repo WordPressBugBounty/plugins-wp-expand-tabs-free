@@ -1,0 +1,51 @@
+/* accordion body style in store-front theme. */
+html body.sptpro-smart-tabs.theme-storefront ul.tabs.wc-tabs {
+    width: 100%;
+}
+
+.sptpro-smart-tabs.theme-storefront .woocommerce-tabs .woocommerce-Tabs-panel.panel {
+    width: 100%;
+}
+
+.sptpro-smart-tabs.theme-storefront .woocommerce-tabs .wc-tabs li:after {
+    display: none;
+}
+
+.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs::after {
+    display: none !important;
+}
+
+/* Tabs style on Hello elementor theme */
+.theme-hello-elementor.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li {
+    border: none;
+}
+
+/* Fix active tab border related styles in popular themes. */
+.wp-theme-popularfx.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li::before,
+.wp-theme-popularfx.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li::after,
+.wp-theme-generatepress.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li::before,
+.wp-theme-generatepress.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li::after,
+.theme-hello-elementor.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li::before,
+.theme-hello-elementor.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li::after {
+    border: none;
+    width: 0;
+}
+
+.wp-theme-oceanwp.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    border: none;
+}
+
+/* Style for Product Tabs content */
+ #sp-smart-product-tabs.woocommerce {
+    box-sizing: border-box;
+    position: relative;
+}
+
+#sp-smart-product-tabs.woocommerce figure {
+    position: relative;
+}
+
+/* Hide duplicate tab on Block Theme. */
+/* .woocommerce-uses-block-theme div:has(.wc-tabs-wrapper)+.wp-block-woocommerce-product-details .woocommerce-tabs.wc-tabs-wrapper {
+    display: none !important;
+} */
