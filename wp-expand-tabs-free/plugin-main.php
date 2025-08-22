@@ -11,7 +11,7 @@
  * Plugin Name:       Smart Tabs
  * Plugin URI:        https://wptabs.com/?ref=1
  * Description:       Smart Tabs (formerly WP Tabs) is a powerful, highly customizable plugin to build and manage WooCommerce Product Tabs and WordPress Tabs — perfect for store owners, agencies, and developers alike.
- * Version:           3.0.0
+ * Version:           3.0.1
  * Author:            ShapedPlugin LLC
  * Author URI:        https://shapedplugin.com/
  * License:           GPL-2.0+
@@ -32,7 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'WP_TABS_NAME', 'Smart Tabs' );
-define( 'WP_TABS_VERSION', '3.0.0' );
+define( 'WP_TABS_VERSION', '3.0.1' );
 define( 'WP_TABS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WP_TABS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_TABS_URL', plugin_dir_url( __FILE__ ) );

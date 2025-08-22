@@ -1,21 +1,21 @@
-=== Custom Product Tabs for WooCommerce – Smart Tabs (formerly WP Tabs) ===
+=== Custom Product Tabs for WooCommerce and Responsive Tabs Builder – Smart Tabs (formerly WP Tabs) ===
 Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: WooCommerce product tabs, WooCommerce custom product tabs, WooCommerce tabs plugin, product tabs, tabs
 Requires at least: 5.0
-Tested up to: 6.8.2
-Stable tag: 3.0.0
+Tested up to: 6.8
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-🔥 A Powerful, Customizable plugin to Create and Manage WooCommerce Product Tabs and WordPress Tabs—Organize Content & Engage Shoppers. 🚀
+A customizable plugin to create and manage WooCommerce product tabs and WordPress tabs to organize content.
 
 == Description ==
 
-### The Best WooCommerce Product & WordPress Tabs Plugin ###
+### Responsive WooCommerce Product Tabs & WordPress Tabs Builder Plugin ###
 
-[__Smart Tabs__](https://wptabs.com/) **(formerly WP Tabs)** is a feature-rich and beginner-friendly tab plugin designed for both WooCommerce and WordPress. It provides beautiful, responsive tab layouts and easy-to-use customizations to create professional WooCommerce Product Tabs and Responsive WordPress Tabs in minutes with no code.
+**Smart Tabs (formerly WP Tabs)** is a tab plugin designed for both WooCommerce and WordPress. It provides responsive tab layouts and customization options to create WooCommerce product tabs and WordPress tabs with no coding required.
 
-🖥 [__Live Demo__](https://wptabs.com/) | 📖 [__Documentation__](https://wptabs.com/docs/) | 🛟 [__Support__](https://shapedplugin.com/support/?user=lite) | 💎 [__Upgrade to Pro!__](https://wptabs.com/?ref=1)
+🖥 [__Live Demo__](https://wptabs.com/) | 📖 [__Documentation__](https://wptabs.com/docs/) | 🛟 [__Support__](https://shapedplugin.com/create-new-ticket/)
 
 = Key Benefits: =
 * Organize rich content and keep shoppers engaged
@@ -25,48 +25,43 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Boost engagement and drive more sales
 
 = Key Features List: =
-* **WooCommerce Custom Product Tabs** – Add unlimited custom product tabs to product pages
+* **WooCommerce Custom Product Tabs** – Add custom product tabs to product pages
 * **WooCommerce Suggested Product Tabs** – Showcase related & complementary items for cross-sells
-* **Pre-made Tab Layouts** – Create beautiful tabs in one click
+* **Pre-made Tab Layouts** – Create tabs in one click
 * **Responsive Mobile Tabs** – Tabs convert to full-width or accordion style on smaller screens
 * **Nested / Multi-level Tabs** – Structure content with tabs inside tabs
 * **Flexible Tab Navigation** – Switch tabs by clicking or mouseover
 * **Drag & Drop Ordering** – Reorder tabs easily by drag-and-drop, ID, title, or date
-* **Tab Animations & Hover Effects** – Add smooth animations for engaging interactions
+* **Tab Animations & Hover Effects** – Add animations for interactions
 * **Tabs Alignment Options** – Left, right, top, bottom, center, or justified
 
 = Key Compatibility: =
-* Works seamlessly with major themes, WooCommerce plugins, and page builders
+* Works with major themes, WooCommerce plugins, and page builders
 * Multisite Supported – Activate network-wide or per site
-* Multilingual & RTL Ready – Fully compatible with WPML, Polylang, WeGlot, Loco Translate, TranslatePress, GTranslate, qTranslate-x, and more
+* Multilingual & RTL Ready – Compatible with WPML, Polylang, WeGlot, Loco Translate, TranslatePress, GTranslate, qTranslate-x, and more
 
-### Upgrade to Smart Tabs Pro 🚀 ###
-[__Smart Tabs Pro__](https://wptabs.com/) is the best WooCommerce Custom Product Tabs & WordPress Tabs Builder. With **Smart Tabs Pro**, you can easily organize your content, give shoppers all the details they need, and boost sales with the most powerful, user-friendly product tab builder.
+
+### Upgrade to Smart Tabs Pro ###
+[__Smart Tabs Pro__](https://wptabs.com/) is a premium version that extends the functionality of the free plugin with additional features for WooCommerce product tabs and WordPress tabs.
+
 
 ### 🏆 What You Can Do with Smart Tabs Pro⚡ ###
-✅ **WooCommerce Product Tabs:** Add new custom tabs & accordions globally or individually, place them below or beside the product gallery to display rich content smartly.
-✅ **Override Tabs Per Products:** Different content for different products.  Instantly override tabs per product while adding or editing a product.
+✅ **WooCommerce Product Tabs:** Add custom tabs and accordions globally or individually, positioned below or beside the product gallery.
+✅ **Override Tabs Per Products:** Create different content for specific products by overriding tabs while adding or editing products.
 ✅ **Custom Content Tabs:** Create tabs with any type of content: texts, images, videos, shortcodes, and more.
-✅ **Post Tabs:** Build tabs with any type of posts filtered by various taxonomies and more.
+✅ **Post Tabs:** Build tabs displaying posts filtered by various taxonomies.
 ✅ **Horizontal and Vertical Tabs:** Shape Horizontal & Vertical tabs with left and right placement options.
-✅ **Nested/Multilevel Tabs:** Add as many tabs inside tabs as you want.
-✅ **Tabs Carousels (Scrollable Tabs):** Create interactive tab carousels to allocate many tabs in a single row.
+✅ **Nested/Multilevel Tabs:** Add tabs within other tabs.
+✅ **Tabs Carousels (Scrollable Tabs):** Create scrollable tab carousels to display multiple tabs in a single row.
 
 ### 🏆 WooCommerce Product Tabs: ###
-**👉 20+ Beautiful Tabs Templates and Layouts**
-Go beyond basic tabs. [_Smart Tabs Pro_](https://wptabs.com/) offers stunning, professionally designed layouts that give your content a polished, modern look that captivates visitors and accelerates conversion growth.
+**👉 Tabs Templates and Layouts:** Access pre-designed tab layouts for your product pages.
 
-**👉 Create Product Tabs with Product Image Galleries**
-Enrich your product pages with dynamic content. Whether it’s plain text, beautiful image layouts, or interactive shortcodes– your tabs can handle it all.
+**👉 Product Tabs with Product Image Galleries:** Include image galleries in tabs with grid or masonry layouts and adjustable column settings.
 
-* Grid-style image gallery layout
-* Masonry-style image gallery layout
-* Adjustable column settings for mobile and desktop views
+**👉 Video Tab:** Add video content to showcase reviews, tutorials, and promotions.
 
-**👉 Add a Video Tab to Showcase Reviews, Tutorials, and Promos**
-Bring your products to life with video content that informs, persuades, and builds trust– boosting customer engagement and sales.
-
-**Supported video platforms:**
+***Supported video platforms:***
 
 * YouTube
 * Vimeo
@@ -75,59 +70,45 @@ Bring your products to life with video content that informs, persuades, and buil
 * Self-hosted videos
 
 
-**👉 Add an FAQ Tab to Address Common Questions and Boost Conversions**
-Answer frequent customer queries directly on the product page. Clear information builds confidence, reduces friction, and improves purchase rates.
+**👉 FAQ Tab:** Include an FAQ section to address common customer questions.
 
-**👉 Add a Contact Form Tab and Get Potential Leads, Wholesale Inquiries, and More**
-Make it easy for customers to connect with you, right from the product page. Capture leads, handle wholesale requests, and gather feedback without friction.
+**👉 Contact Form Tab:** Add a contact form to capture leads and inquiries.
 
-**👉 Add a Download Tab for Manuals, Charts, PDFs, and More**
-Provide easy access to all essential documents—technical specs, guides, warranties, charts, and more—in one clean, dedicated tab.
+**👉 Download Tab:** Provide access to all essential documents like technical specs, guides, warranties, charts, and more in one dedicated tab.
 
-**👉 Add Tabs to Specific Products, Categories, or Brands 🔥🔥**
-It lets you add tab(s) for all or specific WooCommerce products filtered by categories, brands, or names to provide the necessary information in an organized way.
+**👉 Product-Specific Tabs:** Add tabs to specific products, categories, or brands.
 
-**👉 Product Tabs as Accordion Layout**
-Sometimes, you may need to use long titles that don’t fit in a single row, and keeping a tab open by default can take up too much space. No worries! Smart Tabs offers an Accordion layout with necessary customizations to display key information smartly in a collapsed format, just like the world's top brands.
+**👉 Product Tabs as Accordion Layout:** Display tabs in an accordion format for better space utilization.
 
-**👉 Hide or Override (Edit) Tabs Per Product**
-If a global tab isn't relevant to a specific product, you can easily hide the tab or edit its content directly from the product form.
+**👉 Hide or Override (Edit) Tabs Per Product:** Hide or modify tabs for specific products as needed.
 
-**👉 WooCommerce Custom Related Products Tabs**
-Use Smart Tabs to add custom related products in a dedicated product tab. You can choose any products as related products without matching by category or tag.
+**👉 Custom Related Products Tabs:** Add related products tabs without relying on category or tag matching.
 
-###🏆 WordPress Tabs###
-**👉 Display Posts in Tabs**
-Smart Tabs Pro is a two-in-one solution—WooCommerce and WordPress tabs. Easily organize news, blog posts, and pages into relevant tabs for better navigation. With powerful filters, you can display specific posts or pages by time, name, category, tag, and more.
+###🏆 WordPress Tabs Features:###
 
-**👉 Image & Video Gallery Tabs 🔥**
-Demonstrate your content with relevant images and videos. You can even create gorgeous image and video galleries in tabs with this multi-functional plugin.
+**👉 Display Posts in Tabs:** Organize blog posts, news, and pages into tabs with filtering options.
 
-**👉 Ready FontAwesome and Custom Tab Icons**
-Smart Tabs offers you hundreds of ready icons to choose from and also allows you to upload custom icons.
+**👉 Image & Video Gallery Tabs:** Create image and video galleries within tabs.
 
-**👉 Tab Connecting Arrow or Indicator to Content**
-A clear connection between the active tab and its content area is crucial for good UX. Smart Tabs offers many styles to connect the active tab with its content.
+**👉 Tab Icons:** Choose from FontAwesome icons or upload custom icons.
 
-**👉 Stunning Animations and Effects**
-Bring your tabbed content to life with Smart Tabs’ rich library of animations and hover effects. Choose from a variety of stylish transitions to create a smooth, interactive experience that captures attention.
+**👉 Tab Connecting Arrow or Indicator:** Add visual indicators connecting tabs to their content.
 
-**👉 Responsive Product Tabs: Change into Accordion on Mobile**
-Deliver a seamless mobile experience by automatically converting product tabs into responsive accordions on phones and tablets.
+**👉 Animations and Effects:** Apply animations and hover effects to tabs.
 
-**👉 Add Deep Links in Tabs**
-In addition to general links, you can use deep links within tabs to skip your website or app’s home page and take your traffic right where you want them. Send traffic to a specific web page, post, content section, or even a screen in a web or mobile app to provide contextual information. Simply check the box and paste your desired deep link—quick and easy!
+**👉 Responsive Design:** Tabs automatically convert to accordions on mobile devices.
 
-**👉 Advanced Customizations – Full Control Over Styling**
-Smart Tabs Pro gives you 1,500+ Google Fonts and 300+ design options to customize everything—from tab bars to content—so your tabs perfectly match your brand and style.
+**👉 Deep Links:** Add deep links within tabs to direct users to specific content.
+
+**👉 Customization Options:** Access extensive styling options including Google Fonts and design settings.
 
 == 🛟 Support and Documentation ==
 👉 Get all guidance at our [__Documentation__](https://wptabs.com/docs/)
 👉 Say Hi for support to the [__Plugin’s Support Team__](https://shapedplugin.com/create-new-ticket/?ref=1)
 👉 Explore more at [__Smart Tabs__](https://wptabs.com/)
 
-**🧑🏻‍💻 Author – Backed By A Trusted Team 🔥**
-Smart Tabs plugin is developed and maintained by [__ShapedPlugin LLC__](https://shapedplugin.com/), a Dedicated WordPress plugin development Team trusted by **350,000+** happy, active users worldwide. 🌎
+**Author – Backed By A Trusted Team**
+Smart Tabs plugin is developed and maintained by [__ShapedPlugin LLC__](https://shapedplugin.com/).
 
 
 == Frequently Asked Questions ==
@@ -135,85 +116,74 @@ Smart Tabs plugin is developed and maintained by [__ShapedPlugin LLC__](https://
 = Q. Is Smart Tabs free? =
 **A:** Yes! **Smart Tabs** is and always will be free.
 
-= Q. How can I Add tabs to my site? =
-**A:** After activating the plugin, you will see Smart Tabs in WordPress admin dashboard.
+= Q. How can I add tabs to my site? =
+**A:** After activating the plugin, you will see Smart Tabs in the WordPress admin dashboard.
 
-**Firstly**,
-* Click on Add New menu;
-* Write a Shortcode Title which is optional (shown as tab group section title) for the Tab Group;
+**First:**
+
+* Click on the Add New menu;
+* Write a Shortcode Title, which is optional (shown as tab group section title) for the Tab Group;
 * Select Content from the Tabs Type option;
-* Add some content by following the steps below:
-* Click on Add New Tab button;
-* Type Title for the Tab item;
-* Write description/content for the tab item;
-* Thus, you can add tab items as many as you want.
+* Add some content by following the steps:
+ * Click on the Add New Tab button;
+ * Type Title for the Tab item;
+ * Write description/content for the tab item;
+ * Thus, you can add as many tab items as needed
 
-**Secondly**,
-* You can customize the setting fields how you want. And then click on→ Publish and you will find a Generated Shortcode in the bottom area;
+**Second:**
 
-**Finally**,
-* Copy and Paste the Tabs or Tab Group Shortcode to your post/page or anywhere on your site.
+* You can customize the setting fields as you want. And then click on→ Publish, and you will find a Generated Shortcode in the bottom area;
 
-I’d like access to more features. How can I get them?
-You can get access to more features when you purchase a license of the plugin. Purchasing a license of [__Smart Tabs Pro__](https://wptabs.com/?ref=1) gets you to access the full version of Smart Tabs, automatic lifetime updates, and support.
+**Finally:**,
 
-= Q. What if I upgrade to premium version? =
-**A:** Your existing tabs content will work with premium version. So you won’t lose your developed contents.
+* Copy and paste the Tabs or Tab Group Shortcode to your post/page or anywhere on your site.
+
+= Q. What if I upgrade to the premium version? =
+**A:** Your existing tab content will work with the premium version, so you won't lose your developed content.
 
 = Q. Do I need to have coding skills to use Smart Tabs? =
-**A:** No. You don’t need any coding skills. No more pain writing any shortcode attributes to display tabs in your site. With just a few clicks, you can amazingly create unlimited tab groups.
-
+**A:** No. You don’t need any coding skills. No more pain writing any shortcode attributes to display tabs on your site. With just a few clicks, you can amazingly create unlimited tab groups.
 
 = Q. Is Smart Tabs responsive? =
-**A:** Yes, Smart Tabs is fully responsive, mobile and touch-friendly.
-
+**A:** Yes, Smart Tabs is responsive and works on mobile and touch devices.
 
 = Q. Can I add Tabs anywhere on my website? =
-**A:** Yes, you can add tabs inside your blog posts, pages, widgets, and anywhere else on your WordPress site with a shortcode or PHP function.
+**A:** Yes, you can add tabs to blog posts, pages, widgets, and other areas of your WordPress site using a shortcode or PHP function.
 
+= Q. How to show tabs/tabs group into my homepage, header.php, or other PHP files? =
+**A:** Use the following PHP code: <code> <?php echo do_shortcode('[wptabs id="x..."]'); ?> </code>
 
-= Q. How to show tabs/tabs group into my homepage or header.php or other PHP files? =
-**A:** &#60;?php echo do_shortcode('[wptabs id="x..."]'); ?&#62;
-
-
-= Q. Can I have multiple tab group with the separate setting? =
-**A:** Yes. You can have an unlimited tab groups with each separate setting in the page, post, template, widget or anywhere you like.
-
+= Q. Can I have multiple tab groups with separate settings? =
+**A:** Yes, you can create unlimited tab groups with separate settings on pages, posts, templates, widgets, or other areas.
 
 = Q. Will Smart Tabs work with my theme? =
-**A:** Smart Tabs works with any WordPress theme if themes are developed according to WordPress standard.
+**A:** Smart Tabs works with any WordPress theme that follows WordPress development standards.
 
 = Q. How can I get support if the plugin is not working? =
-**A:** If you face any problem with our plugin or something is not working as it should, first follow the preliminary steps:
+**A:** If you encounter issues with the plugin:
 
-Test the plugin with a WordPress default theme, to be sure that the error is not caused by the theme you are currently using.
+1. Test with a WordPress default theme to ensure the issue isn't theme-related
+2. Deactivate all plugins to check for conflicts
+3. If the problem persists, submit a support ticket with details about your WordPress version, plugin version, and a description of the issue
 
-Deactivate all plugins you are using and check if the problem is still occurring.
-
-If none of the previously listed actions helps you solve the problem, then, submit a ticket in the forum and describe your problem accurately, specify WordPress and plugin versions you are using and any other information that might help us solve your problem as quickly as possible.
-
-Ask us at either via our [__Support__](https://shapedplugin.com/support/?user=lite) or [__WordPress.org__](https://wordpress.org/support/plugin/wp-expand-tabs-free/)
+You can get support via our  [__Support__](https://shapedplugin.com/create-new-ticket/) or [__WordPress.org__](https://wordpress.org/support/plugin/wp-expand-tabs-free/) forums.
 
 
 = Q. Where can I report bugs? =
-**A:** If you find a bug, please report it in our active [__support__](https://shapedplugin.com/support/?user=lite). You will be replied once the issue is resolved.
-
+**A:** If you find a bug, please report it in our active [__support__](https://shapedplugin.com/create-new-ticket/). You will be replied to once the issue is resolved.
 
 = Q. Is Smart Tabs Multilingual Ready? =
-**A:** Yes, Smart Tabs is 100% translation ready and tested with WPML, Polylang, Loco Translate, qTranslate-x, GTranslate, Google Language Translator, WPGlobus etc.
+**A:** Yes, Smart Tabs is translation-ready and compatible with WPML, Polylang, Loco Translate, qTranslate-x, GTranslate, Google Language Translator, WPGlobus, etc.
 
 = Q. Is Smart Tabs ready with multisite? =
-**A:** Yes, Smart Tabs works perfectly with WordPress multi-site network.
-
+**A:** Yes, Smart Tabs works with WordPress multi-site networks.
 
 = Q. How to use Smart Tabs in WordPress 5.0 Gutenberg Block Editor =
-**A:** Adding a tab group using the WordPress 5.0 Block Editor is pretty straight-forward. You can paste the generated shortcode into a Paragraph Block or use the Shortcode Block. It works nicely as classic editor.
+**A:** To add a tab group in the WordPress Block Editor:
 
-
-= Q. Do you like this plugin and want to encourage us for improvement? =
-**A:** Please give the plugin [__5 stars rating__](https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post) and your precious appreciation will help us to make it much great in the future.
-
-Thank you!
+* Paste the generated shortcode into a Paragraph Block
+* Or use the Shortcode Block
+The plugin works with both the Block Editor and Classic Editor.
 
 
 == Installation ==
@@ -228,10 +198,9 @@ Thank you!
 
 = AUTOMATIC INSTALLATION (EASIEST WAY) =
 
-To do an automatic install of Smart Tabs, log in to your WordPress dashboard, navigate to the Plugins menu and click
+To do an automatic install of Smart Tabs, log in to your WordPress dashboard, navigate to the Plugins menu, and click.
 Add New.
-In the search field type "Smart Tabs" by ShapedPlugin. Once you have found it you can install it by simply clicking
-"Install Now" and then "Activate".
+In the search field, type "Smart Tabs" by ShapedPlugin. Once you have found it, you can install it by simply clicking "Install Now" and then "Activate".
 
 = MANUAL INSTALLATION =
 
@@ -266,6 +235,9 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 3.0.1 - Aug 22, 2025 =
+* Fix: The Woo Product Tab (deprecated) option did not show for specific products.
 
 = 3.0.0 - Aug 16, 2025 =
 * New: Dedicated Product Tabs for WooCommerce feature.
@@ -330,15 +302,15 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 * New: The WooCommerce Additional Tabs feature.
 * New: Hooks 'sp_wp_tabs_title_allowed_tags' and 'sp_wp_tabs_desc_allowed_tags' were added to the modified allowed tags as needed.
 * Improved: The plugin security.
-* Improved: The plugin options and backed UI were enhanced.
+* Improved: The plugin options and backend UI were enhanced.
 * Improved: The "How to Use Shortcode" section moved to the right sidebar.
 * Updated: The language (.pot) file.
-* Fix: Some strings translation issue.
+* Fix: Some string translation issues.
 * Fix: The label tag warning is on the tab.
 * Tested: WordPress 6.6.1 compatibility.
 
 = 2.2.3 - Apr 01, 2024 =
-* Fix: The warning was found when the plugin was activated via the WP-Cli command.
+* Fix: The warning was found when the plugin was activated via the WP-CLI command.
 * Tested: WordPress 6.5 compatibility.
 
 = 2.2.2 - Jan 23, 2024 =
@@ -349,17 +321,17 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 = 2.2.1 - Nov 02, 2023 =
 * Improved: The plugin security.
 * Fix: Few PHPCS warnings found with PHP8.2.
-* Removed: The deprecated [ir_item], [tr_tabs], [tabs] shortcodes from the plugin.
+* Removed: The deprecated [ir_item], [tr_tabs], and [tabs] shortcodes from the plugin.
 * Tested: WordPress 6.4 compatibility.
 
 = 2.2.0 - Oct 06, 2023 =
 * New: The Tab Animation feature.
-* New: The Expand and Collapse Icon Show/Hide option for accordion mode of tab in mobile view.
+* New: The Expand and Collapse Icon Show/Hide option for the accordion mode of the tab in mobile view.
 * Updated: The language (.pot) file.
 * Improved: Plugin UI and UX improved.
-* Improved: The tooltip/help text of plugin options to make more user-friendly.
+* Improved: The tooltip/help text of plugin options to make them more user-friendly.
 * Improved: The import feature with animation.
-* Improved: The margin-bottom option Tabs Section Title moved to Typography tab.
+* Improved: The margin-bottom option for the Tabs Section Title moved to the Typography tab.
 * Fix: The accessibility issue of the plugin.
 * Tested: WordPress 6.3.1 compatibility.
 
@@ -369,7 +341,7 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 = 2.1.20 - Jul 06, 2023 =
 * New: A hook 'sp_tab_content_markdown_to_html' to enable markdown support.
-* Fix: The Gutenberg Block preview shows the preloader at the second reload.
+* Fix: The Gutenberg Block preview shows the preloader on the second reload.
 * Fix: The compatibility issue with WordPress v4.7
 * Fix: Some RTL style issues.
 * Tested: WordPress 6.2.2 compatibility.
@@ -380,14 +352,14 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 = 2.1.18 - Mar 15, 2023 =
 * New: The Allow Iframe/Script Tags option in the import panel of the plugin.
-* New: Multiple br tag in tab content support.
-* Fix: The alignment of Iframe in tab content does not work.
+* New: Multiple br tags in tab content support.
+* Fix: The alignment of the Iframe in tab content does not work.
 * Fix: Iframe does not show in tab content with the Twenty Twenty theme.
-* Fix: Import option does not work when the tab has iframe or script tags.
+* Fix: The Import option does not work when the tab has iframe or script tags.
 * Removed: The hook 'sp_wp_tabs_allow_import_tags' was removed as an option added.
 
 = 2.1.17 - Jan 05, 2023 =
-* New: Allow to skip responsive CSS from the iframe by adding 'skip' class to iframe.
+* New: Allow to skip responsive CSS from the iframe by adding the 'skip' class to the iframe.
 * Improved: Plugin security improved.
 * Tested: WordPress 6.1.1 compatibility.
 
@@ -396,7 +368,7 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 * Fix: Minor styling issue of nested tab inside a tab.
 
 = 2.1.15 - Nov 09, 2022 =
-* Fix: Extra padding in tab navigation. tag in preview.
+* Fix: Extra padding in tab navigation. Tag in preview.
 * Improved: Plugin security improved.
 * Tested: WordPress 6.1 compatibility.
 
@@ -419,20 +391,20 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 = 2.1.10 - May 17, 2022 =
 * Tested: WordPress 6.0 compatibility.
 * Fix: Extra p tag added in ul tag after saving accordion shortcode multiple times.
-* Fix: Multiple tabs break down into two lines then these tabs take space.
+* Fix: Multiple tabs break down into two lines, then these tabs take up space.
 * Fix: CSS warning for the margin-bottom of the section title when it has no value in the backend field.
 
 = 2.1.9 - May 06, 2022 =
 * Fix: URL in tab content does not work.
 
 = 2.1.8 - Apr 30, 2022 =
-* Improved: SVG preloading icon has been added as a pre-loader image.
+* Improved: SVG preloading icon has been added as a preloader image.
 * Updated: The language (.pot) file.
 * Fix: Some assets of the backend are not loaded properly when the hosting directory is different.
 * Fix: RTL Slider direction issue.
 
 = 2.1.7 - Apr 19, 2022 =
-* Fix: Tab accordion mode does not work in theme Twenty-twenty theme.
+* Fix: Tab accordion mode does not work in the Twenty-Twenty theme.
 * Fix: Media formatting/alignment issues.
 
 = 2.1.6 - Mar 28, 2022 =
@@ -464,17 +436,17 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 * Improved: Security filter improved.
 * Improved: Custom CSS option improved.
 * Fix: Self-hosted video issue fixed.
-* Fix: Padding in ul issue fixed.
+* Fix: Padding in the ul issue fixed.
 * Fix: Contact Form 7 compatibility issue resolved.
-* Fix: Underline from ul of tab content removed.
-* Fix: Several minor tweaking.
+* Fix: Underline from the ul of tab content removed.
+* Fix: Several minor tweaks.
 
 = 2.1.0 - Oct 28, 2021 =
 * New: Shortcode live preview option.
 * Fix: Several minor issues.
 
 = 2.0.15 - Sep 22, 2021 =
-* Fix: Conflict with bootstrap v4.
+* Fix: Conflict with Bootstrap v4.
 
 = 2.0.14 - Sep 06, 2021 =
 * Improved: Plugin security.
@@ -487,7 +459,7 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 = 2.0.12 - Jul 12, 2021 =
 * New: Auto p tag remove hook(sp_wp_tabs_autop_remove) added.
-* Fix: Iframe doesn't render in the frontend and the embedded code deleted once when I update the shortcode.
+* Fix: Iframe doesn't render in the frontend, and the embedded code is deleted once I update the shortcode.
 
 = 2.0.11 - Jun 09, 2021 =
 * New: Export and Import option.
@@ -514,17 +486,17 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 = 2.0.5 - Jul 07, 2020 =
 * New: Tabs duplicate option.
-* Fix: Tabs title width issue.
-* Fix: Small screen full width tabs issue.
+* Fix: Tab title width issue.
+* Fix: Small screen full-width tabs issue.
 
 = 2.0.4 - Jan 08, 2020 =
-* Improved: Tabs description border option.
+* Improved: Tab description border option.
 
 = 2.0.3 - Dec 05, 2019 =
 * Fix: HTTP and HTTPS mixed content issue.
 
 = 2.0.2 - Oct 08, 2019 =
-* Fix: Conflict with bootstrap.
+* Fix: Conflict with Bootstrap.
 
 = 2.0.1 - Oct 02, 2019 =
 * New: Widget added.
@@ -532,22 +504,22 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 = 2.0.0 - Sep 21, 2019 =
 * New: Shortcode Generator.
-* New: 2 Tabs positions (left and right).
+* New: 2 Tab positions (left and right).
 * New: 30+ Styling customization options.
 * New: Drag & drop tab items.
-* New: Tab items – sorting, clone, delete options.
+* New: Tab items – sorting, clone, and delete options.
 * New: Event or Action–supports click/mouseover.
 * New: HTML title tag (H1-H6 tags) option.
-* New: Tabs title background, active, and hover color.
+* New: Tab title background, active, and hover color.
 * New: Tab title color, active, and hover color.
 * New: Tab title padding, border, and border radius.
 * New: Tabs description padding, border, and background color.
-* New: Strip all HTML tags of tab content option.
+* New: Option Strip all HTML tags of tab content.
 * New: Tabs set section title and its margin option.
 * New: The custom margin between tabs option.
 * New: Mobile versions–tabs screen size and tabs mode.
 * New: Preloader option.
-* New: Clean up data option (when the plugin deleted).
+* New: Clean up data option (when the plugin is deleted).
 * New: Custom CSS field to override styles.
 * Improved: Admin dashboard UI.
 

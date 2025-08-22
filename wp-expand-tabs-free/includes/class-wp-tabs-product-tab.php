@@ -717,8 +717,8 @@ class WP_Tabs_Product_Tab {
 					}
 				}
 			}
-			return $tabs;
 		}
+		return $tabs;
 	}
 
 	/**
