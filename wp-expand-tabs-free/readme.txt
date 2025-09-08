@@ -3,7 +3,7 @@ Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: WooCommerce product tabs, WooCommerce custom product tabs, WooCommerce tabs plugin, product tabs, tabs
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -235,6 +235,16 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 3.0.2 - Sep 08, 2025 =
+* New: The Anchor Link for Tabs option.
+* New: The Link Type (Tab ID / Tab Title-slug) option.
+* New: The Override Product Tab content at each product option.
+* New: The Small Screen Product Tab Type (Same as desktop, Full width, Accordion mode) option.
+* New: The Expand and Collapse Icon Show/Hide option for small screens.
+* Improved: Enhanced plugin security and data validation.
+* Improved: The Additional CSS option.
+* Fix: The Divi Builder template conflict issue.
 
 = 3.0.1 - Aug 22, 2025 =
 * Fix: The Woo Product Tab (deprecated) option did not show for specific products.

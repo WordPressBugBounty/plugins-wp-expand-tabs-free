@@ -11,6 +11,10 @@
  * @subpackage WP_Tabs/public/partials
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( $sptpro_section_title ) { ?>
 	<h2 class="sp-tab__section_title_<?php echo esc_html( $post_id ); ?>"> <?php echo wp_kses_post( $main_section_title ); ?></h2>
 	<?php

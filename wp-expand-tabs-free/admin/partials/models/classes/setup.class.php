@@ -85,9 +85,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 			// init action.
 			do_action( 'wptabspro_init' );
 
-			// Init translation in framework.
-			// self::textdomain();
-			add_action( 'init', array( 'SP_WP_TABS', 'textdomain' ) );
 			// set constants.
 			self::constants();
 
@@ -101,16 +98,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 			add_action( 'admin_head', array( 'SP_WP_TABS', 'add_admin_head_css' ), 99 );
 		}
 
-		/**
-		 * Setup textdomain.
-		 *
-		 * @return void
-		 */
-		public static function textdomain() {
-			require WP_TABS_PATH . '/includes/class-wp-tabs-i18n.php';
-			$plugin_i18n = new WP_Tabs_i18n();
-			$plugin_i18n->load_plugin_textdomain();
-		}
 		/**
 		 * Setup.
 		 *
@@ -376,14 +363,6 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker' );
 
-				// font awesome 4 and 5.
-				if ( apply_filters( 'wptabspro_fa4', false ) ) {
-					wp_enqueue_style( 'wptabspro-fa', WP_TABS_URL . 'public/assets/css/font-awesome.min.css', array(), '4.7.0', 'all' );
-				} else {
-					wp_enqueue_style( 'wptabspro-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all' . $min . '.css', array(), WP_TABS_VERSION, 'all' );
-					wp_enqueue_style( 'wptabspro-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/v4-shims' . $min . '.css', array(), WP_TABS_VERSION, 'all' );
-				}
-
 				// framework core styles.
 				wp_enqueue_style( 'wptabspro', self::include_plugin_url( 'assets/css/wptabspro' . $min . '.css' ), array(), WP_TABS_VERSION, 'all' );
 				wp_enqueue_style( 'wptabspro-product-tabs-icons', self::include_plugin_url( 'assets/css/fontello' . $min . '.css' ), array(), WP_TABS_VERSION, 'all' );
@@ -396,18 +375,22 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 				// framework core scripts.
 				wp_enqueue_script( 'wptabspro-plugins', self::include_plugin_url( 'assets/js/wptabspro-plugins' . $min . '.js' ), array(), WP_TABS_VERSION, true );
 				wp_enqueue_script( 'wptabspro', self::include_plugin_url( 'assets/js/wptabspro' . $min . '.js' ), array( 'wptabspro-plugins' ), WP_TABS_VERSION, true );
+				wp_enqueue_script( 'sptpro-collapse' );
 
 				wp_localize_script(
 					'wptabspro',
 					'wptabspro_vars',
 					array(
-						'pluginsUrl'        => WP_TABS_URL,
-						'adminImgUrl'       => WP_TABS_URL . 'admin/img/woo-tabs-position',
-						'ajax_url'          => admin_url( 'admin-ajax.php' ),
-						'tabs_order_nonce'  => wp_create_nonce( 'sp-product-tabs-order-nonce-verification' ),
-						'tabs_toggle_nonce' => wp_create_nonce( 'sp-product-tabs-nonce-verification' ),
-						'color_palette'     => apply_filters( 'wptabspro_color_palette', array() ),
-						'i18n'              => array(
+						'pluginsUrl'           => WP_TABS_URL,
+						'adminImgUrl'          => WP_TABS_URL . 'admin/img/woo-tabs-position',
+						'ajax_url'             => admin_url( 'admin-ajax.php' ),
+						'previewTabConfigJS'   => esc_url( WP_TABS_URL . 'public/assets/js/wp-tabs-public' . $min . '.js' ),
+						'previewCollapseTabJS' => esc_url( WP_TABS_URL . 'public/assets/js/collapse' . $min . '.js' ),
+						'previewTabJS'         => esc_url( WP_TABS_URL . 'public/assets/js/tab' . $min . '.js' ),
+						'tabs_order_nonce'     => wp_create_nonce( 'sp-product-tabs-order-nonce-verification' ),
+						'tabs_toggle_nonce'    => wp_create_nonce( 'sp-product-tabs-nonce-verification' ),
+						'color_palette'        => apply_filters( 'wptabspro_color_palette', array() ),
+						'i18n'                 => array(
 							// global localize.
 							'confirm'             => esc_html__( 'Are you sure?', 'wp-expand-tabs-free' ),
 							'reset_notification'  => esc_html__( 'Restoring options.', 'wp-expand-tabs-free' ),

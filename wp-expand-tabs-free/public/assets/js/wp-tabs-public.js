@@ -1,17 +1,18 @@
 (function ($) {
 	'use strict';
 
-	$(document).ready(function () {
-		// This function will check the url is video type or not.
-		function isVideo(url) {
-			var regex = /^(https?:\/\/)?((www\.)?youtube\.com|vimeo\.com|dailymotion\.com|wistia\.com|hubspot\.com|sproutvideo\.com|hippovideo\.io|brightcove\.com|spotlightr\.com|vidyard\.com)\/.+$/i;
-			return regex.test(url);
-		}
+	// This function will check the url is video type or not.
+	function isVideo(url) {
+		var regex = /^(https?:\/\/)?((www\.)?youtube\.com|vimeo\.com|dailymotion\.com|wistia\.com|hubspot\.com|sproutvideo\.com|hippovideo\.io|brightcove\.com|spotlightr\.com|vidyard\.com)\/.+$/i;
+		return regex.test(url);
+	}
 
+	function SP_Tabs_Init() {
 		$('div[id^="sp-wp-tabs-wrapper_"]').each(function () {
 			var _this = $(this);
 			var tabsID = _this.attr('id');
 			var preloader = $('#' + tabsID).data('preloader');
+			var anchorLinking = $('#' + tabsID).data('anchor_linking');
 			var activemode = $('#' + tabsID).data('activemode');
 			// Preloader
 			if (preloader) {
@@ -27,20 +28,21 @@
 			}
 
 			// Fix iframe conflict with 2020 theme.
-			$('.sp-tab__lay-default iframe[style*="width: 0px"]').css({'width': '', 'height': ''});
-			
-            // Add wrapper at video iframe for responsiveness. 
+			$('.sp-tab__lay-default iframe[style*="width: 0px"]').css({ 'width': '', 'height': '' });
+
+			// Add wrapper at video iframe for responsiveness. 
 			$('#' + tabsID + ' iframe:not(.wp-tab-iframe,.skip,[src*="omny.fm/"])').each(function (i) {
 				var iframe_url = $(this).attr('src');
 				// Only for video type.
-				if ( isVideo( iframe_url ) ) {
+				if (isVideo(iframe_url)) {
 					let max_width = $(this).attr('width') > 100 ? 'max-width:' + $(this).attr('width') + 'px' : '';
 					$(this).addClass('wp-tab-iframe').wrap("<div class='wp-tab-iframe-container " + tabsID + "_" + i + " '></div>");
-					if (max_width){
+					if (max_width) {
 						$(this).parent('.wp-tab-iframe-container').wrap("<div style='" + max_width + ";width: 100%;display: inline-block;'></div>");
 					}
 				}
 			});
+
 			// Tab #anchoring
 			$(function () {
 				// check if there is a hash in the url
@@ -53,7 +55,7 @@
 			var $tabs = $('#' + tabsID + ' .sp-tab__nav-item');
 			$('.sp-tab__nav-link', $tabs).on('click', function (e) {
 				e.preventDefault();
-				if ('tabs-activator-event-hover' !== activemode) {
+				if ('tabs-activator-event-hover' !== activemode && anchorLinking == '1') {
 					// Add hash url
 					window.location.hash = $(this).attr('for');
 				}
@@ -106,6 +108,17 @@
 			// Add class for gutenberg block.
 			$('.wp-block .sp-tab__lay-default').addClass('sp-tab-loaded');
 		});
+	}
+
+
+	// Initialize the Tabs when the document is ready.
+	$(document).ready(function () {
+		SP_Tabs_Init();
 	});
 
+	// Register the handler with Elementor's frontend event.
+	$(window).on('elementor/frontend/init', function () {
+		// For General Widget.
+		elementorFrontend.hooks.addAction('frontend/element_ready/sp-wp-tabs-shortcode-ew.default', SP_Tabs_Init);
+	});
 })(jQuery);

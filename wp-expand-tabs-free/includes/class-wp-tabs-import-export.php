@@ -40,8 +40,8 @@ class Wp_Tabs_Import_Export {
 			if ( ! empty( $shortcodes ) ) {
 				foreach ( $shortcodes as $shortcode ) {
 					$accordion_export = array(
-						'title'       => $shortcode->post_title,
-						'original_id' => $shortcode->ID,
+						'title'       => sanitize_text_field( $shortcode->post_title ),
+						'original_id' => absint( $shortcode->ID ),
 						'meta'        => array(),
 					);
 					foreach ( get_post_meta( $shortcode->ID ) as $metakey => $value ) {
@@ -100,6 +100,11 @@ class Wp_Tabs_Import_Export {
 			die();
 		}
 
+		$_capability = apply_filters( 'wptabspro_import_export_capability', 'manage_options' );
+		if ( ! current_user_can( $_capability ) ) {
+			wp_send_json_error( array( 'error' => esc_html__( 'You do not have permission to export.', 'wp-expand-tabs-free' ) ) );
+		}
+
 		$shortcode_ids = '';
 		if ( isset( $_POST['tab_ids'] ) ) {
 			$shortcode_ids = is_array( $_POST['tab_ids'] ) ? wp_unslash( array_map( 'absint', $_POST['tab_ids'] ) ) : sanitize_text_field( wp_unslash( $_POST['tab_ids'] ) );
@@ -109,7 +114,7 @@ class Wp_Tabs_Import_Export {
 		if ( is_wp_error( $export ) ) {
 			wp_send_json_error(
 				array(
-					'message' => $export->get_error_message(),
+					'message' => esc_html( $export->get_error_message() ),
 				),
 				400
 			);
@@ -138,7 +143,7 @@ class Wp_Tabs_Import_Export {
 			try {
 				$new_tabs_id = wp_insert_post(
 					array(
-						'post_title'  => isset( $shortcode['title'] ) ? $shortcode['title'] : '',
+						'post_title'  => isset( $shortcode['title'] ) ? sanitize_text_field( $shortcode['title'] ) : '',
 						'post_status' => 'publish',
 						'post_type'   => 'sp_wp_tabs',
 					),
@@ -232,27 +237,57 @@ class Wp_Tabs_Import_Export {
 		if ( ! wp_verify_nonce( $nonce, 'wptabspro_options_nonce' ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Error: Nonce verification has failed. Please try again.', 'wp-expand-tabs-free' ) ), 401 );
 		}
+
+		$_capability = apply_filters( 'wptabspro_import_export_capability', 'manage_options' );
+		if ( ! current_user_can( $_capability ) ) {
+			wp_send_json_error( array( 'error' => esc_html__( 'You do not have permission to import.', 'wp-expand-tabs-free' ) ) );
+		}
+
 		$allow_tags = isset( $_POST['unSanitize'] ) ? sanitize_text_field( wp_unslash( $_POST['unSanitize'] ) ) : '';
 		// Don't worry sanitize after JSON decode below.
 		$data         = isset( $_POST['shortcode'] ) ? wp_unslash( $_POST['shortcode'] ) : '';//phpcs:ignore
-		$data       = json_decode( $data );
-		$data       = json_decode( $data, true );
-		$shortcodes = $allow_tags ? $data['shortcode'] : wp_kses_post_deep( $data['shortcode'] );
 		if ( ! $data ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'Nothing to import.', 'wp-expand-tabs-free' ),
+					'message' => esc_html__( 'Nothing to import.', 'wp-expand-tabs-free' ),
 				),
 				400
 			);
 		}
+
+		// Decode JSON with error checking.
+		$decoded_data = json_decode( $data, true );
+		if ( is_string( $decoded_data ) ) {
+			$decoded_data = json_decode( $decoded_data, true );
+		}
+
+		if ( json_last_error() !== JSON_ERROR_NONE ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Invalid JSON data.', 'wp-expand-tabs-free' ),
+				),
+				400
+			);
+		}
+
+		// Validate expected structure.
+		if ( ! isset( $decoded_data['shortcode'] ) || ! is_array( $decoded_data['shortcode'] ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Invalid shortcode data structure.', 'wp-expand-tabs-free' ),
+				),
+				400
+			);
+		}
+
+		$shortcodes = $allow_tags ? $decoded_data['shortcode'] : wp_kses_post_deep( $decoded_data['shortcode'] );
 
 		$status = $this->import( $shortcodes );
 
 		if ( is_wp_error( $status ) ) {
 			wp_send_json_error(
 				array(
-					'message' => $status->get_error_message(),
+					'message' => esc_html( $status->get_error_message() ),
 				),
 				400
 			);

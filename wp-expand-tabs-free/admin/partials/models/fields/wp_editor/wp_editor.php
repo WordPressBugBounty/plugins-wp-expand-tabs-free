@@ -95,7 +95,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_wp_editor' ) ) {
 			echo ( wptabspro_wp_editor_api() ) ? '</div>' : '';
       		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
 
 		/**
@@ -114,7 +113,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_wp_editor' ) ) {
 				add_action( 'print_default_editor_scripts', array( &$this, 'setup_wp_editor_media_buttons' ) );
 
 			}
-
 		}
 
 		/**
@@ -131,7 +129,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_wp_editor' ) ) {
 			echo '<script type="text/javascript">';
 			echo 'var wptabspro_media_buttons = ' . wp_json_encode( $media_buttons ) . ';';
 			echo '</script>';
-
 		}
 
 		/**
@@ -155,9 +152,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_wp_editor' ) ) {
 				_WP_Editors::editor_settings( 'wptabspro_wp_editor', $setup );
 
 			}
-
 		}
-
 	}
 }
-

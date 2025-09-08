@@ -13,6 +13,10 @@
  * @subpackage WP_Tabs/includes
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Define the custom post type functionality.
  */
@@ -138,7 +142,7 @@ class WP_Tabs_CPT {
 			'not_found_in_trash' => esc_html__( 'No tabs found in trash.', 'wp-expand-tabs-free' ),
 			'parent_item_colon'  => esc_html__( 'Parent Item:', 'wp-expand-tabs-free' ),
 			'menu_name'          => esc_html__( 'Product Tabs', 'wp-expand-tabs-free' ),
-			'all_items'          => __( 'Product Tabs', 'wp-expand-tabs-free' ) . '<span class="sp-tabs-menu-new-indicator" style="color: #f18200;font-size: 9px; padding-left: 3px;">' . __( ' NEW!', 'wp-expand-tabs-free' ) . '</span>',
+			'all_items'          => esc_html__( 'Product Tabs', 'wp-expand-tabs-free' ) . '<span class="sp-tabs-menu-new-indicator" style="color: #f18200;font-size: 9px; padding-left: 3px;">' . esc_html__( ' NEW!', 'wp-expand-tabs-free' ) . '</span>',
 		);
 
 		$args = array(
@@ -170,26 +174,26 @@ class WP_Tabs_CPT {
 
 		$messages['sp_wp_tabs'] = array(
 			0  => '', // Unused. Messages start at index 1.
-			1  => sprintf( __( 'Tabs updated.', 'wp-expand-tabs-free' ) ),
+			1  => sprintf( esc_html__( 'Tabs updated.', 'wp-expand-tabs-free' ) ),
 			2  => '',
 			3  => '',
-			4  => __( ' updated.', 'wp-expand-tabs-free' ),
+			4  => esc_html__( ' updated.', 'wp-expand-tabs-free' ),
 			5  => $revision_id ? sprintf(
 				/* translators: %s: post ID. */
-				__( 'Tabs restored to revision from %s', 'wp-expand-tabs-free' ),
+				esc_html__( 'Tabs restored to revision from %s', 'wp-expand-tabs-free' ),
 				wp_post_revision_title( $revision_id, false )
 			) : false,
-			6  => sprintf( __( 'Tabs published.', 'wp-expand-tabs-free' ) ),
-			7  => __( 'Tabs saved.', 'wp-expand-tabs-free' ),
-			8  => sprintf( __( 'Tabs submitted.', 'wp-expand-tabs-free' ) ),
+			6  => sprintf( esc_html__( 'Tabs published.', 'wp-expand-tabs-free' ) ),
+			7  => esc_html__( 'Tabs saved.', 'wp-expand-tabs-free' ),
+			8  => sprintf( esc_html__( 'Tabs submitted.', 'wp-expand-tabs-free' ) ),
 			9  => sprintf(
 				/* translators: 1: start strong tag, 2: date time, 3: close strong tag. */
-				__( 'Tabs scheduled for: %1$s %2$s %3$s.', 'wp-expand-tabs-free' ),
+				esc_html__( 'Tabs scheduled for: %1$s %2$s %3$s.', 'wp-expand-tabs-free' ),
 				'<strong>',
 				date_i18n( 'M j, Y @ G:i', strtotime( $post->post_date ) ),
 				'</strong>'
 			),
-			10 => sprintf( __( 'Tabs draft updated.', 'wp-expand-tabs-free' ) ),
+			10 => sprintf( esc_html__( 'Tabs draft updated.', 'wp-expand-tabs-free' ) ),
 		);
 
 		// Messages for 'sp_products_tabs'.
@@ -198,17 +202,17 @@ class WP_Tabs_CPT {
 			1  => '',
 			2  => '',
 			3  => '',
-			4  => __( 'Product tab updated.', 'wp-expand-tabs-free' ),
+			4  => esc_html__( 'Product tab updated.', 'wp-expand-tabs-free' ),
 			// translators: %s: Revision date and time.
-			5  => $revision_id ? sprintf( __( 'Product tab restored to revision from %s.', 'wp-expand-tabs-free' ), wp_post_revision_title( $revision_id, false ) ) : false,
-			6  => __( 'Product tab published.', 'wp-expand-tabs-free' ),
-			7  => __( 'Product tab saved.', 'wp-expand-tabs-free' ),
-			8  => __( 'Product tab submitted.', 'wp-expand-tabs-free' ),
+			5  => $revision_id ? sprintf( esc_html__( 'Product tab restored to revision from %s.', 'wp-expand-tabs-free' ), wp_post_revision_title( $revision_id, false ) ) : false,
+			6  => esc_html__( 'Product tab published.', 'wp-expand-tabs-free' ),
+			7  => esc_html__( 'Product tab saved.', 'wp-expand-tabs-free' ),
+			8  => esc_html__( 'Product tab submitted.', 'wp-expand-tabs-free' ),
 			// translators: %s: Scheduled date and time.
-			9  => sprintf( __( 'Product tab scheduled for: <strong>%1$s</strong>.', 'wp-expand-tabs-free' ), date_i18n( __( 'M j, Y @ G:i', 'wp-expand-tabs-free' ), strtotime( $post->post_date ) ) ),
-			10 => __( 'Product tab draft updated.', 'wp-expand-tabs-free' ),
-			11 => __( 'tab moved to the Trash.', 'wp-expand-tabs-free' ),
-			12 => __( 'tab restored from the Trash.', 'wp-expand-tabs-free' ),
+			9  => sprintf( esc_html__( 'Product tab scheduled for: <strong>%1$s</strong>.', 'wp-expand-tabs-free' ), date_i18n( esc_html__( 'M j, Y @ G:i', 'wp-expand-tabs-free' ), strtotime( $post->post_date ) ) ),
+			10 => esc_html__( 'Product tab draft updated.', 'wp-expand-tabs-free' ),
+			11 => esc_html__( 'tab moved to the Trash.', 'wp-expand-tabs-free' ),
+			12 => esc_html__( 'tab restored from the Trash.', 'wp-expand-tabs-free' ),
 		);
 
 		return $messages;
@@ -223,9 +227,9 @@ class WP_Tabs_CPT {
 	public function sptpro_admin_column( $columns ) {
 		return array(
 			'cb'        => '<input type="checkbox" />',
-			'title'     => __( 'Name', 'wp-expand-tabs-free' ),
-			'shortcode' => __( 'Shortcode', 'wp-expand-tabs-free' ),
-			'date'      => __( 'Date', 'wp-expand-tabs-free' ),
+			'title'     => esc_html__( 'Name', 'wp-expand-tabs-free' ),
+			'shortcode' => esc_html__( 'Shortcode', 'wp-expand-tabs-free' ),
+			'date'      => esc_html__( 'Date', 'wp-expand-tabs-free' ),
 		);
 	}
 

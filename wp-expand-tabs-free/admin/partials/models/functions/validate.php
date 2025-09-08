@@ -26,7 +26,6 @@ if ( ! function_exists( 'wptabspro_validate_email' ) ) {
 		if ( ! filter_var( $value, FILTER_VALIDATE_EMAIL ) ) {
 			return esc_html__( 'Please write a valid email address!', 'wp-expand-tabs-free' );
 		}
-
 	}
 }
 
@@ -44,7 +43,6 @@ if ( ! function_exists( 'wptabspro_validate_numeric' ) ) {
 		if ( ! is_numeric( $value ) ) {
 			return esc_html__( 'Please write a numeric data!', 'wp-expand-tabs-free' );
 		}
-
 	}
 }
 
@@ -62,7 +60,6 @@ if ( ! function_exists( 'wptabspro_validate_required' ) ) {
 		if ( empty( $value ) ) {
 			return esc_html__( 'Error! This field is required!', 'wp-expand-tabs-free' );
 		}
-
 	}
 }
 
@@ -80,7 +77,6 @@ if ( ! function_exists( 'wptabspro_validate_url' ) ) {
 		if ( ! filter_var( $value, FILTER_VALIDATE_URL ) ) {
 			return esc_html__( 'Please write a valid url!', 'wp-expand-tabs-free' );
 		}
-
 	}
 }
 
@@ -102,7 +98,6 @@ if ( ! function_exists( 'wptabspro_customize_validate_email' ) ) {
 		}
 
 		return $validity;
-
 	}
 }
 
@@ -125,7 +120,6 @@ if ( ! function_exists( 'wptabspro_customize_validate_numeric' ) ) {
 		}
 
 		return $validity;
-
 	}
 }
 
@@ -147,7 +141,6 @@ if ( ! function_exists( 'wptabspro_customize_validate_required' ) ) {
 		}
 
 		return $validity;
-
 	}
 }
 
@@ -169,6 +162,5 @@ if ( ! function_exists( 'wptabspro_customize_validate_url' ) ) {
 		}
 
 		return $validity;
-
 	}
 }

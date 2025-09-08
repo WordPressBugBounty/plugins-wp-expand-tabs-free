@@ -100,8 +100,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_radio' ) ) {
 			}
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
-
 	}
 }

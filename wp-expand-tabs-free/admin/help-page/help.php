@@ -104,22 +104,22 @@ class WP_Tabs_Help_Page {
 	public function help_admin_menu() {
 		add_submenu_page(
 			'edit.php?post_type=sp_wp_tabs',
-			__( 'Smart Tabs', 'wp-expand-tabs-free' ),
-			__( 'Recommended', 'wp-expand-tabs-free' ),
+			esc_html__( 'Smart Tabs', 'wp-expand-tabs-free' ),
+			esc_html__( 'Recommended', 'wp-expand-tabs-free' ),
 			'manage_options',
 			'edit.php?post_type=sp_wp_tabs&page=tabs_help#recommended'
 		);
 		add_submenu_page(
 			'edit.php?post_type=sp_wp_tabs',
-			__( 'Smart Tabs', 'wp-expand-tabs-free' ),
-			__( 'Lite vs Pro', 'wp-expand-tabs-free' ),
+			esc_html__( 'Smart Tabs', 'wp-expand-tabs-free' ),
+			esc_html__( 'Lite vs Pro', 'wp-expand-tabs-free' ),
 			'manage_options',
 			'edit.php?post_type=sp_wp_tabs&page=tabs_help#lite-to-pro'
 		);
 		add_submenu_page(
 			'edit.php?post_type=sp_wp_tabs',
-			__( 'Smart Tabs Help', 'wp-expand-tabs-free' ),
-			__( 'Get Help', 'wp-expand-tabs-free' ),
+			esc_html__( 'Smart Tabs Help', 'wp-expand-tabs-free' ),
+			esc_html__( 'Get Help', 'wp-expand-tabs-free' ),
 			'manage_options',
 			'tabs_help',
 			array(
@@ -901,7 +901,7 @@ class WP_Tabs_Help_Page {
 							</div>
 						</div>
 						<div class="sptabs-about-img">
-							<img src="https://shapedplugin.com/wp-content/uploads/2024/01/shapedplugin-team.jpg" alt="">
+							<img src="<?php echo esc_url( WP_TABS_URL . 'admin/help-page/img/shapedplugin-team.jpg' ); ?>" alt="ShapedPlugin Team">
 							<span><?php esc_html_e( 'Team ShapedPlugin LLC at WordCamp Sylhet', 'wp-expand-tabs-free' ); ?></span>
 						</div>
 					</div>
@@ -949,8 +949,8 @@ class WP_Tabs_Help_Page {
 							</a>
 							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://getwpteam.com/?ref=1">
 								<i class="sptabs-icon-button-arrow-icon"></i>
-								<img src="<?php echo esc_url( $plugin_icon['team-free'] ); ?>" alt="WP Team">
-								<h4><?php esc_html_e( 'WP Team', 'wp-expand-tabs-free' ); ?></h4>
+								<img src="<?php echo esc_url( $plugin_icon['team-free'] ); ?>" alt="Smart Team">
+								<h4><?php esc_html_e( 'Smart Team', 'wp-expand-tabs-free' ); ?></h4>
 								<p><?php esc_html_e( 'Display your team members smartly who are at the heart of your company or organization!', 'wp-expand-tabs-free' ); ?></p>
 							</a>
 							<a target="_blank" class="sptabs-our-plugin-list-box" href="https://logocarousel.com/?ref=1">

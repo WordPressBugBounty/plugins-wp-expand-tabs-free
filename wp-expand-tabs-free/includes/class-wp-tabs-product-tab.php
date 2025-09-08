@@ -125,6 +125,9 @@ class WP_Tabs_Product_Tab {
 
 		// Handle hide functionality for ALL tabs.
 		$this->sp_save_tab_custom_hide_fields( $post_id );
+
+		// Handle override-enabled tabs for content based on the override setting and tab type.
+		$this->sp_save_tab_custom_override_fields( $post_id );
 	}
 
 	/**
@@ -133,15 +136,92 @@ class WP_Tabs_Product_Tab {
 	 * @param int $post_id The post ID of the product.
 	 */
 	private function sp_save_tab_custom_hide_fields( $post_id ) {
-		// Define the default WooCommerce tab keys.
+		// Combined all meta keys to be updated.
+		$meta_keys = array();
+
+		// Collect product custom tabs from 'sp_products_tabs' post type and use them to hide meta keys.
+		$product_custom_tabs = get_posts(
+			array(
+				'post_type'      => 'sp_products_tabs',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+			)
+		);
+
+		// Add custom product tab hide meta keys.
+		foreach ( $product_custom_tabs as $tab_id ) {
+			$meta_keys[] = "sp_tab_{$tab_id}_hide";
+		}
+
+		// Add hide meta keys of default WooCommerce tab.
 		$default_tab_keys = array( 'description', 'additional_information', 'reviews' );
-
-		// Loop through each default key and update its corresponding meta value.
 		foreach ( $default_tab_keys as $key ) {
-			$meta_key   = "sp_wc_tab_{$key}_hide";
-			$meta_value = isset( $_POST[ $meta_key ] ) ? 'yes' : 'no'; // phpcs:ignore -- Nonce verification handled by WooCommerce's 'woocommerce_process_product_meta' hook which includes its own security checks.
+			$meta_keys[] = "sp_wc_tab_{$key}_hide";
+		}
 
-			update_post_meta( $post_id, $meta_key, $meta_value );
+		// Update all hide meta keys in a single loop.
+		foreach ( $meta_keys as $meta_key ) {
+			update_post_meta( $post_id, $meta_key, isset( $_POST[ $meta_key ] ) ? 'yes' : 'no' ); // phpcs:ignore -- Nonce verification handled by WooCommerce's 'woocommerce_process_product_meta' hook which includes its own security checks.
+		}
+	}
+
+	/**
+	 * Save override-related fields if the tab is enabled for override.
+	 *
+	 * @param int $post_id The post ID of the product.
+	 */
+	private function sp_save_tab_custom_override_fields( $post_id ) {
+		// Fetch override-enabled tabs only for content processing.
+		$override_tabs = get_posts(
+			array(
+				'post_type'      => 'sp_products_tabs',
+				'posts_per_page' => -1,
+				'meta_key'       => 'sp_override_tab_enabled', // phpcs:ignore -- WordPress.VIP.SlowDBQuery.meta_value Only fetch tabs with override enabled.
+				'meta_value'     => 'yes', // phpcs:ignore -- WordPress.VIP.SlowDBQuery.meta_value
+				'fields'         => 'ids',
+			)
+		);
+
+		if ( empty( $override_tabs ) ) {
+			return;
+		}
+
+		foreach ( $override_tabs as $tab_id ) {
+			$settings = get_post_meta( $tab_id, 'sptpro_woo_product_tabs_settings', true );
+			if ( empty( $settings['tabs_content_type'] ) ) {
+				continue;
+			}
+
+			$tab_type     = sanitize_key( $settings['tabs_content_type'] );
+			$override_key = "sp_tab_{$tab_id}_override";
+
+			// Save override checkbox.
+			update_post_meta( $post_id, $override_key, isset( $_POST[ $override_key ] ) ? 'yes' : 'no' ); // phpcs:ignore -- Nonce verification is not necessary here.
+
+			// Only save content if override is checked.
+			if ( ! isset( $_POST[ $override_key ] ) ) { // phpcs:ignore -- Nonce verification is not necessary here.
+				continue;
+			}
+
+			// Save content based on tab type.
+			$content_key = "sp_tab_{$tab_id}_{$tab_type}";
+
+			if ( isset( $_POST[ $content_key ] ) ) {  // phpcs:ignore -- Nonce verification handled by WooCommerce's 'woocommerce_process_product_meta' hook which includes its own security checks.
+				$raw_value = wp_unslash( $_POST[ $content_key ] ); // phpcs:ignore -- Nonce verification is not necessary here.
+
+				switch ( $tab_type ) {
+					case 'content':
+						$save_content_meta = wp_kses_post( $raw_value );
+						update_post_meta( $post_id, $content_key, $save_content_meta );
+						break;
+
+					default:
+						$sanitized = sanitize_text_field( $raw_value );
+						update_post_meta( $post_id, $content_key, $sanitized );
+						break;
+				}
+			}
 		}
 	}
 
@@ -175,7 +255,6 @@ class WP_Tabs_Product_Tab {
 		wp_send_json_success( 'Order saved' );
 	}
 
-
 	/**
 	 * Handles saving of custom tab metadata and sets the correct menu order for new tabs.
 	 *
@@ -191,6 +270,25 @@ class WP_Tabs_Product_Tab {
 
 		if ( wp_is_post_revision( $post_id ) ) {
 			return;
+		}
+
+		// Check if the 'override_tab' setting is present in the submitted form data.
+		if ( isset( $_POST['sptpro_woo_product_tabs_settings']['override_tab'] ) ) {
+			// Verify nonce when override checkbox exists.
+			if (
+				! isset( $_POST['sptpro_product_tabs_nonce'] ) ||
+				! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['sptpro_product_tabs_nonce'] ) ), 'sptpro_save_product_tabs_data' )
+			) {
+				return;
+			}
+
+			// If the override checkbox is checked (value is '1'), enable the override by saving a post meta flag.
+			if ( '1' === $_POST['sptpro_woo_product_tabs_settings']['override_tab'] ) {
+				update_post_meta( $post_id, 'sp_override_tab_enabled', 'yes' );
+			} else {
+				// If not checked, remove the override flag to disable it.
+				delete_post_meta( $post_id, 'sp_override_tab_enabled' );
+			}
 		}
 
 		// Assign last menu_order if it's a NEW post.
@@ -248,8 +346,7 @@ class WP_Tabs_Product_Tab {
 	 * @param array $tabs woo tab.
 	 */
 	public function sptpro_woo_tab( $tabs ) {
-		global $product;
-		$product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->ID; // Product ID.
+		$product_id = $this->get_woo_product_id();
 
 		$product = wc_get_product( $product_id );
 		if ( ! $product ) {
@@ -273,7 +370,7 @@ class WP_Tabs_Product_Tab {
 			'posts_per_page'         => -1,
 			'orderby'                => 'menu_order',
 			'order'                  => 'ASC',
-			'no_found_rows'          => true,
+			'no_found_rows'          => true, // No need for pagination (Performance optimization).
 			'update_post_term_cache' => false, // Avoid loading terms for better performance.
 		);
 
@@ -283,7 +380,7 @@ class WP_Tabs_Product_Tab {
 		if ( $query->have_posts() ) {
 			foreach ( $query->posts as $product_tab ) {
 				$settings = self::get_product_tab_meta_options( $product_tab->ID );
-
+				// Skip if product tab settings are empty or not an array.
 				if ( empty( $settings ) || ! is_array( $settings ) ) {
 					continue;
 				}
@@ -293,10 +390,9 @@ class WP_Tabs_Product_Tab {
 					continue;
 				}
 
-				$check_exclude = $settings['tabs_exclude'] ?? false;
-				$excluded      = $settings['exclude_specific'] ?? array();
-				if ( $check_exclude && ! empty( $excluded ) && in_array( $product_id, $excluded, false ) ) {
-					continue; // Skip this tab if the product is excluded.
+				// Check Tabs visibility.
+				if ( ! $this->is_tab_visible_for_product( $product_id, $settings ) ) {
+					continue;
 				}
 
 				// Tabs Name HTML.
@@ -304,6 +400,11 @@ class WP_Tabs_Product_Tab {
 
 				$tab_key                        = 'sptpro_tab_' . $product_tab->ID;
 				$this->tab_post_ids[ $tab_key ] = $product_tab->ID;
+				$hide_tab_for_specific_product  = get_post_meta( $product_id, "sp_tab_{$product_tab->ID}_hide", true );
+
+				if ( 'yes' === $hide_tab_for_specific_product ) {
+					continue; // If the tab is hidden for this product, do not render it.
+				}
 
 				$smart_tabs[ $tab_key ] = array(
 					'title'    => $tab_name_html,
@@ -446,6 +547,85 @@ class WP_Tabs_Product_Tab {
 	}
 
 	/**
+	 * Determine whether a tab should be visible for a specific product.
+	 *
+	 * @param int   $product_id         The WooCommerce product ID.
+	 * @param array $settings           Tab settings from post meta.
+	 *
+	 * @return bool True if the tab should be shown, false otherwise.
+	 */
+	public static function is_tab_visible_for_product( $product_id, $settings ) {
+		$show_in = $settings['tabs_show_in'] ?? 'all_product';
+
+		$check_exclude = $settings['tabs_exclude'] ?? false;
+		$excluded      = $settings['exclude_specific'] ?? array();
+
+		if ( 'specific_product' !== $show_in && $check_exclude && ! empty( $excluded ) && in_array( $product_id, $excluded, false ) ) {
+			return false;
+		}
+
+		switch ( $show_in ) {
+			case 'all_product':
+			default:
+				return true;
+		}
+	}
+
+	/**
+	 * Returns the current WooCommerce product ID.
+	 *
+	 * If the product object is not available, it tries to get the product ID from the current post object.
+	 * If the post object is not a product, it will return 0.
+	 * If the product object is not available and in the Divi builder, it will return the first product ID for preview.
+	 *
+	 * @return int The WooCommerce product ID.
+	 */
+	public function get_woo_product_id() {
+		global $product, $post;
+		$product_id = 0;
+
+		if ( $product instanceof WC_Product ) {
+			$product_id = $product->get_id();
+		} elseif ( $post && 'product' === $post->post_type ) {
+			$product_id = $post->ID;
+		}
+
+		// If no product but in Divi builder, load first product for preview.
+		if ( ( isset( $_GET['et_fb'] ) || isset( $_GET['et_pb_preview'] ) ) && ! $product_id ) {
+
+			// Verify nonce from rest api.
+			if ( isset( $_SERVER['HTTP_X_WP_NONCE'] ) ) {
+				$rest_nonce = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_WP_NONCE'] ) );
+				if ( ! wp_verify_nonce( $rest_nonce, 'wp_rest' ) ) {
+					wp_send_json_error( array( 'message' => 'Invalid REST nonce' ), 403 );
+				}
+			}
+
+			$preview_product = get_posts(
+				array(
+					'post_type'      => 'product',
+					'posts_per_page' => 1,
+					'post_status'    => 'publish',
+				)
+			);
+
+			if ( ! empty( $preview_product ) ) {
+				$product_id = $preview_product[0]->ID; // Get only the first product ID.
+				$product    = wc_get_product( $product_id );
+			}
+		}
+
+		if ( ! $product_id ) {
+			echo '<div class="sp-tab__tab-content">';
+			echo esc_html__( 'Product data unavailable.', 'wp-expand-tabs-free' );
+			echo '</div>';
+			return;
+		}
+
+		return $product_id;
+	}
+
+	/**
 	 * WooCommerce Tab Content.
 	 *
 	 * @param array $key tab key.
@@ -458,20 +638,51 @@ class WP_Tabs_Product_Tab {
 		}
 
 		$tab_id     = $this->tab_post_ids[ $key ];
-		$_tabs_data = self::get_product_tab_meta_options( $tab_id );
+		$_tabs_data = get_post_meta( $tab_id, 'sptpro_woo_product_tabs_settings', true );
+		$tab_type   = isset( $_tabs_data['tabs_content_type'] ) ? $_tabs_data['tabs_content_type'] : 'content';
 
-		$tab_type     = isset( $_tabs_data['tabs_content_type'] ) ? $_tabs_data['tabs_content_type'] : 'content';
-		$tabs_content = $_tabs_data['tabs_content_description'] ?? '';
-		// If the tab type is not content, we don't render it.
-		global $product;
-		$product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->ID;
+		// Get the current product ID.
+		$product_id = $this->get_woo_product_id();
 
 		// Check if this tab is overridden for this product.
 		$override_tab = get_post_meta( $product_id, "sp_tab_{$tab_id}_override", true );
 
 		echo '<div class="sp-tab__tab-content">';
-		$this->render_tab_content_by_type( $tab_type, $_tabs_data, $tabs_content );
+		if ( 'yes' === $override_tab ) {
+			// Render overridable tabs content.
+			$this->render_overridable_tab_content( $product_id, $tab_id, $tab_type, $_tabs_data );
+		} else {
+			$tabs_content = $_tabs_data['tabs_content_description'] ?? '';
+			// Render tab content based on type.
+			$this->render_tab_content_by_type( $tab_type, $_tabs_data, $tabs_content );
+		}
 		echo '</div>';
+	}
+
+	/**
+	 * Renders overridden tab content for a specific WooCommerce product.
+	 *
+	 * This method checks if a specific tab has custom (overridden) data for the current product.
+	 * If so, it renders the appropriate content depending on the tab type—content, image, video, FAQ, or downloadable files.
+	 *
+	 * @param int    $product_id The ID of the WooCommerce product.
+	 * @param int    $tab_id     The ID of the tab being rendered.
+	 * @param string $tab_type   The type of the tab (e.g., 'content', 'image', 'video', 'faqs', 'download').
+	 * @param array  $_tabs_data Additional tab configuration data passed from meta or tab settings.
+	 *
+	 * @return void Outputs the tab content directly.
+	 */
+	protected function render_overridable_tab_content( $product_id, $tab_id, $tab_type, $_tabs_data ) {
+		// Overridable tab content rendering based on tab type.
+		switch ( $tab_type ) {
+			case 'content':
+				$override_content = get_post_meta( $product_id, "sp_tab_{$tab_id}_content", true );
+				$this->sp_render_tab_content( $override_content );
+				break;
+
+			default:
+				echo esc_html__( 'Unsupported override tab type.', 'wp-expand-tabs-free' );
+		}
 	}
 
 	/**
@@ -630,6 +841,7 @@ class WP_Tabs_Product_Tab {
 					break;
 				}
 
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				$query_args['tax_query'] = array(
 					array(
 						'taxonomy' => $args['taxonomy'],
@@ -638,6 +850,7 @@ class WP_Tabs_Product_Tab {
 					),
 				);
 				// Exclude the current product from the results.
+				// @codingStandardsIgnoreLine
 				$query_args['post__not_in'] = array( $product_id );
 				break;
 
@@ -666,7 +879,8 @@ class WP_Tabs_Product_Tab {
 		foreach ( $sptpro_woo_set_tabs as $sptpro_woo_set_tab ) {
 			$sptpro_display_tab_for = $sptpro_woo_set_tab['sptpro_display_tab_for'];
 
-			$product_id = method_exists( $product, 'get_id' ) === true ? $product->get_id() : $product->ID;
+			// Get the current product ID.
+			$product_id = $this->get_woo_product_id();
 			$cat_ids    = get_the_terms( $product_id, 'product_cat' );
 			$cat_ids    = wp_list_pluck( $cat_ids, 'term_id' );
 
@@ -732,7 +946,7 @@ class WP_Tabs_Product_Tab {
 		$title_section = $settings['product_tab_title_section'] ?? array();
 		$tab_name      = $title_section['tab_title'] ?? '';
 
-		return '<span class="tab_title_area">' . esc_html( $tab_name ) . '</span>';
+		return $tab_name;
 	}
 
 	/**
@@ -754,8 +968,10 @@ class WP_Tabs_Product_Tab {
 		}
 
 		$tab_title_html = '<h2 class="sptpro-woo-tab-title sptpro-woo-tab-title-' . urldecode( sanitize_title( $tab['title'] ) ) . '">' . $tab['title'] . '</h2>';
+		echo '<div class="sp-tab__tab-content">';
 		echo wp_kses_post( apply_filters( 'sptpro_repeatable_product_tabs_heading', $tab_title_html, $tab ) );
 		echo apply_filters( 'sptpro_repeatable_product_tabs_content', $content, $tab ); // @codingStandardsIgnoreLine
+		echo '</div>';
 	}
 
 	/**
@@ -772,6 +988,7 @@ class WP_Tabs_Product_Tab {
 		}
 
 		wp_enqueue_style( 'sptpro-product-tabs-style', WP_TABS_URL . 'admin/css/product-admin-tabs' . $this->min . '.css', array(), WP_TABS_VERSION, 'all' );
+		wp_enqueue_script( 'sptpro-product-tabs-script', WP_TABS_URL . 'admin/partials/models/assets/js/product-admin-tabs' . $this->min . '.js', array(), WP_TABS_VERSION, true );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 	}
 
@@ -813,15 +1030,15 @@ class WP_Tabs_Product_Tab {
 		if ( 'sp_products_tabs' === $post_type ) {
 			$bulk_messages['sp_products_tabs'] = array(
 				// translators: %s: Number of tabs updated.
-				'updated'   => _n( '%s tab updated.', '%s tabs updated.', $bulk_counts['updated'], 'wp-tabs-pro' ),
+				'updated'   => _n( '%s tab updated.', '%s tabs updated.', $bulk_counts['updated'], 'wp-expand-tabs-free' ),
 				// translators: %s: Number of tabs not updated because someone else is editing.
-				'locked'    => _n( '%s tab not updated, someone is editing it.', '%s tabs not updated, someone is editing them.', $bulk_counts['locked'], 'wp-tabs-pro' ),
+				'locked'    => _n( '%s tab not updated, someone is editing it.', '%s tabs not updated, someone is editing them.', $bulk_counts['locked'], 'wp-expand-tabs-free' ),
 				// translators: %s: Number of tabs permanently deleted.
-				'deleted'   => _n( '%s tab permanently deleted.', '%s tabs permanently deleted.', $bulk_counts['deleted'], 'wp-tabs-pro' ),
+				'deleted'   => _n( '%s tab permanently deleted.', '%s tabs permanently deleted.', $bulk_counts['deleted'], 'wp-expand-tabs-free' ),
 				// translators: %s: Number of tabs moved to the Trash.
-				'trashed'   => _n( '%s tab moved to the Trash.', '%s tabs moved to the Trash.', $bulk_counts['trashed'], 'wp-tabs-pro' ),
+				'trashed'   => _n( '%s tab moved to the Trash.', '%s tabs moved to the Trash.', $bulk_counts['trashed'], 'wp-expand-tabs-free' ),
 				// translators: %s: Number of tabs restored from the Trash.
-				'untrashed' => _n( '%s tab restored from the Trash.', '%s tabs restored from the Trash.', $bulk_counts['untrashed'], 'wp-tabs-pro' ),
+				'untrashed' => _n( '%s tab restored from the Trash.', '%s tabs restored from the Trash.', $bulk_counts['untrashed'], 'wp-expand-tabs-free' ),
 			);
 		}
 		return $bulk_messages;

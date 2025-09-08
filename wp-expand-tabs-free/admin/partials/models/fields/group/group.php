@@ -141,7 +141,7 @@ if ( ! class_exists( 'SP_WP_TABS_Field_group' ) ) {
 
 						echo '</div>';
 
-						$num++;
+						++$num;
 
 					}
 				}
@@ -157,7 +157,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_group' ) ) {
 				echo $this->field_after();
 
 			}
-
 		}
 
 		/**
@@ -174,8 +173,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_group' ) ) {
 			if ( ! wp_script_is( 'jquery-ui-sortable' ) ) {
 				wp_enqueue_script( 'jquery-ui-sortable' );
 			}
-
 		}
-
 	}
 }

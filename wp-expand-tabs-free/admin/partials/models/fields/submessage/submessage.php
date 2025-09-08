@@ -45,8 +45,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_submessage' ) ) {
 			$style = ( ! empty( $this->field['style'] ) ) ? $this->field['style'] : 'normal';
 
 			echo '<div class="wptabspro-submessage wptabspro-submessage-' . esc_attr( $style ) . '">' . wp_kses_post( $this->field['content'] ) . '</div>';
-
 		}
-
 	}
 }

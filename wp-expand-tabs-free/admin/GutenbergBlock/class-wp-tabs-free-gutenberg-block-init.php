@@ -32,7 +32,7 @@ if ( ! class_exists( 'WP_Tabs_Free_Gutenberg_Block_Init' ) ) {
 		 * Custom Gutenberg Block Initializer.
 		 */
 		public function __construct() {
-			$this->min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || defined( 'WP_DEBUG' ) && WP_DEBUG ? '' : '.min';
+			$this->min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
 			add_action( 'init', array( $this, 'sptabfree_gutenberg_shortcode_block' ) );
 			add_action( 'enqueue_block_editor_assets', array( $this, 'sptabfree_block_editor_assets' ) );
 		}
@@ -43,7 +43,7 @@ if ( ! class_exists( 'WP_Tabs_Free_Gutenberg_Block_Init' ) ) {
 		public function sptabfree_block_editor_assets() {
 			wp_enqueue_script(
 				'wp-tabs-free-shortcode-block',
-				plugins_url( '/GutenbergBlock/build/index.js', dirname( __FILE__ ) ),
+				plugins_url( '/GutenbergBlock/build/index.js', __DIR__ ),
 				array( 'jquery', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components' ),
 				WP_TABS_VERSION,
 				true
@@ -66,7 +66,6 @@ if ( ! class_exists( 'WP_Tabs_Free_Gutenberg_Block_Init' ) ) {
 				wp_enqueue_style( 'sptpro-accordion-style' );
 			}
 			wp_add_inline_style( 'sptpro-style', $dynamic_style['dynamic_css'] );
-
 		}
 		/**
 		 * Shortcode list.

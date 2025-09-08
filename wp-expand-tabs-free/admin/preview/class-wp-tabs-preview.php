@@ -9,6 +9,9 @@
  * @subpackage WP_Tabs/admin
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 /**
  * The admin preview.
  */
@@ -30,7 +33,6 @@ class WP_Tabs_Preview {
 	private function wp_tabs_preview_action() {
 		// admin Preview.
 		add_action( 'wp_ajax_sp_tab_preview_meta_box', array( $this, 'wp_tabs_backend_preview' ) );
-
 	}
 
 	/**
@@ -61,9 +63,6 @@ class WP_Tabs_Preview {
 		WP_Tabs_Shortcode::sp_tabs_html_show( $post_id, $sptpro_data_src, $sptpro_shortcode_options, $main_section_title );
 
 		?>
-		<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/collapse.min.js' ); ?>" ></script>
-		<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/tab.min.js' ); ?>" ></script>
-		<script src="<?php echo esc_url( WP_TABS_URL . 'public/assets/js/wp-tabs-public.min.js' ); ?>" ></script>
 		<?php
 		die();
 	}

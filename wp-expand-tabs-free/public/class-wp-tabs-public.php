@@ -9,6 +9,10 @@
  * @subpackage WP_Tabs/public
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -147,14 +151,24 @@ class WP_Tabs_Public {
 		$product_tabs_layout          = $product_tabs_settings['product_tabs_layout'] ?? 'horizontal';
 		$preloader                    = $sp_woo_tabs_settings['sptpro_preloader'] ?? true;
 
+		$set_small_screen_width            = $product_tabs_settings['sptpro_set_small_screen']['all'] ?? 480;
+		$sptpro_tabs_on_small_screen       = $product_tabs_settings['sptpro_tabs_on_small_screen'] ?? 'full_width';
+		$small_screen_expand_collapse_icon = filter_var(
+			$product_tabs_settings['sptpro_expand_and_collapse_icon'] ?? false,
+			FILTER_VALIDATE_BOOLEAN
+		);
+
 		wp_localize_script(
 			'sptpro-tabs-type',
 			'sp_tabs_ajax',
 			array(
-				'ajax_url'        => admin_url( 'admin-ajax.php' ),
-				'activator_event' => $product_tabs_activator_event,
-				'tabs_layout'     => $product_tabs_layout,
-				'tabs_preloader'  => $preloader,
+				'ajax_url'                   => admin_url( 'admin-ajax.php' ),
+				'activator_event'            => $product_tabs_activator_event,
+				'tabs_layout'                => $product_tabs_layout,
+				'tabs_preloader'             => $preloader,
+				'set_min_small_screen_width' => $set_small_screen_width,
+				'small_screen_tab_layout'    => $sptpro_tabs_on_small_screen,
+				'expand_collapse_icon'       => $small_screen_expand_collapse_icon,
 			)
 		);
 	}

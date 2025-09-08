@@ -171,12 +171,12 @@ class Smart_Tabs_Free_Admin {
 	 */
 	public function add_product_tabs_columns() {
 		$new_columns['cb']            = '<input type="checkbox" />';
-		$new_columns['title']         = __( 'Tabs Name', 'wp-expand-tabs-free' );
-		$new_columns['tab_type']      = __( 'Tab Type', 'wp-expand-tabs-free' );
-		$new_columns['show_in']       = __( 'Show Tab In', 'wp-expand-tabs-free' );
-		$new_columns['last_modified'] = __( 'Last Modified', 'wp-expand-tabs-free' );
-		$new_columns['show_tabs']     = __( 'Enable/Disable', 'wp-expand-tabs-free' );
-		// $new_columns['date']                          = __( 'Date', 'wp-expand-tabs-free' );
+		$new_columns['title']         = esc_html__( 'Tabs Name', 'wp-expand-tabs-free' );
+		$new_columns['tab_type']      = esc_html__( 'Tab Type', 'wp-expand-tabs-free' );
+		$new_columns['show_in']       = esc_html__( 'Show Tab In', 'wp-expand-tabs-free' );
+		$new_columns['last_modified'] = esc_html__( 'Last Modified', 'wp-expand-tabs-free' );
+		$new_columns['show_tabs']     = esc_html__( 'Enable/Disable', 'wp-expand-tabs-free' );
+		// $new_columns['date']                          = esc_html__( 'Date', 'wp-expand-tabs-free' );
 
 		return $new_columns;
 	}
@@ -320,7 +320,7 @@ class Smart_Tabs_Free_Admin {
 	 */
 	public function add_woo_product_custom_tabs( $tabs ) {
 		$tabs['sp_products_table'] = array(
-			'label'    => __( 'Product Tabs', 'wp-expand-tabs-free' ),
+			'label'    => esc_html__( 'Product Tabs', 'wp-expand-tabs-free' ),
 			'target'   => 'sp_product_tabs_panel', // This will be the ID of the div we create later.
 			// 'class'    => array( 'show_if_simple', 'show_if_variable' ), // Show for simple and variable products.
 			'priority' => 80, // Adjust position among tabs.
@@ -336,11 +336,16 @@ class Smart_Tabs_Free_Admin {
 	 * @param int    $post_id The post ID.
 	 * @return string Modified title.
 	 */
-	public function modify_admin_table_title_name( $title, $post_id ) {
+	public function modify_admin_table_title_name( $title, $post_id = null ) {
+		if ( ! $post_id ) {
+			return $title;
+		}
+
+		// Ensure the function exists before calling it.
 		if ( ! function_exists( 'get_current_screen' ) ) {
 			require_once ABSPATH . '/wp-admin/includes/screen.php';
 		}
-
+		// Only modify the title in the admin list table for 'sp_products_tabs' post type.
 		$screen = get_current_screen();
 		if ( is_admin() && $screen && 'sp_products_tabs' === $screen->post_type && 'edit' === $screen->base ) {
 

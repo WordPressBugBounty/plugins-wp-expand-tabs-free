@@ -412,6 +412,51 @@ SP_WP_TABS::createSection(
 				),
 			),
 			array(
+				'id'              => 'sptpro_set_small_screen',
+				'type'            => 'spacing',
+				'title'           => __( 'When Screen Width is Less Than', 'wp-expand-tabs-free' ),
+				'all'             => true,
+				'all_text'        => false,
+				'all_placeholder' => 'width',
+				'default'         => array(
+					'all' => '480',
+				),
+				'units'           => array(
+					'px',
+				),
+			),
+			array(
+				'id'         => 'sptpro_tabs_on_small_screen',
+				'type'       => 'radio',
+				'title'      => __( 'Tabs Mode on Small Screen', 'wp-expand-tabs-free' ),
+				'subtitle'   => __( 'Choose a tabs mode on small screen.', 'wp-expand-tabs-free' ),
+				'title_help' => sprintf(
+					/* translators: 1: start div tag, 2: close div tag, 3: start div tag, 4: start anchor tag, 5: close anchor tag, 6: start anchor tag, 7: close anchor tag */
+					__( '%1$sTabs Mode on Small Screen%2$sChoose how your tabs behave on small screens, such as mobile devices. You can select "Full Width" to maintain the current layout or "Accordion" to switch to a collapsible format, ensuring the best user experience on mobile.%3$sOpen Docs%4$sOpen Live Demo%5$s', 'wp-expand-tabs-free' ),
+					'<div class="wptabspro-info-label">',
+					'</div><div class="wptabspro-short-content">',
+					'</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-expand-tabs-free/configurations/how-to-configure-tabs-mood-on-small-screen/" target="_blank">',
+					'</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-mood-on-small-screen/" target="_blank">',
+					'</a>'
+				),
+				'options'    => array(
+					'default'        => __( 'Default', 'wp-expand-tabs-free' ),
+					'full_width'     => __( 'Full Width', 'wp-expand-tabs-free' ),
+					'accordion_mode' => __( 'Accordion', 'wp-expand-tabs-free' ),
+				),
+				'default'    => 'default',
+			),
+			array(
+				'id'         => 'sptpro_expand_and_collapse_icon',
+				'type'       => 'switcher',
+				'title'      => __( 'Expand and Collapse Icon', 'wp-expand-tabs-free' ),
+				'default'    => true,
+				'text_on'    => __( 'Show', 'wp-expand-tabs-free' ),
+				'text_off'   => __( 'Hide', 'wp-expand-tabs-free' ),
+				'text_width' => 75,
+				'dependency' => array( 'sptpro_tabs_on_small_screen', '==', 'accordion_mode' ),
+			),
+			array(
 				'id'         => 'tabs_icon',
 				'type'       => 'switcher',
 				'ignore_db'  => true,

@@ -324,6 +324,26 @@ SP_WP_TABS::createSection(
 				),
 			),
 			array(
+				'id'         => 'sptpro_anchor_linking',
+				'type'       => 'switcher',
+				'title'      => __( 'Anchor Link for Tabs', 'wp-expand-tabs-free' ),
+				'text_on'    => __( 'Enabled', 'wp-expand-tabs-free' ),
+				'text_off'   => __( 'Disabled', 'wp-expand-tabs-free' ),
+				'text_width' => 94,
+				'default'    => true,
+			),
+			array(
+				'id'         => 'sptpro_tab_link_type',
+				'type'       => 'button_set',
+				'title'      => __( 'Link Type ', 'wp-expand-tabs-free' ),
+				'options'    => array(
+					'tab_id'    => __( 'Tab ID', 'wp-expand-tabs-free' ),
+					'tab_title' => __( 'Tab Title', 'wp-expand-tabs-free' ),
+				),
+				'default'    => 'tab_id',
+				'dependency' => array( 'sptpro_anchor_linking', '==', 'true', true ),
+			),
+			array(
 				'id'         => 'sptpro_preloader',
 				'type'       => 'switcher',
 				'title'      => __( 'Preloader', 'wp-expand-tabs-free' ),
@@ -1274,8 +1294,7 @@ SP_WP_TABS::createSection(
 				'id'         => 'number_of_total_products',
 				'type'       => 'spinner',
 				'title'      => __( 'Limit', 'wp-expand-tabs-free' ),
-				'class'      => 'number-of-total-posts',
-				'help'       => __( 'Number of total posts to display. Default value is 6.', 'wp-expand-tabs-free' ),
+				'title_help' => __( 'Number of total posts to display. Default value is 8.', 'wp-expand-tabs-free' ),
 				'default'    => '8',
 				'min'        => 1,
 				'max'        => 1000,
@@ -1331,16 +1350,15 @@ SP_WP_TABS::createSection(
 			array(
 				'id'         => 'override_tab',
 				'type'       => 'checkbox',
-				'class'      => 'override_tab_checkbox',
 				'title'      => __( 'Override this tab in each product', 'wp-expand-tabs-free' ),
 				'default'    => false,
 				'title_help' => sprintf(
 					/* translators: 1: start div tag, 2: close div tag, 3: start div tag, 4: close div tag. */
 					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div>',
-					__( 'Override this tab in each product (Pro)', 'wp-expand-tabs-free' ),
+					__( 'Override this tab in each product', 'wp-expand-tabs-free' ),
 					__( 'Enable this option to override the default behavior and customize this tab’s visibility for specific products.', 'wp-expand-tabs-free' )
 				),
-				'dependency' => array( 'tabs_content_type', 'any', 'content,products' ),
+				'dependency' => array( 'tabs_content_type', 'any', 'content' ),
 			),
 			array(
 				'id'      => 'product_tabs_notice',

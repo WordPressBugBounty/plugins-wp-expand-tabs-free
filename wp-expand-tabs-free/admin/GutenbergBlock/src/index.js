@@ -11,12 +11,12 @@ const ServerSideRender = wp.serverSideRender;
 const el = wp.element.createElement;
 
 /**
- * Register: WP Tabs Gutenberg Block.
+ * Register: Smart Tabs Gutenberg Block.
  */
 registerBlockType("sp-wp-tabs-pro/shortcode", {
-  title: escapeHTML(__("WP Tabs", "wp-expand-tabs-free")),
+  title: escapeHTML(__("Smart Tabs", "wp-expand-tabs-free")),
   description: escapeHTML(__(
-    "Use WP Tabs to insert a tabs group in your page",
+    "Use Smart Tabs to insert a tabs group in your page",
     "wp-expand-tabs-free"
   )),
   icon: icons.sptabfreeIcon,
@@ -76,7 +76,7 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
             el('div', { className: 'components-placeholder components-placeholder is-large' },
               el('div', { className: 'components-placeholder__label' },
                 el('img', { className: 'block-editor-block-icon', src: escapeAttribute(sp_tab_free_gb_block.url + "admin/GutenbergBlock/assets/wp-tabs-icon.svg") }),
-                escapeHTML(__("WP Tabs", "wp-expand-tabs-free"))
+                escapeHTML(__("Smart Tabs", "wp-expand-tabs-free"))
               ),
               el('div', { className: 'components-placeholder__instructions' },
                 escapeHTML(__("No shortcode found. ", "wp-expand-tabs-free")),
@@ -94,7 +94,7 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
       return (
         <Fragment>
           <InspectorControls>
-            <PanelBody title="WP Tabs">
+            <PanelBody title="Smart Tabs">
               <PanelRow>
                 <DynamicShortcodeInput
                   attributes={attributes}
@@ -108,7 +108,7 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
             el('div', { className: 'components-placeholder components-placeholder is-large' },
               el('div', { className: 'components-placeholder__label' },
                 el('img', { className: 'block-editor-block-icon', src: escapeAttribute(sp_tab_free_gb_block.url + "admin/GutenbergBlock/assets/wp-tabs-icon.svg") }),
-                escapeHTML(__("WP Tabs", "wp-expand-tabs-free"))
+                escapeHTML(__("Smart Tabs", "wp-expand-tabs-free"))
               ),
               el('div', { className: 'components-placeholder__instructions' }, escapeHTML(__("Select a tabs group", "wp-expand-tabs-free"))),
               <DynamicShortcodeInput
@@ -125,7 +125,7 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
     return (
       <Fragment>
         <InspectorControls>
-          <PanelBody title="WP Tabs">
+          <PanelBody title="Smart Tabs">
             <PanelRow>
               <DynamicShortcodeInput
                 attributes={attributes}

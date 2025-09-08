@@ -9,6 +9,9 @@
  * @subpackage wp-expand-tabs-free/admin
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 /**
  * Adds widget.
  */
@@ -32,7 +35,6 @@ class WP_Tabs_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		// outputs the content of the widget.
-		// extract( $args, EXTR_SKIP ).
 		$before_widget = $args['before_widget'];
 		$before_title  = $args['before_title'];
 		$after_title   = $args['after_title'];

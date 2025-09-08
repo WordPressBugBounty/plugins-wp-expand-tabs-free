@@ -51,7 +51,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_textarea' ) ) {
 			echo '<textarea name="' . esc_attr( $this->field_name() ) . '"' . $this->field_attributes() . '>' . $this->value . '</textarea>';
       // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
 		/**
 		 * Shortcoder field
@@ -74,8 +73,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_textarea' ) ) {
 					}
 				}
 			}
-
 		}
 	}
 }
-

@@ -42,7 +42,6 @@ if ( ! function_exists( 'wptabspro_array_search' ) ) {
 		}
 
 		return $results;
-
 	}
 }
 
@@ -77,4 +76,3 @@ if ( ! function_exists( 'wptabspro_wp_editor_api' ) ) {
 		return version_compare( $wp_version, '4.8', '>=' );
 	}
 }
-

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Framework content field file.
  *
@@ -49,9 +49,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_content' ) ) {
 				echo wp_kses_post( $this->field['content'] );
 
 			}
-
 		}
-
 	}
 }
-

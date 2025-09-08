@@ -9,6 +9,10 @@
  * @subpackage WP_Tabs/includes
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Admin Submenu of the Plugin
  */
@@ -77,7 +81,7 @@ class WP_Tabs_Admin_Menu {
 	public function sptpro_review_text( $text ) {
 		$screen = get_current_screen();
 		if ( 'sp_wp_tabs' === $screen->post_type ) {
-			$url  = 'https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post';
+			$url  = 'https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/';
 			$text = sprintf(
 				/* translators: 1: start strong tag, 2: close strong tag, 3: start a tag, 4: close a tag. */
 				__( 'Enjoying %1$sSmart Tabs?%2$s Please rate us %3$sWordPress.org%4$s. Your positive feedback will help us grow more. Thank you! 😊', 'wp-expand-tabs-free' ),

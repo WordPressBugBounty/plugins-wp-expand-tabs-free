@@ -9,6 +9,10 @@
  * @subpackage WP_Tabs/public
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $sptpro_tabs_horizontal_alignment = isset( $sptpro_shortcode_options['sptpro_tabs_horizontal_alignment'] ) ? $sptpro_shortcode_options['sptpro_tabs_horizontal_alignment'] : 'tab-horizontal-alignment-left';
 $sptpro_set_small_screen          = isset( $sptpro_shortcode_options['sptpro_set_small_screen'] ) ? $sptpro_shortcode_options['sptpro_set_small_screen'] : array(
 	'all' => '480',
@@ -132,10 +136,13 @@ if ( $sptpro_expand_and_collapse_icon && 'accordion_mode' === $sptpro_tabs_on_sm
 		#sp-wp-tabs-wrapper_' . $post_id . '.sp-tab__lay-default .sp-tab__card span,
 		#sp-wp-tabs-wrapper_' . $post_id . '.sp-tab__lay-default a.sp-tab__link{
 			position: relative;
+			display: block;
 		}
+
 		#sp-wp-tabs-wrapper_' . $post_id . '.sp-tab__lay-default .sp-tab__card .sp-tab__nav-link .sp-tab__card-header{
 			padding-right: 40px; 
 		}
+
 		#sp-wp-tabs-wrapper_' . $post_id . '.sp-tab__lay-default .sp-tab__card span[data-sptoggle]:after,
 		#sp-wp-tabs-wrapper_' . $post_id . '.sp-tab__lay-default a.sp-tab__link:after,
 		#sp-wp-tabs-wrapper_' . $post_id . '.sp-tab__lay-default .sp-tab__card span[aria-expanded="false"]:after {

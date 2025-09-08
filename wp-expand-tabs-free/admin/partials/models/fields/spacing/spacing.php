@@ -143,51 +143,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_spacing' ) ) {
 			echo '</div>';
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
-
-		/**
-		 * Field output
-		 *
-		 * @return statement
-		 */
-		public function output() {
-
-			$output    = '';
-			$element   = ( is_array( $this->field['output'] ) ) ? join( ',', $this->field['output'] ) : $this->field['output'];
-			$important = ( ! empty( $this->field['output_important'] ) ) ? '!important' : '';
-			$unit      = ( ! empty( $this->value['unit'] ) ) ? $this->value['unit'] : 'px';
-
-			$mode = ( ! empty( $this->field['output_mode'] ) ) ? $this->field['output_mode'] : 'padding';
-			$mode = ( 'relative' === $mode || 'absolute' === $mode || 'none' === $mode ) ? '' : $mode;
-			$mode = ( ! empty( $mode ) ) ? $mode . '-' : '';
-
-			if ( ! empty( $this->field['all'] ) && isset( $this->value['all'] ) && '' !== $this->value['all'] ) {
-
-				$output  = $element . '{';
-				$output .= $mode . 'top:' . $this->value['all'] . $unit . $important . ';';
-				$output .= $mode . 'right:' . $this->value['all'] . $unit . $important . ';';
-				$output .= $mode . 'bottom:' . $this->value['all'] . $unit . $important . ';';
-				$output .= $mode . 'left:' . $this->value['all'] . $unit . $important . ';';
-				$output .= '}';
-
-			} else {
-
-				$top    = ( isset( $this->value['top'] ) && '' !== $this->value['top'] ) ? $mode . 'top:' . $this->value['top'] . $unit . $important . ';' : '';
-				$right  = ( isset( $this->value['right'] ) && '' !== $this->value['right'] ) ? $mode . 'right:' . $this->value['right'] . $unit . $important . ';' : '';
-				$bottom = ( isset( $this->value['bottom'] ) && '' !== $this->value['bottom'] ) ? $mode . 'bottom:' . $this->value['bottom'] . $unit . $important . ';' : '';
-				$left   = ( isset( $this->value['left'] ) && '' !== $this->value['left'] ) ? $mode . 'left:' . $this->value['left'] . $unit . $important . ';' : '';
-
-				if ( '' !== $top || '' !== $right || '' !== $bottom || '' !== $left ) {
-					$output = $element . '{' . $top . $right . $bottom . $left . '}';
-				}
-			}
-
-			$this->parent->output_css .= $output;
-
-			return $output;
-
-		}
-
 	}
 }

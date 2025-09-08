@@ -9,6 +9,10 @@
  * @author     ShapedPlugin<support@shapedplugin.com>
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * WP_Tabs_Review notice class.
  *
@@ -56,11 +60,11 @@ class WP_Tabs_Review {
 			</div>
 			<div class="sp-wptabs-notice-text">
 				<h3>Enjoying <strong>Smart Tabs</strong>?</h3>
-				<p>We hope you had a wonderful experience using <strong>Smart Tabs</strong>. Please take a moment to leave a review on <a href="https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a>.
+				<p>We hope you had a wonderful experience using <strong>Smart Tabs</strong>. Please take a moment to leave a review on <a href="https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/" target="_blank"><strong>WordPress.org</strong></a>.
 				Your positive review will help us improve. Thank you! 😊</p>
 
 				<p class="sp-wptabs-review-actions">
-					<a href="https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/?filter=5#new-post" target="_blank" class="button button-primary notice-dismissed rate-wp-tabs">Ok, you deserve ★★★★★</a>
+					<a href="https://wordpress.org/support/plugin/wp-expand-tabs-free/reviews/" target="_blank" class="button button-primary notice-dismissed rate-wp-tabs">Ok, you deserve ★★★★★</a>
 					<a href="#" class="notice-dismissed remind-me-later"><span class="dashicons dashicons-clock"></span>Nope, maybe later
 					</a>
 					<a href="#" class="notice-dismissed never-show-again"><span class="dashicons dashicons-dismiss"></span>Never show again</a>

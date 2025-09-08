@@ -11,6 +11,9 @@
  * @subpackage WP_Tabs/public/partials
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 ?>
 <div class="sp-tab__tab-content">
@@ -22,6 +25,10 @@ if ( is_array( $sptpro_data_src ) || is_object( $sptpro_data_src ) ) {
 		$sptpro_active_tab_class = $sptpro_tab_opened === $sptpro_cont_count ? '' : 'collapsed';
 		$sptpro_active_class     = $sptpro_tab_opened === $sptpro_cont_count ? 'sp-tab__show sp-tab__active' : '';
 		$tabs_pane_variable_id   = 'tab-' . $post_id . $sptpro_cont_count;
+
+		// Tab title slug.
+		$name_url              = preg_replace( '/\s+/', '-', sanitize_title( $sptpro_data['tabs_content_title'] ) ) . '-' . $post_id;
+		$tabs_pane_variable_id = isset( $name_url ) && 'tab_title' === $sptpro_tab_link_type ? strtolower( $name_url ) : $tabs_pane_variable_id;
 
 		$sptpro_content       = apply_filters( 'sp_wp_tabs_content', $sptpro_data['tabs_content_description'] );
 		$sptpro_content_embed = str_replace( ']]>', ']]&gt;', $sptpro_content );

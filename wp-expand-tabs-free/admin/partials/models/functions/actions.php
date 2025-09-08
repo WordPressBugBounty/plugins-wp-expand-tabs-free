@@ -46,7 +46,6 @@ if ( ! function_exists( 'wptabspro_chosen_ajax' ) ) {
 		$options = SP_WP_TABS_Fields::field_data( $type, $term, $query );
 
 		wp_send_json_success( $options );
-
 	}
 	add_action( 'wp_ajax_wptabspro-chosen', 'wptabspro_chosen_ajax' );
 }

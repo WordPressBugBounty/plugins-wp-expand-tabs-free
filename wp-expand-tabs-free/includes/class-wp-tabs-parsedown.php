@@ -9,6 +9,10 @@
  * @subpackage wp-expand-tabs-free/includes
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Parsedown for convert markdown to html.
  */
@@ -159,7 +163,7 @@ class Parsedown {
 			$indent = 0;
 
 			while ( isset( $line[ $indent ] ) and $line[ $indent ] === ' ' ) {
-				$indent ++;
+				++$indent;
 			}
 
 			$text = $indent > 0 ? substr( $line, $indent ) : $line;
@@ -177,10 +181,8 @@ class Parsedown {
 					$CurrentBlock = $Block;
 
 					continue;
-				} else {
-					if ( $this->isBlockCompletable( $CurrentBlock['type'] ) ) {
+				} elseif ( $this->isBlockCompletable( $CurrentBlock['type'] ) ) {
 						$CurrentBlock = $this->{'block' . $CurrentBlock['type'] . 'Complete'}( $CurrentBlock );
-					}
 				}
 			}
 
@@ -434,7 +436,7 @@ class Parsedown {
 			$level = 1;
 
 			while ( isset( $Line['text'][ $level ] ) and $Line['text'][ $level ] === '#' ) {
-				$level ++;
+				++$level;
 			}
 
 			if ( $level > 6 ) {
@@ -675,12 +677,12 @@ class Parsedown {
 		}
 
 		if ( preg_match( '/^<' . $Block['name'] . '(?:[ ]*' . $this->regexHtmlAttribute . ')*[ ]*>/i', $Line['text'] ) ) {
-			$Block['depth'] ++;
+			++$Block['depth'];
 		}
 
 		if ( preg_match( '/(.*?)<\/' . $Block['name'] . '>[ ]*$/i', $Line['text'], $matches ) ) {
 			if ( $Block['depth'] > 0 ) {
-				$Block['depth'] --;
+				--$Block['depth'];
 			} else {
 				$Block['closed'] = true;
 			}

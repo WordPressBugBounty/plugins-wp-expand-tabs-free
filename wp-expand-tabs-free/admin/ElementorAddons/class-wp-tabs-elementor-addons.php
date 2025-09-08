@@ -10,6 +10,10 @@
  * @author     ShapedPlugin <support@shapedplugin.com>
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Elementor shortcode addon.
  */
@@ -44,7 +48,6 @@ class WP_Tabs_Elementor_Addons {
 			self::$_instance = new self();
 		}
 		return self::$_instance;
-
 	}
 
 	/**
@@ -142,9 +145,7 @@ class WP_Tabs_Elementor_Addons {
 		require_once __DIR__ . '/widgets/shortcode.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register( new WP_Tabs_Free_Eelementor_Shortcode_Widget() );
-
 	}
-
 }
 
 WP_Tabs_Elementor_Addons::instance();

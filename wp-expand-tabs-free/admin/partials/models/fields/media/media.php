@@ -114,8 +114,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_media' ) ) {
 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
-
 	}
 }

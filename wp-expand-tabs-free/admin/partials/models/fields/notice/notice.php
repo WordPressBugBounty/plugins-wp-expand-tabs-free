@@ -47,9 +47,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_notice' ) ) {
 			$style = ( ! empty( $this->field['style'] ) ) ? $this->field['style'] : 'normal';
 
 			echo ( ! empty( $this->field['content'] ) ) ? '<div class="wptabspro-notice wptabspro-notice-' . esc_attr( $style ) . '">' . wp_kses_post( $this->field['content'] ) . '</div>' : '';
-
 		}
-
 	}
 }
-

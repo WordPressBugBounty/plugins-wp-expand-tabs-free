@@ -9,6 +9,10 @@
  * @subpackage WP_Tabs/admin
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -72,7 +76,7 @@ class WP_Tabs_Admin {
 		 */
 		$current_screen        = get_current_screen();
 		$the_current_post_type = $current_screen->post_type;
-		if ( 'sp_wp_tabs' === $the_current_post_type ) {
+		if ( 'sp_wp_tabs' === $the_current_post_type || 'sp_products_tabs' === $the_current_post_type ) {
 			wp_enqueue_style( 'font-awesome', WP_TABS_URL . '/public/assets/css/font-awesome.min.css', array(), WP_TABS_VERSION, 'all' );
 		}
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-tabs-admin.min.css', array(), $this->version, 'all' );
@@ -194,7 +198,7 @@ class WP_Tabs_Admin {
 		$capability = apply_filters( 'sp_wp_tabs_ui_permission', 'manage_options' );
 		$show_ui    = current_user_can( $capability ) ? true : false;
 		if ( $show_ui && 'sp_wp_tabs' === $post->post_type ) {
-			$actions['duplicate'] = '<a href="' . wp_nonce_url( 'admin.php?action=sp_duplicate_tabs&post=' . $post->ID, basename( __FILE__ ), 'sp_duplicate_tabs_nonce' ) . '" rel="permalink">' . __( 'Duplicate', 'wp-expand-tabs-free' ) . '</a>';
+			$actions['duplicate'] = '<a href="' . wp_nonce_url( 'admin.php?action=sp_duplicate_tabs&post=' . $post->ID, basename( __FILE__ ), 'sp_duplicate_tabs_nonce' ) . '" rel="permalink">' . esc_html__( 'Duplicate', 'wp-expand-tabs-free' ) . '</a>';
 		}
 		return $actions;
 	}

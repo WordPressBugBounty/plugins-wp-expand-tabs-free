@@ -210,7 +210,7 @@ SP_WP_TABS::createSection(
 				'title'    => __( 'Custom CSS', 'wp-expand-tabs-free' ),
 				'settings' => array(
 					'mode'  => 'css',
-					'theme' => 'monokai',
+					'theme' => 'default',
 				),
 			),
 		),

@@ -83,7 +83,7 @@ if ( ! class_exists( 'SP_WP_TABS_Field_typography' ) ) {
 					'word_spacing'       => false,
 					'text_decoration'    => false,
 					'custom_style'       => false,
-					'exclude'            => '',
+					'exclude'            => '', // phpcs:ignore
 					'unit'               => 'px',
 					'line_height_unit'   => '',
 					'preview_text'       => 'The quick brown fox jumps over the lazy dog',
@@ -130,7 +130,10 @@ if ( ! class_exists( 'SP_WP_TABS_Field_typography' ) ) {
 				echo '<div class="wptabspro--block">';
 				echo '<div class="wptabspro--title">' . esc_html__( 'Font Family', 'wp-expand-tabs-free' ) . '</div>';
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo $this->create_select( array( $this->value['font-family'] => $this->value['font-family'] ), 'font-family', esc_html__( 'Select a font', 'wp-expand-tabs-free' ) );
+				echo '<select name="sp_tab_shortcode_options[sptpro_tabs_title_typo][font-family]" class="wptabspro--font-family" data-placeholder="Select a font">
+					<option value="">Select a font</option>
+				</select>';
+				// echo $this->create_select( array( $this->value['font-family'] => $this->value['font-family'] ), 'font-family', esc_html__( 'Select a font', 'wp-expand-tabs-free' ) );
 				echo '</div>';
 			}
 
@@ -423,7 +426,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_typography' ) ) {
 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
 
 		/**
@@ -460,231 +462,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_typography' ) ) {
 			$output .= '</select>';
 
 			return $output;
-
 		}
-
-		/**
-		 * Field enqueue script.
-		 *
-		 * @return void
-		 */
-		public function enqueue() {
-
-			if ( ! wp_script_is( 'wptabspro-webfontloader' ) ) {
-
-				SP_WP_TABS::include_plugin_file( 'fields/typography/google-fonts.php' );
-
-				wp_enqueue_script( 'wptabspro-webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js', array( 'wptabspro' ), '1.6.28', true );
-
-				$webfonts = array();
-
-				$customwebfonts = apply_filters( 'wptabspro_field_typography_customwebfonts', array() );
-
-				if ( ! empty( $customwebfonts ) ) {
-					$webfonts['custom'] = array(
-						'label' => esc_html__( 'Custom Web Fonts', 'wp-expand-tabs-free' ),
-						'fonts' => $customwebfonts,
-					);
-				}
-
-				$webfonts['safe'] = array(
-					'label' => esc_html__( 'Safe Web Fonts', 'wp-expand-tabs-free' ),
-					'fonts' => apply_filters(
-						'wptabspro_field_typography_safewebfonts',
-						array(
-							'Arial',
-							'Arial Black',
-							'Helvetica',
-							'Times New Roman',
-							'Courier New',
-							'Tahoma',
-							'Verdana',
-							'Impact',
-							'Trebuchet MS',
-							'Comic Sans MS',
-							'Lucida Console',
-							'Lucida Sans Unicode',
-							'Georgia, serif',
-							'Palatino Linotype',
-						)
-					),
-				);
-
-				$webfonts['google'] = array(
-					'label' => esc_html__( 'Google Web Fonts', 'wp-expand-tabs-free' ),
-					'fonts' => apply_filters(
-						'wptabspro_field_typography_googlewebfonts',
-						wptabspro_get_google_fonts()
-					),
-				);
-
-				$defaultstyles = apply_filters( 'wptabspro_field_typography_defaultstyles', array( 'normal', 'italic', '700', '700italic' ) );
-
-				$googlestyles = apply_filters(
-					'wptabspro_field_typography_googlestyles',
-					array(
-						'100'       => 'Thin 100',
-						'100italic' => 'Thin 100 Italic',
-						'200'       => 'Extra-Light 200',
-						'200italic' => 'Extra-Light 200 Italic',
-						'300'       => 'Light 300',
-						'300italic' => 'Light 300 Italic',
-						'normal'    => 'Normal 400',
-						'italic'    => 'Normal 400 Italic',
-						'500'       => 'Medium 500',
-						'500italic' => 'Medium 500 Italic',
-						'600'       => 'Semi-Bold 600',
-						'600italic' => 'Semi-Bold 600 Italic',
-						'700'       => 'Bold 700',
-						'700italic' => 'Bold 700 Italic',
-						'800'       => 'Extra-Bold 800',
-						'800italic' => 'Extra-Bold 800 Italic',
-						'900'       => 'Black 900',
-						'900italic' => 'Black 900 Italic',
-					)
-				);
-
-				$webfonts = apply_filters( 'wptabspro_field_typography_webfonts', $webfonts );
-
-				wp_localize_script(
-					'wptabspro',
-					'wptabspro_typography_json',
-					array(
-						'webfonts'      => $webfonts,
-						'defaultstyles' => $defaultstyles,
-						'googlestyles'  => $googlestyles,
-					)
-				);
-
-			}
-
-		}
-
-		/**
-		 * Enqueue google fonts
-		 *
-		 * @return mixed
-		 */
-		public function enqueue_google_fonts() {
-
-			$value     = $this->value;
-			$families  = array();
-			$is_google = false;
-
-			if ( ! empty( $this->value['type'] ) ) {
-				$is_google = ( 'google' === $this->value['type'] ) ? true : false;
-			} else {
-				SP_WP_TABS::include_plugin_file( 'fields/typography/google-fonts.php' );
-				$is_google = ( array_key_exists( $this->value['font-family'], wptabspro_get_google_fonts() ) ) ? true : false;
-			}
-
-			if ( $is_google ) {
-
-				// set style.
-				$font_weight = ( ! empty( $value['font-weight'] ) ) ? $value['font-weight'] : '';
-				$font_style  = ( ! empty( $value['font-style'] ) ) ? $value['font-style'] : '';
-
-				if ( $font_weight || $font_style ) {
-					$style                       = $font_weight . $font_style;
-					$families['style'][ $style ] = $style;
-				}
-
-				// set extra styles.
-				if ( ! empty( $value['extra-styles'] ) ) {
-					foreach ( $value['extra-styles'] as $extra_style ) {
-						$families['style'][ $extra_style ] = $extra_style;
-					}
-				}
-
-				// set subsets.
-				if ( ! empty( $value['subset'] ) ) {
-					$value['subset'] = ( is_array( $value['subset'] ) ) ? $value['subset'] : array_filter( (array) $value['subset'] );
-					foreach ( $value['subset'] as $subset ) {
-						$families['subset'][ $subset ] = $subset;
-					}
-				}
-
-				$all_styles  = ( ! empty( $families['style'] ) ) ? ':' . implode( ',', $families['style'] ) : '';
-				$all_subsets = ( ! empty( $families['subset'] ) ) ? ':' . implode( ',', $families['subset'] ) : '';
-
-				$families = $this->value['font-family'] . str_replace( array( 'normal', 'italic' ), array( 'n', 'i' ), $all_styles ) . $all_subsets;
-
-				$this->parent->typographies[] = $families;
-
-				return $families;
-
-			}
-
-			return false;
-
-		}
-
-		/**
-		 * Field output
-		 *
-		 * @return statement
-		 */
-		public function output() {
-
-			$output    = '';
-			$bg_image  = array();
-			$important = ( ! empty( $this->field['output_important'] ) ) ? '!important' : '';
-			$element   = ( is_array( $this->field['output'] ) ) ? join( ',', $this->field['output'] ) : $this->field['output'];
-
-			$font_family   = ( ! empty( $this->value['font-family'] ) ) ? $this->value['font-family'] : '';
-			$backup_family = ( ! empty( $this->value['backup-font-family'] ) ) ? ', ' . $this->value['backup-font-family'] : '';
-
-			if ( $font_family ) {
-				$output .= 'font-family:"' . $font_family . '"' . $backup_family . $important . ';';
-			}
-
-			// Common font properties.
-			$properties = array(
-				'color',
-				'hover_color',
-				'active_color',
-				'font-weight',
-				'font-style',
-				'font-variant',
-				'text-align',
-				'text-transform',
-				'text-decoration',
-			);
-
-			foreach ( $properties as $property ) {
-				if ( isset( $this->value[ $property ] ) && '' !== $this->value[ $property ] ) {
-					$output .= $property . ':' . $this->value[ $property ] . $important . ';';
-				}
-			}
-
-			$properties = array(
-				'font-size',
-				'line-height',
-				'letter-spacing',
-				'word-spacing',
-			);
-
-			$unit             = ( ! empty( $this->value['unit'] ) ) ? $this->value['unit'] : '';
-			$line_height_unit = ( ! empty( $this->value['line_height_unit'] ) ) ? $this->value['line_height_unit'] : $unit;
-
-			foreach ( $properties as $property ) {
-				if ( isset( $this->value[ $property ] ) && '' !== $this->value[ $property ] ) {
-					$unit    = ( 'line-height' === $property ) ? $line_height_unit : $unit;
-					$output .= $property . ':' . $this->value[ $property ] . $unit . $important . ';';
-				}
-			}
-
-			$custom_style = ( ! empty( $this->value['custom-style'] ) ) ? $this->value['custom-style'] : '';
-
-			if ( $output ) {
-				$output = $element . '{' . $output . $custom_style . '}';
-			}
-
-			$this->parent->output_css .= $output;
-
-			return $output;
-
-		}
-
 	}
 }

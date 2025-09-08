@@ -12,7 +12,17 @@
  * @subpackage WP_Tabs_Pro/public
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $sp_woo_tabs_settings = get_option( 'sptabs_product_tabs_settings', array() ); // Main key of woo product tabs settings.
+
+$tabs_on_small_screen     = $sp_woo_tabs_settings['sptpro_tabs_on_small_screen'] ?? 'default';
+$expand_and_collapse_icon = filter_var(
+	$sp_woo_tabs_settings['sptpro_expand_and_collapse_icon'] ?? false,
+	FILTER_VALIDATE_BOOLEAN
+);
 
 /**
  * Defines Woo Product Tabs Styles related settings (General Settings).
@@ -22,6 +32,7 @@ $product_tabs_alignemnt = $sp_woo_tabs_settings['product_tabs_alignemnt'] ?? 'le
 $tabs_activator_event   = $sp_woo_tabs_settings['sptpro_tabs_activator_event'] ?? 'tabs-activator-event-click';
 $margin_between_tabs    = $sp_woo_tabs_settings['sptpro_margin_between_tabs']['all'] ?? '10';
 $_content_height        = $sp_woo_tabs_settings['sptpro_tab_content_height'] ?? 'auto';
+$set_small_screen_width = $sp_woo_tabs_settings['sptpro_set_small_screen']['all'] ?? 480;
 $preloader              = $sp_woo_tabs_settings['sptpro_preloader'] ?? true;
 
 /**
@@ -301,4 +312,75 @@ if ( 'divi' === strtolower( get_template() ) ) {
         padding: ' . $_name_padding_top . 'px ' . $_name_padding_right . 'px ' . $_name_padding_bottom . 'px ' . $_name_padding_left . 'px !important;
     }body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li:not(.active) a:hover {
         color: ' . $product_tabs_title_typo['hover_color'] . ' !important;}';
+}
+
+// Tabs on small screen.
+if ( 'accordion_mode' === $tabs_on_small_screen ) {
+	$dynamic_style .= '
+        /* Responsive Columns for the Image Grid. */
+        @media (max-width: ' . intval( $set_small_screen_width ) . 'px) {
+            /* Accordion style for tabs on small screen */
+            .woocommerce.sptpro-smart-tabs.single-product .woocommerce-tabs .accordion-header {
+                background-color: transparent;
+                width: 100%;
+                padding: 10px 15px;
+                border-radius: 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                cursor: pointer;
+                box-sizing: border-box;
+            }
+
+            html body.woocommerce.single-product .woocommerce-tabs.wc-tabs-wrapper .accordion-header, 
+            html body.woocommerce ul.tabs.wc-tabs {
+                border-bottom: 1px solid #9B9B9B;
+            }
+
+            html body.woocommerce.sptpro-smart-tabs.single-product .woocommerce-tabs.wc-tabs-wrapper #tab-description,
+            html body.woocommerce.sptpro-smart-tabs.single-product .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-additional_information,
+            html body.woocommerce.sptpro-smart-tabs.single-product .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-reviews,
+            body.woocommerce.sptpro-smart-tabs.single-product .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel {
+                border: 0;
+                margin-left: 0;
+            }
+
+            .woocommerce.single-product div.product .woocommerce-tabs {
+                flex-direction: column;
+            }
+    ';
+
+	// Conditional CSS inside the same @media block.
+	if ( $expand_and_collapse_icon ) {
+		$dynamic_style .= '
+            /** Accordion style for mobile devices */
+            .woocommerce.single-product .woocommerce-tabs.wc-tabs-wrapper .accordion-header {
+                position: relative;
+                display: block;
+            }
+
+            .woocommerce.single-product .woocommerce-tabs.wc-tabs-wrapper .accordion-header span::after {
+                font-family: "FontAwesome";
+                content: "\002B";
+                color: #1a1515;
+                font-weight: bold;
+                float: right;
+                position: absolute;
+                right: 15px;
+                font-size: 25px;
+                bottom: auto;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .woocommerce.single-product .woocommerce-tabs.wc-tabs-wrapper .accordion-header.active span::after {
+                content: "\2212";
+            }
+        ';
+	}
+
+	// Close the @media block.
+	$dynamic_style .= '
+        }
+    ';
 }

@@ -24,6 +24,11 @@
 	border: 1px solid #D0D7DB;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
+	overflow: hidden;
+}
+
+.woocommerce_options_panel .sp-tab-content textarea {
+    float: none;
 }
 
 #sp_product_tabs_panel.panel .sp-tab-controls label {

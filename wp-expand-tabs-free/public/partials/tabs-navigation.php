@@ -11,6 +11,9 @@
  * @subpackage WP_Tabs/public/partials
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
 <ul class="sp-tab__nav sp-tab__nav-tabs" id="sp-tab__ul" role="tablist">
 	<?php
@@ -20,6 +23,11 @@
 			$sptpro_active_class       = $sptpro_tab_opened === $sptpro_data_count ? ' sp-tab__active' : '';
 			$tabs_content_title        = '<' . $sptpro_title_heading_tag . ' class="sp-tab__tab_title">' . $sptpro_data['tabs_content_title'] . '</' . $sptpro_title_heading_tag . '>';
 			$tabs_aria_controls_for_id = 'tab-' . $post_id . $sptpro_data_count;
+
+			// Tab title slug.
+			$name_url                  = preg_replace( '/\s+/', '-', sanitize_title( $sptpro_data['tabs_content_title'] ) ) . '-' . $post_id;
+			$tabs_aria_controls_for_id = isset( $name_url ) && 'tab_title' === $sptpro_tab_link_type ? strtolower( $name_url ) : $tabs_aria_controls_for_id;
+
 			?>
 			<li class="sp-tab__nav-item" role="presentation">
 				<span class="sp-tab__nav-link<?php echo esc_attr( $sptpro_active_class ); ?>" data-sptoggle="tab" for="#<?php echo esc_attr( $tabs_aria_controls_for_id ); ?>" role="tab" <?php printf( esc_attr( $title_data_attr ), esc_attr( $tabs_aria_controls_for_id ) ); ?>>

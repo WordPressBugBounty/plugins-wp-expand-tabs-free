@@ -46,15 +46,12 @@ if ( ! class_exists( 'SP_WP_TABS_Field_text' ) ) {
 
 			$type = ( ! empty( $this->field['attributes']['type'] ) ) ? $this->field['attributes']['type'] : 'text';
 
-      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+      		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_before();
-      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+     		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr( $this->value ) . '"' . $this->field_attributes() . ' />';
-      // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+      		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_after();
-
 		}
-
 	}
 }
-

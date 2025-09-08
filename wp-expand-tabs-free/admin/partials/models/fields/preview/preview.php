@@ -43,6 +43,5 @@ if ( ! class_exists( 'SP_WP_TABS_Field_preview' ) ) {
 		public function render() {
 			echo '<div class="sp-tab-preview-box"><div id="sp-tab-preview-box"></div></div>';
 		}
-
 	}
 }

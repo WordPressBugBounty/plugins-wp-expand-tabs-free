@@ -45,9 +45,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_subheading' ) ) {
 		public function render() {
 
 			echo ( ! empty( $this->field['content'] ) ) ? wp_kses_post( $this->field['content'] ) : '';
-
 		}
-
 	}
 }
-

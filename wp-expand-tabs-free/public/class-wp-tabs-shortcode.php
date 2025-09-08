@@ -12,6 +12,10 @@
  * @subpackage WP_Tabs/public
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Define the shortcode functionality.
  */
@@ -95,9 +99,16 @@ class WP_Tabs_Shortcode {
 		$sptpro_tabs_layout          = isset( $sptpro_shortcode_options['sptpro_tabs_layout'] ) ? $sptpro_shortcode_options['sptpro_tabs_layout'] : 'horizontal';
 		$sptpro_tabs_activator_event = isset( $sptpro_shortcode_options['sptpro_tabs_activator_event'] ) ? $sptpro_shortcode_options['sptpro_tabs_activator_event'] : '';
 		$sptpro_tab_opened           = 1;
-		$sptpro_tabs_on_small_screen = isset( $sptpro_shortcode_options['sptpro_tabs_on_small_screen'] ) ? $sptpro_shortcode_options['sptpro_tabs_on_small_screen'] : '';
-		$sptpro_title_heading_tag    = isset( $sptpro_shortcode_options['sptpro_title_heading_tag'] ) ? $sptpro_shortcode_options['sptpro_title_heading_tag'] : '';
+		$sptpro_tabs_on_small_screen = isset( $sptpro_shortcode_options['sptpro_tabs_on_small_screen'] ) ? $sptpro_shortcode_options['sptpro_tabs_on_small_screen'] : 'full_widht';
+		$sptpro_title_heading_tag    = isset( $sptpro_shortcode_options['sptpro_title_heading_tag'] ) ? $sptpro_shortcode_options['sptpro_title_heading_tag'] : 'H4';
 		$sptpro_section_title        = isset( $sptpro_shortcode_options['sptpro_section_title'] ) ? $sptpro_shortcode_options['sptpro_section_title'] : false;
+
+		$sptpro_anchor_linking = filter_var(
+			$sptpro_shortcode_options['sptpro_anchor_linking'] ?? true,
+			FILTER_VALIDATE_BOOLEAN
+		);
+		$sptpro_tab_link_type  = isset( $sptpro_shortcode_options['sptpro_tab_link_type'] ) ? $sptpro_shortcode_options['sptpro_tab_link_type'] : 'tab_id';
+
 		// Animation.
 		$sptpro_tabs_animation      = isset( $sptpro_shortcode_options['sptpro_tabs_animation'] ) ? $sptpro_shortcode_options['sptpro_tabs_animation'] : false;
 		$sptpro_tabs_animation_type = isset( $sptpro_shortcode_options['sptpro_tabs_animation_type'] ) ? $sptpro_shortcode_options['sptpro_tabs_animation_type'] : '';
@@ -126,7 +137,7 @@ class WP_Tabs_Shortcode {
 		wp_enqueue_script( 'sptpro-script' );
 		include WP_TABS_PATH . 'public/partials/section-title.php';
 		?>
-		<div id="sp-wp-tabs-wrapper_<?php echo esc_attr( $post_id ); ?>" class="<?php echo esc_html( $wrapper_class . $sptpro_tabs_position_bottom ); ?>" data-preloader="<?php echo esc_html( $sptpro_preloader ); ?>" data-activemode="<?php echo esc_html( $sptpro_tabs_activator_event ); ?>">
+		<div id="sp-wp-tabs-wrapper_<?php echo esc_attr( $post_id ); ?>" class="<?php echo esc_attr( $wrapper_class . $sptpro_tabs_position_bottom ); ?>" data-preloader="<?php echo esc_attr( $sptpro_preloader ); ?>" data-activemode="<?php echo esc_attr( $sptpro_tabs_activator_event ); ?>" data-anchor_linking="<?php echo esc_attr( $sptpro_anchor_linking ); ?>">
 		<?php
 		include WP_TABS_PATH . '/public/preloader.php';
 		include WP_TABS_PATH . '/public/partials/tabs-navigation.php';

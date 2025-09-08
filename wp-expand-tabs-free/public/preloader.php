@@ -11,6 +11,10 @@
  * @subpackage WP_Tabs/public
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( $sptpro_preloader ) { ?>
 	<div class="sp-tab__preloader">
 		<div class="sp-tab__spinner">

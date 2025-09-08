@@ -21,20 +21,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_code_editor' ) ) {
 	 * @version 1.0.0
 	 */
 	class SP_WP_TABS_Field_code_editor extends SP_WP_TABS_Fields {
-
-		/**
-		 * Version
-		 *
-		 * @var string
-		 */
-		public $version = '5.41.0';
-		/**
-		 * Cdn_url
-		 *
-		 * @var string
-		 */
-		public $cdn_url = 'https://cdn.jsdelivr.net/npm/codemirror@';
-
 		/**
 		 * Code_editor field constructor.
 		 *
@@ -59,8 +45,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_code_editor' ) ) {
 				'tabSize'     => 2,
 				'lineNumbers' => true,
 				'theme'       => 'default',
-				'mode'        => 'htmlmixed',
-				'cdnURL'      => $this->cdn_url . $this->version,
 			);
 
 			$settings = ( ! empty( $this->field['settings'] ) ) ? $this->field['settings'] : array();
@@ -79,21 +63,9 @@ if ( ! class_exists( 'SP_WP_TABS_Field_code_editor' ) ) {
 		 * @return void
 		 */
 		public function enqueue() {
-			// phpcs:ignore -- Safe usage: only reads $_GET['page'] to conditionally enqueue assets.
-			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-
-			// Do not loads CodeMirror in revslider page.
-			if ( in_array( $page, array( 'revslider' ), true ) ) {
-				return; }
-
-			if ( ! wp_script_is( 'wptabspro-codemirror' ) ) {
-				wp_enqueue_script( 'wptabspro-codemirror', esc_url( $this->cdn_url . $this->version . '/lib/codemirror.min.js' ), array( 'wptabspro' ), $this->version, true );
-				wp_enqueue_script( 'wptabspro-codemirror-loadmode', esc_url( $this->cdn_url . $this->version . '/addon/mode/loadmode.min.js' ), array( 'wptabspro-codemirror' ), $this->version, true );
-			}
-
-			if ( ! wp_style_is( 'wptabspro-codemirror' ) ) {
-				wp_enqueue_style( 'wptabspro-codemirror', esc_url( $this->cdn_url . $this->version . '/lib/codemirror.min.css' ), array(), $this->version );
-			}
+			// Enqueue code-mirror.
+			wp_enqueue_script( 'code-editor' );
+			wp_enqueue_style( 'code-editor' );
 		}
 	}
 }
