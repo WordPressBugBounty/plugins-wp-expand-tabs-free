@@ -80,6 +80,10 @@ function sp_wptabspro_delete_plugin_data() {
 	delete_post_meta_by_key( 'sp_tab_source_options' );
 	delete_post_meta_by_key( 'sp_tab_shortcode_options' );
 	delete_post_meta_by_key( 'sp_tab_display_shortcode_sidebar' );
+
+	// Delete offer banner related option keys.
+	delete_option( 'shapedplugin_offer_banner_dismissed_black_friday_2025' );
+	delete_option( 'shapedplugin_offer_banner_dismissed_new_year_2026' );
 }
 
 // Load Smart Tabs file.

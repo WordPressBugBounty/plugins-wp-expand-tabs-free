@@ -22,7 +22,6 @@ if ( ! function_exists( 'wptabspro_chosen_ajax' ) ) {
 	 * @version 1.0.0
 	 */
 	function wptabspro_chosen_ajax() {
-
 		$nonce = ( ! empty( $_POST['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 		$type  = ( ! empty( $_POST['type'] ) ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 		$term  = ( ! empty( $_POST['term'] ) ) ? sanitize_text_field( wp_unslash( $_POST['term'] ) ) : '';

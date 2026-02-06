@@ -804,3 +804,17 @@
     width: 100%;
   }
 }
+
+
+.sp-wp-tabs-help .sptabs-video-area ul li {
+  margin-right: 16px;
+}
+
+.sp-wp-tabs-help .sptabs-video-area ul b.sptabs-separator-or {
+  display: flex;
+  align-items: center;
+}
+
+.sp-wp-tabs-help .sptabs-video-area ul li.sptabs-create-tab-group {
+  margin-left: 16px;
+}

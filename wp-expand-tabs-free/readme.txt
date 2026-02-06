@@ -1,9 +1,9 @@
-=== Custom Product Tabs for WooCommerce and Responsive Tabs Builder – Smart Tabs (formerly WP Tabs) ===
+=== Custom Product Tabs for WooCommerce & WordPress Tabs Builder – Smart Tabs ===
 Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: WooCommerce product tabs, WooCommerce custom product tabs, WooCommerce tabs plugin, product tabs, tabs
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 3.0.2
+Tested up to: 6.9
+Stable tag: 3.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ A customizable plugin to create and manage WooCommerce product tabs and WordPres
 
 **Smart Tabs (formerly WP Tabs)** is a tab plugin designed for both WooCommerce and WordPress. It provides responsive tab layouts and customization options to create WooCommerce product tabs and WordPress tabs with no coding required.
 
-🖥 [__Live Demo__](https://wptabs.com/) | 📖 [__Documentation__](https://wptabs.com/docs/) | 🛟 [__Support__](https://shapedplugin.com/create-new-ticket/)
+🖥 [__Live Demo__](https://demo.wptabs.com/) | 📖 [__Documentation__](https://wptabs.com/docs/) | 🛟 [__Support__](https://shapedplugin.com/create-new-ticket/)
 
 = Key Benefits: =
 * Organize rich content and keep shoppers engaged
@@ -235,6 +235,40 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 3.1.3 - Jan 12, 2026 =
+* Improved: Standardized singleton instance property naming.
+* Improved: Code readability and maintainability improved.
+
+= 3.1.2 - Nov 19, 2025 =
+* Fix: The conflict issue with the WP Carousel plugin.
+
+= 3.1.1 - Nov 16, 2025 =
+* New: The Product Tabs Export and Import feature.
+* New: The Use Theme's Product Tab Style option.
+* Improved: The mobile accordion feature for the vertical post layout of WP Tabs.
+* Improved: The mobile accordion feature for the vertical post layout of Product Tabs.
+* Fix: The Product tabs compatibility issue with the Elementor Pro single product template.
+* Fix: The Product tabs compatibility issue with the single product template builder of the Divi theme.
+* Fix: Related Products tabs style issue with the Avada theme.
+* Tested: WordPress 6.9 compatibility.
+
+= 3.1.0 - Oct 09, 2025 =
+* New: The Tabs Layout: Vertical Right option has been added for the product tab.
+* New: The Tabs Vertical Line option.
+* New: The Product Tab Description Border Radius option.
+* New: Show Product Tabs by Brands option.
+* New: WooCommerce Default Related Products [Show/Hide] option.
+* New: The Typography (Font Family: Safe fonts, Text Align, Text Transform, Line Height, Letter Spacing) feature for Tab Name, and Description of Product Tabs.
+* New: The Typography (Font Family: Safe fonts, Text Align, Text Transform, Line Height, Letter Spacing) feature for Tab Name, Description, and Section Title of WP Tabs.
+* New: The Tabs Source Type: Post (Posts, Pages) option added to WP Tabs
+* New: The Tabs Layout: Vertical Right option has been added for the WP Tabs.
+* New: The Tabs Alignment option has been added for the WP Tabs Vertical Right layout.
+* Improved: The 'Spacing Between Tabs' option has been moved to the Display Settings tab.
+* Improved: The Tabs Name Color option has been moved to the Display Settings tab.
+* Improved: The default value for Tabs Mode on small screens is set to Accordion mode.
+* Updated: The language(.pot) file.
+* Tested: WordPress 6.8.3 compatibility.
 
 = 3.0.2 - Sep 08, 2025 =
 * New: The Anchor Link for Tabs option.

@@ -80,7 +80,7 @@ if ( version_compare( WP_TABS_FIRST_VERSION, '3.0.0', '<' ) ) {
 		$prefix,
 		array(
 			'title'  => __( 'Woo Tab Group', 'wp-expand-tabs-free' ),
-			'icon'   => 'fa fa-shopping-bag',
+			'icon'   => 'fa sp-tab-icon-woo-tabs-group',
 			'fields' => array(
 				array(
 					'type'    => 'submessage',
@@ -211,6 +211,28 @@ SP_WP_TABS::createSection(
 				'settings' => array(
 					'mode'  => 'css',
 					'theme' => 'default',
+				),
+			),
+		),
+	)
+);
+
+//
+// Custom Fields.
+//
+SP_WP_TABS::createSection(
+	$prefix,
+	array(
+		'id'     => 'upgrade_to_pro_section',
+		'title'  => __( 'UPGRADE TO PRO', 'wp-expand-tabs-free' ),
+		'icon'   => 'fa icon-upgrade-to-pro',
+		'fields' => array(
+			array(
+				'type'      => 'notice',
+				'ignore_db' => true,
+				'class'     => 'upgrade-to-pro-notice',
+				'content'   => (
+					SP_WP_TABS::upgrade_to_pro_section()
 				),
 			),
 		),

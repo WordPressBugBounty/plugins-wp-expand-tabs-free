@@ -104,7 +104,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_group' ) ) {
 					$num = 0;
 
 					foreach ( $this->value as $value ) {
-
 						$first_id    = ( isset( $this->field['fields'][0]['id'] ) ) ? $this->field['fields'][0]['id'] : '';
 						$first_value = ( isset( $value[ $first_id ] ) ) ? $value[ $first_id ] : '';
 						$first_value = ( is_array( $first_value ) ) ? reset( $first_value ) : $first_value;
@@ -142,7 +141,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_group' ) ) {
 						echo '</div>';
 
 						++$num;
-
 					}
 				}
 
@@ -155,7 +153,6 @@ if ( ! class_exists( 'SP_WP_TABS_Field_group' ) ) {
 
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $this->field_after();
-
 			}
 		}
 

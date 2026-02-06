@@ -1,15 +1,1 @@
-<svg width="100" height="80" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="0.75" y="0.75" width="98.5" height="78.5" rx="2.25" fill="white"/>
-<rect x="0.75" y="0.75" width="98.5" height="78.5" rx="2.25" stroke="#CCCCCC" stroke-width="1.5"/>
-<path d="M10 12.7498H11.5V18.7498H10V12.7498Z" fill="#293035"/>
-<path d="M11.5 12.7498H31V18.7498H11.5V12.7498Z" fill="#65747F"/>
-<mask id="path-4-inside-1_1347_7490" fill="white">
-<path d="M10 18.7498H31V66.7498H10V18.7498Z"/>
-</mask>
-<path d="M31 18.7498H30.2V66.7498H31H31.8V18.7498H31Z" fill="#B5BEC4" mask="url(#path-4-inside-1_1347_7490)"/>
-<path d="M10 20.2498H31V26.2498H10V20.2498Z" fill="#B5BEC4"/>
-<path d="M10 27.7498H31V33.7498H10V27.7498Z" fill="#B5BEC4"/>
-<path d="M10 35.2498H31V41.2498H10V35.2498Z" fill="#B5BEC4"/>
-<path d="M10 42.7498H31V48.7498H10V42.7498Z" fill="#B5BEC4"/>
-<rect x="35" y="12.7498" width="54" height="54" fill="#E6E9EB"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="124" height="130" fill="none"><rect x=".75" y=".75" width="122.5" height="128.5" rx="3.25" stroke="#a3afb7" stroke-width="1.5"/><rect x="15" y="15" width="45" height="49" rx="2.044" fill="#e6e9eb"/><path d="M53.168 34.8l-7.52-7.52-3.76-.627c0 2.193-1.88 4.074-4.387 4.074s-4.387-1.88-4.387-4.074l-3.76.627-7.52 7.52 5.014 5.014 2.507-2.507v15.041h16.294V37.307l2.507 2.507 5.014-5.014z" fill="#fff"/><g fill="#e6e9eb"><rect x="65" y="17" width="31" height="2" rx="1"/><rect x="65" y="21" width="7" height="1.5" rx=".75"/><rect x="65" y="25.5" width="44" height="1" rx=".5"/><rect x="65" y="28.5" width="44" height="1" rx=".5"/><rect x="65" y="31.5" width="44" height="1" rx=".5"/><rect x="65" y="34.5" width="25" height="1" rx=".5"/><circle cx="66.5" cy="41" r="1.5"/><circle cx="70.5" cy="41" r="1.5"/><circle cx="74.5" cy="41" r="1.5"/><rect x="65" y="46.5" width="9" height="3" rx=".5"/></g><path d="M39 70H16v7h23v-7z" fill="#65747f"/><path d="M16 70h-.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5h.5v-7z" fill="#293035"/><mask id="A" fill="#fff"><path d="M39 77H15v38h24V77z"/></mask><g fill="#b5bec4"><path d="M39 115h-.928V77H39h.928v38H39z" mask="url(#A)"/><use href="#C"/><use href="#C" y="8.74"/><use href="#C" y="17.481"/></g><rect x="42" y="70" width="67" height="45" rx="1" fill="#dce3e7"/><defs ><path id="C" d="M39 78.741H15.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5H39v-7z"/></defs></svg>

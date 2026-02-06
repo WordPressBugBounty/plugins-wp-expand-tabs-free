@@ -28,7 +28,7 @@ class WP_Tabs_Elementor_Addons {
 	 *
 	 * @var WP_Tabs_Elementor_Addons The single instance of the class.
 	 */
-	private static $_instance = null;
+	private static $instance = null;
 
 	/**
 	 * Instance
@@ -44,10 +44,10 @@ class WP_Tabs_Elementor_Addons {
 	 */
 	public static function instance() {
 
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**

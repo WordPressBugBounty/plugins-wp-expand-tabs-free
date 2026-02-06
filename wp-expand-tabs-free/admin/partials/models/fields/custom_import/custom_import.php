@@ -42,10 +42,13 @@ if ( ! class_exists( 'SP_WP_TABS_Field_custom_import' ) ) {
 		public function render() {
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $this->field_before();
-			$tabs_link = admin_url( 'edit.php?post_type=sp_wp_tabs' );
-				echo '<p><input type="file" id="import" accept=".json"></p>';
-				echo '<p><button type="button" class="import">Import</button></p>';
-				echo '<a id="wp__tabs_link_redirect" href="' . esc_url( $tabs_link ) . '"></a>';
+			$tabs_link         = admin_url( 'edit.php?post_type=sp_wp_tabs' );
+			$product_tabs_link = admin_url( 'edit.php?post_type=sp_products_tabs' );
+
+			echo '<p><input type="file" id="import" accept=".json"></p>';
+			echo '<p><button type="button" class="import">Import</button></p>';
+			echo '<a id="wp__tabs_link_redirect" href="' . esc_url( $tabs_link ) . '"></a>';
+			echo '<a id="wp_product_tabs_link_redirect" href="' . esc_url( $product_tabs_link ) . '"></a>';
 			echo $this->field_after(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}

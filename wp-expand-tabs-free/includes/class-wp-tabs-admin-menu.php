@@ -62,7 +62,7 @@ class WP_Tabs_Admin_Menu {
 		if ( WP_TABS_BASENAME === $file ) {
 
 			$new_links = array(
-				sprintf( '<a href="%s">%s</a>', admin_url( 'post-new.php?post_type=sp_wp_tabs' ), __( 'Add Tabs', 'wp-expand-tabs-free' ) ),
+				sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=sp_products_tabs' ), __( 'Settings', 'wp-expand-tabs-free' ) ),
 			);
 			$links[]   = '<a href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" style="color: #35b747; font-weight: 700;">' . __( 'Go Pro!', 'wp-expand-tabs-free' ) . '</a>';
 

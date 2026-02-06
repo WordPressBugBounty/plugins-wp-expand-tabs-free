@@ -129,11 +129,8 @@ if ( ! class_exists( 'SP_WP_TABS_Field_typography' ) ) {
 			if ( ! empty( $args['font_family'] ) ) {
 				echo '<div class="wptabspro--block">';
 				echo '<div class="wptabspro--title">' . esc_html__( 'Font Family', 'wp-expand-tabs-free' ) . '</div>';
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<select name="sp_tab_shortcode_options[sptpro_tabs_title_typo][font-family]" class="wptabspro--font-family" data-placeholder="Select a font">
-					<option value="">Select a font</option>
-				</select>';
-				// echo $this->create_select( array( $this->value['font-family'] => $this->value['font-family'] ), 'font-family', esc_html__( 'Select a font', 'wp-expand-tabs-free' ) );
+				// phpcs:ignore
+				echo $this->create_select( array( $this->value['font-family'] => $this->value['font-family'] ), 'font-family', esc_html__( 'Select a font', 'wp-expand-tabs-free' ) );
 				echo '</div>';
 			}
 
@@ -462,6 +459,93 @@ if ( ! class_exists( 'SP_WP_TABS_Field_typography' ) ) {
 			$output .= '</select>';
 
 			return $output;
+		}
+
+
+		/**
+		 * Enqueue
+		 *
+		 * @return void
+		 */
+		public function enqueue() {
+			$webfonts       = array();
+			$customwebfonts = apply_filters( 'wptabspro_field_typography_customwebfonts', array() );
+
+			if ( ! empty( $customwebfonts ) ) {
+				$webfonts['custom'] = array(
+					'label' => esc_html__( 'Custom Web Fonts', 'wp-expand-tabs-free' ),
+					'fonts' => $customwebfonts,
+				);
+			}
+
+			$webfonts['safe'] = array(
+				'label' => esc_html__( 'Safe Web Fonts', 'wp-expand-tabs-free' ),
+				'fonts' => apply_filters(
+					'wptabspro_field_typography_safewebfonts',
+					array(
+						'Arial',
+						'Arial Black',
+						'Helvetica',
+						'Times New Roman',
+						'Courier New',
+						'Tahoma',
+						'Verdana',
+						'Impact',
+						'Trebuchet MS',
+						'Comic Sans MS',
+						'Lucida Console',
+						'Lucida Sans Unicode',
+						'Georgia, serif',
+						'Palatino Linotype',
+					)
+				),
+			);
+
+			$webfonts['google'] = array(
+				'label' => esc_html__( 'Google Web Fonts (Pro)', 'wp-expand-tabs-free' ),
+				'fonts' => apply_filters(
+					'wptabspro_field_typography_googlewebfonts',
+					array()
+				),
+			);
+
+			$defaultstyles = apply_filters( 'wptabspro_field_typography_defaultstyles', array( 'normal', 'italic', '700', '700italic' ) );
+
+			$googlestyles = apply_filters(
+				'wptabspro_field_typography_googlestyles',
+				array(
+					'100'       => 'Thin 100',
+					'100italic' => 'Thin 100 Italic',
+					'200'       => 'Extra-Light 200',
+					'200italic' => 'Extra-Light 200 Italic',
+					'300'       => 'Light 300',
+					'300italic' => 'Light 300 Italic',
+					'normal'    => 'Normal 400',
+					'italic'    => 'Normal 400 Italic',
+					'500'       => 'Medium 500',
+					'500italic' => 'Medium 500 Italic',
+					'600'       => 'Semi-Bold 600',
+					'600italic' => 'Semi-Bold 600 Italic',
+					'700'       => 'Bold 700',
+					'700italic' => 'Bold 700 Italic',
+					'800'       => 'Extra-Bold 800',
+					'800italic' => 'Extra-Bold 800 Italic',
+					'900'       => 'Black 900',
+					'900italic' => 'Black 900 Italic',
+				)
+			);
+
+			$webfonts = apply_filters( 'wptabspro_field_typography_webfonts', $webfonts );
+
+			wp_localize_script(
+				'wptabspro',
+				'wptabspro_typography_json',
+				array(
+					'webfonts'      => $webfonts,
+					'defaultstyles' => $defaultstyles,
+					'googlestyles'  => $googlestyles,
+				)
+			);
 		}
 	}
 }

@@ -8,93 +8,20 @@
  * @link       https://shapedplugin.com/
  * @since      2.0.0
  *
- * @package    WP_Tabs_Pro
- * @subpackage WP_Tabs_Pro/public
+ * @package wp-expand-tabs-free
+ * @subpackage wp-expand-tabs-free/public
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$sp_woo_tabs_settings = get_option( 'sptabs_product_tabs_settings', array() ); // Main key of woo product tabs settings.
-
-$tabs_on_small_screen     = $sp_woo_tabs_settings['sptpro_tabs_on_small_screen'] ?? 'default';
-$expand_and_collapse_icon = filter_var(
-	$sp_woo_tabs_settings['sptpro_expand_and_collapse_icon'] ?? false,
-	FILTER_VALIDATE_BOOLEAN
-);
-
-/**
- * Defines Woo Product Tabs Styles related settings (General Settings).
- */
-$product_tabs_layout    = $sp_woo_tabs_settings['product_tabs_layout'] ?? 'horizontal';
-$product_tabs_alignemnt = $sp_woo_tabs_settings['product_tabs_alignemnt'] ?? 'left';
-$tabs_activator_event   = $sp_woo_tabs_settings['sptpro_tabs_activator_event'] ?? 'tabs-activator-event-click';
-$margin_between_tabs    = $sp_woo_tabs_settings['sptpro_margin_between_tabs']['all'] ?? '10';
-$_content_height        = $sp_woo_tabs_settings['sptpro_tab_content_height'] ?? 'auto';
-$set_small_screen_width = $sp_woo_tabs_settings['sptpro_set_small_screen']['all'] ?? 480;
-$preloader              = $sp_woo_tabs_settings['sptpro_preloader'] ?? true;
-
-/**
- * Display Settings.
- */
-$tab_name_bg_colors    = $sp_woo_tabs_settings['tab_name_bg_color'] ?? array();
-$tab_name_bg_color     = $tab_name_bg_colors['color'] ?? '#fff';
-$tab_name_active_color = $tab_name_bg_colors['active-color'] ?? '#fff';
-$tab_name_hover_color  = $tab_name_bg_colors['hover-color'] ?? '#fff';
-
-$tabs_name_padding    = $sp_woo_tabs_settings['tabs_name_padding'] ?? array(
-	'top'    => '14',
-	'right'  => '16',
-	'bottom' => '14',
-	'left'   => '16',
-);
-$_name_padding_left   = $tabs_name_padding['left'] ?? '16';
-$_name_padding_top    = $tabs_name_padding['top'] ?? '14';
-$_name_padding_bottom = $tabs_name_padding['bottom'] ?? '14';
-$_name_padding_right  = $tabs_name_padding['right'] ?? '16';
-
-$tabs_bottom_line   = $sp_woo_tabs_settings['tabs_bottom_line'] ?? array(
-	'all'   => '2',
-	'color' => '#E7E7E7',
-);
-$tabs_vertical_line = $sp_woo_tabs_settings['tabs_vertical_line'] ?? array(
-	'all'   => '2',
-	'color' => '#E7E7E7',
-);
-
-$tabs_bottom_line_position = $sp_woo_tabs_settings['tabs_bottom_line_position'] ?? 'bottom-line';
-// Tabs bottom line color and width.
-$active_tab_bottom_line = $sp_woo_tabs_settings['active_tab_bottom_line'] ?? array(
-	'all'   => '3',
-	'color' => '#121212',
-);
-$bottom_border_width    = $active_tab_bottom_line['all'] ?? '3';
-$bottom_border_color    = $active_tab_bottom_line['color'] ?? '#121212';
-
-$space_between_title_and_desc = $sp_woo_tabs_settings['space_between_title_and_desc']['all'] ?? '0';
-$desc_background_color        = $sp_woo_tabs_settings['desc_background_color'] ?? '#ffffff';
-
-$desc_border       = $sp_woo_tabs_settings['desc_border'] ?? array(
-	'all'   => '0',
-	'style' => 'solid',
-	'color' => '#c3c4c7',
-);
-$desc_border_width = $desc_border['all'] ?? '0';
-$desc_border_style = $desc_border['style'] ?? 'solid';
-$desc_border_color = $desc_border['color'] ?? '#c3c4c7';
-$desc_padding      = $sp_woo_tabs_settings['desc_padding'] ?? array(
-	'top'    => '20',
-	'right'  => '20',
-	'bottom' => '20',
-	'left'   => '20',
-);
-
 // Apply Dynamic CSS styles.
 $dynamic_style .= '
     /* WooCommerce Tabs Style */
     html body.woocommerce.sptpro-smart-tabs ul.tabs.wc-tabs:not(.is-width-constrained) {
         margin: 0 !important;
+        margin-bottom: ' . $space_between_title_and_desc . 'px !important;
     }
     html body.woocommerce.sptpro-smart-tabs ul.wc-tabs li {
         text-align: center;
@@ -113,13 +40,14 @@ $dynamic_style .= '
     }
     html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel .sp-tab__tab-content {
         max-height: 100%;
-        background-color: ' . $desc_background_color . ';
+        background-color: ' . $description_bg_color . ';
         border: ' . $desc_border_width . 'px ' . $desc_border_style . ' ' . $desc_border_color . ';
+        border-radius: ' . $desc_border_radius . 'px;
         padding: ' . $desc_padding['top'] . 'px ' . $desc_padding['right'] . 'px ' . $desc_padding['bottom'] . 'px ' . $desc_padding['left'] . 'px;
     }
 
     /* Remove WC default border line */
-    .woocommerce-page div.product .woocommerce-tabs ul.tabs::before,
+    .woocommerce-page div.product .woocommerce-tabs.wc-tabs-wrapper ul.tabs::before,
     .woocommerce.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li.active:before{
         background: none;
         border: none;
@@ -129,11 +57,11 @@ $dynamic_style .= '
     html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-additional_information,
     html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-reviews {
         max-height: 100%;
-        background-color: ' . $desc_background_color . ';
+        background-color: ' . $description_bg_color . ';
         border: ' . $desc_border_width . 'px ' . $desc_border_style . ' ' . $desc_border_color . ';
+        border-radius: ' . $desc_border_radius . 'px;
         padding: ' . $desc_padding['top'] . 'px ' . $desc_padding['right'] . 'px ' . $desc_padding['bottom'] . 'px ' . $desc_padding['left'] . 'px;
     }';
-
 
 // Border bottom line for the tabs area.
 $dynamic_style .= '
@@ -162,37 +90,172 @@ if ( 'horizontal' === $product_tabs_layout ) {
         gap: ' . $margin_between_tabs . 'px !important;
         justify-content: ' . $product_tabs_alignemnt . ';
     }';
-}
 
-// Tabs area and active tab bottom line.
-if ( 'bottom-line' === $tabs_bottom_line_position ) {
+	// Tabs area and active tab bottom line.
+	if ( 'default' === $tabs_style ) {
+		$dynamic_style .= '
+        html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs ul.tabs.wc-tabs {
+            border-bottom: ' . $tabs_bottom_line['all'] . 'px solid ' . $tabs_bottom_line['color'] . ' !important;  
+        }
+        /* Active tab bottom line in Block theme */
+        html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li:hover{
+            border: 0;
+        }
+        html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li.active {
+            border-bottom: ' . $bottom_border_width . 'px solid ' . $bottom_border_color . ' !important;
+        }';
+	} else {
+		$dynamic_style .= '
+        html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs ul.tabs.wc-tabs {
+            border-top: ' . $tabs_bottom_line['all'] . 'px solid ' . $tabs_bottom_line['color'] . ' !important;  
+        }
+        .sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li.active::before {
+            bottom: unset;
+            top: 0;
+        }
+        /* Active tab bottom line in Block theme */
+        html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li:hover{
+            border: 0;
+        }
+        html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li.active {
+            border-bottom: 0;
+            border-top: ' . $bottom_border_width . 'px solid ' . $bottom_border_color . ' !important;
+        }';
+	}
+} else { // Vertical Right layout.
 	$dynamic_style .= '
-    html body.woocommerce ul.tabs.wc-tabs {
-        border-bottom: ' . $tabs_bottom_line['all'] . 'px solid ' . $tabs_bottom_line['color'] . ' !important;  
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs {
+        display: flex;
+        margin-top: 30px;
     }
-    /* Active tab bottom line in Block theme */
-    html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li:hover{
-        border: 0;
+    
+    /* --- Left tab menu --- */
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.wc-tabs {
+        flex: 0 0 280px;
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: ' . $margin_between_tabs . 'px;
+        overflow: hidden;
     }
-    html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li.active {
-        border-bottom: ' . $bottom_border_width . 'px solid ' . $bottom_border_color . ' !important;
+    
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.tabs::before {
+        border-bottom: none;
+    }
+    
+    /* ---- Tab items style ---- */
+     html .woocommerce-page div.product .woocommerce-tabs.wc-tabs-wrapper ul.tabs::before,
+    html .woocommerce.sptpro-smart-tabs div.product .woocommerce-tabs.wc-tabs-wrapper ul.tabs li.active:before{
+        background: none !important;
+        border: none;
+    }
+   .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.wc-tabs li {
+        border: none !important;
+        width: 100% !important;
+        border-left: ' . $bottom_border_width . 'px solid transparent !important; 
+    }
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.wc-tabs li.active,
+    .woocommerce div.product .woocommerce-tabs ul.wc-tabs li {
+        margin: 0;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s ease;
+    }
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.wc-tabs li:last-child {
+        border-bottom: none;
+    }
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.wc-tabs li.active {
+        border-left-color: ' . $bottom_border_color . ' !important; 
+        z-index: 999;
+        position: relative;
+        width: 100%;
+    }
+    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper #tab-description,
+    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-additional_information,
+    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-reviews,
+    body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel {
+        z-index: 999;
+    }
+
+    /* ----- Right content panel area ----- */
+
+    body.woocommerce.sptpro-smart-tabs div.product .woocommerce-Tabs-panel {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 20px 25px;
+        background: #fff;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        padding: ' . $desc_padding['top'] . 'px ' . $desc_padding['right'] . 'px ' . $desc_padding['bottom'] . 'px ' . $desc_padding['left'] . 'px;
+    }
+    
+    /* Tabs vertical to horizontal for better responsiveness */
+    @media (max-width: 768px) {
+        .woocommerce div.product .woocommerce-tabs {
+            flex-direction: column;
+        }
+        .woocommerce div.product .woocommerce-tabs ul.wc-tabs {
+            flex-direction: row;
+            flex-wrap: wrap;
+            flex: auto;
+            overflow-x: auto;
+            border-radius: 4px;
+            border: none;
+        }
+        .woocommerce div.product .woocommerce-tabs ul.wc-tabs li {
+            white-space: nowrap;
+            border-bottom: none;
+        }
+        .woocommerce div.product .woocommerce-tabs ul.wc-tabs li.active {
+            border-left: none;
+            border-bottom: ' . $bottom_border_width . 'px solid ' . $bottom_border_color . ';
+        }
+        .woocommerce div.product .woocommerce-Tabs-panel {
+            margin-top: 15px;
+            width: 100%;
+        }
     }';
-} else {
+
 	$dynamic_style .= '
-    html body.woocommerce ul.tabs.wc-tabs {
-        border-top: ' . $tabs_bottom_line['all'] . 'px solid ' . $tabs_bottom_line['color'] . ' !important;  
-    }
-    .sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs li.active::before {
-        bottom: unset;
-        top: 0;
-    }
-    /* Active tab bottom line in Block theme */
-    html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li:hover{
+    .theme-hello-elementor div.product .woocommerce-tabs ul.tabs li {
         border: 0;
     }
-    html body.sptpro-smart-tabs .wp-block-woocommerce-product-details ul.tabs.wc-tabs li.active {
-        border-bottom: 0;
-        border-top: ' . $bottom_border_width . 'px solid ' . $bottom_border_color . ' !important;
+    .woocommerce div.product .woocommerce-tabs {
+        flex-direction: row-reverse;
+    }
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.wc-tabs li {
+        border: none !important;
+        border-right: ' . $bottom_border_width . 'px solid  ' . $tab_name_bg_color . ' !important;
+    }
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs ul.wc-tabs li.active {
+        border-right-color: ' . $bottom_border_color . ' !important;
+        border-left: ' . $bottom_border_width . 'px solid ' . $tab_name_active_color . ';
+    }
+    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper #tab-description,
+    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-additional_information,
+    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-reviews,
+    body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel {
+        margin-right: -' . $tabs_vertical_line['all'] . 'px !important;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-right: ' . $space_between_title_and_desc . 'px;  /* Used as Vertical Gap */
+        border-right: ' . $tabs_vertical_line['all'] . 'px solid ' . $tabs_vertical_line['color'] . ' !important;
+    }
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs.wc-tabs-wrapper ul.wc-tabs li.active::after {
+        left: 24px;
+    }
+    .sptpro-smart-tabs.woocommerce div.product .woocommerce-tabs.wc-tabs-wrapper ul.wc-tabs li::after {
+        left: -1em;
+        transform: rotate(180deg);
+    }
+    /* Remove top border from content panel from elementor preview tab */
+    .woocommerce.sptpro-smart-tabs div.product.elementor .woocommerce-tabs .panel {
+        border-top: none;
+    }
+    .woocommerce.sptpro-smart-tabs #content div.product.elementor .woocommerce-tabs ul.tabs::before {
+        display: none;
     }';
 }
 
@@ -203,50 +266,70 @@ $dynamic_style .= '
     }
 ';
 
-/**
- * Typography Section Styling for Woo Product Tabs Area.
- */
-$product_tabs_title_font_load = isset( $sp_woo_tabs_settings['product_tabs_title_font_load'] ) ? $sp_woo_tabs_settings['product_tabs_title_font_load'] : false;
-$product_tabs_title_typo      = isset( $sp_woo_tabs_settings['product_tabs_title_typo'] ) ? $sp_woo_tabs_settings['product_tabs_title_typo'] : '';
 
+/**
+ * Typography Section Styling for Woo Tab Name.
+ */
 $dynamic_style .= '
     body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li a,
     html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs ul.wc-tabs li a {
         padding: 0;
         box-sizing: border-box;
         font-size: ' . $product_tabs_title_typo['font-size'] . 'px;
-        color: ' . $product_tabs_title_typo['color'] . ' !important;
-    }';
+        text-align: ' . $product_tabs_title_typo['text-align'] . ';
+        text-transform: ' . $product_tabs_title_typo['text-transform'] . ';
+        line-height: ' . $product_tabs_title_typo['line-height'] . 'px;
+        letter-spacing: ' . $product_tabs_title_typo['letter-spacing'] . 'px;
+        color: ' . $tab_name_color['color'] . ' !important;
+    ';
 
-$dynamic_style .= '
-    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs ul.tabs.wc-tabs li.active a {
-        color: ' . $product_tabs_title_typo['active_color'] . ';
+if ( ! empty( $product_tabs_title_typo['font-family'] ) ) {
+	$font_style     = ! empty( $product_tabs_title_typo['font-style'] ) ? $product_tabs_title_typo['font-style'] : 'normal';
+	$dynamic_style .= '
+        font-family: ' . $product_tabs_title_typo['font-family'] . ';
+        font-style: ' . $font_style . ';
+        font-weight: ' . $product_tabs_title_typo['font-weight'] . ';
+        ';
+}
+
+// Close the tab title typography block & start the hover/active/focus state.
+$dynamic_style .= '} 
+    html body.woocommerce.sptpro-smart-tabs div.product .woocommerce-tabs ul.tabs.wc-tabs li.active a {
+        color: ' . $tab_name_color['active-color'] . ' !important;
     } 
     html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs ul.tabs.wc-tabs li.active a:focus {
     outline: none !important;}
     html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs ul.tabs.wc-tabs li:not(.active) a:hover {
-        color: ' . $product_tabs_title_typo['hover_color'] . ' !important;
+        color: ' . $tab_name_color['hover-color'] . ' !important;
     }
 ';
 
 /**
- * Typography Section Styling for Woo Description Area.
+ * Typography Section Styling for Woo product Description Area.
  */
-$product_desc_font_load = isset( $sp_woo_tabs_settings['product_desc_font_load'] ) ? $sp_woo_tabs_settings['product_desc_font_load'] : false;
-$product_desc_typo      = isset( $sp_woo_tabs_settings['product_desc_typo'] ) ? $sp_woo_tabs_settings['product_desc_typo'] : '';
-
 $dynamic_style .= '
 html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper #tab-description,
  html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-additional_information,
  html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel#tab-reviews,
 html body.woocommerce .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel .sp-tab__tab-content {
+    text-align: ' . $product_desc_typo['text-align'] . ';
+    text-transform: ' . $product_desc_typo['text-transform'] . ';
+    font-size: ' . $product_desc_typo['font-size'] . 'px;
+    line-height: ' . $product_desc_typo['line-height'] . 'px;
+    letter-spacing: ' . $product_desc_typo['letter-spacing'] . 'px;
     font-size: ' . $product_desc_typo['font-size'] . 'px !important;
-    color: ' . $product_desc_typo['color'] . ' !important;
-}';
+    color: ' . $description_font_color . ' !important;';
 
-// Advanced Settings.
-$product_tabs_advanced = get_option( 'sp_products_tabs_advanced' ); // Main key of woo product tabs advanced.
-$show_tabs_on_mobile   = isset( $product_tabs_advanced['show_product_tabs_on_mobile'] ) ? $product_tabs_advanced['show_product_tabs_on_mobile'] : false;
+if ( ! empty( $product_desc_typo['font-family'] ) ) {
+	$font_style     = ! empty( $product_desc_typo['font-style'] ) ? $product_desc_typo['font-style'] : 'normal';
+	$dynamic_style .= '
+        font-family: ' . $product_desc_typo['font-family'] . ';
+        font-style: ' . $font_style . ';
+        font-weight: ' . $product_desc_typo['font-weight'] . ';';
+}
+// Close the description typography block.
+$dynamic_style .= '}';
+
 // Show/Hide tabs on mobile.
 if ( ! $show_tabs_on_mobile ) {
 	$dynamic_style .= '
@@ -254,6 +337,16 @@ if ( ! $show_tabs_on_mobile ) {
         .woocommerce .woocommerce-tabs.wc-tabs-wrapper {
             display: none !important;
         }
+    }';
+}
+
+// Hide WooCommerce’s default related products section based on the show/hide option.
+if ( ! $show_wc_default_related_products ) {
+	$dynamic_style .= '
+    html body.woocommerce.sptpro-smart-tabs .wp-block-woocommerce-product-collection,
+    html body.woocommerce.sptpro-smart-tabs .wp-block-woocommerce-related-products,
+    html body.woocommerce.sptpro-smart-tabs section.related.products {
+        display: none;
     }';
 }
 
@@ -298,20 +391,6 @@ if ( $preloader ) {
     body.sptpro-tabs-loaded .sptpro-tabs-preloader {
         display: none;
     }';
-}
-
-// Add styles compatibility for Divi theme.
-if ( 'divi' === strtolower( get_template() ) ) {
-	$dynamic_style .= '
-    html body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li.active {
-        background-color: ' . $tab_name_active_color . ' !important;
-    }body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li.active:before {
-        display: block; }   
-    body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li a {
-        width: 100%;
-        padding: ' . $_name_padding_top . 'px ' . $_name_padding_right . 'px ' . $_name_padding_bottom . 'px ' . $_name_padding_left . 'px !important;
-    }body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li:not(.active) a:hover {
-        color: ' . $product_tabs_title_typo['hover_color'] . ' !important;}';
 }
 
 // Tabs on small screen.
@@ -383,4 +462,59 @@ if ( 'accordion_mode' === $tabs_on_small_screen ) {
 	$dynamic_style .= '
         }
     ';
+}
+
+/**
+ * Divi theme compatibility:
+ * When the active theme is Divi, apply specific dynamic CSS to adjust the WooCommerce
+ * tabs layout and styles inside the "#content-area" wrapper of Divi theme.
+ */
+if ( 'divi' === strtolower( get_template() ) ) {
+	$dynamic_style .= '
+    /* --- Product tab style ---  */
+	body.woocommerce.sptpro-smart-tabs #content-area .woocommerce-tabs {
+	    border: none;
+	}
+	body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs {
+	    background: none !important;
+	}
+    body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li.active,
+    body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li {
+        border-right: 0;
+    }
+    html body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li.active {
+        background-color: ' . $tab_name_active_color . ' !important;
+    }body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li.active:before {
+        display: block; }
+    body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li a {
+        width: 100%;
+        padding: ' . $_name_padding_top . 'px ' . $_name_padding_right . 'px ' . $_name_padding_bottom . 'px ' . $_name_padding_left . 'px !important;
+    }body.woocommerce.sptpro-smart-tabs #content-area div.product .woocommerce-tabs ul.tabs li:not(.active) a:hover {
+        color: ' . $tab_name_color['hover-color'] . ' !important;}';
+}
+
+/**
+ * Avada theme compatibility:
+ * When the active theme is Avada, apply specific dynamic CSS to adjust the WooCommerce tabs layout and styles.
+ */
+if ( 'avada' === strtolower( get_template() ) ) {
+	$dynamic_style .= '
+    /* --- Product tab style ---  */
+	html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs ul.wc-tabs {
+        width: 100%;
+        float: none;
+    }
+    .sptpro-smart-tabs .woocommerce-tabs .tabs li a {
+        border-bottom: 0;
+    }
+    html body.woocommerce.sptpro-smart-tabs ul.wc-tabs li.active a {
+        background-color: ' . $tab_name_active_color . ' !important;
+    }
+    html body.woocommerce.sptpro-smart-tabs .woocommerce-tabs .panel {
+        border: none;
+    }
+    .sptpro-tabs-loaded .sp-tab__tab-content .featured-image.crossfade-images {
+        height: auto !important;
+    }
+';
 }

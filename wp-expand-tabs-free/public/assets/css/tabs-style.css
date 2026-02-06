@@ -45,6 +45,10 @@ html body.sptpro-smart-tabs.theme-storefront ul.tabs.wc-tabs {
     position: relative;
 }
 
+body.woocommerce.sptpro-smart-tabs .woocommerce-tabs.wc-tabs-wrapper .woocommerce-Tabs-panel .sp-tab__tab-content iframe {
+    max-width: 100%;
+}
+
 /* Hide duplicate tab on Block Theme. */
 /* .woocommerce-uses-block-theme div:has(.wc-tabs-wrapper)+.wp-block-woocommerce-product-details .woocommerce-tabs.wc-tabs-wrapper {
     display: none !important;

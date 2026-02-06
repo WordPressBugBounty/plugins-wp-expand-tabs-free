@@ -383,6 +383,7 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 					array(
 						'pluginsUrl'           => WP_TABS_URL,
 						'adminImgUrl'          => WP_TABS_URL . 'admin/img/woo-tabs-position',
+						'adminTabsAlignment'   => WP_TABS_URL . 'admin/img/tabs-alignment',
 						'ajax_url'             => admin_url( 'admin-ajax.php' ),
 						'previewTabConfigJS'   => esc_url( WP_TABS_URL . 'public/assets/js/wp-tabs-public' . $min . '.js' ),
 						'previewCollapseTabJS' => esc_url( WP_TABS_URL . 'public/assets/js/collapse' . $min . '.js' ),
@@ -462,6 +463,65 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 		}
 
 		/**
+		 * Render the "Upgrade to Pro" section markup.
+		 *
+		 * @return string HTML content for the upgrade section.
+		 */
+		public static function upgrade_to_pro_section() {
+			return '<div class="smart-tabs-upgrade-to-pro-section">
+				<h2>Unlock the Full Potential of Your Product Tabs with Pro</h2>
+				<p>
+					Upgrade to Pro and unlock powerful features that take your product pages to the next level – boosting engagement and sales,
+					all managed in one place.
+				</p>
+				<div class="features-wrapper">
+					<ul class="features-list">
+						<li><i class="icon-feature-list-checkmark"></i> 6+ Product Tab Layouts 
+							(<a href="https://demo.wptabs.com/product/nike-sportswear-jdi/" target="_blank">Horizontal</a>, 
+							<a href="https://demo.wptabs.com/vertical-left-product-tabs/product/meta-quest-3-vr-headset/" target="_blank">Vertical</a>,
+							<a href="https://demo.wptabs.com/accordion-product-tabs/product/hot-air-balloon-flight/" target="_blank">Accordion</a>, etc.)
+						</li>
+						<li><i class="icon-feature-list-checkmark"></i> Override/Edit Tab Content Per Product</li>
+						<li><i class="icon-feature-list-checkmark"></i> Create Global Tabs for All Products or Selected Categories</li>
+						<li><i class="icon-feature-list-checkmark"></i> Show Tabs for Specific Products, Categories, Tags, Brands, SKUs, etc.</li>
+						<li><i class="icon-feature-list-checkmark"></i> Add Image Gallery Tabs with Lightbox</li>
+						<li><i class="icon-feature-list-checkmark"></i> Add Video Gallery Tabs with Lightbox (Self-Hosted, YouTube, etc.)</li>
+						<li><i class="icon-feature-list-checkmark"></i> Add FAQ Tabs to Answer Common Questions</li>
+						<li><i class="icon-feature-list-checkmark"></i> Add Download Tabs for PDFs, Manuals, etc.</li>
+						<li><i class="icon-feature-list-checkmark"></i> Add Google Map Tabs for Store Address & Pickup Points</li>
+						<li><i class="icon-feature-list-checkmark"></i> Add Contact Form Tabs to Get Customer Queries</li>
+					</ul>
+					<ul class="features-list">
+						<li><i class="icon-feature-list-checkmark"></i> 5 Horizontal Tabs Styles 
+							(<a href="https://demo.wptabs.com/product/nike-sportswear-jdi/" target="_blank">Bottom Line</a>, 
+							<a href="https://demo.wptabs.com/horizontal-topline-tabs-style/product/apple-watch-ultra-2/" target="_blank">Top Line</a>,
+							<a href="https://demo.wptabs.com/horizontal-classic-tabs-style/product/adjustable-dumbbell-set/" target="_blank">Classic</a>,
+							<a href="https://demo.wptabs.com/horizontal-button-tabs-style/product/meta-quest-3-vr-headset/" target="_blank">Button</a>,
+							<a href="https://demo.wptabs.com/horizontal-rounded-tabs-style/product/the-alchemist/" target="_blank">Rounded</a>, etc.)
+						</li>
+						<li><i class="icon-feature-list-checkmark"></i> 4 Vertical Tabs Styles 
+							(<a href="https://demo.wptabs.com/vertical-left-product-tabs/product/meta-quest-3-vr-headset/" target="_blank">Default</a>, 
+							<a href="https://demo.wptabs.com/vertical-left-classic-tabs-style/product/apple-watch-ultra-2/" target="_blank">Classic</a>,
+							<a href="https://demo.wptabs.com/vertical-left-button-tabs-style/product/adjustable-dumbbell-set/" target="_blank">Button</a>,
+							<a href="https://demo.wptabs.com/vertical-left-rounded-tabs-style/product/ai-powered-design-workshop/" target="_blank">Rounded</a>, etc.)
+						</li>
+						<li><i class="icon-feature-list-checkmark"></i> Add Tab Icon from Library or Upload Custom</li>
+						<li><i class="icon-feature-list-checkmark"></i> Reorder Tabs Easily with Drag & Drop</li>
+						<li><i class="icon-feature-list-checkmark"></i> Rename Default WooCommerce Tabs (Description, Additional Info, Reviews)</li>
+						<li><i class="icon-feature-list-checkmark"></i> Disable Default WooCommerce Tabs</li>
+						<li><i class="icon-feature-list-checkmark"></i> Replace or Hide Default Related Products with Custom, Specific, Best-Selling, or On-Sale Products.</li>
+						<li><i class="icon-feature-list-checkmark"></i> Works great with Elementor and Divi single product templates</li>
+						<li><i class="icon-feature-list-checkmark"></i> 200+ Customizable Options to Match Your Store Style</li>
+						<li><i class="icon-feature-list-checkmark"></i> Dedicated customer support from our top-tier team and much more.</li>
+					</ul>
+				</div>
+
+				
+				<a href="https://wptabs.com/pricing/" target="_blank" class="upgrade-btn">Upgrade to Pro</a>
+			</div>';
+		}
+
+		/**
 		 * Add a new framework field.
 		 *
 		 * @param array  $field The fields array.
@@ -532,8 +592,20 @@ if ( ! class_exists( 'SP_WP_TABS' ) ) {
 				if ( ! empty( $field['title'] ) ) {
 					$subtitle = ( ! empty( $field['subtitle'] ) ) ? '<p class="wptabspro-text-subtitle">' . $field['subtitle'] . '</p>' : '';
 
-					$title_help = ( ! empty( $field['title_help'] ) ) ? '<span class="wptabspro-help wptabspro-title-help"><span class="wptabspro-help-text">' . $field['title_help'] . '</span> <span class="tooltip-icon"><img src="' . self::include_plugin_url( 'assets/images/info.svg' ) . '"></span></span>' : '';
-					echo '<div class="wptabspro-title"><h4>' . wp_kses_post( $field['title'] ) . '</h4>' . wp_kses_post( $title_help . $subtitle ) . '</div>';
+					$title_help = '';
+					if ( ! empty( $field['title_help'] ) || ! empty( $field['title_video'] ) ) {
+						$help_text       = ! empty( $field['title_help'] ) ? $field['title_help'] : '';
+						$icon_type       = ! empty( $field['title_video'] ) ? 'video_info.svg' : 'info.svg';
+						$video_help_attr = ! empty( $field['title_video'] ) ? ' title-video-help' : '';
+						$title_help      = sprintf(
+							'<span class="wptabspro-help wptabspro-title-help">
+							<span class="wptabspro-help-text ' . esc_attr( $video_help_attr ) . '">%s</span><span class="tooltip-icon"><img src="%s"></span></span>',
+							$help_text . ( ! empty( $field['title_video'] ) ? $field['title_video'] : '' ),
+							self::include_plugin_url( 'assets/images/' . $icon_type )
+						);
+					}
+
+					echo '<div class="wptabspro-title"><h4>' . wp_kses_post( $field['title'] ) . '</h4>' . $title_help . wp_kses_post( $subtitle ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 
 				echo ( ! empty( $field['title'] ) || ! empty( $field['fancy_title'] ) ) ? '<div class="wptabspro-fieldset">' : '';

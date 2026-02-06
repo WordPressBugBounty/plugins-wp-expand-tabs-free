@@ -60,6 +60,28 @@ class WP_Tabs_Product_Tab {
 	private $min;
 
 	/**
+	 * Stores the advanced tab settings loaded from the WordPress options table.
+	 *
+	 * @var array
+	 */
+	protected static $advanced_tab_settings = array();
+
+	/**
+	 * Flag indicating whether to skip loading the default product tab styles.
+	 *
+	 * @var bool
+	 */
+	protected static $is_skip_product_style = false;
+
+	/**
+	 * Flag indicating whether the Divi Builder is being used.
+	 *
+	 * @since 3.2.0
+	 * @var bool
+	 */
+	protected static $use_divi_builder = null;
+
+	/**
 	 * WooCommerce product tab construct function.
 	 */
 	public function __construct() {
@@ -69,6 +91,9 @@ class WP_Tabs_Product_Tab {
 			return; // Product Tab disabled — don't hook anything.
 		}
 
+		// Load the advanced tab settings from the database and store them statically for reuse.
+		self::$advanced_tab_settings = get_option( 'sp_products_tabs_advanced' );
+
 		add_action( 'wp_ajax_sp_save_tabs_order', array( $this, 'save_product_tabs_ordered_value' ) );
 		add_action( 'save_post_sp_products_tabs', array( $this, 'sp_handle_tab_meta_and_order' ), 5, 3 );
 		add_action( 'pre_get_posts', array( $this, 'sp_products_tabs_orderby_menu_order' ) ); // Ensure tabs are ordered by menu order in queries.
@@ -76,12 +101,29 @@ class WP_Tabs_Product_Tab {
 		// Admin and public assets for product tabs.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_product_admin_tabs_assets' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_product_tabs_assets' ) );
-		add_filter( 'body_class', array( $this, 'sptpro_add_tabs_body_class' ) );
+
 		// Use minified files in production unless in development mode.
 		$this->min = ( apply_filters( 'enqueue_dev_mode', false ) || WP_DEBUG ) ? '' : '.min';
 
 		add_filter( 'bulk_post_updated_messages', array( $this, 'sp_tabs_bulk_updated_messages' ), 10, 2 );
 		add_filter( 'edit_posts_per_page', array( $this, 'set_sp_products_tabs_admin_items_per_page' ), 10, 2 );
+
+		self::$is_skip_product_style = self::get_advanced_setting( 'skip_product_tab_style', false );
+
+		if ( ! self::$is_skip_product_style ) {
+			add_filter( 'body_class', array( $this, 'sptpro_add_tabs_body_class' ) );
+		}
+	}
+
+	/**
+	 * Get Advanced Tab Settings.
+	 *
+	 * @param string $key The setting key to retrieve.
+	 * @param mixed  $settings_default The default value to return if the key does not exist.
+	 * @return mixed The value of the setting if it exists, otherwise the default value.
+	 */
+	protected static function get_advanced_setting( $key, $settings_default = null ) {
+		return self::$advanced_tab_settings[ $key ] ?? $settings_default;
 	}
 
 	/**
@@ -348,9 +390,11 @@ class WP_Tabs_Product_Tab {
 	public function sptpro_woo_tab( $tabs ) {
 		$product_id = $this->get_woo_product_id();
 
-		$product = wc_get_product( $product_id );
-		if ( ! $product ) {
-			return array();
+		if ( $product_id > 0 ) {
+			$product = wc_get_product( $product_id );
+		}
+		if ( ! $product instanceof WC_Product ) {
+			return $tabs;
 		}
 
 		$tabs = $this->filter_hidden_default_tabs( $tabs, $product_id );
@@ -362,6 +406,8 @@ class WP_Tabs_Product_Tab {
 			}
 		}
 		unset( $tab ); // avoid reference issues.
+
+		$product_brands = wp_get_post_terms( $product_id, 'product_brand', array( 'fields' => 'ids' ) );
 
 		$args = array(
 			'post_type'              => 'sp_products_tabs',
@@ -391,7 +437,7 @@ class WP_Tabs_Product_Tab {
 				}
 
 				// Check Tabs visibility.
-				if ( ! $this->is_tab_visible_for_product( $product_id, $settings ) ) {
+				if ( ! $this->is_tab_visible_for_product( $product_id, $settings, $product_brands ) ) {
 					continue;
 				}
 
@@ -551,20 +597,25 @@ class WP_Tabs_Product_Tab {
 	 *
 	 * @param int   $product_id         The WooCommerce product ID.
 	 * @param array $settings           Tab settings from post meta.
+	 * @param array $product_brands     Array of product brand term IDs.
 	 *
 	 * @return bool True if the tab should be shown, false otherwise.
 	 */
-	public static function is_tab_visible_for_product( $product_id, $settings ) {
+	public static function is_tab_visible_for_product( $product_id, $settings, $product_brands ) {
 		$show_in = $settings['tabs_show_in'] ?? 'all_product';
 
 		$check_exclude = $settings['tabs_exclude'] ?? false;
 		$excluded      = $settings['exclude_specific'] ?? array();
+		$show_brands   = $settings['tabs_show_by_brands'] ?? array();
 
 		if ( 'specific_product' !== $show_in && $check_exclude && ! empty( $excluded ) && in_array( $product_id, $excluded, false ) ) {
 			return false;
 		}
 
 		switch ( $show_in ) {
+			case 'brand':
+				return ! empty( array_intersect( array_map( 'absint', (array) $show_brands ), $product_brands ) );
+
 			case 'all_product':
 			default:
 				return true;
@@ -593,14 +644,6 @@ class WP_Tabs_Product_Tab {
 		// If no product but in Divi builder, load first product for preview.
 		if ( ( isset( $_GET['et_fb'] ) || isset( $_GET['et_pb_preview'] ) ) && ! $product_id ) {
 
-			// Verify nonce from rest api.
-			if ( isset( $_SERVER['HTTP_X_WP_NONCE'] ) ) {
-				$rest_nonce = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_WP_NONCE'] ) );
-				if ( ! wp_verify_nonce( $rest_nonce, 'wp_rest' ) ) {
-					wp_send_json_error( array( 'message' => 'Invalid REST nonce' ), 403 );
-				}
-			}
-
 			$preview_product = get_posts(
 				array(
 					'post_type'      => 'product',
@@ -615,14 +658,7 @@ class WP_Tabs_Product_Tab {
 			}
 		}
 
-		if ( ! $product_id ) {
-			echo '<div class="sp-tab__tab-content">';
-			echo esc_html__( 'Product data unavailable.', 'wp-expand-tabs-free' );
-			echo '</div>';
-			return;
-		}
-
-		return $product_id;
+		return intval( $product_id );
 	}
 
 	/**
@@ -748,7 +784,6 @@ class WP_Tabs_Product_Tab {
 		$product_ids = $this->sp_get_tabbed_products(
 			array(
 				'query_type'      => $filter_products,
-				'taxonomy'        => 'product_cat',
 				'limit'           => $_total_products,
 				'orderby'         => $products_order_by,
 				'order'           => $products_order,
@@ -826,30 +861,34 @@ class WP_Tabs_Product_Tab {
 				$product_id = absint( $args['current_post_id'] );
 
 				// Bail early if no valid product ID or taxonomy doesn't exist.
-				if ( ! $product_id || ! taxonomy_exists( $args['taxonomy'] ) ) {
+				if ( ! $product_id ) {
 					break;
 				}
 
-				$term_ids = wp_get_post_terms(
-					$product_id,
-					$args['taxonomy'],
-					array( 'fields' => 'ids' )
-				);
-
-				// Ensure we have valid, non-empty terms.
-				if ( is_wp_error( $term_ids ) || empty( $term_ids ) ) {
-					break;
-				}
+				$term_ids_cat = wp_get_post_terms( $product_id, 'product_cat', array( 'fields' => 'ids' ) );
+				$term_ids_tag = wp_get_post_terms( $product_id, 'product_tag', array( 'fields' => 'ids' ) );
 
 				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				$query_args['tax_query'] = array(
-					array(
-						'taxonomy' => $args['taxonomy'],
-						'field'    => 'id',
-						'terms'    => $term_ids,
-					),
+					'relation' => 'OR',
 				);
-				// Exclude the current product from the results.
+
+				if ( ! empty( $term_ids_cat ) ) {
+					$query_args['tax_query'][] = array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'id',
+						'terms'    => $term_ids_cat,
+					);
+				}
+
+				if ( ! empty( $term_ids_tag ) ) {
+					$query_args['tax_query'][] = array(
+						'taxonomy' => 'product_tag',
+						'field'    => 'id',
+						'terms'    => $term_ids_tag,
+					);
+				}
+
 				// @codingStandardsIgnoreLine
 				$query_args['post__not_in'] = array( $product_id );
 				break;
@@ -996,7 +1035,9 @@ class WP_Tabs_Product_Tab {
 	 * Enqueue product tabs assets.
 	 */
 	public function enqueue_product_tabs_assets() {
-		if ( ! is_product() ) {
+		$is_elementor_preview = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->preview->is_preview_mode();
+
+		if ( ! is_product() && ! $this->is_divi_builder_active() && ! $is_elementor_preview ) {
 			return;
 		}
 
@@ -1007,8 +1048,25 @@ class WP_Tabs_Product_Tab {
 		}
 
 		wp_enqueue_style( 'sptpro-product-tabs-style', WP_TABS_URL . 'public/assets/css/tabs-style' . $this->min . '.css', array(), WP_TABS_VERSION, 'all' );
+
+		if ( self::$is_skip_product_style ) {
+			return;
+		}
+
 		$dynamic_style = '';
-		include SP_TABS_DYNAMIC_STYLES_DIR . '/woo-tabs-style.php';
+		// Load common configuration variables and settings that define the product tabs appearance.
+		include SP_TABS_DYNAMIC_STYLES_DIR . '/woo-tabs-config.php';
+		$is_divi_theme = 'divi' === strtolower( wp_get_theme()->get( 'Name' ) );
+
+		// Check if the Divi Builder (visual or classic) has been used for this specific product page.
+		if ( $is_divi_theme && $this->is_divi_builder_active() ) {
+			// Divi-specific compatibility styles to correctly target Divi's generated HTML markup.
+			include SP_TABS_DYNAMIC_STYLES_DIR . '/woo-tabs-divi-comatibility-styles.php';
+		} else {
+			// default styling designed for standard WooCommerce tab markup.
+			include SP_TABS_DYNAMIC_STYLES_DIR . '/woo-tabs-style.php';
+		}
+
 		$load_dynamic_styles = WP_Tabs_Shortcode::minify_output( $dynamic_style );
 		wp_add_inline_style( 'sptpro-product-tabs-style', $load_dynamic_styles );
 
@@ -1062,6 +1120,49 @@ class WP_Tabs_Product_Tab {
 	}
 
 	/**
+	 * Check if the current product/page is being rendered or edited with Divi Builder.
+	 *
+	 * Handles:
+	 * - Classic Builder
+	 * - Visual Builder (Frontend)
+	 * - Theme Builder Templates
+	 *
+	 * @return bool
+	 */
+	public function is_divi_builder_active() {
+		if ( is_null( self::$use_divi_builder ) ) {
+			self::$use_divi_builder = false;
+
+			// Detect if Divi Theme Builder is rendering a layout.
+			if ( function_exists( 'et_theme_builder_overrides_layout' ) && et_theme_builder_overrides_layout( ET_THEME_BUILDER_BODY_LAYOUT_POST_TYPE ) ) {
+				self::$use_divi_builder = true;
+			}
+
+			// Detect Divi Frontend Builder (Visual Builder).
+			if ( ! self::$use_divi_builder && function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled() ) {
+				self::$use_divi_builder = true;
+			}
+
+			// Detect product-specific builder usage (Classic or Visual).
+			if ( ! self::$use_divi_builder ) {
+				$product_id = $this->get_woo_product_id();
+
+				if ( $product_id ) {
+					$use_divi_visual_builder  = get_post_meta( $product_id, '_et_pb_use_builder', true );
+					$use_divi_classic_builder = get_post_meta( $product_id, 'et_pb_use_builder', true );
+
+					if ( 'on' === $use_divi_visual_builder || 'on' === $use_divi_classic_builder ) {
+						self::$use_divi_builder = true;
+					}
+				}
+			}
+		}
+
+		return self::$use_divi_builder;
+	}
+
+
+	/**
 	 * Add the main tabs class to the body for product tabs.
 	 *
 	 * @since 2.0.2
@@ -1070,7 +1171,9 @@ class WP_Tabs_Product_Tab {
 	 * @return array
 	 */
 	public function sptpro_add_tabs_body_class( $classes ) {
-		if ( is_product() ) {
+		$is_elementor_preview = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->preview->is_preview_mode();
+
+		if ( is_product() || $this->is_divi_builder_active() || $is_elementor_preview ) {
 			// Add the main tabs class.
 			$classes[] = 'sptpro-smart-tabs';
 		}

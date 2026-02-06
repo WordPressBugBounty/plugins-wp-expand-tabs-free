@@ -158,6 +158,14 @@ class WP_Tabs_Public {
 			FILTER_VALIDATE_BOOLEAN
 		);
 
+		$advanced_settings      = get_option( 'sp_products_tabs_advanced' );
+		$skip_product_tab_style = $advanced_settings['skip_product_tab_style'] ?? false;
+		// If "Skip Product Tab Style" is enabled in advanced settings, disable the tab layout style of the plugin
+		// so that no accordion or tab-specific scripts/styles are applied on the frontend.
+		if ( $skip_product_tab_style ) {
+			$product_tabs_layout = '';
+		}
+
 		wp_localize_script(
 			'sptpro-tabs-type',
 			'sp_tabs_ajax',

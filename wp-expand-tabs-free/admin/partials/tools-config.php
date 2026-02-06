@@ -52,6 +52,7 @@ SP_WP_TABS::createSection(
 				'title'    => __( 'Choose What To Export', 'wp-expand-tabs-free' ),
 				'multiple' => false,
 				'options'  => array(
+					'all_product_tabs'    => __( 'All Product Tabs', 'wp-expand-tabs-free' ),
 					'all_shortcodes'      => __( 'All Tab Groups', 'wp-expand-tabs-free' ),
 					'selected_shortcodes' => __( 'Selected Tab Group(s)', 'wp-expand-tabs-free' ),
 				),

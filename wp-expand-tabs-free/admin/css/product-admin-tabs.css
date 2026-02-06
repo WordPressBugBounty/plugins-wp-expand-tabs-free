@@ -45,9 +45,22 @@
 
 #sp_product_tabs_panel .sp-product-tabs-notice {
 	font-size: 14px;
-    padding: 0 0 20px 25px;
+    padding: 0 25px 20px 25px;
 }
 
+#sp_product_tabs_panel .wptabspro-notice.wptabspro-notice-normal {
+    padding: 0;
+    width: auto;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #E7F2E7;
+    padding: 12px 20px 12px 20px;
+    border-radius: 4px;
+	padding: 14px 20px;
+    border: 1px solid #3d9e564d;
+}
 /* Gallery Image Preview */
 .sp-tab-accordion-wrapper .sp-gallery-preview {
 	display: flex;

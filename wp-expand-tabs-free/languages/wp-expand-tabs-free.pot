@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Tabs 2.2.11\n"
-"POT-Creation-Date: 2025-04-14 17:34+0600\n"
+"POT-Creation-Date: 2025-10-08 12:52+0600\n"
 "PO-Revision-Date: 2023-10-02 10:14+0600\n"
 "Last-Translator: \n"
 "Language-Team: ShapedPlugin <support@shapedplugin.com>\n"
@@ -19,19 +19,19 @@ msgstr ""
 #: admin/ElementorAddons/widgets/shortcode.php:49
 #: admin/GutenbergBlock/src/index.js:17 admin/GutenbergBlock/src/index.js:79
 #: admin/GutenbergBlock/src/index.js:111 admin/help-page/help.php:107
-#: admin/help-page/help.php:114 admin/help-page/help.php:835
-#: admin/help-page/help.php:836 admin/partials/metabox-config.php:53
-#: includes/class-wp-tabs-cpt.php:76
-msgid "WP Tabs"
+#: admin/help-page/help.php:114 admin/help-page/help.php:977
+#: admin/help-page/help.php:978 admin/partials/metabox-config.php:53
+#: admin/partials/metabox-config.php:1362 includes/class-wp-tabs-cpt.php:82
+msgid "Smart Tabs"
 msgstr ""
 
 #: admin/ElementorAddons/widgets/shortcode.php:126
-#: admin/partials/metabox-config.php:79
+#: admin/partials/metabox-config.php:141 admin/partials/metabox-config.php:1399
 msgid "Content"
 msgstr ""
 
 #: admin/ElementorAddons/widgets/shortcode.php:134
-msgid "WP Tabs Shortcode(s)"
+msgid "Smart Tabs Shortcode(s)"
 msgstr ""
 
 #: admin/GutenbergBlock/build/index.js:1
@@ -52,7 +52,7 @@ msgid "a"
 msgstr ""
 
 #: admin/GutenbergBlock/src/index.js:19
-msgid "Use WP Tabs to insert a tabs group in your page"
+msgid "Use Smart Tabs to insert a tabs group in your page"
 msgstr ""
 
 #: admin/GutenbergBlock/src/index.js:82
@@ -67,23 +67,69 @@ msgstr ""
 msgid "Select a tabs group"
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:98
+#: admin/class-smart-tabs-free-admin.php:146
+#: admin/class-smart-tabs-free-admin.php:391
+#: admin/partials/option-config.php:63 includes/class-wp-tabs-cpt.php:133
+#: includes/class-wp-tabs-cpt.php:144 includes/class-wp-tabs-cpt.php:145
+msgid "Product Tabs"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:148
+#: admin/partials/models/fields/border/border.php:144
+#: admin/partials/smart-tab-settings.php:23
+msgid "Style"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:150
+#: admin/partials/smart-tab-settings.php:665
+msgid "Advanced"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:178
+#: admin/partials/metabox-config.php:1180
+#: admin/partials/smart-tab-settings.php:608
+msgid "Tabs Name"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:179
+#: admin/partials/metabox-config.php:137 admin/partials/metabox-config.php:1392
+msgid "Tab Content Type"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:180
+msgid "Show Tab In"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:181
+msgid "Enable/Disable"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:239
+#: admin/partials/metabox-config.php:1495 admin/partials/option-config.php:117
+msgid "All Products"
+msgstr ""
+
+#: admin/class-smart-tabs-free-admin.php:251
+msgid "Brand"
+msgstr ""
+
+#: admin/class-wp-tabs-admin.php:102
 msgid "No tabs to duplicate has been supplied!"
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:115
+#: admin/class-wp-tabs-admin.php:119
 msgid "No shortcode to duplicate has been supplied!"
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:179
+#: admin/class-wp-tabs-admin.php:187
 msgid "Tabs creation failed, could not find original tabs: "
 msgstr ""
 
-#: admin/class-wp-tabs-admin.php:193
+#: admin/class-wp-tabs-admin.php:201
 msgid "Duplicate"
 msgstr ""
 
-#: admin/help-page/help.php:108 admin/help-page/help.php:427
+#: admin/help-page/help.php:108 admin/help-page/help.php:428
 msgid "Recommended"
 msgstr ""
 
@@ -92,7 +138,7 @@ msgid "Lite vs Pro"
 msgstr ""
 
 #: admin/help-page/help.php:121
-msgid "WP Tabs Help"
+msgid "Smart Tabs Help"
 msgstr ""
 
 #: admin/help-page/help.php:122
@@ -134,323 +180,374 @@ msgid ""
 msgstr ""
 
 #: admin/help-page/help.php:405
-msgid "WP Tabs Lite"
+msgid "Smart Tabs Lite"
 msgstr ""
 
 #: admin/help-page/help.php:406
 msgid "upgrading to Pro!"
 msgstr ""
 
-#: admin/help-page/help.php:426
+#: admin/help-page/help.php:427
 msgid "Get Started"
 msgstr ""
 
-#: admin/help-page/help.php:428
+#: admin/help-page/help.php:429
 msgid "Lite Vs Pro"
 msgstr ""
 
-#: admin/help-page/help.php:429
+#: admin/help-page/help.php:430
 msgid "About Us"
 msgstr ""
 
-#: admin/help-page/help.php:442
-msgid "Welcome to WP Tabs!"
-msgstr ""
-
 #: admin/help-page/help.php:443
+msgid "Welcome to Smart Tabs!"
+msgstr ""
+
+#: admin/help-page/help.php:444
 msgid ""
-"Thank you for installing WP Tabs! This video will help you get started with "
-"the plugin. Enjoy!"
+"Thank you for installing Smart Tabs! This video will help you get started "
+"with the plugin. Enjoy!"
 msgstr ""
 
-#: admin/help-page/help.php:447 admin/partials/metabox-config.php:141
-#: admin/partials/metabox-config.php:200 admin/partials/metabox-config.php:256
-#: admin/partials/metabox-config.php:294 admin/partials/metabox-config.php:468
-#: admin/partials/metabox-config.php:526 admin/partials/metabox-config.php:538
-#: admin/partials/metabox-config.php:605 admin/partials/metabox-config.php:630
-#: admin/partials/metabox-config.php:690 admin/partials/metabox-config.php:710
-#: admin/partials/metabox-config.php:759 admin/partials/metabox-config.php:792
-msgid "Live Demo"
-msgstr ""
-
-#: admin/help-page/help.php:448 admin/help-page/help.php:758
-msgid "Explore WP Tabs"
-msgstr ""
-
-#: admin/help-page/help.php:454
-msgid "Documentation"
+#: admin/help-page/help.php:450 admin/help-page/help.php:900
+msgid "Explore Smart Tabs"
 msgstr ""
 
 #: admin/help-page/help.php:456
-msgid "Explore WP Tabs plugin capabilities in our enriched documentation."
+msgid "Documentation"
 msgstr ""
 
-#: admin/help-page/help.php:461
-msgid "Technical Support"
+#: admin/help-page/help.php:458
+msgid "Explore Smart Tabs plugin capabilities in our enriched documentation."
 msgstr ""
 
 #: admin/help-page/help.php:463
+msgid "Technical Support"
+msgstr ""
+
+#: admin/help-page/help.php:465
 msgid ""
 "For personalized assistance, reach out to our skilled support team for "
 "prompt help."
 msgstr ""
 
-#: admin/help-page/help.php:464
+#: admin/help-page/help.php:466
 msgid "Ask Now"
 msgstr ""
 
-#: admin/help-page/help.php:468
+#: admin/help-page/help.php:470
 msgid "Join The Community"
 msgstr ""
 
-#: admin/help-page/help.php:470
+#: admin/help-page/help.php:472
 msgid ""
 "Join the official ShapedPlugin Facebook group to share your experiences, "
 "thoughts, and ideas."
 msgstr ""
 
-#: admin/help-page/help.php:471
+#: admin/help-page/help.php:473
 msgid "Join Now"
 msgstr ""
 
-#: admin/help-page/help.php:482
+#: admin/help-page/help.php:484
 msgid "Lite vs Pro Comparison"
 msgstr ""
 
-#: admin/help-page/help.php:483 admin/help-page/help.php:654
+#: admin/help-page/help.php:485 admin/help-page/help.php:796
 msgid "Upgrade to Pro Now!"
 msgstr ""
 
-#: admin/help-page/help.php:489
+#: admin/help-page/help.php:491
 msgid "FEATURES"
 msgstr ""
 
-#: admin/help-page/help.php:490
+#: admin/help-page/help.php:492
 msgid "Lite"
 msgstr ""
 
-#: admin/help-page/help.php:491
+#: admin/help-page/help.php:493
 msgid "PRO"
 msgstr ""
 
-#: admin/help-page/help.php:494
-msgid "All Free Version Features"
+#: admin/help-page/help.php:496
+msgid "WooCommerce Product Tabs"
 msgstr ""
 
-#: admin/help-page/help.php:499
+#: admin/help-page/help.php:501
+msgid "Product Tab Layouts & Templates"
+msgstr ""
+
+#: admin/help-page/help.php:507
+msgid "Vertical Tabs"
+msgstr ""
+
+#: admin/help-page/help.php:513
+msgid "Accordion Layout 🔥"
+msgstr ""
+
+#: admin/help-page/help.php:522
+#, php-format
 msgid ""
-"Tabs Layout Presets (Horizontal Top, Bottom, Vertical Left, Right, and Tabs "
-"Carousel)"
+"%1$sCustom Product Tab Types%2$s (Size Chart, Shipping, Image Gallery, "
+"Videos, FAQs, Forms, Downloads, Map/Location, and much more)"
 msgstr ""
 
-#: admin/help-page/help.php:504
-msgid "Flexible Tabs Position"
+#: admin/help-page/help.php:532
+msgid "Display a Tab for All Products"
 msgstr ""
 
-#: admin/help-page/help.php:509
-msgid "Unlimited Multi-level or Nested Tabs"
-msgstr ""
-
-#: admin/help-page/help.php:509 admin/help-page/help.php:519
-#: admin/help-page/help.php:559
-msgid "Hot"
-msgstr ""
-
-#: admin/help-page/help.php:514
+#: admin/help-page/help.php:541
+#, php-format
 msgid ""
-"Supports HTML content, images, shortcodes, video, audio, forms, maps, "
-"iframe, slider, galleries, etc."
-msgstr ""
-
-#: admin/help-page/help.php:519
-msgid "WooCommerce Additional Custom Tab"
-msgstr ""
-
-#: admin/help-page/help.php:524
-msgid ""
-"Create Tabs from Posts, Pages, Products, Custom Post Types, Taxonomies, etc."
-msgstr ""
-
-#: admin/help-page/help.php:529
-msgid "Add Tabs Subtitle"
-msgstr ""
-
-#: admin/help-page/help.php:534
-msgid "Add Tabs Title Icon from Icon Library/Custom Image Icons"
-msgstr ""
-
-#: admin/help-page/help.php:539
-msgid "Deep Linking/Custom Linking Tabs"
-msgstr ""
-
-#: admin/help-page/help.php:539 admin/help-page/help.php:559
-msgid "New"
-msgstr ""
-
-#: admin/help-page/help.php:544
-msgid "Make any Tab Item Inactive"
-msgstr ""
-
-#: admin/help-page/help.php:549
-msgid "Tabs AutoPlay Activator Event"
+"Display a Tab for %1$sSpecific Products, Categories%2$s, or %3$sBrands%4$s 🔥"
 msgstr ""
 
 #: admin/help-page/help.php:554
-msgid "Set Custom Tabs Number to be Opened on Page Load"
+msgid "Exclude a Product Tab from Specific Products"
 msgstr ""
 
-#: admin/help-page/help.php:559
-msgid "Enable Scrollable Tabs Variable Width and Loop"
-msgstr ""
-
-#: admin/help-page/help.php:564
-msgid "Hide Tabs hash URL from Site URL/Browser URL"
-msgstr ""
-
-#: admin/help-page/help.php:569
-msgid "Stylize Tabs Icon, Icon Size, Color, Active Color, Position etc."
+#: admin/help-page/help.php:563
+#, php-format
+msgid "%1$sOverride/Edit%2$s Tab Content Per Product 🔥"
 msgstr ""
 
 #: admin/help-page/help.php:574
-msgid "Show Active Tab Indicator Arrow"
+msgid "Custom Icons for Tab Names"
 msgstr ""
 
-#: admin/help-page/help.php:574
-msgid "new"
-msgstr ""
-
-#: admin/help-page/help.php:579
-msgid "Tabs Title Gradient Background Color"
-msgstr ""
-
-#: admin/help-page/help.php:584
-msgid "Active Tab Top Line Border"
-msgstr ""
-
-#: admin/help-page/help.php:589
-msgid "Tabs Title and Description Border, Padding, etc."
+#: admin/help-page/help.php:583
+#, php-format
+msgid "Tab Position: %1$sBelow Product Summary 🔥%2$s"
 msgstr ""
 
 #: admin/help-page/help.php:594
-msgid "Flat Underline Tabs"
+msgid "Tab Navigation Trigger (Click or Mouseover)"
 msgstr ""
 
 #: admin/help-page/help.php:599
-msgid "Strip Tabs Description Content HTML Tags"
+msgid "Custom Spacing Between Tabs"
 msgstr ""
 
 #: admin/help-page/help.php:604
-msgid "Tabs Custom Content Height"
+msgid "Custom Tab Open by Default (Initial Tab Open) 🔥"
 msgstr ""
 
-#: admin/help-page/help.php:609
-msgid "Change Tabs to Accordion on Small Devices"
+#: admin/help-page/help.php:609 admin/help-page/help.php:731
+msgid "Custom Height for Tab Content Area"
 msgstr ""
 
 #: admin/help-page/help.php:614
-msgid "Tabs Description Animation"
+msgid "Multiple Tab Line Positions, Styles & Backgrounds"
 msgstr ""
 
 #: admin/help-page/help.php:619
-msgid "Import/Export Tabs Groups"
+msgid "Custom Space Between Tabs & Description"
 msgstr ""
 
 #: admin/help-page/help.php:624
-msgid "Stylize your Tabs Typography with 1500+ Google Fonts"
+msgid "Full Styling Controls – Highly Customizable"
 msgstr ""
 
 #: admin/help-page/help.php:629
-msgid "All Premium Features, Security Enhancements, and Compatibility"
+msgid "Advanced Typography (1500+ Google Fonts)"
 msgstr ""
 
 #: admin/help-page/help.php:634
-msgid "Priority Top-notch Support"
+msgid "Auto Switch Tabs to Accordion on Mobile 🔥"
 msgstr ""
 
-#: admin/help-page/help.php:641
-msgid "Upgrade To PRO & Enjoy Advanced Features!"
+#: admin/help-page/help.php:639
+msgid "Custom Email Address for Contact Form Submissions"
 msgstr ""
 
-#: admin/help-page/help.php:646
-#, php-format
-msgid ""
-"Already, %1$s15000+%2$s people are using WP Tabs on their websites to create "
-"beautiful showcase, why won't you!"
+#: admin/help-page/help.php:644
+msgid "Disable Default Tab Styles"
 msgstr ""
 
-#: admin/help-page/help.php:655
-msgid "14-Day No-Questions-Asked"
+#: admin/help-page/help.php:650
+msgid "WordPress Tabs"
 msgstr ""
 
 #: admin/help-page/help.php:655
-msgid "Refund Policy"
+msgid "Beautiful, Responsive Tab Layouts"
 msgstr ""
 
-#: admin/help-page/help.php:657
-msgid "See All Features"
-msgstr ""
-
-#: admin/help-page/help.php:658
-msgid "Pro Live Demo"
+#: admin/help-page/help.php:660
+msgid "Tabs Carousel (Scrollable, Variable Width & Infinite Loop)"
 msgstr ""
 
 #: admin/help-page/help.php:665
+msgid "Flexible Content Types (Text, Image & Video Gallery)"
+msgstr ""
+
+#: admin/help-page/help.php:670
+msgid "Supports All Content (HTML, Shortcodes, Images, Videos, Audio, etc.)"
+msgstr ""
+
+#: admin/help-page/help.php:675
+msgid "Create Tabs from Any Post Type, Page, or Taxonomy"
+msgstr ""
+
+#: admin/help-page/help.php:680
+msgid "Unlimited Multi-level/Nested Tabs"
+msgstr ""
+
+#: admin/help-page/help.php:685
+msgid "Font Awesome Tab Icons Library or Image Icons"
+msgstr ""
+
+#: admin/help-page/help.php:690
+msgid "Tab Icon Styling (Size, Color, Position)"
+msgstr ""
+
+#: admin/help-page/help.php:695
+msgid "Add Subtitles to Tabs"
+msgstr ""
+
+#: admin/help-page/help.php:700
+msgid "Deep Linking / Custom Linking"
+msgstr ""
+
+#: admin/help-page/help.php:705
+msgid "Rich Text Editor"
+msgstr ""
+
+#: admin/help-page/help.php:710
+msgid "Make Specific Tabs Inactive"
+msgstr ""
+
+#: admin/help-page/help.php:716
+msgid "Tab Triggers (Click, Mouseover, AutoPlay)"
+msgstr ""
+
+#: admin/help-page/help.php:721
+msgid "Custom Tab Open by Default 🔥"
+msgstr ""
+
+#: admin/help-page/help.php:726
+msgid "Spacing Between Tabs & Description, and Padding"
+msgstr ""
+
+#: admin/help-page/help.php:736
+msgid "Custom HTML Tag Support for Tab Titles"
+msgstr ""
+
+#: admin/help-page/help.php:741
+msgid "Active Tab Arrow to Content"
+msgstr ""
+
+#: admin/help-page/help.php:746
+msgid "Active Tab Indicator Styles"
+msgstr ""
+
+#: admin/help-page/help.php:751
+msgid "Hide Tabs Hash (#) from Browser URL"
+msgstr ""
+
+#: admin/help-page/help.php:756
+msgid "Tab Animations"
+msgstr ""
+
+#: admin/help-page/help.php:761
+msgid "Full Styling + Advanced Typography (1500+ Google Fonts)"
+msgstr ""
+
+#: admin/help-page/help.php:766
+msgid "Import/Export Tab Groups"
+msgstr ""
+
+#: admin/help-page/help.php:771
+msgid "All Premium Features & Enhancements"
+msgstr ""
+
+#: admin/help-page/help.php:776
+msgid "Priority Human Support"
+msgstr ""
+
+#: admin/help-page/help.php:783
+msgid "Upgrade to PRO & Enjoy Advanced Features!"
+msgstr ""
+
+#: admin/help-page/help.php:788
+#, php-format
+msgid ""
+"Already, %1$s15000+%2$s people are using Smart Tabs on their websites to "
+"create beautiful showcase, why won't you!"
+msgstr ""
+
+#: admin/help-page/help.php:797
+msgid "14-Day No-Questions-Asked"
+msgstr ""
+
+#: admin/help-page/help.php:797
+msgid "Refund Policy"
+msgstr ""
+
+#: admin/help-page/help.php:799
+msgid "See All Features"
+msgstr ""
+
+#: admin/help-page/help.php:800
+msgid "Pro Live Demo"
+msgstr ""
+
+#: admin/help-page/help.php:807
 msgid "NO NEED TO TAKE OUR WORD FOR IT"
 msgstr ""
 
-#: admin/help-page/help.php:668
-msgid "Our Users Love WP Tabs Pro!"
+#: admin/help-page/help.php:810
+msgid "Our Users Love Smart Tabs Pro!"
 msgstr ""
 
-#: admin/help-page/help.php:674
+#: admin/help-page/help.php:816
 msgid ""
 "I’ve tried 3 other Gallery / Carousel plugins and this one is by far the "
 "easiest, lightweight and does exactly what I want! I had a minor glitch and "
 "support was very quick to fix it. Very happy and highly rec..."
 msgstr ""
 
-#: admin/help-page/help.php:681
+#: admin/help-page/help.php:823
 msgid "Joyce van den Berg"
 msgstr ""
 
-#: admin/help-page/help.php:683 admin/help-page/help.php:699
-#: admin/help-page/help.php:715
+#: admin/help-page/help.php:825 admin/help-page/help.php:841
+#: admin/help-page/help.php:857
 msgid "★★★★★"
 msgstr ""
 
-#: admin/help-page/help.php:690
+#: admin/help-page/help.php:832
 msgid ""
 "The plugin works great and is a great addition to my site. The support has "
 "been tremendously! Fast and easy! They even helped with JS errors from other "
 "plugins. THANKS!..."
 msgstr ""
 
-#: admin/help-page/help.php:697
+#: admin/help-page/help.php:839
 msgid "Sksposcho"
 msgstr ""
 
-#: admin/help-page/help.php:706
+#: admin/help-page/help.php:848
 msgid ""
 "The new WP-Tabs is a tab menu for people who love more features. First of "
 "all you have to be playful when creating the tabs. If – then the Pro Version "
 "includes the things that make creating them reall..."
 msgstr ""
 
-#: admin/help-page/help.php:713
+#: admin/help-page/help.php:855
 msgid "Wegerl"
 msgstr ""
 
-#: admin/help-page/help.php:728
+#: admin/help-page/help.php:870
 msgid "Enhance your Website with our Free Robust Plugins"
 msgstr ""
 
-#: admin/help-page/help.php:744
+#: admin/help-page/help.php:886
 msgid ""
-"A Highly Customizable WordPress Tabs plugin from the WP Tabs Team, "
+"A Highly Customizable WordPress Tabs plugin from the Smart Tabs Team, "
 "ShapedPlugin, LLC"
 msgstr ""
 
-#: admin/help-page/help.php:748
+#: admin/help-page/help.php:890
 #, php-format
 msgid ""
 "%1$sAt %2$sShapedPlugin LLC%3$s, we have been looking for the best way to "
@@ -460,162 +557,162 @@ msgid ""
 "builder plugin for WordPress with many customization options.%4$s"
 msgstr ""
 
-#: admin/help-page/help.php:756
+#: admin/help-page/help.php:898
 msgid ""
-"The WP Tabs plugin provides a convenient way to create visually appealing "
+"The Smart Tabs plugin provides a convenient way to create visually appealing "
 "Tabs sections and WooCommerce custom tabs. Check it out now and experience "
 "the difference!"
 msgstr ""
 
-#: admin/help-page/help.php:759
+#: admin/help-page/help.php:901
 msgid "More About Us"
 msgstr ""
 
-#: admin/help-page/help.php:764
+#: admin/help-page/help.php:906
 msgid "Team ShapedPlugin LLC at WordCamp Sylhet"
 msgstr ""
 
-#: admin/help-page/help.php:777
+#: admin/help-page/help.php:919
 msgid "Upgrade your Website with our High-quality Plugins!"
 msgstr ""
 
-#: admin/help-page/help.php:782
+#: admin/help-page/help.php:924
 msgid "WP Carousel"
 msgstr ""
 
-#: admin/help-page/help.php:783
+#: admin/help-page/help.php:925
 msgid ""
 "The most powerful and user-friendly multi-purpose carousel, slider, & "
 "gallery plugin for WordPress."
 msgstr ""
 
-#: admin/help-page/help.php:788
+#: admin/help-page/help.php:930
 msgid "Real Testimonials"
 msgstr ""
 
-#: admin/help-page/help.php:789
+#: admin/help-page/help.php:931
 msgid ""
 "Simply collect, manage, and display Testimonials on your website and boost "
 "conversions."
 msgstr ""
 
-#: admin/help-page/help.php:794
+#: admin/help-page/help.php:936
 msgid "Smart Post Show"
 msgstr ""
 
-#: admin/help-page/help.php:795
+#: admin/help-page/help.php:937
 msgid ""
 "Filter and display posts (any post types), pages, taxonomy, custom taxonomy, "
 "and custom field, in beautiful layouts."
 msgstr ""
 
-#: admin/help-page/help.php:800
+#: admin/help-page/help.php:942
 msgid "Product Slider for WooCommerce"
 msgstr ""
 
-#: admin/help-page/help.php:801
+#: admin/help-page/help.php:943
 msgid ""
 "Boost sales by interactive product Slider, Grid, and Table in your "
 "WooCommerce website or store."
 msgstr ""
 
-#: admin/help-page/help.php:806
+#: admin/help-page/help.php:948
 msgid "WooGallery"
 msgstr ""
 
-#: admin/help-page/help.php:807
+#: admin/help-page/help.php:949
 msgid ""
 "Product gallery slider and additional variation images gallery for "
 "WooCommerce and boost your sales."
 msgstr ""
 
-#: admin/help-page/help.php:812
-msgid "WP Team"
+#: admin/help-page/help.php:954
+msgid "Smart Team"
 msgstr ""
 
-#: admin/help-page/help.php:813
+#: admin/help-page/help.php:955
 msgid ""
 "Display your team members smartly who are at the heart of your company or "
 "organization!"
 msgstr ""
 
-#: admin/help-page/help.php:817 admin/help-page/help.php:818
+#: admin/help-page/help.php:959 admin/help-page/help.php:960
 msgid "Logo Carousel"
 msgstr ""
 
-#: admin/help-page/help.php:819
+#: admin/help-page/help.php:961
 msgid ""
 "Showcase a group of logo images with Title, Description, Tooltips, Links, "
 "and Popup as a grid or in a carousel."
 msgstr ""
 
-#: admin/help-page/help.php:823 admin/help-page/help.php:824
+#: admin/help-page/help.php:965 admin/help-page/help.php:966
 msgid "Easy Accordion"
 msgstr ""
 
-#: admin/help-page/help.php:825
+#: admin/help-page/help.php:967
 msgid ""
 "Minimize customer support by offering comprehensive FAQs and increasing "
 "conversions."
 msgstr ""
 
-#: admin/help-page/help.php:829 admin/help-page/help.php:830
+#: admin/help-page/help.php:971 admin/help-page/help.php:972
 msgid "WooCategory"
 msgstr ""
 
-#: admin/help-page/help.php:831
+#: admin/help-page/help.php:973
 msgid ""
 "Display by filtering the list of categories aesthetically and boosting sales."
 msgstr ""
 
-#: admin/help-page/help.php:837
+#: admin/help-page/help.php:979
 msgid ""
 "Display tabbed content smartly & quickly on your WordPress site without "
 "coding skills."
 msgstr ""
 
-#: admin/help-page/help.php:841 admin/help-page/help.php:842
+#: admin/help-page/help.php:983 admin/help-page/help.php:984
 msgid "Location Weather"
 msgstr ""
 
-#: admin/help-page/help.php:843
+#: admin/help-page/help.php:985
 msgid ""
 "Best WordPress Weather Forecast plugin to Show Current Temperature & "
 "Weather, Daily & Hourly, Detailed Forecast up to 16 Days, and Weather Map."
 msgstr ""
 
-#: admin/help-page/help.php:847 admin/help-page/help.php:848
+#: admin/help-page/help.php:989 admin/help-page/help.php:990
 msgid "Smart Brands for WooCommerce"
 msgstr ""
 
-#: admin/help-page/help.php:849
+#: admin/help-page/help.php:991
 msgid ""
 "Smart Brands for WooCommerce Pro helps you display product brands in an "
 "attractive way on your online store."
 msgstr ""
 
-#: admin/help-page/help.php:863
+#: admin/help-page/help.php:1005
 msgid "Made With"
 msgstr ""
 
-#: admin/help-page/help.php:866
+#: admin/help-page/help.php:1008
 #, php-format
 msgid "By the %1$sShapedPlugin LLC%2$s Team"
 msgstr ""
 
-#: admin/help-page/help.php:872
+#: admin/help-page/help.php:1014
 msgid "Get connected with"
 msgstr ""
 
-#: admin/partials/class-wp-tabs-widget.php:22
+#: admin/partials/class-wp-tabs-widget.php:25
 msgid "Create and display tabs"
 msgstr ""
 
-#: admin/partials/class-wp-tabs-widget.php:74
+#: admin/partials/class-wp-tabs-widget.php:76
 msgid "Title:"
 msgstr ""
 
-#: admin/partials/class-wp-tabs-widget.php:78
+#: admin/partials/class-wp-tabs-widget.php:80
 msgid "Tab Groups:"
 msgstr ""
 
@@ -623,962 +720,1321 @@ msgstr ""
 msgid "Live Preview"
 msgstr ""
 
-#: admin/partials/metabox-config.php:76
-msgid "Tabs Type"
+#: admin/partials/metabox-config.php:77
+msgid "Tabs Source Type"
 msgstr ""
 
-#: admin/partials/metabox-config.php:80
+#: admin/partials/metabox-config.php:80 admin/partials/metabox-config.php:457
+#: admin/partials/smart-tab-settings.php:202
+msgid "Custom"
+msgstr ""
+
+#: admin/partials/metabox-config.php:81
 msgid "Post"
 msgstr ""
 
-#: admin/partials/metabox-config.php:88
+#: admin/partials/metabox-config.php:89
 msgid "Tabs Content"
 msgstr ""
 
-#: admin/partials/metabox-config.php:89
-msgid "Add New Tab"
+#: admin/partials/metabox-config.php:90 includes/class-wp-tabs-cpt.php:136
+msgid "+ Add New Tab"
 msgstr ""
 
-#: admin/partials/metabox-config.php:91
-msgid "Tab :"
+#: admin/partials/metabox-config.php:92
+msgid "Item :"
 msgstr ""
 
-#: admin/partials/metabox-config.php:101
-msgid "Title"
+#: admin/partials/metabox-config.php:102 admin/partials/metabox-config.php:1384
+#: admin/partials/smart-tab-settings.php:742
+#: admin/partials/smart-tab-settings.php:771
+#: admin/partials/smart-tab-settings.php:792
+msgid "Tab Name"
 msgstr ""
 
-#: admin/partials/metabox-config.php:109
-msgid "Subtitle (Pro)"
-msgstr ""
-
-#: admin/partials/metabox-config.php:117
-msgid "Font Icon"
-msgstr ""
-
-#: admin/partials/metabox-config.php:121
-msgid "Or"
-msgstr ""
-
-#: admin/partials/metabox-config.php:129
-msgid "Custom Icon"
-msgstr ""
-
-#: admin/partials/metabox-config.php:135
+#: admin/partials/metabox-config.php:122
 msgid "Make it Deep-Linking"
 msgstr ""
 
-#: admin/partials/metabox-config.php:138
+#: admin/partials/metabox-config.php:125
 msgid "Make it Deep-Linking (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:139
+#: admin/partials/metabox-config.php:126
 msgid ""
 "Check to enable the ability to associate a direct link or URL with a "
 "specific tab"
 msgstr ""
 
-#: admin/partials/metabox-config.php:140 admin/partials/metabox-config.php:199
-#: admin/partials/metabox-config.php:255 admin/partials/metabox-config.php:293
-#: admin/partials/metabox-config.php:467 admin/partials/metabox-config.php:526
-#: admin/partials/metabox-config.php:538 admin/partials/metabox-config.php:604
-#: admin/partials/metabox-config.php:630 admin/partials/metabox-config.php:689
-#: admin/partials/metabox-config.php:710 admin/partials/metabox-config.php:758
-#: admin/partials/metabox-config.php:791
+#: admin/partials/metabox-config.php:127 admin/partials/metabox-config.php:268
+#: admin/partials/metabox-config.php:315 admin/partials/metabox-config.php:352
+#: admin/partials/metabox-config.php:386 admin/partials/metabox-config.php:454
+#: admin/partials/metabox-config.php:522 admin/partials/metabox-config.php:651
+#: admin/partials/metabox-config.php:688 admin/partials/metabox-config.php:718
+#: admin/partials/metabox-config.php:763 admin/partials/metabox-config.php:797
+#: admin/partials/metabox-config.php:991
 msgid "Open Docs"
 msgstr ""
 
-#: admin/partials/metabox-config.php:150 admin/partials/metabox-config.php:1014
+#: admin/partials/metabox-config.php:128 admin/partials/metabox-config.php:269
+#: admin/partials/metabox-config.php:316 admin/partials/metabox-config.php:353
+#: admin/partials/metabox-config.php:387 admin/partials/metabox-config.php:454
+#: admin/partials/metabox-config.php:522 admin/partials/metabox-config.php:651
+#: admin/partials/metabox-config.php:689 admin/partials/metabox-config.php:719
+#: admin/partials/metabox-config.php:764 admin/partials/metabox-config.php:798
+#: admin/partials/metabox-config.php:992
+msgid "Live Demo"
+msgstr ""
+
+#: admin/partials/metabox-config.php:155 admin/partials/metabox-config.php:1212
+#: admin/partials/metabox-config.php:1418
+#: admin/partials/product-tabs-panel.php:17
+#: admin/partials/smart-tab-settings.php:636
+#: admin/partials/smart-tab-settings.php:729
 msgid "Description"
 msgstr ""
 
-#: admin/partials/metabox-config.php:172
+#: admin/partials/metabox-config.php:165
+msgid "Post Type"
+msgstr ""
+
+#: admin/partials/metabox-config.php:169
+msgid "Select Post Type"
+msgstr ""
+
+#: admin/partials/metabox-config.php:178
+msgid "Filter Posts"
+msgstr ""
+
+#: admin/partials/metabox-config.php:180 admin/partials/metabox-config.php:1433
+msgid "Latest"
+msgstr ""
+
+#: admin/partials/metabox-config.php:181
+msgid "Taxonomy (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:182
+msgid "Specific Posts (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:191
+msgid "Order by"
+msgstr ""
+
+#: admin/partials/metabox-config.php:193 admin/partials/metabox-config.php:1454
+msgid "ID"
+msgstr ""
+
+#: admin/partials/metabox-config.php:194 admin/partials/metabox-config.php:1455
+#: includes/class-wp-tabs-cpt.php:232
+msgid "Date"
+msgstr ""
+
+#: admin/partials/metabox-config.php:195 admin/partials/metabox-config.php:1456
+msgid "Random"
+msgstr ""
+
+#: admin/partials/metabox-config.php:196 admin/partials/metabox-config.php:1457
+msgid "Title"
+msgstr ""
+
+#: admin/partials/metabox-config.php:197 admin/partials/metabox-config.php:1458
+msgid "Modified"
+msgstr ""
+
+#: admin/partials/metabox-config.php:198 admin/partials/metabox-config.php:1459
+msgid "Menu Order"
+msgstr ""
+
+#: admin/partials/metabox-config.php:199 admin/partials/metabox-config.php:1460
+msgid "Drag & Drop"
+msgstr ""
+
+#: admin/partials/metabox-config.php:207 admin/partials/metabox-config.php:1468
+msgid "Order"
+msgstr ""
+
+#: admin/partials/metabox-config.php:209 admin/partials/metabox-config.php:1470
+msgid "Ascending"
+msgstr ""
+
+#: admin/partials/metabox-config.php:210 admin/partials/metabox-config.php:1471
+msgid "Descending"
+msgstr ""
+
+#: admin/partials/metabox-config.php:218 admin/partials/metabox-config.php:1479
+msgid "Limit"
+msgstr ""
+
+#: admin/partials/metabox-config.php:220
+msgid "Number of total posts to display. Default value is 6."
+msgstr ""
+
+#: admin/partials/metabox-config.php:242
 msgid "Shortcode Section"
 msgstr ""
 
-#: admin/partials/metabox-config.php:185
+#: admin/partials/metabox-config.php:255
 msgid "Tabs Settings"
 msgstr ""
 
-#: admin/partials/metabox-config.php:192 admin/partials/metabox-config.php:197
+#: admin/partials/metabox-config.php:262 admin/partials/metabox-config.php:266
+#: admin/partials/smart-tab-settings.php:51
 msgid "Tabs Layout"
 msgstr ""
 
-#: admin/partials/metabox-config.php:193
-msgid "Choose a tabs layout."
-msgstr ""
-
-#: admin/partials/metabox-config.php:198
+#: admin/partials/metabox-config.php:267
 msgid ""
 "Choose a layout from five individual layout styles to customize how your "
 "tabs are displayed in the frontend."
 msgstr ""
 
-#: admin/partials/metabox-config.php:204
-#, php-format
-msgid ""
-"To unlock Horizontal Bottom, Vertical (Left & Right), Tabs Carousel, and "
-"more settings, %1$sUpgrade To Pro!%2$s"
+#: admin/partials/metabox-config.php:274
+msgid "Horizontal Top"
 msgstr ""
 
-#: admin/partials/metabox-config.php:211
-msgid "Horizontal"
-msgstr ""
-
-#: admin/partials/metabox-config.php:217
+#: admin/partials/metabox-config.php:280
 msgid "Horizontal Bottom"
 msgstr ""
 
-#: admin/partials/metabox-config.php:223
-msgid "Vertical Left"
-msgstr ""
-
-#: admin/partials/metabox-config.php:229
+#: admin/partials/metabox-config.php:286
+#: admin/partials/smart-tab-settings.php:61
 msgid "Vertical Right"
 msgstr ""
 
-#: admin/partials/metabox-config.php:235
+#: admin/partials/metabox-config.php:291
+#: admin/partials/smart-tab-settings.php:67
+msgid "Vertical Left"
+msgstr ""
+
+#: admin/partials/metabox-config.php:297
 msgid "Tabs Carousel"
 msgstr ""
 
-#: admin/partials/metabox-config.php:248 admin/partials/metabox-config.php:253
+#: admin/partials/metabox-config.php:309 admin/partials/metabox-config.php:313
+#: admin/partials/metabox-config.php:347 admin/partials/metabox-config.php:350
 msgid "Tabs Alignment"
 msgstr ""
 
-#: admin/partials/metabox-config.php:249
-msgid "Select an alignment for tabs."
-msgstr ""
-
-#: admin/partials/metabox-config.php:254
+#: admin/partials/metabox-config.php:314 admin/partials/metabox-config.php:351
 msgid ""
 "Choose where you want your tabs to appear – at the top, right, bottom, or "
 "left of your content, allowing you to customize their position to best suit "
 "your layout and design."
 msgstr ""
 
-#: admin/partials/metabox-config.php:261 admin/partials/metabox-config.php:473
+#: admin/partials/metabox-config.php:321 admin/partials/metabox-config.php:997
 #: admin/partials/models/fields/spacing/spacing.php:61
 #: admin/partials/models/fields/typography/typography.php:220
+#: admin/partials/smart-tab-settings.php:101
 msgid "Left"
 msgstr ""
 
-#: admin/partials/metabox-config.php:266 admin/partials/metabox-config.php:481
+#: admin/partials/metabox-config.php:326 admin/partials/metabox-config.php:1005
 #: admin/partials/models/fields/spacing/spacing.php:59
 #: admin/partials/models/fields/typography/typography.php:222
+#: admin/partials/smart-tab-settings.php:111
 msgid "Right"
 msgstr ""
 
-#: admin/partials/metabox-config.php:271
+#: admin/partials/metabox-config.php:331 admin/partials/metabox-config.php:362
 #: admin/partials/models/fields/typography/typography.php:221
+#: admin/partials/smart-tab-settings.php:106
 msgid "Center"
 msgstr ""
 
-#: admin/partials/metabox-config.php:276
+#: admin/partials/metabox-config.php:336 admin/partials/metabox-config.php:370
+#: admin/partials/smart-tab-settings.php:116
 msgid "Justified"
 msgstr ""
 
-#: admin/partials/metabox-config.php:286 admin/partials/metabox-config.php:291
-msgid "Activator Event"
-msgstr ""
-
-#: admin/partials/metabox-config.php:287
-msgid "Select an activator event for tabs."
-msgstr ""
-
-#: admin/partials/metabox-config.php:292
-msgid ""
-"Set an event to switch between tabs with Autoplay, On Click, or Mouse Hover."
-msgstr ""
-
-#: admin/partials/metabox-config.php:297
-msgid "On Click"
-msgstr ""
-
-#: admin/partials/metabox-config.php:298
-msgid "Mouseover"
-msgstr ""
-
-#: admin/partials/metabox-config.php:299
-msgid "AutoPlay (Pro)"
-msgstr ""
-
-#: admin/partials/metabox-config.php:307 admin/partials/metabox-config.php:308
-msgid "Initial Open Tab"
-msgstr ""
-
-#: admin/partials/metabox-config.php:309
-msgid "The tab which will remain initially opened on page load."
-msgstr ""
-
-#: admin/partials/metabox-config.php:317
-msgid "Preloader"
-msgstr ""
-
-#: admin/partials/metabox-config.php:318
-msgid "Tabs will be hidden until page load completed."
-msgstr ""
-
-#: admin/partials/metabox-config.php:319 admin/partials/metabox-config.php:794
-#: admin/partials/option-config.php:88
-msgid "Enabled"
-msgstr ""
-
-#: admin/partials/metabox-config.php:320 admin/partials/metabox-config.php:795
-#: admin/partials/option-config.php:89
-msgid "Disabled"
-msgstr ""
-
-#: admin/partials/metabox-config.php:334
-msgid "Display Options"
-msgstr ""
-
-#: admin/partials/metabox-config.php:340
-msgid "Tabs Set Section Title"
-msgstr ""
-
-#: admin/partials/metabox-config.php:341
-msgid "Show/hide tabs set section title."
-msgstr ""
-
-#: admin/partials/metabox-config.php:343 admin/partials/metabox-config.php:386
-#: admin/partials/metabox-config.php:499 admin/partials/metabox-config.php:528
-#: admin/partials/metabox-config.php:773
-msgid "Show"
-msgstr ""
-
-#: admin/partials/metabox-config.php:344 admin/partials/metabox-config.php:387
-#: admin/partials/metabox-config.php:500 admin/partials/metabox-config.php:529
-#: admin/partials/metabox-config.php:774
-msgid "Hide"
-msgstr ""
-
-#: admin/partials/metabox-config.php:350
-msgid "Margin Between Tabs"
-msgstr ""
-
-#: admin/partials/metabox-config.php:351
-msgid "Set a space between tabs."
-msgstr ""
-
-#: admin/partials/metabox-config.php:352
-msgid "Margin between Tabs"
-msgstr ""
-
-#: admin/partials/metabox-config.php:367 admin/partials/metabox-config.php:383
-msgid "Tabs Icon"
-msgstr ""
-
-#: admin/partials/metabox-config.php:374
-#, php-format
-msgid ""
-"To unlock the following essential Tabs Icon options, %1$sUpgrade To Pro!%2$s"
-msgstr ""
-
-#: admin/partials/metabox-config.php:384
-msgid "Show/hide the tabs icon."
-msgstr ""
-
-#: admin/partials/metabox-config.php:394
-msgid "Icon Size"
-msgstr ""
-
-#: admin/partials/metabox-config.php:395
-msgid "Set tabs icon size."
-msgstr ""
-
-#: admin/partials/metabox-config.php:416 admin/partials/metabox-config.php:418
-msgid "Space Between Title and Icon"
-msgstr ""
-
-#: admin/partials/metabox-config.php:417
-msgid "Set space between title and icon."
-msgstr ""
-
-#: admin/partials/metabox-config.php:439
-msgid "Icon Color"
-msgstr ""
-
-#: admin/partials/metabox-config.php:440
-msgid "Set tab icon color."
-msgstr ""
-
-#: admin/partials/metabox-config.php:442
-#: admin/partials/models/fields/border/border.php:162
-msgid "Color"
-msgstr ""
-
-#: admin/partials/metabox-config.php:443
-msgid "Active Color"
-msgstr ""
-
-#: admin/partials/metabox-config.php:444
-msgid "Hover Color"
-msgstr ""
-
-#: admin/partials/metabox-config.php:461
-msgid "Icon Position"
-msgstr ""
-
-#: admin/partials/metabox-config.php:462
-msgid "Select tab icon position."
-msgstr ""
-
-#: admin/partials/metabox-config.php:465
-msgid "Icon Position (Pro)"
-msgstr ""
-
-#: admin/partials/metabox-config.php:466
-msgid ""
-"This option allows you to specify the position of icons within your tab "
-"interface. You can place icons to the Top, Right, Bottom and Left of tab's "
-"title."
-msgstr ""
-
-#: admin/partials/metabox-config.php:477 admin/partials/metabox-config.php:614
+#: admin/partials/metabox-config.php:358 admin/partials/metabox-config.php:698
+#: admin/partials/metabox-config.php:1001
 #: admin/partials/models/fields/spacing/spacing.php:58
+#: admin/partials/smart-tab-settings.php:383
+#: admin/partials/smart-tab-settings.php:511
 msgid "Top"
 msgstr ""
 
-#: admin/partials/metabox-config.php:490
-msgid "Tabs Title and Description"
+#: admin/partials/metabox-config.php:366 admin/partials/metabox-config.php:702
+#: admin/partials/models/fields/spacing/spacing.php:60
+msgid "Bottom"
 msgstr ""
 
-#: admin/partials/metabox-config.php:496 admin/partials/metabox-config.php:982
-msgid "Tabs Subtitle"
+#: admin/partials/metabox-config.php:380 admin/partials/metabox-config.php:384
+#: admin/partials/smart-tab-settings.php:149
+msgid "Activator Event"
 msgstr ""
 
-#: admin/partials/metabox-config.php:497
-msgid "Show/hide tabs subtitle."
+#: admin/partials/metabox-config.php:385
+msgid ""
+"Set an event to switch between tabs with AutoPlay (Pro), On Click, or Mouse "
+"Hover."
 msgstr ""
 
-#: admin/partials/metabox-config.php:507
-msgid "Title HTML Tag"
+#: admin/partials/metabox-config.php:390
+#: admin/partials/smart-tab-settings.php:151
+msgid "On Click"
 msgstr ""
 
-#: admin/partials/metabox-config.php:508
-msgid "Select a tag for tabs title."
+#: admin/partials/metabox-config.php:391
+#: admin/partials/smart-tab-settings.php:152
+msgid "Mouseover"
 msgstr ""
 
-#: admin/partials/metabox-config.php:524
-msgid "Active Tab Indicator Arrow"
+#: admin/partials/metabox-config.php:398
+msgid "Space Between Tabs"
 msgstr ""
 
-#: admin/partials/metabox-config.php:525
-msgid "Show/hide active tab indicator arrow."
+#: admin/partials/metabox-config.php:399
+msgid "Margin between Tabs"
 msgstr ""
 
-#: admin/partials/metabox-config.php:526
-msgid "Active Tab Indicator Arrow (Pro)"
+#: admin/partials/metabox-config.php:414
+msgid "Anchor Link for Tabs"
 msgstr ""
 
-#: admin/partials/metabox-config.php:536 admin/partials/metabox-config.php:538
+#: admin/partials/metabox-config.php:415 admin/partials/metabox-config.php:442
+#: admin/partials/metabox-config.php:800 admin/partials/metabox-config.php:1080
+#: admin/partials/metabox-config.php:1092 admin/partials/option-config.php:64
+#: admin/partials/option-config.php:103
+#: admin/partials/smart-tab-settings.php:177
+#: admin/partials/smart-tab-settings.php:187
+#: admin/partials/smart-tab-settings.php:704
+msgid "Enabled"
+msgstr ""
+
+#: admin/partials/metabox-config.php:416 admin/partials/metabox-config.php:443
+#: admin/partials/metabox-config.php:801 admin/partials/metabox-config.php:1081
+#: admin/partials/metabox-config.php:1093 admin/partials/option-config.php:65
+#: admin/partials/option-config.php:104
+#: admin/partials/smart-tab-settings.php:178
+#: admin/partials/smart-tab-settings.php:188
+#: admin/partials/smart-tab-settings.php:705
+msgid "Disabled"
+msgstr ""
+
+#: admin/partials/metabox-config.php:423
+msgid "Link Type "
+msgstr ""
+
+#: admin/partials/metabox-config.php:427
+msgid "Link Type"
+msgstr ""
+
+#: admin/partials/metabox-config.php:428
+msgid ""
+"Tab ID - Adds the tab's unique ID to the URL. i.e. https://example.com/#tab-"
+"id"
+msgstr ""
+
+#: admin/partials/metabox-config.php:429
+msgid ""
+"Tab Title - Adds a URL-friendly version of the tab title (slug) to the URL. "
+"i.e. https://example.com/#tab-title-xx"
+msgstr ""
+
+#: admin/partials/metabox-config.php:432
+msgid "Tab ID"
+msgstr ""
+
+#: admin/partials/metabox-config.php:433
+msgid "Tab Title"
+msgstr ""
+
+#: admin/partials/metabox-config.php:441
+#: admin/partials/smart-tab-settings.php:186
+msgid "Preloader"
+msgstr ""
+
+#: admin/partials/metabox-config.php:453 admin/partials/metabox-config.php:454
+#: admin/partials/smart-tab-settings.php:197
+#: admin/partials/smart-tab-settings.php:198
+msgid "Content Height"
+msgstr ""
+
+#: admin/partials/metabox-config.php:456
+#: admin/partials/smart-tab-settings.php:201
+msgid "Auto"
+msgstr ""
+
+#: admin/partials/metabox-config.php:466 admin/partials/metabox-config.php:467
+#: admin/partials/smart-tab-settings.php:212
+#: admin/partials/smart-tab-settings.php:213
+msgid "Initial Open Tab"
+msgstr ""
+
+#: admin/partials/metabox-config.php:482
+#: admin/partials/smart-tab-settings.php:236
+msgid "Display Settings"
+msgstr ""
+
+#: admin/partials/metabox-config.php:489
+msgid "Tabs Name & Description"
+msgstr ""
+
+#: admin/partials/metabox-config.php:495 admin/partials/metabox-config.php:1151
+msgid "Tabs Section Title"
+msgstr ""
+
+#: admin/partials/metabox-config.php:497 admin/partials/metabox-config.php:641
+#: admin/partials/metabox-config.php:653 admin/partials/metabox-config.php:777
+#: admin/partials/metabox-config.php:910
+#: admin/partials/smart-tab-settings.php:559
+#: admin/partials/smart-tab-settings.php:571
+#: admin/partials/smart-tab-settings.php:693
+#: admin/partials/smart-tab-settings.php:714
+#: admin/partials/smart-tab-settings.php:808
+msgid "Show"
+msgstr ""
+
+#: admin/partials/metabox-config.php:498 admin/partials/metabox-config.php:642
+#: admin/partials/metabox-config.php:654 admin/partials/metabox-config.php:778
+#: admin/partials/metabox-config.php:911
+#: admin/partials/product-tabs-panel.php:38
+#: admin/partials/product-tabs-panel.php:96
+#: admin/partials/smart-tab-settings.php:560
+#: admin/partials/smart-tab-settings.php:572
+#: admin/partials/smart-tab-settings.php:694
+#: admin/partials/smart-tab-settings.php:715
+#: admin/partials/smart-tab-settings.php:809
+msgid "Hide"
+msgstr ""
+
+#: admin/partials/metabox-config.php:505
+msgid "Tab Name HTML Tag"
+msgstr ""
+
+#: admin/partials/metabox-config.php:521
+msgid "Tab Name BG Color Type"
+msgstr ""
+
+#: admin/partials/metabox-config.php:522
 msgid "Title Background Color Type"
 msgstr ""
 
-#: admin/partials/metabox-config.php:537
-msgid "Choose a color type for the title background."
-msgstr ""
-
-#: admin/partials/metabox-config.php:540
+#: admin/partials/metabox-config.php:524
 #: admin/partials/models/fields/border/border.php:83
 #: admin/partials/models/fields/typography/typography.php:278
 msgid "Solid"
 msgstr ""
 
-#: admin/partials/metabox-config.php:541
+#: admin/partials/metabox-config.php:525
 msgid "Gradient"
 msgstr ""
 
-#: admin/partials/metabox-config.php:548
-msgid "Title Background Color"
+#: admin/partials/metabox-config.php:532
+msgid "Tab Name BG Color"
 msgstr ""
 
-#: admin/partials/metabox-config.php:549
-msgid "Set tabs title background color."
-msgstr ""
-
-#: admin/partials/metabox-config.php:552
+#: admin/partials/metabox-config.php:535
 msgid "Background"
 msgstr ""
 
-#: admin/partials/metabox-config.php:553
-msgid "Active Background"
+#: admin/partials/metabox-config.php:536
+msgid "Active BG"
 msgstr ""
 
-#: admin/partials/metabox-config.php:554
-msgid "Hover Background"
+#: admin/partials/metabox-config.php:537
+msgid "Hover BG"
 msgstr ""
 
-#: admin/partials/metabox-config.php:566 admin/partials/metabox-config.php:569
-msgid "Title Padding"
+#: admin/partials/metabox-config.php:549
+msgid "Gradient Color"
 msgstr ""
 
 #: admin/partials/metabox-config.php:567
-msgid "Set tabs title padding."
+msgid "Tab Name Padding"
+msgstr ""
+
+#: admin/partials/metabox-config.php:569
+msgid "Title Padding"
 msgstr ""
 
 #: admin/partials/metabox-config.php:582
 msgid "Border"
 msgstr ""
 
-#: admin/partials/metabox-config.php:583
-msgid "Set tabs border."
+#: admin/partials/metabox-config.php:596
+#: admin/partials/smart-tab-settings.php:487
+msgid "Description Background Color"
 msgstr ""
 
-#: admin/partials/metabox-config.php:598
+#: admin/partials/metabox-config.php:602 admin/partials/metabox-config.php:603
+#: admin/partials/smart-tab-settings.php:509
+#: admin/partials/smart-tab-settings.php:510
+msgid "Description Padding"
+msgstr ""
+
+#: admin/partials/metabox-config.php:615
+#: admin/partials/smart-tab-settings.php:494
+msgid "Description Border"
+msgstr ""
+
+#: admin/partials/metabox-config.php:629
+#, php-format
+msgid ""
+"Unlock additional settings for Tab Name & Description — %1$sUpgrade to Pro!"
+"%2$s"
+msgstr ""
+
+#: admin/partials/metabox-config.php:639 admin/partials/metabox-config.php:1238
+msgid "Tabs Subtitle"
+msgstr ""
+
+#: admin/partials/metabox-config.php:650
+#: admin/partials/smart-tab-settings.php:438
+msgid "Active Tab Indicator Arrow"
+msgstr ""
+
+#: admin/partials/metabox-config.php:651
+msgid "Active Tab Indicator Arrow (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:663 admin/partials/metabox-config.php:664
+#: admin/partials/smart-tab-settings.php:470
+#: admin/partials/smart-tab-settings.php:471
+msgid "Space Between Tabs and Description"
+msgstr ""
+
+#: admin/partials/metabox-config.php:683
 msgid "Active Tab Style"
 msgstr ""
 
-#: admin/partials/metabox-config.php:599
-msgid "Choose active tab style."
-msgstr ""
-
-#: admin/partials/metabox-config.php:602
+#: admin/partials/metabox-config.php:686
 msgid "Active Tab Style (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:603
+#: admin/partials/metabox-config.php:687
 msgid ""
 "Choose how the currently selected tab looks. You can add a line to the Top "
 "or Bottom of tab's title to make it stand out."
 msgstr ""
 
-#: admin/partials/metabox-config.php:610 admin/partials/metabox-config.php:695
+#: admin/partials/metabox-config.php:694 admin/partials/metabox-config.php:724
+#: admin/partials/models/fields/background/background.php:339
 #: admin/partials/models/fields/typography/typography.php:240
 msgid "Normal"
 msgstr ""
 
-#: admin/partials/metabox-config.php:618
-#: admin/partials/models/fields/spacing/spacing.php:60
-msgid "Bottom"
-msgstr ""
-
-#: admin/partials/metabox-config.php:629 admin/partials/metabox-config.php:630
-msgid "Margin Between Tabs and Description"
-msgstr ""
-
-#: admin/partials/metabox-config.php:631
-msgid "Set a space between tabs and description."
-msgstr ""
-
-#: admin/partials/metabox-config.php:648
-msgid "Description Background Color"
-msgstr ""
-
-#: admin/partials/metabox-config.php:649
-msgid "Set description background color."
-msgstr ""
-
-#: admin/partials/metabox-config.php:655 admin/partials/metabox-config.php:657
-msgid "Description Padding"
-msgstr ""
-
-#: admin/partials/metabox-config.php:656
-msgid "Set description padding."
-msgstr ""
-
-#: admin/partials/metabox-config.php:669
-msgid "Description Border"
-msgstr ""
-
-#: admin/partials/metabox-config.php:670
-msgid "Set description border."
-msgstr ""
-
-#: admin/partials/metabox-config.php:683
+#: admin/partials/metabox-config.php:713
 msgid "Flat Tab Style"
 msgstr ""
 
-#: admin/partials/metabox-config.php:684
-msgid "Choose flat tab style."
-msgstr ""
-
-#: admin/partials/metabox-config.php:687
+#: admin/partials/metabox-config.php:716
 msgid "Flat Tab Style (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:688
+#: admin/partials/metabox-config.php:717
 msgid ""
 "Select the Underline option to enhance your tabs with flat underline "
 "positioned below the tab navigation for a clean and modern look."
 msgstr ""
 
-#: admin/partials/metabox-config.php:699
+#: admin/partials/metabox-config.php:728
 msgid "Underline"
 msgstr ""
 
-#: admin/partials/metabox-config.php:709 admin/partials/metabox-config.php:710
-msgid "Content Height"
-msgstr ""
-
-#: admin/partials/metabox-config.php:711
-msgid "Select content height."
-msgstr ""
-
-#: admin/partials/metabox-config.php:713
-msgid "Auto"
-msgstr ""
-
-#: admin/partials/metabox-config.php:714
-msgid "Custom"
-msgstr ""
-
-#: admin/partials/metabox-config.php:723
-#, php-format
-msgid ""
-"To unlock the more settings for %1$sTabs Title and Description%2$s, "
-"%3$sUpgrade To Pro!%4$s"
-msgstr ""
-
-#: admin/partials/metabox-config.php:732
-msgid "Small Screen"
-msgstr ""
-
 #: admin/partials/metabox-config.php:737
+msgid "Responsive Screen"
+msgstr ""
+
+#: admin/partials/metabox-config.php:743
+#: admin/partials/smart-tab-settings.php:523
 msgid "When Screen Width is Less Than"
 msgstr ""
 
-#: admin/partials/metabox-config.php:752 admin/partials/metabox-config.php:756
+#: admin/partials/metabox-config.php:758 admin/partials/metabox-config.php:761
+#: admin/partials/smart-tab-settings.php:537
 msgid "Tabs Mode on Small Screen"
 msgstr ""
 
-#: admin/partials/metabox-config.php:753
-msgid "Choose a tabs mode on small screen."
-msgstr ""
-
-#: admin/partials/metabox-config.php:757
+#: admin/partials/metabox-config.php:762
 msgid ""
 "Choose how your tabs behave on small screens, such as mobile devices. You "
 "can select \"Full Width\" to maintain the current layout or \"Accordion\" to "
 "switch to a collapsible format, ensuring the best user experience on mobile."
 msgstr ""
 
-#: admin/partials/metabox-config.php:762
+#: admin/partials/metabox-config.php:767
+#: admin/partials/smart-tab-settings.php:549
 msgid "Full Width"
 msgstr ""
 
-#: admin/partials/metabox-config.php:763
+#: admin/partials/metabox-config.php:768
+#: admin/partials/models/fields/shortcode/shortcode.php:84
+#: admin/partials/smart-tab-settings.php:74
+#: admin/partials/smart-tab-settings.php:550
 msgid "Accordion"
 msgstr ""
 
-#: admin/partials/metabox-config.php:770
+#: admin/partials/metabox-config.php:775
+#: admin/partials/smart-tab-settings.php:557
 msgid "Expand and Collapse Icon"
 msgstr ""
 
-#: admin/partials/metabox-config.php:771
-msgid "Show/Hide expand and collapse icon."
+#: admin/partials/metabox-config.php:786
+msgid "Description Animation"
 msgstr ""
 
-#: admin/partials/metabox-config.php:780 admin/partials/metabox-config.php:785
-#: admin/partials/metabox-config.php:789
+#: admin/partials/metabox-config.php:792 admin/partials/metabox-config.php:795
 msgid "Animation"
 msgstr ""
 
-#: admin/partials/metabox-config.php:786
-msgid "Enable/Disable animation for tabs content."
-msgstr ""
-
-#: admin/partials/metabox-config.php:790
+#: admin/partials/metabox-config.php:796
 msgid ""
 "You can select animation to enhance your tab with over 50+ fascinating "
 "animations to add dynamic and eye-catching effects to your content."
 msgstr ""
 
-#: admin/partials/metabox-config.php:803
+#: admin/partials/metabox-config.php:809
 msgid "Animation Style"
 msgstr ""
 
-#: admin/partials/metabox-config.php:804
-msgid "Choose an animation style for tabs content."
-msgstr ""
-
-#: admin/partials/metabox-config.php:807
+#: admin/partials/metabox-config.php:812
 msgid "fadeIn"
 msgstr ""
 
-#: admin/partials/metabox-config.php:808
+#: admin/partials/metabox-config.php:813
 msgid "fadeInDown"
 msgstr ""
 
-#: admin/partials/metabox-config.php:809
+#: admin/partials/metabox-config.php:814
 msgid "fadeInLeft (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:810
+#: admin/partials/metabox-config.php:815
 msgid "fadeInRight (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:811
+#: admin/partials/metabox-config.php:816
 msgid "fadeInUp (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:812
+#: admin/partials/metabox-config.php:817
 msgid "fadeInDownBig (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:813
+#: admin/partials/metabox-config.php:818
 msgid "fadeInLeftBig (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:814
+#: admin/partials/metabox-config.php:819
 msgid "fadeInRightBig (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:815
+#: admin/partials/metabox-config.php:820
 msgid "fadeInUpBig (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:816
+#: admin/partials/metabox-config.php:821
 msgid "zoomIn (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:817
+#: admin/partials/metabox-config.php:822
 msgid "zoomInDown (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:818
+#: admin/partials/metabox-config.php:823
 msgid "zoomInLeft (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:819
+#: admin/partials/metabox-config.php:824
 msgid "zoomInRight (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:820
+#: admin/partials/metabox-config.php:825
 msgid "zoomInUp (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:821
+#: admin/partials/metabox-config.php:826
 msgid "zoomOut (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:822
+#: admin/partials/metabox-config.php:827
 msgid "slideInDown (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:823
+#: admin/partials/metabox-config.php:828
 msgid "slideInLeft (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:824
+#: admin/partials/metabox-config.php:829
 msgid "slideInRight (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:825
+#: admin/partials/metabox-config.php:830
 msgid "slideInUp (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:826
+#: admin/partials/metabox-config.php:831
 msgid "flip (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:827
+#: admin/partials/metabox-config.php:832
 msgid "flipInX (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:828
+#: admin/partials/metabox-config.php:833
 msgid "flipInY (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:829
+#: admin/partials/metabox-config.php:834
 msgid "bounce (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:830
+#: admin/partials/metabox-config.php:835
 msgid "bounceIn (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:831
+#: admin/partials/metabox-config.php:836
 msgid "bounceInLeft (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:832
+#: admin/partials/metabox-config.php:837
 msgid "bounceInRight (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:833
+#: admin/partials/metabox-config.php:838
 msgid "bounceInUp (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:834
+#: admin/partials/metabox-config.php:839
 msgid "bounceInDown (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:835
+#: admin/partials/metabox-config.php:840
 msgid "rotateIn (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:836 admin/partials/metabox-config.php:840
+#: admin/partials/metabox-config.php:841
 msgid "rotateInDownLeft (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:837 admin/partials/metabox-config.php:841
+#: admin/partials/metabox-config.php:842
 msgid "rotateInDownRight (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:838
+#: admin/partials/metabox-config.php:843
 msgid "rotateInUpLeft (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:839
+#: admin/partials/metabox-config.php:844
 msgid "rotateInUpRight (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:842
+#: admin/partials/metabox-config.php:845
 msgid "backInDown (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:843
+#: admin/partials/metabox-config.php:846
 msgid "backInLeft (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:844
+#: admin/partials/metabox-config.php:847
 msgid "flash (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:845
+#: admin/partials/metabox-config.php:848
 msgid "pulse (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:846
+#: admin/partials/metabox-config.php:849
 msgid "shake (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:847
+#: admin/partials/metabox-config.php:850
 msgid "swing (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:848
+#: admin/partials/metabox-config.php:851
 msgid "tada (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:849
+#: admin/partials/metabox-config.php:852
 msgid "wobble (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:850
+#: admin/partials/metabox-config.php:853
 msgid "rubberBand (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:851
+#: admin/partials/metabox-config.php:854
 msgid "heartBeat (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:852
+#: admin/partials/metabox-config.php:855
 msgid "jello (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:853
+#: admin/partials/metabox-config.php:856
 msgid "headShake (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:854
+#: admin/partials/metabox-config.php:857
 msgid "lightSpeedIn (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:855
+#: admin/partials/metabox-config.php:858
 msgid "jackInTheBox (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:856
+#: admin/partials/metabox-config.php:859
 msgid "rollIn (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:864
+#: admin/partials/metabox-config.php:867
 msgid "Transition Delay"
 msgstr ""
 
-#: admin/partials/metabox-config.php:865
-msgid "Set animation transition delay in milisecond."
-msgstr ""
-
-#: admin/partials/metabox-config.php:877
+#: admin/partials/metabox-config.php:879
 #, php-format
 msgid ""
-"To unlock %1$s50+ elegant Tabs Animations%2$s settings, %3$sUpgrade To Pro!"
+"To unlock %1$s50+ elegant Tabs Animations%2$s settings, %3$sUpgrade to Pro!"
 "%4$s"
 msgstr ""
 
-#: admin/partials/metabox-config.php:894
-msgid "Typography"
+#: admin/partials/metabox-config.php:889 admin/partials/metabox-config.php:908
+#: admin/partials/smart-tab-settings.php:569
+msgid "Tabs Icon"
 msgstr ""
 
-#: admin/partials/metabox-config.php:903
+#: admin/partials/metabox-config.php:898
 #, php-format
 msgid ""
-"To unlock These Typography (940+ Google Fonts) options, %1$sUpgrade To Pro!"
-"%2$s P.S. Note: The %3$scolor fields and margin bottom for section title%4$s "
-"work in the lite version."
+"To unlock the following essential Tabs Icon options, %1$sUpgrade to Pro!%2$s"
 msgstr ""
 
-#: admin/partials/metabox-config.php:913
-msgid "Load Tabs Section Title Font"
+#: admin/partials/metabox-config.php:919
+msgid "Icon Size"
 msgstr ""
 
-#: admin/partials/metabox-config.php:914
-msgid "On/Off google font for the section title."
+#: admin/partials/metabox-config.php:941 admin/partials/metabox-config.php:942
+msgid "Space Between Title and Icon"
 msgstr ""
 
-#: admin/partials/metabox-config.php:921
-msgid "Tabs Section Title"
+#: admin/partials/metabox-config.php:964
+msgid "Icon Color"
 msgstr ""
 
-#: admin/partials/metabox-config.php:922
-msgid "Set tabs section title font properties."
+#: admin/partials/metabox-config.php:966
+#: admin/partials/models/fields/background/background.php:347
+#: admin/partials/models/fields/border/border.php:162
+#: admin/partials/smart-tab-settings.php:352
+#: admin/partials/smart-tab-settings.php:368
+msgid "Color"
 msgstr ""
 
-#: admin/partials/metabox-config.php:943
-msgid "Load Tabs Title Font"
+#: admin/partials/metabox-config.php:967
+#: admin/partials/smart-tab-settings.php:353
+#: admin/partials/smart-tab-settings.php:369
+msgid "Active Color"
 msgstr ""
 
-#: admin/partials/metabox-config.php:944
-msgid "On/Off google font for the tabs title."
+#: admin/partials/metabox-config.php:968
+#: admin/partials/smart-tab-settings.php:354
+#: admin/partials/smart-tab-settings.php:370
+msgid "Hover Color"
 msgstr ""
 
-#: admin/partials/metabox-config.php:950
-msgid "Tabs Title"
+#: admin/partials/metabox-config.php:986
+msgid "Icon Position"
 msgstr ""
 
-#: admin/partials/metabox-config.php:951
-msgid "Set tabs title font properties."
+#: admin/partials/metabox-config.php:989
+msgid "Icon Position (Pro)"
 msgstr ""
 
-#: admin/partials/metabox-config.php:975
-msgid "Load Subtitle Font"
-msgstr ""
-
-#: admin/partials/metabox-config.php:976
-msgid "On/Off google font for the tabs subtitle."
-msgstr ""
-
-#: admin/partials/metabox-config.php:983
-msgid "Set tabs subtitle font properties."
-msgstr ""
-
-#: admin/partials/metabox-config.php:1007
-msgid "Load Description Font"
-msgstr ""
-
-#: admin/partials/metabox-config.php:1008
-msgid "On/Off google font for the tabs description."
+#: admin/partials/metabox-config.php:990
+msgid ""
+"This option allows you to specify the position of icons within your tab "
+"interface. You can place icons to the Top, Right, Bottom and Left of tab's "
+"title."
 msgstr ""
 
 #: admin/partials/metabox-config.php:1015
-msgid "Set description font properties."
+msgid "Image & Video Gallery"
 msgstr ""
 
-#: admin/partials/metabox-config.php:1046
+#: admin/partials/metabox-config.php:1024
+#, php-format
+msgid ""
+"Unlock Image & Video Gallery Tabs with lightbox features & more— %1$sUpgrade "
+"to Pro!%2$s"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1035
+msgid "Layout Preset"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1037
+msgid "Grid"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1038
+msgid "Masonry"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1048
+msgid "Columns"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1064
+msgid "Space Between"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1079
+msgid "Caption"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1091
+msgid "Image Gallery Lightbox"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1102
+msgid "Video Play Mode"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1104
+msgid "Inline"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1105
+msgid "Lightbox"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1123
+#: admin/partials/smart-tab-settings.php:582
+msgid "Typography"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1132
+#: admin/partials/smart-tab-settings.php:590
+#, php-format
+msgid ""
+"Access 1500+ Google Fonts & Advanced Typography Options — %1$sUpgrade to Pro!"
+"%2$s"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1144
+msgid "Load Tabs Section Title Font"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1174
+#: admin/partials/smart-tab-settings.php:602
+msgid "Enable Google Fonts for Tab Name"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1206
+#: admin/partials/smart-tab-settings.php:630
+msgid "Enable Google Fonts for Tab Description"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1232
+msgid "Load Subtitle Font"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1276
 msgid "How to Use"
 msgstr ""
 
-#: admin/partials/models/classes/metabox.class.php:351
-#: admin/partials/models/classes/options.class.php:815
+#: admin/partials/metabox-config.php:1304
+msgid "Page Builders Ready"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1332
+msgid "Page Builders"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1393
+msgid "Access More Powerful Tab Content Types in"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1394
+msgid "Pro!"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1404
+msgid "Products"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1430
+msgid "Filter Products"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1434
+msgid "Related"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1435
+#: admin/partials/metabox-config.php:1500
+msgid "Specific Products (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1436
+msgid "On Sale (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1437
+msgid "Best Selling (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1441
+#, php-format
+msgid "Hide WooCommerce default related products %s."
+msgstr ""
+
+#: admin/partials/metabox-config.php:1444
+msgid "here"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1452
+msgid "Order By"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1480
+msgid "Number of total posts to display. Default value is 8."
+msgstr ""
+
+#: admin/partials/metabox-config.php:1493
+msgid "Show Tab in"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1496
+msgid "Brands"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1497
+msgid "Categories (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1498
+msgid "Tags (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1499
+msgid "SKU (Pro)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1509
+msgid "Choose Brands"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1515
+msgid "Choose Brand(s)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1525
+msgid "Exclude"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1532
+msgid "Specific"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1548
+msgid "Choose Product(s)"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1554
+#: admin/partials/metabox-config.php:1559
+msgid "Override this tab in each product"
+msgstr ""
+
+#: admin/partials/metabox-config.php:1560
+msgid ""
+"Enable this option to override the default behavior and customize this tab’s "
+"visibility for specific products."
+msgstr ""
+
+#: admin/partials/metabox-config.php:1571
+#, php-format
+msgid ""
+"Add unlimited custom tabs with any content to boost engagement and sales — "
+"%1$sUpgrade to Pro!%2$s"
+msgstr ""
+
+#: admin/partials/models/classes/metabox.class.php:350
+#: admin/partials/models/classes/options.class.php:857
 msgid "No option provided by developer."
 msgstr ""
 
-#: admin/partials/models/classes/metabox.class.php:362
+#: admin/partials/models/classes/metabox.class.php:359
 msgid "Show Preview"
 msgstr ""
 
-#: admin/partials/models/classes/metabox.class.php:371
+#: admin/partials/models/classes/metabox.class.php:366
 msgid "Restore"
 msgstr ""
 
-#: admin/partials/models/classes/metabox.class.php:372
+#: admin/partials/models/classes/metabox.class.php:367
 msgid "update post for restore "
 msgstr ""
 
-#: admin/partials/models/classes/metabox.class.php:372
+#: admin/partials/models/classes/metabox.class.php:367
 msgid "Cancel"
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:329
+#: admin/partials/models/classes/options.class.php:327
 msgid "Error while saving."
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:409
-msgid "Success. Imported backup options."
-msgstr ""
-
-#: admin/partials/models/classes/options.class.php:421
+#: admin/partials/models/classes/options.class.php:462
 msgid "Default options restored."
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:436
+#: admin/partials/models/classes/options.class.php:475
 msgid "Default options restored for only this section."
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:502
+#: admin/partials/models/classes/options.class.php:540
 msgid "Settings saved."
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:709
+#: admin/partials/models/classes/options.class.php:751
 msgid "show all options"
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:711
+#: admin/partials/models/classes/options.class.php:753
 msgid "Search option(s)"
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:714
+#: admin/partials/models/classes/options.class.php:756
 msgid "Save Settings"
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:714
+#: admin/partials/models/classes/options.class.php:756
 msgid "Saving..."
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:715
+#: admin/partials/models/classes/options.class.php:757
 msgid "Reset Tab"
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:715
+#: admin/partials/models/classes/options.class.php:757
 msgid "Are you sure to reset all the settings of this tab?"
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:716
+#: admin/partials/models/classes/options.class.php:758
 msgid "Reset All"
 msgstr ""
 
-#: admin/partials/models/classes/options.class.php:716
+#: admin/partials/models/classes/options.class.php:758
 msgid "Are you sure to reset all options?"
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:407
+#: admin/partials/models/classes/setup.class.php:396
 msgid "Are you sure?"
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:408
+#: admin/partials/models/classes/setup.class.php:397
 msgid "Restoring options."
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:409
+#: admin/partials/models/classes/setup.class.php:398
 msgid "Importing options."
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:412
+#: admin/partials/models/classes/setup.class.php:401
 #, php-format
 msgid "Please enter %s or more characters"
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:413
+#: admin/partials/models/classes/setup.class.php:402
 msgid "Searching..."
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:414
+#: admin/partials/models/classes/setup.class.php:403
 msgid "No results match"
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:494
+#: admin/partials/models/classes/setup.class.php:545
 #, php-format
 msgid "Ooops! This field type (%s) can not be used here, yet."
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:564
+#: admin/partials/models/classes/setup.class.php:627
 msgid "This field class is not available!"
 msgstr ""
 
-#: admin/partials/models/classes/setup.class.php:567
+#: admin/partials/models/classes/setup.class.php:630
 msgid "This type is not found!"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:64
+msgid "No background selected"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:96
+msgid "From"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:119
+msgid "To"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:142
+msgid "Direction"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:150
+msgid "&#8659; top to bottom"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:151
+msgid "&#8658; left to right"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:152
+msgid "&#8664; corner top to right"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:153
+msgid "&#8665; corner top to left"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:204
+msgid "Background Position"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:205
+msgid "Left Top"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:206
+msgid "Left Center"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:207
+msgid "Left Bottom"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:208
+msgid "Center Top"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:209
+msgid "Center Center"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:210
+msgid "Center Bottom"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:211
+msgid "Right Top"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:212
+msgid "Right Center"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:213
+msgid "Right Bottom"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:232
+msgid "Background Repeat"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:233
+msgid "Repeat"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:234
+msgid "No Repeat"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:235
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:236
+msgid "Repeat Vertically"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:254
+msgid "Background Attachment"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:255
+msgid "Scroll"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:256
+msgid "Fixed"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:274
+msgid "Background Size"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:275
+msgid "Cover"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:276
+msgid "Contain"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:294
+msgid "Background Origin"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:295
+#: admin/partials/models/fields/background/background.php:318
+msgid "Padding Box"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:296
+#: admin/partials/models/fields/background/background.php:317
+msgid "Border Box"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:297
+#: admin/partials/models/fields/background/background.php:319
+msgid "Content Box"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:316
+msgid "Background Clip"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:338
+msgid "Background Blend Mode"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:340
+msgid "Multiply"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:341
+msgid "Screen"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:342
+msgid "Overlay"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:343
+msgid "Darken"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:344
+msgid "Lighten"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:345
+msgid "Color Dodge"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:346
+msgid "Saturation"
+msgstr ""
+
+#: admin/partials/models/fields/background/background.php:348
+msgid "Luminosity"
 msgstr ""
 
 #: admin/partials/models/fields/border/border.php:53
@@ -1602,6 +2058,7 @@ msgid "left"
 msgstr ""
 
 #: admin/partials/models/fields/border/border.php:57
+#: admin/partials/models/fields/column/column.php:59
 #: admin/partials/models/fields/spacing/spacing.php:57
 msgid "all"
 msgstr ""
@@ -1640,6 +2097,7 @@ msgstr ""
 #: admin/partials/models/fields/border/border.php:91
 #: admin/partials/models/fields/typography/typography.php:258
 #: admin/partials/models/fields/typography/typography.php:277
+#: admin/partials/smart-tab-settings.php:445
 msgid "None"
 msgstr ""
 
@@ -1647,23 +2105,39 @@ msgstr ""
 msgid "Width"
 msgstr ""
 
-#: admin/partials/models/fields/border/border.php:144
-msgid "Style"
-msgstr ""
-
-#: admin/partials/models/fields/border/border.php:171
-msgid "Border Radius"
+#: admin/partials/models/fields/border/border.php:172
+msgid "Radius"
 msgstr ""
 
 #: admin/partials/models/fields/button_set/button_set.php:87
 #: admin/partials/models/fields/checkbox/checkbox.php:94
 #: admin/partials/models/fields/radio/radio.php:93
-#: admin/partials/models/fields/select/select.php:142
+#: admin/partials/models/fields/select/select.php:146
 msgid "No data provided for this option type."
 msgstr ""
 
+#: admin/partials/models/fields/column/column.php:54
+msgid "Large Desktop"
+msgstr ""
+
+#: admin/partials/models/fields/column/column.php:55
+msgid "Desktop"
+msgstr ""
+
+#: admin/partials/models/fields/column/column.php:56
+msgid "Small Desktop"
+msgstr ""
+
+#: admin/partials/models/fields/column/column.php:57
+msgid "Tablet"
+msgstr ""
+
+#: admin/partials/models/fields/column/column.php:58
+msgid "Mobile"
+msgstr ""
+
 #: admin/partials/models/fields/group/group.php:51
-#: includes/class-wp-tabs-cpt.php:67
+#: includes/class-wp-tabs-cpt.php:73 includes/class-wp-tabs-cpt.php:135
 msgid "Add New"
 msgstr ""
 
@@ -1684,6 +2158,22 @@ msgstr ""
 msgid "You can not remove less than"
 msgstr ""
 
+#: admin/partials/models/fields/map/map.php:60
+msgid "Search..."
+msgstr ""
+
+#: admin/partials/models/fields/map/map.php:61
+msgid "Latitude"
+msgstr ""
+
+#: admin/partials/models/fields/map/map.php:62
+msgid "Longitude"
+msgstr ""
+
+#: admin/partials/models/fields/map/map.php:93
+msgid "Address"
+msgstr ""
+
 #: admin/partials/models/fields/media/media.php:53
 msgid "Upload"
 msgstr ""
@@ -1696,6 +2186,81 @@ msgstr ""
 msgid "No media selected"
 msgstr ""
 
+#: admin/partials/models/fields/shortcode/shortcode.php:54
+#, php-format
+msgid "Unlock Full Potential with %1$sPRO%2$s"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:61
+msgid "Boost Engagement & Sales with Pro WordPress + WooCommerce Tabs."
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:69
+msgid "20+ Tab Layouts & Positions"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:70
+msgid "Image Gallery Tabs (Lightbox)"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:71
+msgid "Video Gallery Tabs (Lightbox)"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:72
+msgid "Tabs from Post Type & Taxonomy"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:73
+msgid "Vertical & Multi-Level Tabs"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:74
+msgid "Scrollable Tabs, and more"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:81
+#, php-format
+msgid "6+ Product Tab Layouts (%1$s, %2$s, %3$s)"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:82
+#: admin/partials/smart-tab-settings.php:55
+msgid "Horizontal"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:83
+msgid "Vertical"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:87
+msgid "Override/Edit Product Tabs"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:88
+msgid "Global Tabs & Show Tabs by Product, Category, Tag, Brand..."
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:89
+msgid "Product Image Gallery, Video, FAQs, Download, Map, Contact Tabs, etc."
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:90
+msgid "Tab Icons (Library/Upload Custom)"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:91
+msgid "Drag & Drop Tabs Reorder"
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:92
+msgid "Rename Default Tabs, and more."
+msgstr ""
+
+#: admin/partials/models/fields/shortcode/shortcode.php:98
+msgid "Upgrade to Pro Now"
+msgstr ""
+
 #: admin/partials/models/fields/switcher/switcher.php:46
 msgid "On"
 msgstr ""
@@ -1704,7 +2269,7 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
-#: admin/partials/models/fields/textarea/textarea.php:70
+#: admin/partials/models/fields/textarea/textarea.php:69
 msgid "Add Shortcode"
 msgstr ""
 
@@ -1728,6 +2293,8 @@ msgstr ""
 #: admin/partials/models/fields/typography/typography.php:245
 #: admin/partials/models/fields/typography/typography.php:264
 #: admin/partials/models/fields/typography/typography.php:287
+#: admin/partials/smart-tab-settings.php:267
+#: admin/partials/smart-tab-settings.php:306
 msgid "Default"
 msgstr ""
 
@@ -1840,20 +2407,20 @@ msgstr ""
 msgid "Margin Bottom"
 msgstr ""
 
-#: admin/partials/models/fields/typography/typography.php:485
+#: admin/partials/models/fields/typography/typography.php:476
 msgid "Custom Web Fonts"
 msgstr ""
 
-#: admin/partials/models/fields/typography/typography.php:491
+#: admin/partials/models/fields/typography/typography.php:482
 msgid "Safe Web Fonts"
 msgstr ""
 
-#: admin/partials/models/fields/typography/typography.php:514
-msgid "Google Web Fonts"
+#: admin/partials/models/fields/typography/typography.php:505
+msgid "Google Web Fonts (Pro)"
 msgstr ""
 
 #: admin/partials/models/functions/actions.php:32
-#: includes/class-wp-tabs-import-export.php:160
+#: includes/class-wp-tabs-import-export.php:238
 msgid "Error: Nonce verification has failed. Please try again."
 msgstr ""
 
@@ -1866,35 +2433,32 @@ msgid "You do not have required permissions to access."
 msgstr ""
 
 #: admin/partials/models/functions/validate.php:27
-#: admin/partials/models/functions/validate.php:101
+#: admin/partials/models/functions/validate.php:97
 msgid "Please write a valid email address!"
 msgstr ""
 
-#: admin/partials/models/functions/validate.php:45
-#: admin/partials/models/functions/validate.php:124
+#: admin/partials/models/functions/validate.php:44
+#: admin/partials/models/functions/validate.php:119
 msgid "Please write a numeric data!"
 msgstr ""
 
-#: admin/partials/models/functions/validate.php:63
-#: admin/partials/models/functions/validate.php:146
+#: admin/partials/models/functions/validate.php:61
+#: admin/partials/models/functions/validate.php:140
 msgid "Error! This field is required!"
 msgstr ""
 
-#: admin/partials/models/functions/validate.php:81
-#: admin/partials/models/functions/validate.php:168
+#: admin/partials/models/functions/validate.php:78
+#: admin/partials/models/functions/validate.php:161
 msgid "Please write a valid url!"
 msgstr ""
 
-#: admin/partials/notices/offer-banner.php:129
-msgid "Limited Time Offer, Upgrade Now!"
-msgstr ""
-
 #: admin/partials/option-config.php:26 admin/partials/option-config.php:38
+#: includes/class-wp-tabs-admin-menu.php:65
 msgid "Settings"
 msgstr ""
 
 #: admin/partials/option-config.php:50
-msgid "Advanced Settings"
+msgid "Advanced Controls"
 msgstr ""
 
 #: admin/partials/option-config.php:56
@@ -1903,73 +2467,276 @@ msgstr ""
 
 #: admin/partials/option-config.php:57
 msgid ""
-"Check this box if you would like WP Tabs to completely remove all of its "
+"Check this box if you would like Smart Tabs to completely remove all of its "
 "data when the plugin is deleted."
 msgstr ""
 
-#: admin/partials/option-config.php:70
-msgid "Woo Tab Settings"
+#: admin/partials/option-config.php:66
+msgid ""
+"Disable this option if your website does not have a WooCommerce store. In "
+"this case, the product tabs functionality will not be loaded, keeping your "
+"admin panel optimized and faster."
 msgstr ""
 
-#: admin/partials/option-config.php:77
+#: admin/partials/option-config.php:82
+msgid "Woo Tab Group"
+msgstr ""
+
+#: admin/partials/option-config.php:90
 #, php-format
-msgid "Note: %1$sWooCommerce%2$s is required to use this feature."
+msgid ""
+"⚠️ Note: We've introduced a new and powerful %s feature that gives you full "
+"control to create and \tcustomize individual tabs per product — with "
+"advanced options, flexible layouts, and complete content freedom.\n"
+"\t\t\t\t\t\tYour existing Woo Tabs Group settings will continue to work as "
+"before. However, we recommend switching to the new Woo Product Tabs style to "
+"take advantage of all the new capabilities."
 msgstr ""
 
-#: admin/partials/option-config.php:86
+#: admin/partials/option-config.php:94
+msgid "Woo Product Tabs"
+msgstr ""
+
+#: admin/partials/option-config.php:101
 msgid "WooCommerce Additional Tabs"
 msgstr ""
 
-#: admin/partials/option-config.php:100
+#: admin/partials/option-config.php:115
 msgid "Display Tabs on"
 msgstr ""
 
-#: admin/partials/option-config.php:102
-msgid "All Products"
-msgstr ""
-
-#: admin/partials/option-config.php:103
+#: admin/partials/option-config.php:118
 msgid "Category"
 msgstr ""
 
-#: admin/partials/option-config.php:104
+#: admin/partials/option-config.php:119
 msgid "Specific Products"
 msgstr ""
 
-#: admin/partials/option-config.php:112
+#: admin/partials/option-config.php:127
 msgid "Specific Product(s)"
 msgstr ""
 
-#: admin/partials/option-config.php:127
+#: admin/partials/option-config.php:142
 msgid "Choose Product"
 msgstr ""
 
-#: admin/partials/option-config.php:134
+#: admin/partials/option-config.php:149
 msgid "Category Term(s)"
 msgstr ""
 
-#: admin/partials/option-config.php:139
+#: admin/partials/option-config.php:154
 msgid "Choose term(s)"
 msgstr ""
 
-#: admin/partials/option-config.php:149
+#: admin/partials/option-config.php:164
 msgid "Select Tabs Group(s)"
 msgstr ""
 
-#: admin/partials/option-config.php:157
+#: admin/partials/option-config.php:172
 msgid "Select tabs group(s)"
 msgstr ""
 
-#: admin/partials/option-config.php:167
+#: admin/partials/option-config.php:182
 msgid "Tabs Priority"
 msgstr ""
 
-#: admin/partials/option-config.php:187
+#: admin/partials/option-config.php:204
 msgid "Additional CSS"
 msgstr ""
 
-#: admin/partials/option-config.php:193
+#: admin/partials/option-config.php:210
 msgid "Custom CSS"
+msgstr ""
+
+#: admin/partials/option-config.php:227
+msgid "UPGRADE TO PRO"
+msgstr ""
+
+#: admin/partials/product-tabs-panel.php:18
+#: admin/partials/smart-tab-settings.php:758
+msgid "Additional Information"
+msgstr ""
+
+#: admin/partials/product-tabs-panel.php:19
+#: admin/partials/smart-tab-settings.php:779
+msgid "Reviews"
+msgstr ""
+
+#: admin/partials/product-tabs-panel.php:64
+msgid "(No Title)"
+msgstr ""
+
+#: admin/partials/product-tabs-panel.php:91
+msgid "Override"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:44
+msgid "General Settings"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:80
+msgid "Below Summary"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:86
+msgid "Accordion Below"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:97
+msgid "Tabs Alignemnt"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:161
+#: admin/partials/smart-tab-settings.php:164
+msgid "AutoPlay Delay Time"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:165
+msgid ""
+"Set autoplay delay or interval time. The amount of time to delay between "
+"automatically cycling a weather item. e.g. 1000 milliseconds(ms) = 1 second."
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:176
+msgid "Pause on Hover"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:224
+#, php-format
+msgid ""
+"Highlight Product Info Perfectly with More Beautiful & Customizable Tabs "
+"Layouts to Boost Sales — %1$sUpgrade to Pro!%2$s"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:263
+#: admin/partials/smart-tab-settings.php:302
+msgid "Tabs Style"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:272
+msgid "Top Line"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:278
+#: admin/partials/smart-tab-settings.php:311
+msgid "Classic"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:284
+#: admin/partials/smart-tab-settings.php:317
+msgid "Button"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:290
+#: admin/partials/smart-tab-settings.php:323
+msgid "Rounded"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:335
+msgid "Spacing Between Tabs"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:336
+msgid "Spacing between Tabs"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:350
+msgid "Tabs Name Color"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:366
+msgid "Tabs Name Background"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:381
+#: admin/partials/smart-tab-settings.php:382
+msgid "Tabs Name Padding"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:396
+msgid "Tabs Bottom Line"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:410
+msgid "Tabs Vertical Line"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:423
+msgid "Active Tab Line"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:465
+msgid "Tabs Description"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:540
+#, php-format
+msgid ""
+"%1$sTabs Mode on Small Screen%2$sChoose how your tabs behave on small "
+"screens, such as mobile devices. You can select \"Full Width\" to maintain "
+"the current layout or \"Accordion\" to switch to a collapsible format, "
+"ensuring the best user experience on mobile.%3$sOpen Docs%4$sOpen Live "
+"Demo%5$s"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:548
+msgid "Same as Desktop"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:686
+msgid "Section Settings"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:691
+msgid "Product Tabs on Mobile Device"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:701
+msgid "Use Theme's Product Tab Style"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:702
+msgid ""
+"Enable to prevent the plugin's default tab styling to maintain complete "
+"control over your product tabs' appearance. This option is ideal when using "
+"custom themes or when you prefer to style your tabs exclusively through your "
+"own CSS rules."
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:711
+msgid "WooCommerce Default Related Products"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:713
+msgid ""
+"Hide WooCommerce’s default related products section on single product page. "
+"Recommended when using custom product tabs (e.g., Related, Specific, Best "
+"Selling, On Sale, or Latest products) to prevent duplication."
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:726
+msgid "Override WooCommerce Default Tabs"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:743
+#: admin/partials/smart-tab-settings.php:772
+#: admin/partials/smart-tab-settings.php:793
+msgid "Leave it empty to show default tabs name."
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:749
+msgid "Add Icon"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:805
+msgid "WooCommerce Default Tab Heading"
+msgstr ""
+
+#: admin/partials/smart-tab-settings.php:806
+msgid ""
+"Hide repeated tab headings (e.g., Description, Additional Information, & "
+"Reviews) displayed inside the tab content."
 msgstr ""
 
 #: admin/partials/tools-config.php:25 admin/partials/tools-config.php:37
@@ -2014,111 +2781,238 @@ msgstr ""
 msgid "Import JSON File To Upload"
 msgstr ""
 
-#: includes/class-wp-tabs-admin-menu.php:61
-msgid "Add Tabs"
-msgstr ""
-
-#: includes/class-wp-tabs-admin-menu.php:63
+#: includes/class-wp-tabs-admin-menu.php:67
 msgid "Go Pro!"
 msgstr ""
 
-#: includes/class-wp-tabs-admin-menu.php:83
+#: includes/class-wp-tabs-admin-menu.php:87
 #, php-format
 msgid ""
-"Enjoying %1$sWP Tabs?%2$s Please rate us %3$sWordPress.org%4$s. Your "
+"Enjoying %1$sSmart Tabs?%2$s Please rate us %3$sWordPress.org%4$s. Your "
 "positive feedback will help us grow more. Thank you! 😊"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:65 includes/class-wp-tabs-cpt.php:77
+#: includes/class-wp-tabs-cpt.php:71 includes/class-wp-tabs-cpt.php:83
 msgid "Tab Groups"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:66
+#: includes/class-wp-tabs-cpt.php:72 includes/class-wp-tabs-cpt.php:134
 msgid "Tabs"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:68
+#: includes/class-wp-tabs-cpt.php:74
 msgid "Add New Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:69
+#: includes/class-wp-tabs-cpt.php:75
 msgid "Edit Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:70
+#: includes/class-wp-tabs-cpt.php:76
 msgid "New Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:71
+#: includes/class-wp-tabs-cpt.php:77
 msgid "View Tab Group"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:72
+#: includes/class-wp-tabs-cpt.php:78
 msgid "Search Tabs"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:73
+#: includes/class-wp-tabs-cpt.php:79
 msgid "No Tab Group found."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:74
+#: includes/class-wp-tabs-cpt.php:80
 msgid "No Tab Group found in trash."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:75
+#: includes/class-wp-tabs-cpt.php:81 includes/class-wp-tabs-cpt.php:143
 msgid "Parent Item:"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:130
+#: includes/class-wp-tabs-cpt.php:137
+msgid "Edit Tab"
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:138
+msgid "New Tab"
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:139
+msgid "View Tab"
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:140
+msgid "Search"
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:141
+msgid "No tabs found."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:142
+msgid "No tabs found in trash."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:145
+msgid " NEW!"
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:177
 msgid "Tabs updated."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:133
+#: includes/class-wp-tabs-cpt.php:180
 msgid " updated."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:136
+#: includes/class-wp-tabs-cpt.php:183
 #, php-format
 msgid "Tabs restored to revision from %s"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:139
+#: includes/class-wp-tabs-cpt.php:186
 msgid "Tabs published."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:140
+#: includes/class-wp-tabs-cpt.php:187
 msgid "Tabs saved."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:141
+#: includes/class-wp-tabs-cpt.php:188
 msgid "Tabs submitted."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:144
+#: includes/class-wp-tabs-cpt.php:191
 #, php-format
 msgid "Tabs scheduled for: %1$s %2$s %3$s."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:146
+#: includes/class-wp-tabs-cpt.php:193 includes/class-wp-tabs-cpt.php:212
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:149
+#: includes/class-wp-tabs-cpt.php:196
 msgid "Tabs draft updated."
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:163
+#: includes/class-wp-tabs-cpt.php:205
+msgid "Product tab updated."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:207
+#, php-format
+msgid "Product tab restored to revision from %s."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:208
+msgid "Product tab published."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:209
+msgid "Product tab saved."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:210
+msgid "Product tab submitted."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:212
+#, php-format
+msgid "Product tab scheduled for: <strong>%1$s</strong>."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:213
+msgid "Product tab draft updated."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:214
+msgid "tab moved to the Trash."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:215
+msgid "tab restored from the Trash."
+msgstr ""
+
+#: includes/class-wp-tabs-cpt.php:230
 msgid "Name"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:164
+#: includes/class-wp-tabs-cpt.php:231
 msgid "Shortcode"
 msgstr ""
 
-#: includes/class-wp-tabs-cpt.php:165
-msgid "Date"
+#: includes/class-wp-tabs-import-export.php:105
+msgid "You do not have permission to export."
 msgstr ""
 
-#: includes/class-wp-tabs-import-export.php:171
+#: includes/class-wp-tabs-import-export.php:243
+msgid "You do not have permission to import."
+msgstr ""
+
+#: includes/class-wp-tabs-import-export.php:252
 msgid "Nothing to import."
+msgstr ""
+
+#: includes/class-wp-tabs-import-export.php:267
+msgid "Invalid JSON data."
+msgstr ""
+
+#: includes/class-wp-tabs-import-export.php:277
+msgid "Invalid shortcode data structure."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:627
+msgid "Product data unavailable."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:643
+msgid "Tab content unavailable."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:691
+msgid "Unsupported override tab type."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:715
+msgid "No content available."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:789
+msgid "No products found."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:1040
+#, php-format
+msgid "%s tab updated."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:1042
+#, php-format
+msgid "%s tab not updated, someone is editing it."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:1044
+#, php-format
+msgid "%s tab permanently deleted."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:1046
+#, php-format
+msgid "%s tab moved to the Trash."
+msgstr ""
+
+#: includes/class-wp-tabs-product-tab.php:1048
+#, php-format
+msgid "%s tab restored from the Trash."
+msgstr ""
+
+#: public/partials/tab-post/post-meta.php:16
+msgid "By "
+msgstr ""
+
+#: public/partials/tab-post/post-meta.php:18
+msgid "On "
 msgstr ""

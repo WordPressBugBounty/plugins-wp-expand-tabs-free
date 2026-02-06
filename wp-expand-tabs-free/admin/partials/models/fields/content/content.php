@@ -43,11 +43,8 @@ if ( ! class_exists( 'SP_WP_TABS_Field_content' ) ) {
 		 * @return void
 		 */
 		public function render() {
-
 			if ( ! empty( $this->field['content'] ) ) {
-
 				echo wp_kses_post( $this->field['content'] );
-
 			}
 		}
 	}

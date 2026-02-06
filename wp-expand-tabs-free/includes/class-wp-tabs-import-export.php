@@ -26,10 +26,11 @@ class Wp_Tabs_Import_Export {
 	public function export( $shortcode_ids ) {
 		$export = array();
 		if ( ! empty( $shortcode_ids ) ) {
-			$post_in = 'all_shortcodes' === $shortcode_ids ? '' : $shortcode_ids;
+			$post_type = 'all_product_tabs' === $shortcode_ids ? 'sp_products_tabs' : 'sp_wp_tabs';
+			$post_in   = 'all_shortcodes' === $shortcode_ids || 'all_product_tabs' === $shortcode_ids ? '' : $shortcode_ids;
 
 			$args       = array(
-				'post_type'        => 'sp_wp_tabs',
+				'post_type'        => $post_type,
 				'post_status'      => array( 'inherit', 'publish' ),
 				'orderby'          => 'modified',
 				'suppress_filters' => 1, // wpml, ignore language filter.
@@ -39,9 +40,15 @@ class Wp_Tabs_Import_Export {
 			$shortcodes = get_posts( $args );
 			if ( ! empty( $shortcodes ) ) {
 				foreach ( $shortcodes as $shortcode ) {
+					// Skip default tabs (those mapped from WC default tab slugs).
+					if ( get_post_meta( $shortcode->ID, '_wc_default_tab_slug', true ) ) {
+						continue;
+					}
+
 					$accordion_export = array(
 						'title'       => sanitize_text_field( $shortcode->post_title ),
 						'original_id' => absint( $shortcode->ID ),
+						'post_type'   => $shortcode->post_type,
 						'meta'        => array(),
 					);
 					foreach ( get_post_meta( $shortcode->ID ) as $metakey => $value ) {
@@ -136,16 +143,22 @@ class Wp_Tabs_Import_Export {
 	 * @return object
 	 */
 	public function import( $shortcodes ) {
-		$errors = array();
+		$errors     = array();
+		$_post_type = 'sp_products_tabs';
+
 		foreach ( $shortcodes as $index => $shortcode ) {
 			$errors[ $index ] = array();
 			$new_tabs_id      = 0;
+			$_post_type       = isset( $shortcode['post_type'] ) && 'sp_products_tabs' === $shortcode['post_type']
+			? 'sp_products_tabs'
+			: 'sp_wp_tabs';
+
 			try {
 				$new_tabs_id = wp_insert_post(
 					array(
 						'post_title'  => isset( $shortcode['title'] ) ? sanitize_text_field( $shortcode['title'] ) : '',
 						'post_status' => 'publish',
-						'post_type'   => 'sp_wp_tabs',
+						'post_type'   => $_post_type,
 					),
 					true
 				);
@@ -156,7 +169,7 @@ class Wp_Tabs_Import_Export {
 
 				if ( isset( $shortcode['meta'] ) && is_array( $shortcode['meta'] ) ) {
 					foreach ( $shortcode['meta'] as $key => $value ) {
-						if ( 'sp_tab_source_options' === $key || 'sp_tab_shortcode_options' === $key ) {
+						if ( 'sp_tab_source_options' === $key || 'sp_tab_shortcode_options' === $key || 'sptpro_woo_product_tabs_settings' === $key ) {
 							$value = str_replace( '{#ID#}', $new_tabs_id, $value );
 							if ( is_serialized( $value ) ) {
 								// If the value is serialized, we need to unserialize it.
@@ -189,7 +202,7 @@ class Wp_Tabs_Import_Export {
 		}
 
 		$errors = reset( $errors );
-		return isset( $errors[0] ) ? new WP_Error( 'import_tabs_error', $errors[0] ) : $shortcodes;
+		return isset( $errors[0] ) ? new WP_Error( 'import_tabs_error', $errors[0] ) : $_post_type;
 	}
 
 	/**

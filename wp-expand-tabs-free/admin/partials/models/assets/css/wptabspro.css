@@ -835,6 +835,27 @@ span.tooltip-icon {
   display: inline-block;
 }
 
+.wptabspro-field.wptabspro-field-image_select p.wptabs-image-name a {
+  color: #3c4c4a;
+  text-decoration: none;
+}
+
+.wptabspro-field.wptabspro-field-image_select p.wptabs-image-name a:focus {
+  box-shadow: none;
+}
+
+.wptabspro-tooltip:has(video) {
+  max-width: 560px;
+  max-height: 345px;
+}
+
+.wptabspro-tooltip .wptabspro-img-tag video {
+  height: 315px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 7px;
+}
+
 /**
  * 02. Themes
  */
@@ -994,6 +1015,7 @@ span.tooltip-icon {
   background-color: #fff;
   box-shadow: 3px 0 0 0 #3ec0a1 inset;
   color: #3ec0a1;
+  margin-right: -1px;
 }
 
 .wptabspro-theme-light .wptabspro-nav ul li .wptabspro-section-active {
@@ -1112,7 +1134,6 @@ span.tooltip-icon {
   min-height: 0;
   font-size: 100%;
   user-select: none;
-  border: 1px solid #ccd0d4;
   background-color: #fafafa;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   transition: border-color .15s;
@@ -1152,6 +1173,162 @@ span.tooltip-icon {
 .wptabspro-field-accordion .wptabspro-accordion-open {
   display: block;
 }
+
+/**
+ * 03. 02. Field: accordion
+ */
+.wptabspro-field-accordion .wptabspro-accordion-item {
+  position: relative;
+  margin-bottom: 8px;
+  border: 1px solid #DDDDDD;
+  border-radius: 2px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-item h4 {
+  font-size: 1em;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-title {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+  padding: 15px;
+  min-height: 0;
+  font-size: 100%;
+  user-select: none;
+  background-color: #e8ecefb3;
+  transition: border-color .15s;
+  padding-left: 44px;
+  border-radius: 4px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-title:active,
+.wptabspro-field-accordion .wptabspro-accordion-title:hover,
+.wptabspro-field-accordion .wptabspro-accordion-title:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-title .wptabspro--icon {
+  width: 20px;
+  text-align: center;
+  margin-right: 2px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-icon {
+  width: 16px;
+  text-align: center;
+  position: absolute;
+  right: 19px;
+  font-size: 20px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-content {
+  display: none;
+  padding: 0;
+  border-top: none;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-content {
+  margin: 10px 20px 20px 20px;
+  border: 1px solid #ccd0d4;
+  border-radius: 2px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-content>.wptabspro-field {
+  padding: 15px 20px 20px 20px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-content>.wptabspro-field.wptabspro-field-text:first-child {
+  padding-top: 25px;
+}
+
+.wptabspro-field-accordion .wptabspro-accordion-open {
+  display: block;
+}
+
+/* Tabs form styles */
+.sp-tab__content_wrapper .sp_tabs_contact_form .wptabspro-field-text {
+  float: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sp-tab__content_wrapper .sp_tabs_contact_form .wptabspro-field-text:first-child {
+  padding-right: 20px;
+}
+
+.wptabspro-field-accordion.sp_tabs_contact_form .wptabspro-accordion-items {
+  padding: 20px;
+  border: 1px solid;
+  border: 1px solid #C3C4C7;
+  border-radius: 4px;
+  width: 600px;
+}
+
+.wptabspro-field-accordion.override_wc_default_tabs .wptabspro-accordion-items {
+  width: 680px;
+  pointer-events: none;
+}
+
+.wptabspro-field-accordion.sp_tabs_contact_form .wptabspro-accordion-title {
+  padding-left: 20px;
+}
+
+.wptabspro-field-accordion.sp_tabs_contact_form .wptabspro-accordion-content {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #ccd0d4;
+  border-radius: 2px;
+}
+
+.wptabspro-field-accordion.sp_tabs_contact_form .wptabspro-accordion-item {
+  background-color: #e8ecefb3;
+  border-radius: 4px;
+}
+
+.wptabspro-field.sp_tabs_contact_form .wptabspro-field-text>.wptabspro-title h4,
+.wptabspro-field.sp_tabs_contact_form .wptabspro-field-checkbox>.wptabspro-title h4 {
+  color: #2C3333;
+  display: inline-block;
+  font-weight: 400;
+}
+
+.wptabspro-accordion-item:has(.wptabspro-accordion-open) .wptabspro-accordion-title {
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.wptabspro-accordion-item:has(.wptabspro-accordion-open) .wptabspro-accordion-content {
+  border-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.default_tab_override .wptabspro-fieldset-content .wptabspro-title {
+  width: 100%;
+}
+
+.default_tab_override.tabs_title_section .wptabspro-fieldset-content {
+  align-items: end;
+}
+
+.default_tab_override.tabs_title_section .wptabspro-field.wptabspro-field-button_set {
+  padding: 0;
+}
+
+.default_tab_override.tabs_title_section .wptabspro-field.wptabspro-field-button_set .wptabspro--sibling.wptabspro--button {
+  border-radius: 4px;
+}
+
 
 /**
  * 03. 03. Field: background
@@ -1220,6 +1397,7 @@ span.tooltip-icon {
  */
 .wptabspro-field-border .wptabspro--inputs,
 .wptabspro-field-spacing .wptabspro--inputs,
+.wptabspro-field-column .wptabspro--inputs,
 .wptabspro-field-dimensions .wptabspro--inputs {
   float: left;
   display: flex;
@@ -1228,6 +1406,7 @@ span.tooltip-icon {
 
 .wptabspro-field-border .wptabspro--input,
 .wptabspro-field-spacing .wptabspro--input,
+.wptabspro-field-column .wptabspro--input,
 .wptabspro-field-dimensions .wptabspro--input {
   display: flex;
   padding-right: 6px;
@@ -1243,6 +1422,7 @@ span.tooltip-icon {
 
 .wptabspro-field-border .wptabspro--input input,
 .wptabspro-field-spacing .wptabspro--input input,
+.wptabspro-field-column .wptabspro--input input,
 .wptabspro-field-dimensions .wptabspro--input input {
   position: relative;
   z-index: 1;
@@ -1255,12 +1435,14 @@ span.tooltip-icon {
 
 .wptabspro-field-border .wptabspro--color,
 .wptabspro-field-spacing .wptabspro--color,
+.wptabspro-field-column .wptabspro--color,
 .wptabspro-field-dimensions .wptabspro--color {
   float: left;
 }
 
 .wptabspro-field-border .wptabspro--label,
 .wptabspro-field-spacing .wptabspro--label,
+.wptabspro-field-column .wptabspro--label,
 .wptabspro-field-dimensions .wptabspro--label {
   display: flex;
   flex-direction: column;
@@ -1278,6 +1460,7 @@ span.tooltip-icon {
 
 .wptabspro-field-border .wptabspro--icon,
 .wptabspro-field-spacing .wptabspro--icon,
+.wptabspro-field-column .wptabspro--icon,
 .wptabspro-field-dimensions .wptabspro--icon {
   border-right: 0;
   border-radius: 4px 0 0 4px;
@@ -1285,6 +1468,7 @@ span.tooltip-icon {
 
 .wptabspro-field-border .wptabspro--icon+input,
 .wptabspro-field-spacing .wptabspro--icon+input,
+.wptabspro-field-column .wptabspro--icon+input,
 .wptabspro-field-dimensions .wptabspro--icon+input {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -1292,6 +1476,7 @@ span.tooltip-icon {
 
 .wptabspro-field-border .wptabspro--unit,
 .wptabspro-field-spacing .wptabspro--unit,
+.wptabspro-field-column .wptabspro--unit,
 .wptabspro-field-dimensions .wptabspro--unit {
   border-left: 0;
   border-radius: 0 4px 4px 0;
@@ -1299,6 +1484,7 @@ span.tooltip-icon {
 
 .wptabspro-field-border .wptabspro--is-unit,
 .wptabspro-field-spacing .wptabspro--is-unit,
+.wptabspro-field-column .wptabspro--is-unit,
 .wptabspro-field-dimensions .wptabspro--is-unit {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -1580,6 +1766,7 @@ span.tooltip-icon {
   outline: 0;
 }
 
+.post-type-sp_wp_tabs .default_tab_override .wptabspro-field-text .wptabspro-fieldset>input,
 #wptabspro-section-sp_tab_source_options_1 .wptabspro-field-group .wptabspro-field-text input {
   width: 100%;
   min-height: 38px;
@@ -1623,10 +1810,9 @@ span.tooltip-icon {
   cursor: pointer;
 }
 
-/* .wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature img {
-  width: 94px;
-  cursor: default;
-} */
+.wptabspro-field-image_select.smart_tab_style.vertical .wptabspro--image img {
+  width: 84px;
+}
 
 .wptabspro-field-image_select.common-size .wptabspro--image img {
   width: 74px;
@@ -1636,9 +1822,9 @@ span.tooltip-icon {
   position: relative;
 }
 
-.wptabspro-field-image_select.pro-preset-style .wptabspro--image.pro-feature {
+/* .wptabspro-field-image_select.pro-preset-style .wptabspro--image.pro-feature {
   pointer-events: none;
-}
+} */
 
 .wptabspro-field-image_select .wptabspro--image:before {
   position: absolute;
@@ -1676,6 +1862,7 @@ span.tooltip-icon {
   margin-top: 3px;
 }
 
+.sptpro_tabs_vertical_alignment.wptabspro-field-image_select .wptabspro--sibling img,
 .sptpro_tabs_horizontal_alignment.wptabspro-field-image_select .wptabspro--sibling img {
   vertical-align: top;
   width: 94px;
@@ -2706,8 +2893,8 @@ span.tooltip-icon {
 .wptabspro-field-subheading {
   font-size: 14px;
   font-weight: bold;
-  padding-top: 17px;
-  padding-bottom: 17px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   color: #23282d;
   background-color: #f7f7f7;
 }
@@ -3472,6 +3659,10 @@ span.tooltip-icon {
   color: #000;
   font-style: normal;
   font-size: 14px;
+}
+
+.wptabspro-field .wptabspro-text-desc {
+  color: #999;
 }
 
 .sp_product_tabs_content_type .wptabspro-text-desc {
@@ -4329,6 +4520,7 @@ span.tooltip-icon {
   color: #000;
   box-shadow: 0 3px 0 0 #08A683 inset;
   border-right: 1px solid transparent;
+  color: #08A683;
 }
 
 .post-type-sp_wp_tabs:not(.sp_wp_tabs_page_tab_tools, .sp_wp_tabs_page_tabs_settings) .wptabspro-nav ul li .wptabspro-section-active .fa {
@@ -4462,7 +4654,8 @@ span.tooltip-icon {
 .wptabspro-field.only-for-pro>.wptabspro-title h4,
 .wptabspro-field-typography.disable-typos>.wptabspro-title h4,
 .wptabspro-field.only_pro_switcher>.wptabspro-title h4,
-.wptabspro-field.only_pro_spinner>.wptabspro-title h4 {
+.wptabspro-field.only_pro_spinner>.wptabspro-title h4,
+.override_wc_default_tabs {
   opacity: .5;
 }
 
@@ -4470,34 +4663,21 @@ span.tooltip-icon {
   outline: 0;
 }
 
-.wptabspro-field.wptabspro-field-notice.only_pro_notice {
-  background-color: transparent;
-}
 
-.wptabspro-field.wptabspro-field-notice.only_pro_notice .wptabspro-notice-normal {
-  padding: 0;
-  background-color: #fff;
-  border-left-style: solid;
-  border-left-width: 0;
-  box-shadow: none;
-  font-style: normal;
-}
-
-.wptabspro-field.wptabspro-field-notice.only_pro_notice.middle_notice { 
+.wptabspro-field.wptabspro-field-notice.middle_notice {
   padding: 0 30px;
 }
 
-.wptabspro-field.wptabspro-field-notice.only_pro_notice.middle_notice .wptabspro-notice {
+.wptabspro-field.wptabspro-field-notice.middle_notice .wptabspro-notice {
   margin-top: 0;
 }
 
 .wptabspro-field.wptabspro-field-notice.tab-icon-top-notice,
 .wptabspro-field.wptabspro-field-notice.only_pro_notice_typo {
   padding-bottom: 0;
-  padding-top: 12px;
+  padding-top: 20px;
 }
 
-.wptabspro-field.wptabspro-field-notice.only_pro_notice_typo,
 .wptabspro-field.wptabspro-field-notice.bottom_notice {
   padding-top: 0;
 }
@@ -4537,7 +4717,6 @@ span.tooltip-icon {
 
 .pro-preset-style .wptabspro--image.pro-feature,
 .wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2),
-.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2),
 .wptabspro-field.override_tab_checkbox .wptabspro-fieldset .wptabspro-checkbox,
 .wptabspro-field-spinner.only_pro_spinner .ui-spinner {
   position: relative;
@@ -4545,7 +4724,6 @@ span.tooltip-icon {
 
 .wptabspro-field.pro-preset-style .pro-feature::after,
 .wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2):after,
-.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2):after,
 .wptabspro-field.override_tab_checkbox .wptabspro-fieldset .wptabspro-checkbox::after,
 .wptabspro-field.only-for-pro .wptabspro-fieldset::after,
 .only_pro_spinner span.ui-spinner.ui-corner-all.ui-widget.ui-widget-content::after {
@@ -4556,15 +4734,14 @@ span.tooltip-icon {
   padding: 2px 4px;
   font-size: 8px;
   border-radius: 2px;
-  height: 11px;
+  height: 10px;
   margin-top: 8px;
   font-weight: 600;
   right: -32px;
-  line-height: 12px;
+  line-height: 11px;
 }
 
 .wptabspro-field.pro-preset-style .pro-feature:after,
-.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2):after,
 .wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2):after {
   right: 0;
   top: 0;
@@ -4618,7 +4795,6 @@ span.tooltip-icon {
 }
 
 /* Pro only lock */
-.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2),
 .sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(2),
 .sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(3),
 .sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(4),
@@ -4635,26 +4811,19 @@ span.tooltip-icon {
   opacity: .4;
 }
 
-/* .sp_wp_tabs_layout .wptabspro--sibling:nth-of-type(2)::after {
-  right: 10px;
-  border-top-right-radius: 2px;
-} */
-
 .wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2),
 .wptabspro-field-image_select.smart_tabs_position .wptabspro--image.pro-feature img,
-.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature img,
 #wptabspro-section-sp_tab_shortcode_options_3 .wptabspro--switcher {
   pointer-events: none;
 }
 
+.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature img,
+.wptabspro-field-image_select.sp_wp_tabs_layout .wptabspro--image.pro-feature img,
 .wptabspro-field.only_pro_fixed_height .wptabspro--button:nth-child(2),
-.sp_wp_tab_type .wptabspro--sibling:nth-of-type(2),
-.wptabspro-field-typography .wptabspro--blocks.wptabspro--blocks-inputs .wptabspro--block:not(:first-child),
-.wptabspro-field-typography .wptabspro--blocks.wptabspro--blocks-selects,
 .wptabspro-field-typography.disable-typos .wptabspro-field-color,
 .wptabspro-field-typography.disable-typos .wptabspro--block {
   pointer-events: none;
-  opacity: .4;
+  opacity: .5;
 }
 
 .wptabspro-field-typography .wptabspro--blocks-inputs input::-webkit-outer-spin-button,
@@ -4842,9 +5011,13 @@ span.tooltip-icon {
 
 /* demo external link icon styles */
 /* component name image_select.php  */
-.sp_wp_tabs_layout .wptabspro--sibling.wptabspro--image:not(.pro-feature) {
+.sp_wp_tabs_layout .wptabspro--sibling.wptabspro--image {
   margin: 0px 10px 6px 0px;
 }
+
+/* .sptpro_product_tabs_layout .wptabspro--sibling.wptabspro--image.pro-feature {
+  margin: 0px 10px 6px 0px;
+} */
 
 .wptabs-demo-icon[tooltip]:hover {
   position: relative;
@@ -4959,11 +5132,25 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   text-align: left;
 }
 
+.sp-tab-list-heading,
 .sp-tab-notice-heading {
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   color: rgba(0, 0, 0, 1);
+}
+
+.sp-tab-list-heading {
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+
+.sp-tab-notice-wrapper ul li.sp-tab-layouts-list {
+  display: block;
+}
+
+.sp-tab-notice-wrapper ul li.sp-tab-layouts-list a:focus {
+  box-shadow: none;
 }
 
 .sp-tab-notice-heading span {
@@ -5177,10 +5364,10 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   position: relative;
 }
 
-.sp_wp_tabs_layout .wptabspro--image-group .pro-feature img {
+/* .sp_wp_tabs_layout .wptabspro--image-group .pro-feature img {
   width: 305px !important;
   margin-left: 8px;
-}
+} */
 
 .sp_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature,
 .sp_product_tabs_content_type .wptabspro--sibling.wptabspro--image.pro-feature {
@@ -5191,16 +5378,17 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   display: flex;
 }
 
-.wptabspro-field-notice.product-tabs-notice {
-  background-color: transparent;
-  padding: 0px 0px 20px 30px;
-}
-
-.wptabspro-field-notice.product-tabs-notice .wptabspro-notice {
+.wptabspro-field-notice.smart-tabs-notice .wptabspro-notice {
+  padding: 0;
+  width: auto;
   margin-top: 0;
   padding-top: 0;
   font-size: 14px;
   box-sizing: border-box;
+  background-color: #E7F2E7;
+  padding: 12px 20px 12px 20px;
+  border-radius: 4px;
+  border: 1px solid #3d9e564d;
 }
 
 /* style for the tabs type and description field */
@@ -5525,6 +5713,88 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   background: transparent;
 }
 
+/* Smart Tabs Upgrade to Pro section style */
+.wptabspro-field-notice.upgrade-to-pro-notice {
+  padding: 30px;
+}
+
+.wptabspro-field-notice.upgrade-to-pro-notice .wptabspro-notice {
+  padding: 0;
+  margin-top: 0;
+}
+
+.smart-tabs-upgrade-to-pro-section {
+  background: #E7F2E7;
+  border: 1px solid #3d9e564d;
+  border-radius: 8px;
+  padding: 30px;
+  line-height: 1.6;
+  color: #3C434A;
+  max-width: 100%;
+}
+
+.smart-tabs-upgrade-to-pro-section h2 {
+  color: #3C434A;
+  margin: 0px;
+  font-size: 22px;
+}
+
+.smart-tabs-upgrade-to-pro-section p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.smart-tabs-upgrade-to-pro-section .features-wrapper {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.smart-tabs-upgrade-to-pro-section .features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.smart-tabs-upgrade-to-pro-section .features-list li {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.smart-tabs-upgrade-to-pro-section .features-list a {
+  color: #1a73e8;
+  cursor: pointer;
+}
+
+.smart-tabs-upgrade-to-pro-section .special-bonus {
+  font-size: 15px;
+  margin: 20px 0;
+}
+
+.smart-tabs-upgrade-to-pro-section .special-bonus .highlight-discount {
+  color: #F38600;
+  font-weight: bold;
+}
+
+.smart-tabs-upgrade-to-pro-section .upgrade-btn {
+  display: inline-block;
+  background: #7DC049;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.smart-tabs-upgrade-to-pro-section .features-list a:focus,
+.smart-tabs-upgrade-to-pro-section .upgrade-btn:focus {
+  box-shadow: none;
+}
+
+.smart-tabs-upgrade-to-pro-section .upgrade-btn:hover {
+  background: #78b74a;
+}
 
 /* styles for Custom save button for products tabs */
 .post-type-sp_products_tabs #poststuff #post-body.columns-2 {
@@ -5695,7 +5965,8 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   position: relative;
 }
 
-.wptabspro-field-tabbed .wptabspro-tabbed-nav a:last-child::after {
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a.wptabspro-tab-item-3::after,
+.wptabspro-field-tabbed .wptabspro-tabbed-nav a.wptabspro-tab-item-4::after {
   content: "PRO";
   position: absolute;
   color: #fff;
@@ -5710,17 +5981,56 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   margin-left: 6px;
 }
 
+/* Tabs Carousel Navigation Style. */
+.wptabspro-field-fieldset.sptpro_tabs_carousel_navigation_style .wptabspro-fieldset-content {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.wptabspro-field-fieldset.sptpro_tabs_carousel_navigation_style .wptabspro-field {
+  padding: 0px 10px 0px 0px;
+}
+
+.wptabspro-field-fieldset.sptpro_tabs_carousel_navigation_style .wptabspro-field-spacing .wptabspro--input {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.wptabspro-field-fieldset.sptpro_tabs_carousel_navigation_style .wptabspro-field-color_group .wptabspro--left {
+  margin-right: 4px;
+}
+
+.wptabspro-field-fieldset.sptpro_tabs_carousel_navigation_style .wptabspro-field-button_set .wptabspro--button {
+  padding: 5px 14px;
+}
+
+.wptabspro-field-button_set.tabs_navigation_styles .wptabspro--button {
+  min-width: 5px;
+}
+
+.sptpro_tabs_carousel_navigation_style .wptabspro-fieldset .wptabspro--title {
+  color: #999;
+  top: -20px;
+  position: absolute;
+}
+
+.wptabspro-field-fieldset.sptpro_tabs_carousel_navigation_style.indicator-arrow-style .wptabspro-field-button_set .wptabspro--button {
+  box-shadow: none;
+  padding: 6px 10px;
+}
+
 /*=======================================================
- * Tabs Pro - Support Builder
+ * Tabs Pro - Backend Fontello Icons
  *=======================================================*/
 @font-face {
   font-family: 'sp-tab-fontello';
-  src: url('../font/fontello.eot?59003652');
-  src: url('../font/fontello.eot?59003652#iefix') format('embedded-opentype'),
-    url('../font/fontello.woff2?59003652') format('woff2'),
-    url('../font/fontello.woff?59003652') format('woff'),
-    url('../font/fontello.ttf?59003652') format('truetype'),
-    url('../font/fontello.svg?59003652#fontello') format('svg');
+  src: url('../font/fontello.eot?81993417');
+  src: url('../font/fontello.eot?81993417#iefix') format('embedded-opentype'),
+    url('../font/fontello.woff2?81993417') format('woff2'),
+    url('../font/fontello.woff?81993417') format('woff'),
+    url('../font/fontello.ttf?81993417') format('truetype'),
+    url('../font/fontello.svg?81993417#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -5796,3 +6106,8 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
 }
 
 /* '' */
+.sp-tab-icon-woo-tabs-group:before {
+  content: '\e81f';
+}
+
+/* '' */

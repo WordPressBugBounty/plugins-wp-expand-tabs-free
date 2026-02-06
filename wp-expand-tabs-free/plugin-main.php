@@ -8,10 +8,10 @@
  * @link              https://shapedplugin.com/
  * @package           WP_Tabs
  *
- * Plugin Name:       Smart Tabs
+ * Plugin Name:       Smart Tabs – Custom Product Tabs for WooCommerce & Tabs Builder
  * Plugin URI:        https://wptabs.com/?ref=1
  * Description:       Smart Tabs (formerly WP Tabs) is a powerful, highly customizable plugin to build and manage WooCommerce Product Tabs and WordPress Tabs — perfect for store owners, agencies, and developers alike.
- * Version:           3.0.2
+ * Version:           3.1.3
  * Author:            ShapedPlugin LLC
  * Author URI:        https://shapedplugin.com/
  * License:           GPL-2.0+
@@ -32,7 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'WP_TABS_NAME', 'Smart Tabs' );
-define( 'WP_TABS_VERSION', '3.0.2' );
+define( 'WP_TABS_VERSION', '3.1.3' );
 define( 'WP_TABS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WP_TABS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_TABS_URL', plugin_dir_url( __FILE__ ) );
@@ -73,6 +73,25 @@ function wp_tabs_pro_initialize_files() {
 	require_once WP_TABS_PATH . '/admin/partials/tools-config.php';
 }
 add_action( 'after_setup_theme', 'wp_tabs_pro_initialize_files' );
+
+/**
+ * Add a custom link to the plugin description area in the Plugins list.
+ *
+ * This appends a "Smart Tabs" link (pointing to the plugin's website)
+ * under the plugin description on the WordPress Plugins page.
+ *
+ * @param array  $meta Existing plugin meta links.
+ * @param string $file Path to the plugin file relative to the plugins directory.
+ * @return array Modified array of plugin meta links.
+ */
+function sptpro_plugin_description_link( $meta, $file ) {
+	if ( plugin_basename( __FILE__ ) === $file ) {
+		// Add "Smart Tabs" linked text to the description.
+		$meta[] = '<a href="https://wptabs.com/" target="_blank"><strong>Smart Tabs</strong></a>';
+	}
+	return $meta;
+}
+add_filter( 'plugin_row_meta', 'sptpro_plugin_description_link', 10, 2 );
 
 /**
  * Begins execution of the plugin.

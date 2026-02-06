@@ -31,6 +31,7 @@ class WP_Tabs_Updates {
 		'2.1.10' => 'updates/update-2.1.10.php',
 		'2.2.0'  => 'updates/update-2.2.0.php',
 		'2.2.10' => 'updates/update-2.2.10.php',
+		'3.1.0'  => 'updates/update-3.1.0.php',
 	);
 
 	/**

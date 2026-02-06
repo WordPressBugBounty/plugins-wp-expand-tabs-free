@@ -1251,6 +1251,411 @@
   };
 
   //
+  // Field: typography
+  //
+  $.fn.wptabspro_field_typography = function () {
+    return this.each(function () {
+
+      var base = this;
+      var $this = $(this);
+      var loaded_fonts = [];
+      var webfonts = wptabspro_typography_json.webfonts;
+      var googlestyles = wptabspro_typography_json.googlestyles;
+      var defaultstyles = wptabspro_typography_json.defaultstyles;
+
+      //
+      //
+      // Sanitize google font subset
+      base.sanitize_subset = function (subset) {
+        subset = subset.replace('-ext', ' Extended');
+        subset = subset.charAt(0).toUpperCase() + subset.slice(1);
+        return subset;
+      };
+
+      //
+      //
+      // Sanitize google font styles (weight and style)
+      base.sanitize_style = function (style) {
+        return googlestyles[style] ? googlestyles[style] : style;
+      };
+
+      //
+      //
+      // Load google font
+      base.load_google_font = function (font_family, weight, style) {
+
+        if (font_family && typeof WebFont === 'object') {
+
+          weight = weight ? weight.replace('normal', '') : '';
+          style = style ? style.replace('normal', '') : '';
+
+          if (weight || style) {
+            font_family = font_family + ':' + weight + style;
+          }
+
+          if (loaded_fonts.indexOf(font_family) === -1) {
+            WebFont.load({ google: { families: [font_family] } });
+          }
+
+          loaded_fonts.push(font_family);
+        }
+      };
+
+      //
+      //
+      // Append select options
+      base.append_select_options = function ($select, options, condition, type, is_multi) {
+
+        $select.find('option').not(':first').remove();
+
+        var opts = '';
+
+        $.each(options, function (key, value) {
+
+          var selected;
+          var name = value;
+
+          // is_multi
+          if (is_multi) {
+            selected = (condition && condition.indexOf(value) !== -1) ? ' selected' : '';
+          } else {
+            selected = (condition && condition === value) ? ' selected' : '';
+          }
+
+          if (type === 'subset') {
+            name = base.sanitize_subset(value);
+          } else if (type === 'style') {
+            name = base.sanitize_style(value);
+          }
+
+          opts += '<option value="' + value + '"' + selected + '>' + name + '</option>';
+
+        });
+
+        $select.append(opts).trigger('wptabspro.change').trigger('chosen:updated');
+
+      };
+
+      base.init = function () {
+
+        //
+        //
+        // Constants
+        var selected_styles = [];
+        var $typography = $this.find('.wptabspro--typography');
+        var $type = $this.find('.wptabspro--type');
+        var $styles = $this.find('.wptabspro--block-font-style');
+        var unit = $typography.data('unit');
+        var line_height_unit = $typography.data('line-height-unit');
+        var exclude_fonts = $typography.data('exclude') ? $typography.data('exclude').split(',') : [];
+
+        //
+        //
+        // Chosen init
+        if ($this.find('.wptabspro--chosen').length) {
+
+          var $chosen_selects = $this.find('select');
+
+          $chosen_selects.each(function () {
+
+            var $chosen_select = $(this),
+              $chosen_inited = $chosen_select.parent().find('.chosen-container');
+
+            if ($chosen_inited.length) {
+              $chosen_inited.remove();
+            }
+
+            $chosen_select.chosen({
+              allow_single_deselect: true,
+              disable_search_threshold: 15,
+              width: '100%'
+            });
+          });
+        }
+
+        //
+        //
+        // Font family select
+        var $font_family_select = $this.find('.wptabspro--font-family');
+        var first_font_family = $font_family_select.val();
+
+        // Clear default font family select options
+        $font_family_select.find('option').not(':first-child').remove();
+
+        var opts = '';
+
+        $.each(webfonts, function (type, group) {
+          if (group.fonts.length) {
+            // Normal groups with fonts
+            opts += '<optgroup label="' + group.label + '">';
+            $.each(group.fonts, function (key, value) {
+              value = (typeof value === 'object') ? key : value;
+              var selected = (value === first_font_family) ? ' selected' : '';
+              opts += '<option value="' + value + '" data-type="' + type + '"' + selected + '>' + value + '</option>';
+            });
+            opts += '</optgroup>';
+          } else {
+            // Only show label (no options)
+            opts += '<option value="" disabled style="font-weight:bold;">' + group.label + '</option>';
+          }
+        });
+
+        // Append google font select options
+        $font_family_select.append(opts).trigger('chosen:updated');
+
+        //
+        //
+        // Font style select
+        var $font_style_block = $this.find('.wptabspro--block-font-style');
+
+        if ($font_style_block.length) {
+
+          var $font_style_select = $this.find('.wptabspro--font-style-select');
+          var first_style_value = $font_style_select.val() ? $font_style_select.val().replace(/normal/g, '') : '';
+
+          //
+          // Font Style on on change listener
+          $font_style_select.on('change wptabspro.change', function (event) {
+
+            var style_value = $font_style_select.val();
+
+            // set a default value
+            if (!style_value && selected_styles && selected_styles.indexOf('normal') === -1) {
+              style_value = selected_styles[0];
+            }
+
+            // set font weight, for eg. replacing 800italic to 800
+            var font_normal = (style_value && style_value !== 'italic' && style_value === 'normal') ? 'normal' : '';
+            var font_weight = (style_value && style_value !== 'italic' && style_value !== 'normal') ? style_value.replace('italic', '') : font_normal;
+            var font_style = (style_value && style_value.substr(-6) === 'italic') ? 'italic' : '';
+
+            $this.find('.wptabspro--font-weight').val(font_weight);
+            $this.find('.wptabspro--font-style').val(font_style);
+          });
+
+          //
+          //
+          // Extra font style select
+          var $extra_font_style_block = $this.find('.wptabspro--block-extra-styles');
+
+          if ($extra_font_style_block.length) {
+            var $extra_font_style_select = $this.find('.wptabspro--extra-styles');
+            var first_extra_style_value = $extra_font_style_select.val();
+          }
+        }
+
+        //
+        //
+        // Subsets select
+        var $subset_block = $this.find('.wptabspro--block-subset');
+        if ($subset_block.length) {
+          var $subset_select = $this.find('.wptabspro--subset');
+          var first_subset_select_value = $subset_select.val();
+          var subset_multi_select = $subset_select.data('multiple') || false;
+        }
+
+        //
+        //
+        // Backup font family
+        var $backup_font_family_block = $this.find('.wptabspro--block-backup-font-family');
+
+        //
+        //
+        // Font Family on Change Listener
+        $font_family_select.on('change wptabspro.change', function (event) {
+
+          // Hide subsets on change
+          if ($subset_block.length) {
+            $subset_block.addClass('hidden');
+          }
+
+          // Hide extra font style on change
+          if ($extra_font_style_block.length) {
+            $extra_font_style_block.addClass('hidden');
+          }
+
+          // Hide backup font family on change
+          if ($backup_font_family_block.length) {
+            $backup_font_family_block.addClass('hidden');
+          }
+
+          var $selected = $font_family_select.find(':selected');
+          var value = $selected.val();
+          var type = $selected.data('type');
+
+          if (type && value) {
+
+            // Show backup fonts if font type google or custom
+            if ((type === 'google' || type === 'custom') && $backup_font_family_block.length) {
+              $backup_font_family_block.removeClass('hidden');
+            }
+
+
+            // Appending font style select options
+            if ($font_style_block.length) {
+
+              // set styles for multi and normal style selectors
+              var styles = defaultstyles;
+
+              // Custom or gogle font styles
+              if (type === 'google' && webfonts[type].fonts[value][0]) {
+                styles = webfonts[type].fonts[value][0];
+              } else if (type === 'custom' && webfonts[type].fonts[value]) {
+                styles = webfonts[type].fonts[value];
+              }
+
+              selected_styles = styles;
+
+              // Set selected style value for avoid load errors
+              var set_auto_style = (styles.indexOf('normal') !== -1) ? 'normal' : styles[0];
+              var set_style_value = (first_style_value && styles.indexOf(first_style_value) !== -1) ? first_style_value : set_auto_style;
+
+              // Append style select options
+              base.append_select_options($font_style_select, styles, set_style_value, 'style');
+
+              // Clear first value
+              first_style_value = false;
+
+              // Show style select after appended
+              $font_style_block.removeClass('hidden');
+
+              // Appending extra font style select options
+              if (type === 'google' && $extra_font_style_block.length && styles.length > 1) {
+
+                // Append extra-style select options
+                base.append_select_options($extra_font_style_select, styles, first_extra_style_value, 'style', true);
+
+                // Clear first value
+                first_extra_style_value = false;
+
+                // Show style select after appended
+                $extra_font_style_block.removeClass('hidden');
+              }
+            }
+
+            // Appending google fonts subsets select options
+            if (type === 'google' && $subset_block.length && webfonts[type].fonts[value][1]) {
+
+              var subsets = webfonts[type].fonts[value][1];
+              var set_auto_subset = (subsets.length < 2 && subsets[0] !== 'latin') ? subsets[0] : '';
+              var set_subset_value = (first_subset_select_value && subsets.indexOf(first_subset_select_value) !== -1) ? first_subset_select_value : set_auto_subset;
+
+              // check for multiple subset select
+              set_subset_value = (subset_multi_select && first_subset_select_value) ? first_subset_select_value : set_subset_value;
+
+              base.append_select_options($subset_select, subsets, set_subset_value, 'subset', subset_multi_select);
+
+              first_subset_select_value = false;
+
+              $subset_block.removeClass('hidden');
+            }
+
+          } else {
+
+            // Clear Styles
+            $styles.find(':input').val('');
+
+            // Clear subsets options if type and value empty
+            if ($subset_block.length) {
+              $subset_select.find('option').not(':first-child').remove();
+              $subset_select.trigger('chosen:updated');
+            }
+
+            // Clear font styles options if type and value empty
+            if ($font_style_block.length) {
+              $font_style_select.find('option').not(':first-child').remove();
+              $font_style_select.trigger('chosen:updated');
+            }
+
+          }
+
+          // Update font type input value
+          $type.val(type);
+
+        }).trigger('wptabspro.change');
+
+        //
+        //
+        // Preview
+        var $preview_block = $this.find('.wptabspro--block-preview');
+        if ($preview_block.length) {
+          var $preview = $this.find('.wptabspro--preview');
+
+          // Set preview styles on change
+          $this.on('change', SP_WP_TABS.helper.debounce(function (event) {
+            $preview_block.removeClass('hidden');
+
+            var font_family = $font_family_select.val(),
+              font_weight = $this.find('.wptabspro--font-weight').val(),
+              font_style = $this.find('.wptabspro--font-style').val(),
+              font_size = $this.find('.wptabspro--font-size').val(),
+              font_variant = $this.find('.wptabspro--font-variant').val(),
+              line_height = $this.find('.wptabspro--line-height').val(),
+              text_align = $this.find('.wptabspro--text-align').val(),
+              text_transform = $this.find('.wptabspro--text-transform').val(),
+              text_decoration = $this.find('.wptabspro--text-decoration').val(),
+              text_color = $this.find('.wptabspro--color').val(),
+              word_spacing = $this.find('.wptabspro--word-spacing').val(),
+              letter_spacing = $this.find('.wptabspro--letter-spacing').val(),
+              custom_style = $this.find('.wptabspro--custom-style').val(),
+              type = $this.find('.wptabspro--type').val();
+
+            if (type === 'google') {
+              base.load_google_font(font_family, font_weight, font_style);
+            }
+
+            var properties = {};
+
+            if (font_family) { properties.fontFamily = font_family; }
+            if (font_weight) { properties.fontWeight = font_weight; }
+            if (font_style) { properties.fontStyle = font_style; }
+            if (font_variant) { properties.fontVariant = font_variant; }
+            if (font_size) { properties.fontSize = font_size + unit; }
+            if (line_height) { properties.lineHeight = line_height + line_height_unit; }
+            if (letter_spacing) { properties.letterSpacing = letter_spacing + unit; }
+            if (word_spacing) { properties.wordSpacing = word_spacing + unit; }
+            if (text_align) { properties.textAlign = text_align; }
+            if (text_transform) { properties.textTransform = text_transform; }
+            if (text_decoration) { properties.textDecoration = text_decoration; }
+            if (text_color) { properties.color = text_color; }
+
+            $preview.removeAttr('style');
+            // Customs style attribute
+            if (custom_style) { $preview.attr('style', custom_style); }
+
+            $preview.css(properties);
+
+          }, 100));
+
+          // Preview black and white backgrounds trigger
+          $preview_block.on('click', function () {
+
+            $preview.toggleClass('wptabspro--black-background');
+
+            var $toggle = $preview_block.find('.wptabspro--toggle');
+
+            if ($toggle.hasClass('fa-toggle-off')) {
+              $toggle.removeClass('fa-toggle-off').addClass('fa-toggle-on');
+            } else {
+              $toggle.removeClass('fa-toggle-on').addClass('fa-toggle-off');
+            }
+
+          });
+
+          if (!$preview_block.hasClass('hidden')) {
+            $this.trigger('change');
+          }
+        }
+      };
+
+      base.init();
+    });
+  };
+
+
+
+
+  //
   // Field: media
   //
   $.fn.wptabspro_field_media = function () {
@@ -1431,21 +1836,56 @@
         if ($editor_buttons.length) {
 
           $editor_buttons.find('.wptabspro-shortcode-button').data('editor-id', uid);
-
         } else {
-
           var $media_buttons = $(window.wptabspro_media_buttons);
 
           $media_buttons.find('.wptabspro-shortcode-button').data('editor-id', uid);
 
           $editor.prepend($media_buttons);
+        }
+      }
+    });
+  };
 
+  //
+  // Field: Accordion
+  //
+  $.fn.wptabspro_field_accordion = function () {
+    return this.each(function () {
+      var $titles = $(this).find('.wptabspro-accordion-title');
+
+      // Open the first accordion item by default
+      var $firstTitle = $titles.first();
+      var $firstContent = $firstTitle.next();
+
+      $firstContent.addClass('wptabspro-accordion-open');
+      $firstTitle.find('.wptabspro-accordion-icon')
+        .removeClass('fa-angle-right')
+        .addClass('fa-angle-down');
+
+      // Initialize the fields inside the first accordion
+      $firstContent.wptabspro_reload_script();
+      $firstContent.data('opened', true);
+
+      $titles.on('click', function () {
+        var $title = $(this),
+          $icon = $title.find('.wptabspro-accordion-icon'),
+          $content = $title.next();
+
+        if ($icon.hasClass('fa-angle-right')) {
+          $icon.removeClass('fa-angle-right').addClass('fa-angle-down');
+        } else {
+          $icon.removeClass('fa-angle-down').addClass('fa-angle-right');
         }
 
-      }
+        if (!$content.data('opened')) {
+          $content.wptabspro_reload_script();
+          $content.data('opened', true);
+        }
 
+        $content.toggleClass('wptabspro-accordion-open');
+      });
     });
-
   };
 
   //
@@ -1577,9 +2017,7 @@
         }
 
         flooding = true;
-
       });
-
     });
   };
 
@@ -1700,13 +2138,11 @@
         } else {
 
           shortcode += ' ' + shortcode_tag.replace('-', '_') + '="' + shortcode_value.toString() + '"';
-
         }
 
       }
 
       return shortcode;
-
     };
 
     base.insertAtChars = function (_this, currentValue) {
@@ -2119,7 +2555,6 @@
           }
 
           $hidden_select.trigger('change');
-
         });
 
         // Chosen order abstract
@@ -2203,6 +2638,11 @@
 
       $siblings.on('click', function () {
         var $sibling = $(this);
+
+        // Skip action if the clicked sibling is restricted to "Pro" features.
+        if ($sibling.hasClass('pro-feature')) {
+          return;
+        }
 
         if (multiple) {
           if ($sibling.hasClass('wptabspro--active')) {
@@ -2421,7 +2861,10 @@
         $this.children('.wptabspro-field-spinner').wptabspro_field_spinner();
         $this.children('.wptabspro-field-switcher').wptabspro_field_switcher();
         $this.children('.wptabspro-field-upload').wptabspro_field_upload();
+        $this.children('.wptabspro-field-typography').wptabspro_field_typography();
+
         $this.children('.wptabspro-field-wp_editor').wptabspro_field_wp_editor();
+        $this.children('.wptabspro-field-accordion').wptabspro_field_accordion();
 
         // Field colors
         $this.children('.wptabspro-field-border').find('.wptabspro-color').wptabspro_color();
@@ -2551,10 +2994,15 @@
   $('.wp_tabs_export .wptabspro--button').on('click', function (event) {
     event.preventDefault();
     var $wp_tabs_ids = $('.tabs_post_ids select').val();
-    var $wp_tabs_ids_type = 'all_shortcodes' === $export_type ? 'all_shortcodes' : $wp_tabs_ids;
+    // var $wp_tabs_ids_type = 'all_shortcodes' === $export_type ? 'all_shortcodes' : $wp_tabs_ids;
+    var typeMap = {
+      'all_product_tabs': 'all_product_tabs',
+      'all_shortcodes': 'all_shortcodes'
+    };
+    var $wp_tabs_ids_type = typeMap[$export_type] || $wp_tabs_ids;
     var $ex_nonce = $('#wptabspro_options_noncesp_tab_tools').val();
 
-    if ('all_shortcodes' === $export_type || ('selected_shortcodes' === $export_type && $wp_tabs_ids_type.length > 0)) {
+    if ('all_product_tabs' === $export_type || 'all_shortcodes' === $export_type || ('selected_shortcodes' === $export_type && $wp_tabs_ids_type.length > 0)) {
       var data = {
         action: 'tabs_export_shortcode',
         tab_ids: $wp_tabs_ids_type,
@@ -2620,7 +3068,11 @@
             setTimeout(function () {
               $('.wptabspro-form-result.wptabspro-form-success').hide().text('');
               $('#import').val('');
-              window.location.replace($('#wp__tabs_link_redirect').attr('href'));
+              if (resp.data === 'sp_products_tabs') {
+                window.location.replace($('#wp_product_tabs_link_redirect').attr('href'));
+              } else {
+                window.location.replace($('#wp__tabs_link_redirect').attr('href'));
+              }
             }, 2000);
           },
           error: function (error) {
@@ -2686,9 +3138,9 @@
     })
   });
 
-  var $animationSelect = $('.wptabspro-field.sptpro-tabs-animation-type');
+  var $proSelectField = $('.wptabspro-field.sptpro-tabs-pro-select');
   // Iterate through all the animation options.
-  $animationSelect.find('option').each(function () {
+  $proSelectField.find('option').each(function () {
     var $option = $(this);
     // Check if the option text contains "(Pro)"
     if ($option.text().indexOf('(Pro)') !== -1) {
@@ -2792,6 +3244,12 @@
       // Save the state to local storage with the unique key.
       localStorage.setItem('switcherState_' + switcherId, newState);
 
+      // Display tab enable/disable message.
+      showNotificationMessage(
+        newState === 'enabled' ? 'Tab enabled successfully' : 'Tab disabled successfully',
+        2000
+      );
+
       // Send AJAX request to save the state in the database.
       $.ajax({
         url: ajaxurl, // WordPress AJAX URL.
@@ -2829,6 +3287,43 @@
       $input.val('0'); // Value for disabled state
     }
   }
+
+  /**
+   * Display a temporary notification at the top-right of the page.
+   *
+   * @param {string} message The message text to display.
+   * @param {number} duration How long the message should stay visible in milliseconds (default 2000ms).
+   */
+  function showNotificationMessage(message, duration = 2000) {
+    // Create the toast container
+    var $notificationMessage = $('<div class="switcher-notification-message"></div>').text(message);
+
+    // Style the toast
+    $notificationMessage.css({
+      position: 'fixed',
+      top: '50px',
+      right: '20px',
+      transform: 'translateX(0)', // keep it aligned to the right position.
+      background: '#28a745',
+      color: '#fff',
+      padding: '10px 20px',
+      'border-radius': '3px',
+      'box-shadow': '0 2px 6px rgba(0,0,0,0.2)',
+      'z-index': 9999,
+      display: 'none'
+    });
+
+    // Append to body after a slight delay
+    setTimeout(function () {
+      $('body').append($notificationMessage);
+
+      // Show and fade out after duration
+      $notificationMessage.fadeIn(300).delay(duration).fadeOut(500, function () {
+        $(this).remove();
+      });
+    }, 400);
+  }
+
 
   // Move the "Back to Product Tabs" button before the title in the admin product tabs page.
   const $title = $('.wrap > h1.wp-heading-inline');
@@ -2870,8 +3365,6 @@
   * Apply the pro text visibility function to the relevant containers.
   */
   handleProTextVisibility('.sp_wp_tabs_layout', ['horizontal', 'horizontal-bottom']);
-  //  handleProTextVisibility('.sp_tabs_content_type', 'text');
-
 
   // Change tab position images based on the selected tabs layout.
   $('.sptpro_product_tabs_layout').on('change', '.wptabspro--sibling', function () {
@@ -2931,11 +3424,72 @@
     $saveBtn.prop('disabled', true).addClass('disabled');
   });
 
-  // const proFeatures = $('.sp_wp_tabs_layout').find('.wptabspro--image.pro-feature');
-  // if (proFeatures.length && false ) {
-  //   const wrapper = $('<div class="wptabspro--pro-wrapper"></div>');
-  //   proFeatures.first().before(wrapper);
-  //   proFeatures.appendTo(wrapper);
-  // }
+  // Tabs layout paths (Horizontal, Horizontal Bottom, Vertical and Vertical Right).
+  const horizontalTopImages = [
+    '/horizontal-top/horizontal-left.svg',
+    '/horizontal-top/horizontal-right.svg',
+    '/horizontal-top/horizontal-center.svg',
+    '/horizontal-top/horizontal-justified.svg'
+  ];
 
+  const horizontalBottomImages = [
+    '/horizontal-bottom/horizontal-left.svg',
+    '/horizontal-bottom/horizontal-right.svg',
+    '/horizontal-bottom/horizontal-center.svg',
+    '/horizontal-bottom/horizontal-justified.svg'
+  ];
+
+  function changeImages(imageWrappers, newImageSources) { // Change Tabs alignment images according to selecting Tabs' layout preset.
+    $(imageWrappers).each(function (i) {
+      $(this).find("img").attr("src", wptabspro_vars.adminTabsAlignment + newImageSources[i]);
+    });
+    $('.sptpro_tab_flat_border_style').removeClass('hidden');
+  }
+
+  $('.sp_wp_tabs_layout .wptabspro--sibling:nth-child(1)').on('click', function () {
+    const imageWrappers = $('.sptpro_tabs_horizontal_alignment .wptabspro--image-group').find(".wptabspro--image");
+    changeImages(imageWrappers, horizontalTopImages);
+  });
+
+  $('.sp_wp_tabs_layout .wptabspro--sibling:nth-child(2)').on('click', function () {
+    const imageWrappers = $('.sptpro_tabs_horizontal_alignment .wptabspro--image-group').find(".wptabspro--image");
+    changeImages(imageWrappers, horizontalBottomImages);
+  });
+
+  // If Horizontal Top layout is selected, then keep saved the selected image after completing page refresh.
+  if ($('.sp_wp_tabs_layout .wptabspro--sibling:nth-child(1)').hasClass('wptabspro--active')) {
+    const horizontal_top = $('.sptpro_tabs_horizontal_alignment .wptabspro--image-group').find(".wptabspro--image");
+    changeImages(horizontal_top, horizontalTopImages);
+  }
+
+  // If horizontal bottom layout is selected, then keep saved the selected image after doing page refresh.
+  if ($('.sp_wp_tabs_layout .wptabspro--sibling:nth-child(2)').hasClass('wptabspro--active')) {
+    const horizontal_bottom = $('.sptpro_tabs_horizontal_alignment .wptabspro--image-group').find(".wptabspro--image");
+    changeImages(horizontal_bottom, horizontalBottomImages);
+  }
+
+  // Change tab tabs layout style properties based on the selected tabs layout.
+  $('.sptpro_product_tabs_layout').on('change', '.wptabspro--sibling', function () {
+    var tabsLayout = $(this).find('input').val();
+    const isTabsVertical = tabsLayout === 'vertical-right';
+
+    // Set default colors for tab name background color
+    const bgColors = isTabsVertical
+      ? { color: '#fff', 'hover-color': '#eaeaea', 'active-color': '#eaeaea' }
+      : { color: '#fff', 'hover-color': '#fff', 'active-color': '#fff' };
+
+    Object.entries(bgColors).forEach(([key, val]) => {
+      $(`[name="sptabs_product_tabs_settings[tab_name_bg_color][${key}]"]`)
+        .val(val)
+        .trigger('change');
+    });
+
+    const $textAlign = $('[name="sptabs_product_tabs_settings[product_tabs_title_typo][text-align]"]');
+    // Determine value based on layout
+    let textAlign = 'center';
+    if (tabsLayout === 'vertical-right') textAlign = 'right';
+
+    // Update the select and refresh Chosen.
+    $textAlign.val(textAlign).trigger('chosen:updated');
+  });
 })(jQuery, window, document);

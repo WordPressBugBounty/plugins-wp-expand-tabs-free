@@ -56,7 +56,7 @@ class WP_Tabs_Review {
 		?>
 		<div id="sp-wptabs-review-notice" class="sp-wptabs-review-notice">
 			<div class="sp-wptabs-plugin-icon">
-				<img src="<?php echo esc_url( WP_TABS_URL . 'admin/img/images/wp-tabs.svg' ); ?>" alt="Smart Tabs">
+				<img src="<?php echo esc_url( WP_TABS_URL . 'admin/img/images/sp-smart-tabs.gif' ); ?>" alt="Smart Tabs">
 			</div>
 			<div class="sp-wptabs-notice-text">
 				<h3>Enjoying <strong>Smart Tabs</strong>?</h3>

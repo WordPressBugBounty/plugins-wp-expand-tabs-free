@@ -43,7 +43,8 @@ class Smart_Tabs_Free_Admin {
 		add_action( 'in_admin_header', array( $this, 'sp_tabs_woo_product_tabbed_interface' ) );
 		add_filter( 'submenu_file', array( $this, 'sp_tabs_set_active_submenu' ) );
 		add_filter( 'screen_options_show_screen', array( $this, 'disable_screen_options_panel' ), 10, 2 );
-		// add_action( 'admin_menu', array( $this, 'remove_woo_product_submenu' ), 999 );
+		// Popup HTML for "+x more" links in the "Show In" column.
+		add_action( 'admin_footer', array( $this, 'sp_tabs_show_in_column_popup' ) );
 	}
 
 	/**
@@ -63,6 +64,8 @@ class Smart_Tabs_Free_Admin {
 		add_filter( 'redirect_post_location', array( $this, 'set_correct_publish_message' ), 10, 2 );
 		add_filter( 'the_title', array( $this, 'modify_admin_table_title_name' ), 10, 2 );
 		add_filter( 'post_row_actions', array( $this, 'sp_hide_row_actions_for_default_tabs' ), 10, 2 );
+		// Remove "Edit" bulk action from sp_products_tabs list table.
+		add_filter( 'bulk_actions-edit-sp_products_tabs', array( $this, 'remove_edit_bulk_action' ) );
 		add_filter( 'post_class', array( $this, 'sp_add_custom_class_to_default_tabs' ), 10, 3 );
 	}
 
@@ -164,23 +167,21 @@ class Smart_Tabs_Free_Admin {
 
 		return $submenu_file;
 	}
+
 	/**
 	 * Product Tabs Column
 	 *
 	 * @return array
 	 */
 	public function add_product_tabs_columns() {
-		$new_columns['cb']            = '<input type="checkbox" />';
-		$new_columns['title']         = esc_html__( 'Tabs Name', 'wp-expand-tabs-free' );
-		$new_columns['tab_type']      = esc_html__( 'Tab Type', 'wp-expand-tabs-free' );
-		$new_columns['show_in']       = esc_html__( 'Show Tab In', 'wp-expand-tabs-free' );
-		$new_columns['last_modified'] = esc_html__( 'Last Modified', 'wp-expand-tabs-free' );
-		$new_columns['show_tabs']     = esc_html__( 'Enable/Disable', 'wp-expand-tabs-free' );
-		// $new_columns['date']                          = esc_html__( 'Date', 'wp-expand-tabs-free' );
+		$new_columns['cb']        = '<input type="checkbox" />';
+		$new_columns['title']     = esc_html__( 'Tabs Name', 'wp-expand-tabs-free' );
+		$new_columns['tab_type']  = esc_html__( 'Tab Content Type', 'wp-expand-tabs-free' );
+		$new_columns['show_in']   = esc_html__( 'Show Tab In', 'wp-expand-tabs-free' );
+		$new_columns['show_tabs'] = esc_html__( 'Enable/Disable', 'wp-expand-tabs-free' );
 
 		return $new_columns;
 	}
-
 
 	/**
 	 * Add product tabs column data.
@@ -191,21 +192,21 @@ class Smart_Tabs_Free_Admin {
 	 */
 	public function add_product_tabs_columns_data( $column, $post_id ) {
 		$product_tabs_meta = get_post_meta( $post_id, 'sptpro_woo_product_tabs_settings', true );
-		$tabs_content_type = isset( $product_tabs_meta['tabs_content_type'] ) ? $product_tabs_meta['tabs_content_type'] : 'Default';
+		$tabs_content_type = isset( $product_tabs_meta['tabs_content_type'] ) ? $product_tabs_meta['tabs_content_type'] : 'WooCommerce Default';
 		$tabs_show_in      = isset( $product_tabs_meta['tabs_show_in'] ) ? $product_tabs_meta['tabs_show_in'] : '-';
 		$show_in_label     = ucwords( str_replace( '_', ' ', $tabs_show_in ) );
+		// Brands.
+		$tabs_show_by_brands = isset( $product_tabs_meta['tabs_show_by_brands'] ) ? $product_tabs_meta['tabs_show_by_brands'] : '';
 
 		switch ( $column ) {
 			case 'tab_type':
 				echo '<p class="product-tabs-table-data">' . esc_html( ucfirst( $tabs_content_type ) ) . '</p>';
 				break;
 			case 'show_in':
-				echo '<p class="product-tabs-table-data">' . esc_html( $show_in_label ) . '</p>';
-				break;
-			case 'last_modified':
-				$modified_date = get_post_modified_time( 'Y/n/j \A\t g:i a', false, $post_id );
-				$modified_date = ( ! empty( $modified_date ) ) ? $modified_date : '-';
-				echo '<p class="product-tabs-table-data">' . esc_html( $modified_date ) . '</p>';
+				// Callback to format list with "+x more" link.
+				$output = $this->format_show_in_column( $tabs_show_in, (array) $tabs_show_by_brands );
+
+				echo '<p class="product-tabs-table-data">' . wp_kses_post( $output ) . '</p>';
 				break;
 			case 'show_tabs':
 				echo '<div class="wptabspro-field wptabspro-field-switcher sp-tabs-custom-switcher" data-product_tabs_id="' . esc_attr( $post_id ) . '">
@@ -219,6 +220,73 @@ class Smart_Tabs_Free_Admin {
 			default:
 				break;
 		} // end switch
+	}
+
+
+	/**
+	 * Format the "Show In" column output for product tabs.
+	 *
+	 * @param string $tabs_show_in          The show_in type (categories, tags, brand, sku, product).
+	 * @param array  $tabs_show_by_brands Brand Terms.
+	 *
+	 * @return string Formatted HTML for the column.
+	 */
+	private function format_show_in_column( string $tabs_show_in, array $tabs_show_by_brands ) {
+		$output = '';
+
+		switch ( $tabs_show_in ) {
+			case 'all_product':
+				$output = '<span class="sp-tabs-label">' . esc_html__( 'All Products', 'wp-expand-tabs-free' ) . '</span>';
+				break;
+
+			case 'brand':
+				$brand_names = array();
+				foreach ( (array) $tabs_show_by_brands as $brand_id ) {
+					$term = get_term( $brand_id, 'product_brand' ); // Adjust taxonomy if needed.
+					if ( $term && ! is_wp_error( $term ) ) {
+						$brand_names[] = $term->name;
+					}
+				}
+
+				$output = '<span class="sp-tabs-label">' . esc_html__( 'Brand', 'wp-expand-tabs-free' ) . '</span>: ' .
+				( ! empty( $brand_names ) ? $this->format_list_with_more_btn( $brand_names, 'Brand' ) : '' );
+
+				break;
+			default:
+				$output = '-';
+				break;
+		}
+		return $output;
+	}
+
+	/**
+	 * Format a list of items with "+x more" exandable button.
+	 *
+	 * @param array  $items  The list of items (e.g. category names, tags).
+	 * @param string $label  The label (used in popup, e.g. "Category").
+	 * @param int    $limit  Number of items to show before truncation.
+	 *
+	 * @return string HTML output.
+	 */
+	private function format_list_with_more_btn( array $items, string $label = '', int $limit = 2 ) {
+		$items = array_filter( $items );
+
+		if ( count( $items ) > $limit ) {
+			$visible   = array_slice( $items, 0, $limit );
+			$remaining = array_slice( $items, $limit );
+			$truncated = implode( ', ', $visible );
+
+			// Output truncated list + clickable "more" link with full data.
+			return sprintf(
+				'%s, <a href="#" class="sp-tabs-more-link" data-label="%s" data-items="%s">+%d more</a>',
+				esc_html( $truncated ),
+				esc_attr( $label ),
+				esc_attr( implode( ', ', $items ) ), // full list passed to popup.
+				count( $remaining )
+			);
+		}
+
+		return implode( ', ', $items );
 	}
 
 	/**
@@ -525,7 +593,21 @@ class Smart_Tabs_Free_Admin {
 			if ( in_array( $slug, array( 'description', 'additional_information', 'reviews' ), true ) ) {
 				unset( $actions['edit'], $actions['inline hide-if-no-js'], $actions['trash'] );
 			}
+
+			// Remove 'Quick Edit' actions for each WC tabs under the 'sp_products_tabs' post type.
+			unset( $actions['inline hide-if-no-js'] );
 		}
+		return $actions;
+	}
+
+	/**
+	 * Remove "Edit" bulk action from sp_products_tabs list table.
+	 *
+	 * @param array $actions List of bulk actions.
+	 * @return array Filtered list of bulk actions.
+	 */
+	public function remove_edit_bulk_action( $actions ) {
+		unset( $actions['edit'] );
 		return $actions;
 	}
 
@@ -571,5 +653,110 @@ class Smart_Tabs_Free_Admin {
 			return false;
 		}
 		return $show_screen;
+	}
+
+	/**
+	 * Popup HTML for the "+x more" link in the "Show In" column.
+	 *
+	 * This function outputs the HTML structure and necessary JavaScript
+	 * to handle the popup display when clicking on the "+x more" link
+	 * in the "Show In" column of the product tabs admin list.
+	 */
+	public function sp_tabs_show_in_column_popup() {
+		?>
+		<!-- Popup HTML Structure -->
+		<div id="sp-tabs-popup">
+			<div class="sp-tabs-popup-body"></div>
+			<span class="sp-tabs-popup-close">&times;</span>
+		</div>
+		<!-- Popup CSS Styles -->
+		<style>
+			#sp-tabs-popup {
+				position: absolute; /* absolute positioning to appear above button */
+				display: none;
+				z-index: 9999;
+				background: #fff;
+				border: 1px solid #ccc;
+				padding: 10px;
+				border-radius: 4px;
+				box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+				max-width: 250px;
+				width: auto;
+				height: auto;
+			}
+			.sp-tabs-popup-overlay { 
+				position:absolute;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0; 
+				background:rgba(0,0,0,0.4);
+			}
+			.sp-tabs-popup-content { 
+				position: relative; 
+				width: 400px; 
+				max-width: 90%; 
+				background:#fff; 
+				margin:100px auto; 
+				padding:20px; 
+				border-radius:8px; 
+				box-shadow:0 5px 20px rgba(0,0,0,0.2);
+			}
+			.sp-tabs-popup-close { 
+				position: absolute;
+				top: 0px;
+				right: 10px;
+				cursor: pointer;
+				font-size: 18px;
+				display:block;
+				text-align:right;
+				margin-top:5px;
+			}
+			.sp-tabs-popup-body {
+				line-height: 1.4;
+				margin-right: 30px;
+			}
+		</style>
+		<!-- Popup JavaScript -->
+		<script>
+		jQuery(document).ready(function($) {
+			$(document).on('click', '.sp-tabs-more-link', function(e) {
+				e.preventDefault();
+				var $button = $(this);
+				var items   = $button.data('items');   // full list of terms
+				var label   = $button.data('label');   // Category / Tags / Brand...
+				var $popup  = $('#sp-tabs-popup');
+
+				// Fill content
+				$popup.find('.sp-tabs-popup-body').html(
+					'<strong style="color: #8B9494;">' + label + '</strong>: ' + items
+				);
+
+				// Get button position
+				var offset = $button.offset();
+				var popupHeight = $popup.outerHeight();
+				
+				// Position above button
+				$popup.css({
+					top: offset.top - popupHeight - 50, // 50px above
+					left: offset.left - 100,
+					display: 'block'
+				});
+			});
+
+			// Close popup when clicking overlay or close button.
+			$(document).on('click', '.sp-tabs-popup-close', function() {
+				$('#sp-tabs-popup').fadeOut(100);
+			});
+
+			// Click outside to close popup.
+			$(document).on('click', function(e) {
+				if (!$(e.target).closest('.sp-tabs-more-link, #sp-tabs-popup').length) {
+					$('#sp-tabs-popup').fadeOut(100);
+				}
+			});
+		});
+		</script>
+		<?php
 	}
 }

@@ -78,7 +78,7 @@ SP_WP_TABS::createSection(
 				'class'   => 'sp_wp_tab_type',
 				'options' => array(
 					'content-tabs' => __( 'Custom', 'wp-expand-tabs-free' ),
-					'post-tabs'    => __( 'Posts', 'wp-expand-tabs-free' ),
+					'post-tabs'    => __( 'Post', 'wp-expand-tabs-free' ),
 				),
 				'default' => 'content-tabs',
 			),
@@ -87,7 +87,7 @@ SP_WP_TABS::createSection(
 				'id'                     => 'sptpro_content_source',
 				'type'                   => 'group',
 				'title'                  => __( 'Tabs Content', 'wp-expand-tabs-free' ),
-				'button_title'           => __( 'Add New Tab', 'wp-expand-tabs-free' ),
+				'button_title'           => __( '+ Add New Tab', 'wp-expand-tabs-free' ),
 				'class'                  => 'sp-tab__content_wrapper',
 				'accordion_title_prefix' => __( 'Item :', 'wp-expand-tabs-free' ),
 				'accordion_title_number' => true,
@@ -121,7 +121,7 @@ SP_WP_TABS::createSection(
 						'wrap_class' => 'sp-tab__content_source',
 						'title'      => __( 'Make it Deep-Linking', 'wp-expand-tabs-free' ),
 						'title_help' => sprintf(
-							'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-deep-linking-a-tab/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/deep-linking/" target="_blank">%s</a>',
+							'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/how-to-make-a-tab-deep-link/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/deep-linking/" target="_blank">%s</a>',
 							__( 'Make it Deep-Linking (Pro)', 'wp-expand-tabs-free' ),
 							__( 'Check to enable the ability to associate a direct link or URL with a specific tab', 'wp-expand-tabs-free' ),
 							__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -131,18 +131,11 @@ SP_WP_TABS::createSection(
 						'class'      => 'sp-tab__tab-linking',
 					),
 					array(
-						'id'         => 'tabs_content_type',
-						'class'      => 'sp_tabs_content_type pro-preset-style',
-						'type'       => 'image_select',
-						'title'      => __( 'Tab Type', 'wp-expand-tabs-free' ),
-						'title_help' => sprintf(
-							'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-deep-linking-a-tab/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/deep-linking/" target="_blank">%s</a>',
-							__( 'Make it Deep-Linking (Pro)', 'wp-expand-tabs-free' ),
-							__( 'Check to enable the ability to associate a direct link or URL with a specific tab', 'wp-expand-tabs-free' ),
-							__( 'Open Docs', 'wp-expand-tabs-free' ),
-							__( 'Live Demo', 'wp-expand-tabs-free' )
-						),
-						'options'    => array(
+						'id'      => 'tabs_content_type',
+						'class'   => 'sp_tabs_content_type pro-preset-style',
+						'type'    => 'image_select',
+						'title'   => __( 'Tab Content Type', 'wp-expand-tabs-free' ),
+						'options' => array(
 							'text'       => array(
 								'icon'        => 'icon-content',
 								'option_name' => __( 'Content', 'wp-expand-tabs-free' ),
@@ -153,7 +146,7 @@ SP_WP_TABS::createSection(
 								'class' => 'pro-feature',
 							),
 						),
-						'default'    => 'text',
+						'default' => 'text',
 					),
 					array(
 						'id'         => 'tabs_content_description',
@@ -163,7 +156,73 @@ SP_WP_TABS::createSection(
 						'height'     => '150px',
 					),
 				),
+				'dependency'             => array( 'sptpro_tab_type', '==', 'content-tabs' ),
 			), // End of Content Tabs.
+			// Post Tabs.
+			array(
+				'id'         => 'sptpro_post_type',
+				'type'       => 'select',
+				'title'      => __( 'Post Type', 'wp-expand-tabs-free' ),
+				'options'    => 'post_type',
+				'class'      => 'sp-tab__post_type',
+				'attributes' => array(
+					'placeholder' => __( 'Select Post Type', 'wp-expand-tabs-free' ),
+					'style'       => 'min-width: 150px;',
+				),
+				'default'    => 'post',
+				'dependency' => array( 'sptpro_tab_type', '==', 'post-tabs' ),
+			),
+			array(
+				'id'         => 'sptpro_display_posts_from',
+				'type'       => 'select',
+				'title'      => __( 'Filter Posts', 'wp-expand-tabs-free' ),
+				'options'    => array(
+					'latest'        => __( 'Latest', 'wp-expand-tabs-free' ),
+					'taxonomy'      => __( 'Taxonomy (Pro)', 'wp-expand-tabs-free' ),
+					'specific_post' => __( 'Specific Posts (Pro)', 'wp-expand-tabs-free' ),
+				),
+				'default'    => 'latest',
+				'class'      => 'chosen sptpro-tabs-pro-select',
+				'dependency' => array( 'sptpro_tab_type', '==', 'post-tabs' ),
+			),
+			array(
+				'id'         => 'post_order_by',
+				'type'       => 'select',
+				'title'      => __( 'Order by', 'wp-expand-tabs-free' ),
+				'options'    => array(
+					'ID'         => __( 'ID', 'wp-expand-tabs-free' ),
+					'date'       => __( 'Date', 'wp-expand-tabs-free' ),
+					'rand'       => __( 'Random', 'wp-expand-tabs-free' ),
+					'title'      => __( 'Title', 'wp-expand-tabs-free' ),
+					'modified'   => __( 'Modified', 'wp-expand-tabs-free' ),
+					'menu_order' => __( 'Menu Order', 'wp-expand-tabs-free' ),
+					'post__in'   => __( 'Drag & Drop', 'wp-expand-tabs-free' ),
+				),
+				'default'    => 'date',
+				'dependency' => array( 'sptpro_tab_type', '==', 'post-tabs' ),
+			),
+			array(
+				'id'         => 'post_order',
+				'type'       => 'select',
+				'title'      => __( 'Order', 'wp-expand-tabs-free' ),
+				'options'    => array(
+					'ASC'  => __( 'Ascending', 'wp-expand-tabs-free' ),
+					'DESC' => __( 'Descending', 'wp-expand-tabs-free' ),
+				),
+				'default'    => 'DESC',
+				'dependency' => array( 'sptpro_tab_type', '==', 'post-tabs' ),
+			),
+			array(
+				'id'         => 'number_of_total_posts',
+				'type'       => 'spinner',
+				'title'      => __( 'Limit', 'wp-expand-tabs-free' ),
+				'class'      => 'number-of-total-posts',
+				'title_help' => __( 'Number of total posts to display. Default value is 6.', 'wp-expand-tabs-free' ),
+				'default'    => '6',
+				'min'        => 1,
+				'max'        => 1000,
+				'dependency' => array( 'sptpro_tab_type', '==', 'post-tabs' ),
+			),
 		), // End of fields array.
 	)
 );
@@ -203,7 +262,7 @@ SP_WP_TABS::createSection(
 				'title'      => __( 'Tabs Layout', 'wp-expand-tabs-free' ),
 				'sanitize'   => 'sanitize_text_field',
 				'title_help' => sprintf(
-					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-choose-tabs-layout/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-layout/" target="_blank">%s</a>',
+					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/tabs-settings/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-layout/" target="_blank">%s</a>',
 					__( 'Tabs Layout', 'wp-expand-tabs-free' ),
 					__( 'Choose a layout from five individual layout styles to customize how your tabs are displayed in the frontend.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -222,33 +281,26 @@ SP_WP_TABS::createSection(
 						'class'           => 'free-feature',
 						'option_demo_url' => 'https://wptabs.com/horizontal-tabs/',
 					),
-					'pro-features'      => array(
-						'image'           => WP_TABS_URL . '/admin/img/pro-presets/wp-pro-presets.svg',
-						'class'           => 'pro-feature',
-						'option_demo_url' => 'https://wptabs.com/horizontal-tabs/',
+					'vertical-right'    => array(
+						'image'           => WP_TABS_URL . '/admin/img/tabs-layout/vertical-right.svg',
+						'option_name'     => __( 'Vertical Right', 'wp-expand-tabs-free' ),
+						'option_demo_url' => 'https://wptabs.com/vertical-tabs/#vertical-right',
 					),
-					// 'vertical'          => array(
-					// 'image'           => WP_TABS_URL . '/admin/img/tabs-layout/vertical-left.svg',
-					// 'option_name'     => __( 'Vertical Left', 'wp-expand-tabs-free' ),
-					// 'class'           => 'pro-feature',
-					// 'option_demo_url' => 'https://wptabs.com/vertical-tabs/',
-					// ),
-					// 'vertical-right'    => array(
-					// 'image'           => WP_TABS_URL . '/admin/img/tabs-layout/vertical-right.svg',
-					// 'option_name'     => __( 'Vertical Right', 'wp-expand-tabs-free' ),
-					// 'class'           => 'pro-feature',
-					// 'option_demo_url' => 'https://wptabs.com/vertical-tabs/',
-					// ),
-					// 'tabs-carousel'     => array(
-					// 'image'           => WP_TABS_URL . '/admin/img/tabs-layout/tabs-carousel.svg',
-					// 'option_name'     => __( 'Tabs Carousel', 'wp-expand-tabs-free' ),
-					// 'class'           => 'pro-feature',
-					// 'option_demo_url' => 'https://wptabs.com/responsive-scrollable-tabs-2/',
-					// ),
+					'vertical'          => array(
+						'image'           => WP_TABS_URL . '/admin/img/tabs-layout/vertical-left.svg',
+						'option_name'     => __( 'Vertical Left', 'wp-expand-tabs-free' ),
+						'class'           => 'pro-feature',
+						'option_demo_url' => 'https://demo.wptabs.com/vertical-tabs/',
+					),
+					'tabs-carousel'     => array(
+						'image'           => WP_TABS_URL . '/admin/img/tabs-layout/tabs-carousel.svg',
+						'option_name'     => __( 'Tabs Carousel', 'wp-expand-tabs-free' ),
+						'class'           => 'pro-feature',
+						'option_demo_url' => 'https://wptabs.com/responsive-scrollable-tabs-2/',
+					),
 				),
 				'radio'      => true,
 				'default'    => 'horizontal',
-
 			),
 			array(
 				'id'         => 'sptpro_tabs_horizontal_alignment',
@@ -257,7 +309,7 @@ SP_WP_TABS::createSection(
 				'title'      => __( 'Tabs Alignment', 'wp-expand-tabs-free' ),
 				'sanitize'   => 'sanitize_text_field',
 				'title_help' => sprintf(
-					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-select-tabs-alignment/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-position-alignment/" target="_blank">%s</a>',
+					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/tabs-settings/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-position-alignment/" target="_blank">%s</a>',
 					__( 'Tabs Alignment', 'wp-expand-tabs-free' ),
 					__( 'Choose where you want your tabs to appear – at the top, right, bottom, or left of your content, allowing you to customize their position to best suit your layout and design.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -286,6 +338,40 @@ SP_WP_TABS::createSection(
 					),
 				),
 				'default'    => 'tab-horizontal-alignment-left',
+				'dependency' => array( 'sptpro_tabs_layout', '!=', 'vertical-right', true ),
+			),
+			array(
+				'id'         => 'sptpro_tabs_vertical_alignment',
+				'type'       => 'image_select',
+				'class'      => 'sptpro_tabs_vertical_alignment',
+				'title'      => __( 'Tabs Alignment', 'wp-expand-tabs-free' ),
+				'title_help' => sprintf(
+					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/tabs-settings/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-position-alignment/" target="_blank">%s</a>',
+					__( 'Tabs Alignment', 'wp-expand-tabs-free' ),
+					__( 'Choose where you want your tabs to appear – at the top, right, bottom, or left of your content, allowing you to customize their position to best suit your layout and design.', 'wp-expand-tabs-free' ),
+					__( 'Open Docs', 'wp-expand-tabs-free' ),
+					__( 'Live Demo', 'wp-expand-tabs-free' )
+				),
+				'options'    => array(
+					'tab-vertical-alignment-top'       => array(
+						'image'       => WP_TABS_URL . '/admin/img/tabs-alignment/vertical-right/vertical-top.svg',
+						'option_name' => __( 'Top', 'wp-expand-tabs-free' ),
+					),
+					'tab-vertical-alignment-middle'    => array(
+						'image'       => WP_TABS_URL . '/admin/img/tabs-alignment/vertical-right/vertical-center.svg',
+						'option_name' => __( 'Center', 'wp-expand-tabs-free' ),
+					),
+					'tab-vertical-alignment-bottom'    => array(
+						'image'       => WP_TABS_URL . '/admin/img/tabs-alignment/vertical-right/vertical-bottom.svg',
+						'option_name' => __( 'Bottom', 'wp-expand-tabs-free' ),
+					),
+					'tab-vertical-alignment-justified' => array(
+						'image'       => WP_TABS_URL . '/admin/img/tabs-alignment/vertical-right/vertical-justified.svg',
+						'option_name' => __( 'Justified', 'wp-expand-tabs-free' ),
+					),
+				),
+				'default'    => 'tab-vertical-alignment-top',
+				'dependency' => array( 'sptpro_tabs_layout', '==', 'vertical-right', true ),
 			),
 			array(
 				'id'         => 'sptpro_tabs_activator_event',
@@ -294,7 +380,7 @@ SP_WP_TABS::createSection(
 				'title'      => __( 'Activator Event', 'wp-expand-tabs-free' ),
 				'sanitize'   => 'sanitize_text_field',
 				'title_help' => sprintf(
-					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-set-tabs-activator-events/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/activator-events/" target="_blank">%s</a>',
+					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/tabs-settings/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/activator-events/" target="_blank">%s</a>',
 					__( 'Activator Event', 'wp-expand-tabs-free' ),
 					__( 'Set an event to switch between tabs with AutoPlay (Pro), On Click, or Mouse Hover.', 'wp-expand-tabs-free' ),
 					__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -303,7 +389,6 @@ SP_WP_TABS::createSection(
 				'options'    => array(
 					'tabs-activator-event-click' => __( 'On Click', 'wp-expand-tabs-free' ),
 					'tabs-activator-event-hover' => __( 'Mouseover', 'wp-expand-tabs-free' ),
-					// 'tabs-activator-event-auto'  => __( 'AutoPlay (Pro)', 'wp-expand-tabs-free' ),
 				),
 				'default'    => 'tabs-activator-event-click',
 			),
@@ -336,6 +421,13 @@ SP_WP_TABS::createSection(
 				'id'         => 'sptpro_tab_link_type',
 				'type'       => 'button_set',
 				'title'      => __( 'Link Type ', 'wp-expand-tabs-free' ),
+				'title_help' => sprintf(
+					'<div class="wptabspro-info-label">%s</div>
+					<div class="wptabspro-short-content">%s <br/>%s</div>',
+					__( 'Link Type', 'wp-expand-tabs-free' ),
+					__( 'Tab ID - Adds the tab\'s unique ID to the URL. i.e. https://example.com/#tab-id', 'wp-expand-tabs-free' ),
+					__( 'Tab Title - Adds a URL-friendly version of the tab title (slug) to the URL. i.e. https://example.com/#tab-title-xx', 'wp-expand-tabs-free' ),
+				),
 				'options'    => array(
 					'tab_id'    => __( 'Tab ID', 'wp-expand-tabs-free' ),
 					'tab_title' => __( 'Tab Title', 'wp-expand-tabs-free' ),
@@ -359,7 +451,7 @@ SP_WP_TABS::createSection(
 				'class'      => 'only_pro_fixed_height',
 				'ignore_db'  => true,
 				'title'      => __( 'Content Height', 'wp-expand-tabs-free' ),
-				'title_help' => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/content-height.svg" alt="' . __( 'Content Height', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label"> ' . __( 'Content Height', 'wp-expand-tabs-free' ) . '</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-set-tabs-content-height/" target="_blank">' . __( 'Open Docs', 'wp-expand-tabs-free' ) . '</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-fixed-content-height/" target="_blank">' . __( 'Live Demo', 'wp-expand-tabs-free' ) . '</a>',
+				'title_help' => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/content-height.svg" alt="' . __( 'Content Height', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label"> ' . __( 'Content Height', 'wp-expand-tabs-free' ) . '</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/how-to-set-tabs-content-height/" target="_blank">' . __( 'Open Docs', 'wp-expand-tabs-free' ) . '</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-fixed-content-height/" target="_blank">' . __( 'Live Demo', 'wp-expand-tabs-free' ) . '</a>',
 				'options'    => array(
 					'auto'   => __( 'Auto', 'wp-expand-tabs-free' ),
 					'custom' => __( 'Custom', 'wp-expand-tabs-free' ),
@@ -390,7 +482,6 @@ SP_WP_TABS::createSection(
 		'title'  => __( 'Display Settings', 'wp-expand-tabs-free' ),
 		'icon'   => 'fa icon-display',
 		'fields' => array(
-
 			array(
 				'type' => 'tabbed',
 				'tabs' => array(
@@ -428,7 +519,7 @@ SP_WP_TABS::createSection(
 								'type'       => 'button_set',
 								'class'      => 'sptpro_tabs_bg_color_type',
 								'title'      => __( 'Tab Name BG Color Type', 'wp-expand-tabs-free' ),
-								'title_help' => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/title-background-color-type.svg" alt="' . __( 'Title Background Color Type', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label">' . __( 'Title Background Color Type', 'wp-expand-tabs-free' ) . '</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-set-tabs-title-background-color/" target="_blank">' . __( 'Open Docs', 'wp-expand-tabs-free' ) . '</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/title-background-color/" target="_blank">' . __( 'Live Demo', 'wp-expand-tabs-free' ) . '</a>',
+								'title_help' => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/title-background-color-type.svg" alt="' . __( 'Title Background Color Type', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label">' . __( 'Title Background Color Type', 'wp-expand-tabs-free' ) . '</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-expand-tabs-free/configurations/how-to-set-tabs-title-background-color/" target="_blank">' . __( 'Open Docs', 'wp-expand-tabs-free' ) . '</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/title-background-color/" target="_blank">' . __( 'Live Demo', 'wp-expand-tabs-free' ) . '</a>',
 								'options'    => array(
 									'solid'    => __( 'Solid', 'wp-expand-tabs-free' ),
 									'gradient' => __( 'Gradient', 'wp-expand-tabs-free' ),
@@ -512,7 +603,7 @@ SP_WP_TABS::createSection(
 								'title_help' => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/description-padding.svg" alt="' . __( 'Description Padding', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label"> ' . __( 'Description Padding', 'wp-expand-tabs-free' ) . '</div>',
 								'units'      => array( 'px' ),
 								'default'    => array(
-									'left'   => '20',
+									'left'   => '30',
 									'top'    => '20',
 									'bottom' => '20',
 									'right'  => '20',
@@ -532,12 +623,10 @@ SP_WP_TABS::createSection(
 							),
 							array(
 								'type'    => 'notice',
-								'class'   => 'only_pro_notice middle_notice',
+								'class'   => 'middle_notice smart-tabs-notice',
 								'content' => sprintf(
 									/* translators: 1: start bold tag 2: close bold tag 3: start link and bold tag, 4: close tag. */
-									__( 'Unlock additional settings for %1$sTabs Name and Description%2$s, and design your own styled tabs %3$sUpgrade to Pro!%4$s', 'wp-expand-tabs-free' ),
-									'<b>',
-									'</b>',
+									__( 'Unlock additional settings for Tab Name & Description — %1$sUpgrade to Pro!%2$s', 'wp-expand-tabs-free' ),
 									'<a href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" target="_blank"><b>',
 									'</b></a>'
 								),
@@ -559,11 +648,32 @@ SP_WP_TABS::createSection(
 								'ignore_db'  => true,
 								'class'      => 'only_pro_switcher vertical-gap',
 								'title'      => __( 'Active Tab Indicator Arrow', 'wp-expand-tabs-free' ),
-								'title_help' => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/active-tab-indicator-arrow.svg" alt="' . __( 'Active Tab Indicator Arrow (Pro)', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label">' . __( 'Active Tab Indicator Arrow (Pro)', 'wp-expand-tabs-free' ) . '</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-configure-active-tab-indicator-arrow/" target="_blank">' . __( 'Open Docs', 'wp-expand-tabs-free' ) . '</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/active-tab-indicator-arrow/" target="_blank">' . __( 'Live Demo', 'wp-expand-tabs-free' ) . '</a>',
+								'title_help' => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/active-tab-indicator-arrow.svg" alt="' . __( 'Active Tab Indicator Arrow (Pro)', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label">' . __( 'Active Tab Indicator Arrow (Pro)', 'wp-expand-tabs-free' ) . '</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/how-to-configure-an-active-tab-indicator-arrow/" target="_blank">' . __( 'Open Docs', 'wp-expand-tabs-free' ) . '</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/active-tab-indicator-arrow/" target="_blank">' . __( 'Live Demo', 'wp-expand-tabs-free' ) . '</a>',
 								'default'    => false,
 								'text_on'    => __( 'Show', 'wp-expand-tabs-free' ),
 								'text_off'   => __( 'Hide', 'wp-expand-tabs-free' ),
 								'text_width' => 75,
+							),
+							array(
+								'id'              => 'sptpro_margin_between_tabs_and_desc',
+								'type'            => 'spacing',
+								'bottom_icon'     => '<i class="fa fa-arrows-v"></i>',
+								'ignore_db'       => true,
+								'class'           => 'only_pro_spinner',
+								'title'           => __( 'Space Between Tabs and Description', 'wp-expand-tabs-free' ),
+								'title_help'      => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/margin-between-tabs-and-description.svg" alt="' . __( 'Space Between Tabs and Description', 'wp-expand-tabs-free' ) . '"></div>',
+								'all_placeholder' => 'margin',
+								'bottom_text'     => '',
+								'top'             => false,
+								'left'            => false,
+								'bottom'          => true,
+								'right'           => false,
+								'default'         => array(
+									'bottom' => '0',
+								),
+								'units'           => array(
+									'px',
+								),
 							),
 							array(
 								'id'         => 'sptpro_active_tab_style_horizontal',
@@ -572,7 +682,7 @@ SP_WP_TABS::createSection(
 								'class'      => 'only_pro_tabs_icon_section common-size',
 								'title'      => __( 'Active Tab Style', 'wp-expand-tabs-free' ),
 								'title_help' => sprintf(
-									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-set-active-tab-style/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/active-tab-style/" target="_blank">%s</a>',
+									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/how-to-set-and-customize-active-tab-style/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/active-tab-style/" target="_blank">%s</a>',
 									__( 'Active Tab Style (Pro)', 'wp-expand-tabs-free' ),
 									__( 'Choose how the currently selected tab looks. You can add a line to the Top or Bottom of tab\'s title to make it stand out.', 'wp-expand-tabs-free' ),
 									__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -596,34 +706,13 @@ SP_WP_TABS::createSection(
 								'default'    => 'horizontal-active-tab-normal',
 							),
 							array(
-								'id'              => 'sptpro_margin_between_tabs_and_desc',
-								'type'            => 'spacing',
-								'bottom_icon'     => '<i class="fa fa-arrows-v"></i>',
-								'ignore_db'       => true,
-								'class'           => 'only_pro_spinner',
-								'title'           => __( 'Space Between Tabs and Description', 'wp-expand-tabs-free' ),
-								'title_help'      => '<div class="wptabspro-img-tag"><img src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/help-visuals/margin-between-tabs-and-description.svg" alt="' . __( 'Space Between Tabs and Description', 'wp-expand-tabs-free' ) . '"></div><div class="wptabspro-info-label">' . __( 'Space Between Tabs and Description', 'wp-expand-tabs-free' ) . '</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-set-margin-between-tabs-and-description/" target="_blank">' . __( 'Open Docs', 'wp-expand-tabs-free' ) . '</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/margin-between-tabs-and-description/" target="_blank">' . __( 'Live Demo', 'wp-expand-tabs-free' ) . '</a>',
-								'all_placeholder' => 'margin',
-								'bottom_text'     => '',
-								'top'             => false,
-								'left'            => false,
-								'bottom'          => true,
-								'right'           => false,
-								'default'         => array(
-									'bottom' => '0',
-								),
-								'units'           => array(
-									'px',
-								),
-							),
-							array(
 								'id'         => 'sptpro_flat_tab_style_horizontal',
 								'type'       => 'image_select',
 								'ignore_db'  => true,
 								'class'      => 'only_pro_tabs_icon_section common-size',
 								'title'      => __( 'Flat Tab Style', 'wp-expand-tabs-free' ),
 								'title_help' => sprintf(
-									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-make-tab-flat-style/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/flat-contained-tabs/" target="_blank">%s</a>',
+									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/how-to-make-a-tab-flat-style/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/flat-contained-tabs/" target="_blank">%s</a>',
 									__( 'Flat Tab Style (Pro)', 'wp-expand-tabs-free' ),
 									__( 'Select the Underline option to enhance your tabs with flat underline positioned below the tab navigation for a clean and modern look.', 'wp-expand-tabs-free' ),
 									__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -668,7 +757,7 @@ SP_WP_TABS::createSection(
 								'type'       => 'radio',
 								'title'      => __( 'Tabs Mode on Small Screen', 'wp-expand-tabs-free' ),
 								'title_help' => sprintf(
-									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-configure-tabs-mood-on-small-screen/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-mood-on-small-screen/" target="_blank">%s</a>',
+									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/how-to-configure-tabs-mood-on-a-small-screen/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/docs/style/display-settings/" target="_blank">%s</a>',
 									__( 'Tabs Mode on Small Screen', 'wp-expand-tabs-free' ),
 									__( 'Choose how your tabs behave on small screens, such as mobile devices. You can select "Full Width" to maintain the current layout or "Accordion" to switch to a collapsible format, ensuring the best user experience on mobile.', 'wp-expand-tabs-free' ),
 									__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -702,7 +791,7 @@ SP_WP_TABS::createSection(
 								'type'       => 'switcher',
 								'title'      => __( 'Animation', 'wp-expand-tabs-free' ),
 								'title_help' => sprintf(
-									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-configure-tabs-animation/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-animation/" target="_blank">%s</a>',
+									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/how-to-configure-tab-animation/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-animation/" target="_blank">%s</a>',
 									__( 'Animation', 'wp-expand-tabs-free' ),
 									__( 'You can select animation to enhance your tab with over 50+ fascinating animations to add dynamic and eye-catching effects to your content.', 'wp-expand-tabs-free' ),
 									__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -716,7 +805,7 @@ SP_WP_TABS::createSection(
 							array(
 								'id'         => 'sptpro_tabs_animation_type',
 								'type'       => 'select',
-								'class'      => 'sptpro-tabs-animation-type',
+								'class'      => 'sptpro-tabs-pro-select',
 								'title'      => __( 'Animation Style', 'wp-expand-tabs-free' ),
 								'sanitize'   => 'sanitize_text_field',
 								'options'    => array(
@@ -784,7 +873,7 @@ SP_WP_TABS::createSection(
 							),
 							array(
 								'type'    => 'notice',
-								'class'   => 'only_pro_notice bottom_notice',
+								'class'   => 'bottom_notice smart-tabs-notice',
 								'content' => sprintf(
 									/* translators: 1: start strong tag 2: close strong tag 3: start link and bold tag, 4: close tag. */
 									__( 'To unlock %1$s50+ elegant Tabs Animations%2$s settings, %3$sUpgrade to Pro!%4$s', 'wp-expand-tabs-free' ),
@@ -803,7 +892,7 @@ SP_WP_TABS::createSection(
 							array(
 								'type'      => 'notice',
 								'ignore_db' => true,
-								'class'     => 'only_pro_notice tab-icon-top-notice',
+								'class'     => 'only_pro_notice tab-icon-top-notice smart-tabs-notice',
 								'content'   => sprintf(
 									/* translators: 1: start link and blod tag, 2: close tag. */
 									__( 'To unlock the following essential Tabs Icon options, %1$sUpgrade to Pro!%2$s', 'wp-expand-tabs-free' ),
@@ -896,7 +985,7 @@ SP_WP_TABS::createSection(
 								'class'      => 'only_pro_tabs_icon_section tab_icon_position',
 								'title'      => __( 'Icon Position', 'wp-expand-tabs-free' ),
 								'title_help' => sprintf(
-									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-select-tabs-icon-position/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-icon-position/" target="_blank">%s</a>',
+									'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div><a class="wptabspro-open-docs" href="https://wptabs.com/docs/display-settings/tabs-icon/" target="_blank">%s</a><a class="wptabspro-open-live-demo" href="https://wptabs.com/tabs-icon-position/" target="_blank">%s</a>',
 									__( 'Icon Position (Pro)', 'wp-expand-tabs-free' ),
 									__( 'This option allows you to specify the position of icons within your tab interface. You can place icons to the Top, Right, Bottom and Left of tab\'s title.', 'wp-expand-tabs-free' ),
 									__( 'Open Docs', 'wp-expand-tabs-free' ),
@@ -921,6 +1010,104 @@ SP_WP_TABS::createSection(
 							),
 						),
 					),
+
+					array(
+						'title'  => __( 'Image & Video Gallery', 'wp-expand-tabs-free' ),
+						'icon'   => '<i class="fa icon-image-and-video-gallery"></i>',
+						'fields' => array(
+							array(
+								'type'      => 'notice',
+								'ignore_db' => true,
+								'class'     => 'only_pro_notice tab-icon-top-notice smart-tabs-notice',
+								'content'   => sprintf(
+									/* translators: 1: start link and blod tag, 2: close tag. */
+									__( 'Unlock Image & Video Gallery Tabs with lightbox features & more— %1$sUpgrade to Pro!%2$s', 'wp-expand-tabs-free' ),
+									'<a href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" target="_blank"><b>',
+									'</b></a>'
+								),
+							),
+
+							array(
+								'id'        => 'content_image_layouts',
+								'class'     => 'chosen sp-tabs-space-between only_pro_spinner',
+								'type'      => 'select',
+								'ignore_db' => true,
+								'title'     => __( 'Layout Preset', 'wp-expand-tabs-free' ),
+								'options'   => array(
+									'grid'    => __( 'Grid', 'wp-expand-tabs-free' ),
+									'masonry' => __( 'Masonry', 'wp-expand-tabs-free' ),
+								),
+								'default'   => 'grid',
+								// 'dependency' => array( 'tabs_content_type', '==', 'image' ),
+							),
+							array(
+								'id'        => 'content_images_columns',
+								'class'     => 'content_images_columns only_pro_spinner',
+								'type'      => 'column',
+								'ignore_db' => true,
+								'title'     => __( 'Columns', 'wp-expand-tabs-free' ),
+								'default'   => array(
+									'lg_desktop' => '5',
+									'desktop'    => '4',
+									'laptop'     => '4',
+									'tablet'     => '3',
+									'mobile'     => '2',
+								),
+								'min'       => '1',
+								// 'dependency' => array( 'tabs_content_type', '==', 'image' ),
+							),
+							array(
+								'id'        => 'space_between_image_and_video',
+								'type'      => 'spacing',
+								'ignore_db' => true,
+								'class'     => 'sp-tabs-space-between only_pro_spinner',
+								'title'     => __( 'Space Between', 'wp-expand-tabs-free' ),
+								'all'       => true,
+								'all_icon'  => '<i class="fa fa-arrows"></i>',
+								'default'   => array(
+									'all' => '24',
+								),
+								'units'     => array(
+									'px',
+								),
+							),
+							array(
+								'id'         => 'content_image_caption',
+								'type'       => 'switcher',
+								'ignore_db'  => true,
+								'class'      => 'sp-tabs-space-between only_pro_switcher',
+								'title'      => __( 'Caption', 'wp-expand-tabs-free' ),
+								'text_on'    => __( 'Enabled', 'wp-expand-tabs-free' ),
+								'text_off'   => __( 'Disabled', 'wp-expand-tabs-free' ),
+								'text_width' => 96,
+								'default'    => true,
+							// 'dependency' => array( 'tabs_content_type', '==', 'image' ),
+							),
+							array(
+								'id'         => 'enable_image_lightbox',
+								'type'       => 'switcher',
+								'ignore_db'  => true,
+								'class'      => 'sp-tabs-space-between only_pro_switcher',
+								'title'      => __( 'Image Gallery Lightbox', 'wp-expand-tabs-free' ),
+								'text_on'    => __( 'Enabled', 'wp-expand-tabs-free' ),
+								'text_off'   => __( 'Disabled', 'wp-expand-tabs-free' ),
+								'text_width' => 96,
+								'default'    => true,
+							),
+							array(
+								'id'        => 'video_play_mode',
+								'type'      => 'button_set',
+								'class'     => 'only_pro_spinner',
+								'ignore_db' => true,
+								'title'     => __( 'Video Play Mode', 'wp-expand-tabs-free' ),
+								'options'   => array(
+									'inline'   => __( 'Inline', 'wp-expand-tabs-free' ),
+									'lightbox' => __( 'Lightbox', 'wp-expand-tabs-free' ),
+								),
+								'default'   => 'inline',
+							),
+						),
+					),
 				),
 			),
 		),
@@ -939,10 +1126,10 @@ SP_WP_TABS::createSection(
 		'fields'          => array(
 			array(
 				'type'    => 'notice',
-				'class'   => 'only_pro_notice_typo',
+				'class'   => 'only_pro_notice_typo smart-tabs-notice',
 				'content' => sprintf(
 					/* translators: 1: start link and bold tag, 2: close tag 3: start bold tag 4: close bold tag. */
-					__( 'Smart Tabs Lite lets you customize Font Size, Color, and 1500+ Google Fonts — %1$sUpgrade to Pro!%2$s for Advanced Typography!', 'wp-expand-tabs-free' ),
+					__( 'Access 1500+ Google Fonts & Advanced Typography Options — %1$sUpgrade to Pro!%2$s', 'wp-expand-tabs-free' ),
 					'<a href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" target="_blank"><b>',
 					'</b></a>',
 					'<b class="sptpro-notice-typo-exception">',
@@ -984,7 +1171,7 @@ SP_WP_TABS::createSection(
 				'type'      => 'switcher',
 				'ignore_db' => true,
 				'class'     => 'only_pro_switcher',
-				'title'     => __( 'Load Tabs Name Font', 'wp-expand-tabs-free' ),
+				'title'     => __( 'Enable Google Fonts for Tab Name', 'wp-expand-tabs-free' ),
 				'default'   => false,
 			),
 			array(
@@ -1016,7 +1203,7 @@ SP_WP_TABS::createSection(
 				'type'      => 'switcher',
 				'ignore_db' => true,
 				'class'     => 'only_pro_switcher',
-				'title'     => __( 'Load Description Font', 'wp-expand-tabs-free' ),
+				'title'     => __( 'Enable Google Fonts for Tab Description', 'wp-expand-tabs-free' ),
 				'default'   => false,
 			),
 			array(
@@ -1035,7 +1222,7 @@ SP_WP_TABS::createSection(
 					'type'           => 'google',
 				),
 				'preview'      => 'always',
-				'preview_text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+				'preview_text' => 'Smart Tabs makes your content organized and stylish. Easily create customizable tabs to enhance user experience.',
 			),
 			array(
 				'id'        => 'sptpro_subtitle_font_load',
@@ -1196,28 +1383,16 @@ SP_WP_TABS::createSection(
 						'wrap_class' => 'sp-tab__content_source',
 						'title'      => __( 'Tab Name', 'wp-expand-tabs-free' ),
 					),
-					// array(
-					// 'id'           => 'tabs_content_icon',
-					// 'type'         => 'media',
-					// 'class'        => 'tabs-custom-icon-pro',
-					// 'library'      => 'image',
-					// 'url'          => false,
-					// 'desc'         => sprintf(
-					// * translators: 1: opening anchor tag with Pro link, 2: closing anchor tag. */
-					// __( 'This feature is %1$savailable in Pro!%2$s', 'wp-expand-tabs-free' ),
-					// '<a href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" target="_blank"><strong>',
-					// '</strong></a>'
-					// ),
-					// 'button_title' => __( '+ Tab Icon', 'wp-expand-tabs-free' ),
-					// ),
 				),
 			),
 			array(
-				'id'      => 'tabs_content_type',
-				'class'   => 'sp_product_tabs_content_type full-width pro-preset-style',
-				'type'    => 'image_select',
-				'title'   => __( 'Tab Type', 'wp-expand-tabs-free' ),
-				'options' => array(
+				'id'          => 'tabs_content_type',
+				'class'       => 'sp_product_tabs_content_type full-width pro-preset-style',
+				'type'        => 'image_select',
+				'title'       => __( 'Tab Content Type', 'wp-expand-tabs-free' ),
+				'title_video' => '<div class="wptabspro-img-tag"><video autoplay loop muted playsinline><source src="' . plugin_dir_url( __DIR__ ) . 'partials/models/assets/images/tab-content-type.webm" type="video/webm"></video></div><div class="wcgs-info-label">' . esc_html__( 'Access More Powerful Tab Content Types in', 'wp-expand-tabs-free' ) . '
+				<a href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Pro!', 'wp-expand-tabs-free' ) . '</a></div>',
+				'options'     => array(
 					'content'   => array(
 						'icon'        => 'icon-content',
 						'class'       => 'free-feature',
@@ -1233,7 +1408,7 @@ SP_WP_TABS::createSection(
 						'class' => 'pro-feature',
 					),
 				),
-				'default' => 'content',
+				'default'     => 'content',
 			),
 			array(
 				'id'         => 'tabs_content_description',
@@ -1253,14 +1428,22 @@ SP_WP_TABS::createSection(
 				'id'         => 'filter_products',
 				'type'       => 'select',
 				'title'      => __( 'Filter Products', 'wp-expand-tabs-free' ),
-				'class'      => 'chosen sptpro-tabs-animation-type',
+				'class'      => 'chosen sptpro-tabs-pro-select',
 				'options'    => array(
-					'latest'   => __( 'Latest', 'wp-expand-tabs-free' ),
-					'related'  => __( 'Related', 'wp-expand-tabs-free' ),
-					'specific' => __( 'Specific Products (Pro)', 'wp-expand-tabs-free' ),
+					'latest'    => __( 'Latest', 'wp-expand-tabs-free' ),
+					'related'   => __( 'Related', 'wp-expand-tabs-free' ),
+					'specific'  => __( 'Specific Products (Pro)', 'wp-expand-tabs-free' ),
+					'on_sale'   => __( 'On Sale (Pro)', 'wp-expand-tabs-free' ),
+					'best_sell' => __( 'Best Selling (Pro)', 'wp-expand-tabs-free' ),
+				),
+				'desc'       => sprintf(
+					// translators: %s is the link to the Woo Product Tabs generator page.
+					__( 'Hide WooCommerce default related products %s.', 'wp-expand-tabs-free' ),
+					'<a href="' . esc_url(
+						admin_url( 'edit.php?post_type=sp_wp_tabs&page=tab_advanced' )
+					) . '" target="_blank" rel="noopener noreferrer">' . __( 'here', 'wp-expand-tabs-free' ) . '</a>'
 				),
 				'default'    => 'latest',
-				// 'class'      => 'chosen',
 				'dependency' => array( 'tabs_content_type', '==', 'products' ),
 			),
 			array(
@@ -1306,16 +1489,38 @@ SP_WP_TABS::createSection(
 			array(
 				'id'         => 'tabs_show_in',
 				'type'       => 'select',
-				'class'      => 'chosen sptpro-tabs-animation-type',
+				'class'      => 'chosen sptpro-tabs-pro-select',
 				'title'      => __( 'Show Tab in', 'wp-expand-tabs-free' ),
 				'options'    => array(
-					'all_product'      => __( 'All Products', 'wp-expand-tabs-free' ),
-					'categories'       => __( 'Categories (Pro)', 'wp-expand-tabs-free' ),
-					'brand'            => __( 'Brands (Pro)', 'wp-expand-tabs-free' ),
-					'specific_product' => __( 'Specific Products (Pro)', 'wp-expand-tabs-free' ),
+					'all_product'            => __( 'All Products', 'wp-expand-tabs-free' ),
+					'brand'                  => __( 'Brands', 'wp-expand-tabs-free' ),
+					'categories'             => __( 'Categories (Pro)', 'wp-expand-tabs-free' ),
+					'product_tags'           => __( 'Tags (Pro)', 'wp-expand-tabs-free' ),
+					'product_sku'            => __( 'SKU (Pro)', 'wp-expand-tabs-free' ),
+					'specific_product'       => __( 'Specific Products (Pro)', 'wp-expand-tabs-free' ),
+					'product_visibility'     => __( 'Product Visibility (Pro)', 'wp-expand-tabs-free' ),
+					'product_shipping_class' => __( 'Product Shipping Classes (Pro)', 'wp-expand-tabs-free' ),
+					'product_color'          => __( 'Product Colors (Pro)', 'wp-expand-tabs-free' ),
+					'product_size'           => __( 'Product Sizes (Pro)', 'wp-expand-tabs-free' ),
 				),
 				'default'    => 'latest',
 				'dependency' => array( 'tabs_content_type', 'any', 'content,products' ),
+			),
+			array(
+				'id'          => 'tabs_show_by_brands',
+				'type'        => 'select',
+				'class'       => 'sp_tab_specific_posts',
+				'title'       => __( 'Choose Brands', 'wp-expand-tabs-free' ),
+				'options'     => 'brands_term',
+				'chosen'      => true,
+				'sortable'    => true,
+				'multiple'    => true,
+				// 'ajax'        => true,
+				'placeholder' => __( 'Choose Brand(s)', 'wp-expand-tabs-free' ),
+				'attributes'  => array(
+					'style' => 'min-width: 250px;',
+				),
+				'dependency'  => array( 'tabs_show_in', '==', 'brand' ),
 			),
 			array(
 				'id'         => 'tabs_exclude',
@@ -1351,7 +1556,7 @@ SP_WP_TABS::createSection(
 				'id'         => 'override_tab',
 				'type'       => 'checkbox',
 				'title'      => __( 'Override this tab in each product', 'wp-expand-tabs-free' ),
-				'default'    => false,
+				'default'    => true,
 				'title_help' => sprintf(
 					/* translators: 1: start div tag, 2: close div tag, 3: start div tag, 4: close div tag. */
 					'<div class="wptabspro-info-label">%s</div><div class="wptabspro-short-content">%s</div>',
@@ -1364,13 +1569,11 @@ SP_WP_TABS::createSection(
 				'id'      => 'product_tabs_notice',
 				'type'    => 'notice',
 				'style'   => 'normal',
-				'class'   => 'product-tabs-notice',
+				'class'   => 'smart-tabs-notice',
 				'content' => sprintf(
 					/* translators: 1: start link and strong tag, 2: close link and strong tag, 3: start strong tag, 4: close strong tag. 5: start link and strong tag, 6: close link and strong tag. */
-					__( 'Want to add extra tabs with any content to your product pages and boost sales? %1$sUpgrade to Pro!%2$s Learn More about %3$sSmart Tabs%4$s', 'wp-expand-tabs-free' ),
+					__( 'Add unlimited custom tabs with any content to boost engagement and sales — %1$sUpgrade to Pro!%2$s', 'wp-expand-tabs-free' ),
 					'<a class="wcgs-open-live-demo" href="' . esc_url( SP_SMART_TABS_PRO_LINK ) . '" target="_blank"><strong>',
-					'</strong></a>',
-					'<a class="wcgs-open-live-demo" href="https://wptabs.com/" target="_blank"><strong>',
 					'</strong></a>'
 				),
 			),

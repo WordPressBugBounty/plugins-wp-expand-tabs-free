@@ -118,25 +118,29 @@ if ( ! class_exists( 'SP_WP_TABS_Field_select' ) ) {
 
 					foreach ( $options as $option_key => $option ) {
 
-						if ( is_array( $option ) && ! empty( $option ) ) {
-
+						// Handle optgroup.
+						if ( is_array( $option ) && isset( $option['label'] ) ) {
+							// Single option with extra attributes like disabled.
+							$label    = $option['label'];
+							$disabled = ! empty( $option['disabled'] ) ? ' disabled="disabled"' : '';
+							$selected = in_array( $option_key, $this->value, true ) ? ' selected' : '';
+							echo '<option value="' . esc_attr( $option_key ) . '"' . wp_kses_post( $selected . $disabled ) . '>' . esc_attr( $label ) . '</option>';
+						} elseif ( is_array( $option ) && ! empty( $option ) ) {
+							// optgroup.
 							echo '<optgroup label="' . esc_attr( $option_key ) . '">';
-
 							foreach ( $option as $sub_key => $sub_value ) {
 								$selected = ( in_array( $sub_key, $this->value, true ) ) ? ' selected' : '';
 								echo '<option value="' . esc_attr( $sub_key ) . '" ' . esc_attr( $selected ) . '>' . esc_attr( $sub_value ) . '</option>';
 							}
-
 							echo '</optgroup>';
-
 						} else {
+							// Normal flat option.
 							$selected = ( in_array( $option_key, $this->value, true ) ) ? ' selected' : '';
 							echo '<option value="' . esc_attr( $option_key ) . '" ' . esc_attr( $selected ) . '>' . esc_attr( $option ) . '</option>';
 						}
 					}
 
 					echo '</select>';
-
 				} else {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo ( ! empty( $this->field['empty_message'] ) ) ? esc_attr( $this->field['empty_message'] ) : esc_html__( 'No data provided for this option type.', 'wp-expand-tabs-free' );

@@ -5,8 +5,8 @@
  * @link https://shapedplugin.com
  * @since 2.0.11
  *
- * @package WP_Tabs_Pro
- * @subpackage WP_Tabs_Pro/admin
+ * @package wp-expand-tabs-free
+ * @subpackage wp-expand-tabs-free/admin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

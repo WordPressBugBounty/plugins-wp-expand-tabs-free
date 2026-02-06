@@ -45,7 +45,7 @@ if ( ! class_exists( 'SP_WP_TABS_Field_shortcode' ) ) {
 			$type    = ( ! empty( $this->field['attributes']['type'] ) ) ? $this->field['attributes']['type'] : 'text';
 			$post_id = get_the_ID();
 			if ( ! empty( $this->field['shortcode'] ) && 'manage_view' === $this->field['shortcode'] ) {
-				echo ( ! empty( $post_id ) ) ? '<div class="sp-tab__scode-scode-wrap"><p>To display the Tabs, copy and paste this shortcode into your post, page, custom post, or block editor. <a href="https://docs.shapedplugin.com/docs/wp-tabs-pro/configurations/how-to-show-the-tabs-on-your-homepage-or-header-php-or-other-php-files/" target="_blank">Learn how</a> to include it in your template file.</p><span class="sp-tab__shortcode-selectable">[wptabs id="' . esc_attr( $post_id ) . '"]</span></div><div class="sp_tab-after-copy-text"><i class="fa fa-check-circle"></i> Shortcode Copied to Clipboard! </div>' : '';
+				echo ( ! empty( $post_id ) ) ? '<div class="sp-tab__scode-scode-wrap"><p>To display the Tabs, copy and paste this shortcode into your post, page, custom post, or block editor. <a href="https://wptabs.com/docs/how-to-insert-the-php-do-shortcode-template-include/" target="_blank">Learn how</a> to include it in your template file.</p><span class="sp-tab__shortcode-selectable">[wptabs id="' . esc_attr( $post_id ) . '"]</span></div><div class="sp_tab-after-copy-text"><i class="fa fa-check-circle"></i> Shortcode Copied to Clipboard! </div>' : '';
 			} elseif ( ! empty( $this->field['shortcode'] ) && 'pro_notice' === $this->field['shortcode'] ) {
 				if ( ! empty( $post_id ) ) {
 					echo '<div class="sp-tab-shortcode-area sp-tab-notice-wrapper">';
@@ -58,20 +58,39 @@ if ( ! class_exists( 'SP_WP_TABS_Field_shortcode' ) ) {
 
 					echo '<p class="sp-tab-notice-desc">' . sprintf(
 						/* translators: 1: start bold tag, 2: close tag. */
-						esc_html__( 'Boost Engagement and Sales with Premium Tabs by Pro.', 'wp-expand-tabs-free' ),
+						esc_html__( 'Boost Engagement & Sales with Pro WordPress + WooCommerce Tabs.', 'wp-expand-tabs-free' ),
 						'<b>',
 						'</b>'
 					) . '</p>';
 
 					echo '<ul>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( '23+ Beautiful Tab Layouts', 'wp-expand-tabs-free' ) . '</li>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'WooCommerce Product Tabs', 'wp-expand-tabs-free' ) . '</li>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Global & Individual Tab Editing', 'wp-expand-tabs-free' ) . '</li>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Image, Video, Shortcode Tabs', 'wp-expand-tabs-free' ) . '</li>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Post, Map, Download, Form Tabs', 'wp-expand-tabs-free' ) . '</li>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( ' Vertical & Multi-Level Tabs', 'wp-expand-tabs-free' ) . '</li>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Scrollable Tabs', 'wp-expand-tabs-free' ) . '</li>';
-					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( '200+ Customizations and More', 'wp-expand-tabs-free' ) . '</li>';
+
+					echo '<div class="sp-tab-list-heading">WordPress Tabs:</div>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( '20+ Tab Layouts & Positions', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Image Gallery Tabs (Lightbox)', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Video Gallery Tabs (Lightbox)', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Tabs from Post Type & Taxonomy', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Vertical & Multi-Level Tabs', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Scrollable Tabs, and more', 'wp-expand-tabs-free' ) . '</li>';
+
+					echo '<div class="sp-tab-list-heading">WooCommerce Tabs:</div>';
+					printf(
+						'<li class="sp-tab-layouts-list"><i class="sp-tab-icon-check-icon"></i> %s</li>',
+						sprintf(
+						/* translators: 1: Horizontal demo link, 2: Vertical demo link, 3: Accordion demo link */
+							esc_html__( '6+ Product Tab Layouts (%1$s, %2$s, %3$s)', 'wp-expand-tabs-free' ),
+							'<a class="sp-tab" href="https://demo.wptabs.com/product/nike-sportswear-jdi/" target="_blank">' . esc_html__( 'Horizontal', 'wp-expand-tabs-free' ) . '</a>',
+							'<a href="https://demo.wptabs.com/vertical-left-product-tabs/product/meta-quest-3-vr-headset/" target="_blank">' . esc_html__( 'Vertical', 'wp-expand-tabs-free' ) . '</a>',
+							'<a href="https://demo.wptabs.com/accordion-product-tabs/product/hot-air-balloon-flight/" target="_blank">' . esc_html__( 'Accordion', 'wp-expand-tabs-free' ) . '</a>'
+						)
+					);
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Override/Edit Product Tabs', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Global Tabs & Show Tabs by Product, Category, Tag, Brand...', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Product Image Gallery, Video, FAQs, Download, Map, Contact Tabs, etc.', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Tab Icons (Library/Upload Custom)', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Drag & Drop Tabs Reorder', 'wp-expand-tabs-free' ) . '</li>';
+					echo '<li><i class="sp-tab-icon-check-icon"></i> ' . esc_html__( 'Rename Default Tabs, and more.', 'wp-expand-tabs-free' ) . '</li>';
+
 					echo '</ul>';
 
 					echo '<div class="sp-tab-notice-button">';

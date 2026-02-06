@@ -92,7 +92,6 @@ if ( ! function_exists( 'wptabspro_customize_validate_email' ) ) {
 	 * @version 1.0.0
 	 */
 	function wptabspro_customize_validate_email( $validity, $value, $wp_customize ) {
-
 		if ( ! sanitize_email( $value ) ) {
 			$validity->add( 'required', esc_html__( 'Please write a valid email address!', 'wp-expand-tabs-free' ) );
 		}

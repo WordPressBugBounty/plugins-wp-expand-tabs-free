@@ -5,8 +5,8 @@
  * @link       https://shapedplugin.com/
  * @since      2.2.3
  *
- * @package    WP_Tabs_Pro
- * @subpackage WP_Tabs_Pro/admin
+ * @package wp-expand-tabs-free
+ * @subpackage wp-expand-tabs-free/admin
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -122,7 +122,7 @@ foreach ( $all_tabs as $tab_id ) {
 	echo '</div>';
 	echo '<div class="sp-product-tabs-notice">
 	<div class="wptabspro-notice wptabspro-notice-normal">
-	Need unique content for each product? Override tab content individually —
+	Want to add custom tab content types, such as Image Gallery, Videos, FAQs, Downloads, Map, or Forms — and override/edit them per product?
 	<a href="https://wptabs.com/pricing/?ref=1" target="_blank"><b>Upgrade to Pro!</b></a>
 	</div>
 	<div class="clear"></div>

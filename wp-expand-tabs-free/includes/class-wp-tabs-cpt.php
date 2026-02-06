@@ -133,7 +133,7 @@ class WP_Tabs_CPT {
 			'name'               => esc_html__( 'Product Tabs', 'wp-expand-tabs-free' ),
 			'singular_name'      => esc_html__( 'Tabs', 'wp-expand-tabs-free' ),
 			'add_new'            => esc_html__( 'Add New', 'wp-expand-tabs-free' ),
-			'add_new_item'       => esc_html__( 'Add New Tab', 'wp-expand-tabs-free' ),
+			'add_new_item'       => esc_html__( '+ Add New Tab', 'wp-expand-tabs-free' ),
 			'edit_item'          => esc_html__( 'Edit Tab', 'wp-expand-tabs-free' ),
 			'new_item'           => esc_html__( 'New Tab', 'wp-expand-tabs-free' ),
 			'view_item'          => esc_html__( 'View Tab', 'wp-expand-tabs-free' ),

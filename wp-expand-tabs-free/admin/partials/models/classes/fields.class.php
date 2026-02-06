@@ -360,6 +360,34 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 					}
 					wp_reset_postdata();
 					break;
+
+				case 'brands_term':
+					$taxonomies     = get_object_taxonomies( 'product' );
+					$brand_taxonomy = array();
+					foreach ( $taxonomies as $value ) {
+						if ( strpos( $value, 'brand' ) !== false && strpos( $value, 'pa_brand' ) === false ) {
+							$brand_taxonomy[] = $value;
+						}
+					}
+					if ( version_compare( get_bloginfo( 'version' ), '4.5', '>=' ) ) {
+						$terms = get_terms(
+							array(
+								'taxonomy'   => $brand_taxonomy,
+								'hide_empty' => false,
+							)
+						);
+					} else {
+						$terms = get_terms( array( $brand_taxonomy ) );
+					}
+
+					if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+						foreach ( $terms as $item ) {
+							$count                     = $item->count;
+							$options[ $item->term_id ] = $item->name . '(' . $count . ')';
+						}
+					}
+					break;
+
 				case 'category':
 				case 'categories':
 				case 'tag':
@@ -399,13 +427,18 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 							$options[ $item->term_id ] = $item->name;
 						}
 					}
+					break;
 
+				case 'brands_term':
+					$term = get_term( $value );
+					if ( ! is_wp_error( $term ) && ! empty( $term ) ) {
+						$options[ $value ] = $term->name . '(' . $term->count . ')';
+					}
 					break;
 
 				case 'user':
 				case 'users':
 					if ( ! empty( $term ) ) {
-
 						$query = new WP_User_Query(
 							array(
 								'search'  => '*' . $term . '*',
@@ -415,11 +448,8 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 								'fields'  => array( 'display_name', 'ID' ),
 							)
 						);
-
 					} else {
-
 						$query = new WP_User_Query( array( 'fields' => array( 'display_name', 'ID' ) ) );
-
 					}
 
 					if ( ! is_wp_error( $query ) && ! empty( $query->get_results() ) ) {
@@ -427,7 +457,6 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 							$options[ $item->ID ] = $item->display_name;
 						}
 					}
-
 					break;
 
 				case 'sidebar':
@@ -466,7 +495,15 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 
 					if ( ! is_wp_error( $post_types ) && ! empty( $post_types ) ) {
 						foreach ( $post_types as $post_type ) {
-							$options[ $post_type->name ] = $post_type->labels->name;
+							// Allow selecting only Posts & Pages in the free version; other post types are shown as disabled (Pro feature).
+							if ( in_array( $post_type->name, array( 'post', 'page' ), true ) ) {
+								$options[ $post_type->name ] = $post_type->labels->name;
+							} else {
+								$options[ $post_type->name ] = array(
+									'label'    => $post_type->labels->name . ' (Pro)',
+									'disabled' => true,
+								);
+							}
 						}
 					}
 
@@ -484,7 +521,6 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 					}
 
 					break;
-
 			}
 
 			// Array search by "term".
@@ -583,10 +619,15 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 
 						case 'post_type':
 						case 'post_types':
-							$post_types = get_post_types( array( 'show_in_nav_menus' => true ) );
+							$post_types = get_post_types( array( 'show_in_nav_menus' => true ), 'objects' );
 
 							if ( ! is_wp_error( $post_types ) && ! empty( $post_types ) && ! empty( $post_types[ $value ] ) ) {
-								$options[ $value ] = ucfirst( $value );
+								// Allow only post & page titles in free version.
+								if ( in_array( $value, array( 'post', 'page' ), true ) ) {
+									$options[ $value ] = $post_types[ $value ]->labels->name;
+								} else {
+									$options[ $value ] = $post_types[ $value ]->labels->name . ' (Pro)';
+								}
 							}
 
 							break;
