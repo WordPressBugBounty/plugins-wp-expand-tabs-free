@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2025 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="smart-tab" unicode="&#xe800;" d="M1081 794h-998c-16 0-27-11-27-27v-834c0-16 11-27 27-27h998c16 0 27 11 27 27v834c0 16-11 27-27 27z m-98-252h-172v127h172v-127z m-450 0v127h153v-127h-153z m-350-509v634h225v-223c0-16 11-27 28-27h545v-384h-798z" horiz-adv-x="1167" />
+</font>
+</defs>
+</svg>

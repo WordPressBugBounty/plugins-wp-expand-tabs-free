@@ -1,0 +1,15 @@
+{
+  "name": "wp-tabs-free-gutenberg-shortcode-block",
+  "version": "2.1.5",
+  "private": true,
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "dependencies": {
+    "@wordpress/block-editor": "^12.2.0",
+    "@wordpress/create-block": "^4.18.0",
+    "@wordpress/escape-html": "^2.34.0",
+    "@wordpress/scripts": "^26.5.0"
+  }
+}

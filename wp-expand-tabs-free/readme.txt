@@ -2,8 +2,8 @@
 Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: WooCommerce product tabs, WooCommerce custom product tabs, WooCommerce tabs plugin, product tabs, tabs
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 3.1.3
+Tested up to: 7.0
+Stable tag: 3.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -235,6 +235,14 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 3.1.4 - Apr 09, 2026 =
+* Improved: Code maintainability has been improved.
+* Fix: The product tab vertical layout's padding issue.
+* Fix: The mismatched text domain issue.
+* Fix: The offset issue of the product tab title font-size case.
+* Fix: Some CSS style issues found with WP 7.0
+* Tested: WordPress 7.0 compatibility.
 
 = 3.1.3 - Jan 12, 2026 =
 * Improved: Standardized singleton instance property naming.

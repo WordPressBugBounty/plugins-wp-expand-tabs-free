@@ -50,31 +50,13 @@ function sp_wptabspro_delete_plugin_data() {
 	delete_option( $product_tabs_advanced_tab_options );
 	delete_site_option( $product_tabs_advanced_tab_options ); // For site options in Multisite.
 
-	// Delete tabs group post type.
-	$tab_posts = get_posts(
+	// Delete plugin custom post types data on plugin uninstallation.
+	sp_tabs_delete_posts_by_type(
 		array(
-			'numberposts' => -1,
-			'post_type'   => 'sp_wp_tabs',
-			'post_status' => 'any',
+			'sp_wp_tabs',
+			'sp_products_tabs',
 		)
 	);
-
-	foreach ( $tab_posts as $post ) {
-		wp_delete_post( $post->ID, true );
-	}
-
-	// Delete product tabs post type.
-	$product_tab_posts = get_posts(
-		array(
-			'numberposts' => -1,
-			'post_type'   => 'sp_products_tabs',
-			'post_status' => 'any',
-		)
-	);
-
-	foreach ( $product_tab_posts as $tab_post ) {
-		wp_delete_post( $tab_post->ID, true );
-	}
 
 	// Delete Team post meta.
 	delete_post_meta_by_key( 'sp_tab_source_options' );
@@ -86,8 +68,34 @@ function sp_wptabspro_delete_plugin_data() {
 	delete_option( 'shapedplugin_offer_banner_dismissed_new_year_2026' );
 }
 
+/**
+ * Delete all posts of given post types in batches.
+ *
+ * @param array $post_types Post types to delete.
+ * @param int   $batch_size Number of posts per batch (default: 200).
+ */
+function sp_tabs_delete_posts_by_type( array $post_types, int $batch_size = 200 ) {
+	do {
+		$post_ids = get_posts(
+			array(
+				'post_type'      => $post_types,
+				'post_status'    => 'any',
+				'posts_per_page' => $batch_size,
+				'fields'         => 'ids',
+				'orderby'        => 'ID',
+				'order'          => 'ASC',
+				'no_found_rows'  => true,
+			)
+		);
+
+		foreach ( $post_ids as $post_id ) {
+			wp_delete_post( $post_id, true );
+		}
+	} while ( ! empty( $post_ids ) ); // Continue until no more tab posts are found.
+}
+
 // Load Smart Tabs file.
-require plugin_dir_path( __FILE__ ) . '/plugin-main.php';
+require_once plugin_dir_path( __FILE__ ) . '/plugin-main.php';
 $spwptabspro_plugin_settings = get_option( 'sp-tab__settings' );
 $spwptabspro_data_delete     = $spwptabspro_plugin_settings['sptpro_data_remove'];
 
