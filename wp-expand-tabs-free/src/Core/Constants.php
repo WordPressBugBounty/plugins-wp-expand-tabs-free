@@ -52,7 +52,7 @@ final class Constants {
 	/**
 	 * Plugin version.
 	 */
-	public const VERSION = '3.1.5';
+	public const VERSION = '3.1.6';
 
 	/**
 	 * Product item slug.

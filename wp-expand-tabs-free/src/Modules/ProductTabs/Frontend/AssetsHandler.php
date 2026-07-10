@@ -49,7 +49,9 @@ class AssetsHandler {
 	 * Enqueue product tabs frontend assets.
 	 */
 	public function enqueue_frontend_assets() {
-		$is_elementor_preview = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->preview->is_preview_mode();
+		$is_elementor_preview = class_exists( '\Elementor\Plugin' )
+			&& ! empty( \Elementor\Plugin::$instance->preview )
+			&& \Elementor\Plugin::$instance->preview->is_preview_mode();
 
 		if ( ! is_product() && ! DependencyChecker::is_divi_builder_active() && ! $is_elementor_preview ) {
 			return;

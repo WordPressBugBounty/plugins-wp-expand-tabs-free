@@ -167,7 +167,8 @@ class ShortcodeWidget extends \Elementor\Widget_Base {
 
 		$generator_id = esc_attr( $sp_wp_tabs_shortcode );
 
-		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+		if ( \Elementor\Plugin::$instance->editor
+			&& \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
 			$post_id = esc_attr( $generator_id );
 			// Content Accordion.
 			$sptpro_data_src          = get_post_meta( $post_id, 'sp_tab_source_options', true );
