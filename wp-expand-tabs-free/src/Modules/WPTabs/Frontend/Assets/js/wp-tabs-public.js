@@ -116,6 +116,11 @@
 		SP_Tabs_Init();
 	});
 
+	// Expose the initializer so consumers that inject markup after page load can
+	// re-run it. The block editor canvas, which is an iframe with its own window,
+	// uses this after every server side render of the shortcode block.
+	window.SP_Tabs_Init = SP_Tabs_Init;
+
 	// Register the handler with Elementor's frontend event.
 	$(window).on('elementor/frontend/init', function () {
 		// For General Widget.

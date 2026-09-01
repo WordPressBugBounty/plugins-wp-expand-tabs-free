@@ -35,7 +35,7 @@ if ( ! class_exists( 'SP_WP_TABS_Field_map' ) ) {
 		 *
 		 * @var string The CDN URL.
 		 */
-		public $cdn_url = 'https://cdn.jsdelivr.net/npm/leaflet@';
+		// public $cdn_url = 'https://cdn.jsdelivr.net/npm/leaflet@';
 
 		/**
 		 * The class constructor.
@@ -111,13 +111,13 @@ if ( ! class_exists( 'SP_WP_TABS_Field_map' ) ) {
 		 * Enqueue scripts and styles.
 		 */
 		public function enqueue() {
-			if ( ! wp_script_is( 'sp_tabs-leaflet' ) ) {
-				wp_enqueue_script( 'sp_tabs-leaflet', esc_url( $this->cdn_url . $this->version . '/dist/leaflet.js' ), array( 'jquery' ), $this->version, true );
-			}
+			// if ( ! wp_script_is( 'sp_tabs-leaflet' ) ) {
+			// wp_enqueue_script( 'sp_tabs-leaflet', esc_url( $this->cdn_url . $this->version . '/dist/leaflet.js' ), array( 'jquery' ), $this->version, true );
+			// }
 
-			if ( ! wp_style_is( 'sp_tabs-leaflet' ) ) {
-				wp_enqueue_style( 'sp_tabs-leaflet', esc_url( $this->cdn_url . $this->version . '/dist/leaflet.css' ), array(), $this->version );
-			}
+			// if ( ! wp_style_is( 'sp_tabs-leaflet' ) ) {
+			// wp_enqueue_style( 'sp_tabs-leaflet', esc_url( $this->cdn_url . $this->version . '/dist/leaflet.css' ), array(), $this->version );
+			// }
 
 			if ( ! wp_script_is( 'jquery-ui-autocomplete' ) ) {
 				wp_enqueue_script( 'jquery-ui-autocomplete' );

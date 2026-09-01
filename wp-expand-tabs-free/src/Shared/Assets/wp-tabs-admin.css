@@ -133,24 +133,18 @@
  	font-weight: 700;
  } */
 
-a.sp_wp_tabs_block_edit_button {
-	display: inline-block;
-	font-size: 16px;
-	margin: 10px 0;
-}
-
-.sptabfree-gutenberg-shortcode.editor-styles-wrapper {
+/* Keep editor canvas selectors out of this admin stylesheet: WordPress copies
+   any admin sheet that targets the canvas wrapper into the editor iframe and
+   warns about it. The canvas gets its own copy of the block preview rules from
+   the block initializer instead. */
+.sptabfree-gutenberg-shortcode {
 	padding: 0;
 	line-height: 24px;
 	max-width: 100%;
 }
 
-.sptabfree-gutenberg-shortcode.editor-styles-wrapper:after {
+.sptabfree-gutenberg-shortcode:after {
 	display: none;
-}
-
-.editor-styles-wrapper>select.sptabfree-shortcode-selector {
-	max-width: 100%;
 }
 
 .sp-tab-page-loading-spinner i {

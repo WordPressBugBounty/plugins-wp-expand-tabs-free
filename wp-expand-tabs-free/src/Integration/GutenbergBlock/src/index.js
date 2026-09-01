@@ -1,19 +1,28 @@
 import icons from "./shortcode/blockIcon";
 import DynamicShortcodeInput from "./shortcode/dynamicShortcode";
 import { escapeAttribute, escapeHTML } from "@wordpress/escape-html";
-import { InspectorControls } from '@wordpress/block-editor';
+import { __ } from "@wordpress/i18n";
+import { registerBlockType } from "@wordpress/blocks";
+import { PanelBody, PanelRow } from "@wordpress/components";
+import { createElement, useEffect, useRef } from "@wordpress/element";
+import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
+import ServerSideRender from "@wordpress/server-side-render";
 
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { PanelBody, PanelRow } = wp.components;
-const { Fragment } = wp.element;
-const ServerSideRender = wp.serverSideRender;
-const el = wp.element.createElement;
+const el = createElement;
+
+/**
+ * `useBlockProps` was introduced with Block API v2 in WordPress 5.6. Older
+ * releases still wrap the block themselves, so fall back to empty props there.
+ */
+const useBlockPropsCompat = "function" === typeof useBlockProps ? useBlockProps : () => ({});
 
 /**
  * Register: Smart Tabs Gutenberg Block.
  */
 registerBlockType("sp-wp-tabs-pro/shortcode", {
+  // Block API v3 marks the block as compatible with the iframed editor canvas,
+  // which WordPress 7.1 uses for every editor.
+  apiVersion: 3,
   title: escapeHTML(__("Smart Tabs", "wp-expand-tabs-free")),
   description: escapeHTML(__(
     "Use Smart Tabs to insert a tabs group in your page",
@@ -26,25 +35,71 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
   },
   edit: (props) => {
     const { attributes, setAttributes } = props;
-    var shortCodeList = sp_tab_free_gb_block.shortCodeList;
+    const shortCodeList = sp_tab_free_gb_block.shortCodeList;
+    const isPreview = !! attributes.preview;
+    const hasSelection = !! attributes.shortcode && 0 != attributes.shortcode;
+    const previewRef = useRef(null);
+    const blockProps = useBlockPropsCompat(
+      isPreview ? { className: "sptabfree_shortcode_block_preview_image" } : {}
+    );
 
-    let scriptLoad = (shortcodeId) => {
-      let sptabfreeBlockLoaded = false;
-      let sptabfreeBlockLoadedInterval = setInterval(function () {
-        let uniqId = jQuery("#sp-wp-tabs-wrapper_" + shortcodeId).parents().attr('id');
-        if (document.getElementById(uniqId)) {
-          jQuery.getScript(sp_tab_free_gb_block.loadPublic);
-          sptabfreeBlockLoaded = true;
-          uniqId = '';
+    /**
+     * Initialize the tabs group that `ServerSideRender` just rendered.
+     *
+     * Since WordPress 6.3 the block canvas is an iframe, so the rendered markup,
+     * jQuery and the tabs scripts all live in `ownerDocument.defaultView` and not
+     * in the editor window. The canvas document and the server-side render both
+     * settle asynchronously, so wait for this block's own wrapper and for the
+     * canvas scripts, then hand over to the front-end initializer.
+     */
+    useEffect(() => {
+      if (isPreview || ! hasSelection) {
+        return;
+      }
+
+      // `ServerSideRender` keeps the previous markup on screen while it reloads,
+      // so match this block's own wrapper instead of any tabs group.
+      const wrapperSelector = "#sp-wp-tabs-wrapper_" + String(attributes.shortcode).replace(/[^0-9]/g, "");
+      const interval = 150;
+      let attempts = 0;
+      let waitedForScripts = 0;
+
+      const timer = setInterval(() => {
+        attempts++;
+
+        // Bail out rather than polling forever when the render never arrives.
+        if (attempts > 400) {
+          clearInterval(timer);
+          return;
         }
-        if (sptabfreeBlockLoaded) {
-          clearInterval(sptabfreeBlockLoadedInterval);
+
+        const node = previewRef.current;
+        const view = node && node.ownerDocument ? node.ownerDocument.defaultView : null;
+
+        if (! node || ! view || ! view.jQuery || ! node.querySelector(wrapperSelector)) {
+          return;
         }
-        if (0 == shortcodeId) {
-          clearInterval(sptabfreeBlockLoadedInterval);
+
+        // The canvas scripts are parsed while the blocks mount, so make sure they
+        // arrived before initializing. Stop waiting after five seconds and run
+        // whatever is available in case a site filtered one of the handles out.
+        if ("function" !== typeof view.SP_Tabs_Init) {
+          waitedForScripts += interval;
+
+          if (waitedForScripts < 5000) {
+            return;
+          }
         }
-      }, 10);
-    }
+
+        clearInterval(timer);
+
+        if ("function" === typeof view.SP_Tabs_Init) {
+          view.SP_Tabs_Init();
+        }
+      }, interval);
+
+      return () => clearInterval(timer);
+    }, [isPreview, hasSelection, attributes.shortcode]);
 
     let updateShortcode = (updateShortcode) => {
       setAttributes({ shortcode: escapeAttribute(updateShortcode.target.value) });
@@ -52,47 +107,38 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
 
     let shortcodeUpdate = (e) => {
       updateShortcode(e);
-      let shortcodeId = escapeAttribute(e.target.value);
-      scriptLoad(shortcodeId);
     }
 
-    if (jQuery('.sp-tab__lay-default:not(.sp-tab-loaded)').length > 0 ) {
-      let shortcodeId = escapeAttribute( attributes.shortcode );
-      scriptLoad(shortcodeId);
-    }
-
-    if (attributes.preview) {
+    if (isPreview) {
       return (
-        el('div', { className: 'sptabfree_shortcode_block_preview_image' },
-          el('img', { src: escapeAttribute(sp_tab_free_gb_block.url + "assets/wp-tabs-block-preview.svg") })
+        el("div", blockProps,
+          el("img", { src: escapeAttribute(sp_tab_free_gb_block.url + "assets/wp-tabs-block-preview.svg") })
         )
       )
     }
 
     if (shortCodeList.length === 0) {
       return (
-        <Fragment>
-          {
-            el('div', { className: 'components-placeholder components-placeholder is-large' },
-              el('div', { className: 'components-placeholder__label' },
-                el('img', { className: 'block-editor-block-icon', src: escapeAttribute(sp_tab_free_gb_block.url + "assets/wp-tabs-icon.svg") }),
-                escapeHTML(__("Smart Tabs", "wp-expand-tabs-free"))
-              ),
-              el('div', { className: 'components-placeholder__instructions' },
-                escapeHTML(__("No shortcode found. ", "wp-expand-tabs-free")),
-                el('a', { href: escapeAttribute(sp_tab_free_gb_block.link) },
-                  escapeHTML(__("Create a shortcode now!", "wp-expand-tabs-free"))
-                )
+        el("div", blockProps,
+          el("div", { className: "components-placeholder components-placeholder is-large" },
+            el("div", { className: "components-placeholder__label" },
+              el("img", { className: "block-editor-block-icon", src: escapeAttribute(sp_tab_free_gb_block.url + "assets/wp-tabs-icon.svg") }),
+              escapeHTML(__("Smart Tabs", "wp-expand-tabs-free"))
+            ),
+            el("div", { className: "components-placeholder__instructions" },
+              escapeHTML(__("No shortcode found. ", "wp-expand-tabs-free")),
+              el("a", { href: escapeAttribute(sp_tab_free_gb_block.link) },
+                escapeHTML(__("Create a shortcode now!", "wp-expand-tabs-free"))
               )
             )
-          }
-        </Fragment>
+          )
+        )
       );
     }
 
-    if (!attributes.shortcode || attributes.shortcode == 0) {
+    if (! hasSelection) {
       return (
-        <Fragment>
+        el("div", blockProps,
           <InspectorControls>
             <PanelBody title="Smart Tabs">
               <PanelRow>
@@ -103,27 +149,25 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
                 />
               </PanelRow>
             </PanelBody>
-          </InspectorControls>
-          {
-            el('div', { className: 'components-placeholder components-placeholder is-large' },
-              el('div', { className: 'components-placeholder__label' },
-                el('img', { className: 'block-editor-block-icon', src: escapeAttribute(sp_tab_free_gb_block.url + "assets/wp-tabs-icon.svg") }),
-                escapeHTML(__("Smart Tabs", "wp-expand-tabs-free"))
-              ),
-              el('div', { className: 'components-placeholder__instructions' }, escapeHTML(__("Select a tabs group", "wp-expand-tabs-free"))),
-              <DynamicShortcodeInput
-                attributes={attributes}
-                shortCodeList={shortCodeList}
-                shortcodeUpdate={shortcodeUpdate}
-              />
-            )
-          }
-        </Fragment>
+          </InspectorControls>,
+          el("div", { className: "components-placeholder components-placeholder is-large" },
+            el("div", { className: "components-placeholder__label" },
+              el("img", { className: "block-editor-block-icon", src: escapeAttribute(sp_tab_free_gb_block.url + "assets/wp-tabs-icon.svg") }),
+              escapeHTML(__("Smart Tabs", "wp-expand-tabs-free"))
+            ),
+            el("div", { className: "components-placeholder__instructions" }, escapeHTML(__("Select a tabs group", "wp-expand-tabs-free"))),
+            <DynamicShortcodeInput
+              attributes={attributes}
+              shortCodeList={shortCodeList}
+              shortcodeUpdate={shortcodeUpdate}
+            />
+          )
+        )
       );
     }
 
     return (
-      <Fragment>
+      el("div", blockProps,
         <InspectorControls>
           <PanelBody title="Smart Tabs">
             <PanelRow>
@@ -134,9 +178,11 @@ registerBlockType("sp-wp-tabs-pro/shortcode", {
               />
             </PanelRow>
           </PanelBody>
-        </InspectorControls>
-        <ServerSideRender block="sp-wp-tabs-pro/shortcode" attributes={attributes} />
-      </Fragment>
+        </InspectorControls>,
+        el("div", { ref: previewRef, className: "sptabfree-block-preview" },
+          <ServerSideRender block="sp-wp-tabs-pro/shortcode" attributes={attributes} />
+        )
+      )
     );
   },
   save() {

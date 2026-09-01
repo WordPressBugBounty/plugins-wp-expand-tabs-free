@@ -2,8 +2,8 @@
 Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: WooCommerce product tabs, WooCommerce custom product tabs, WooCommerce tabs plugin, product tabs, tabs
 Requires at least: 5.0
-Tested up to: 7.0
-Stable tag: 3.1.6
+Tested up to: 7.1
+Stable tag: 3.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -235,6 +235,10 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 3.1.7 - Sep 01, 2026 =
+* Fixed: The Smart Tabs block now works correctly in WordPress 7.1 iframed editor.
+* Tested: WordPress 7.1 compatibility.
 
 = 3.1.6 - Jul 10, 2026 =
 * Improved: Add capability checks for recommended plugins activation and deactivation.

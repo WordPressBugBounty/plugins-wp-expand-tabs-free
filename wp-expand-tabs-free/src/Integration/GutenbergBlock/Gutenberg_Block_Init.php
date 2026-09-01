@@ -26,40 +26,57 @@ if ( ! class_exists( 'ShapedPlugin\SmartTabsFree\Integration\GutenbergBlock\Gute
 	 */
 	class Gutenberg_Block_Init {
 		/**
-		 * Script and style suffix
-		 *
-		 * @since 2.1.5
-		 * @access protected
-		 * @var string
-		 */
-		protected $min;
-
-		/**
 		 * Custom Gutenberg Block Initializer.
 		 */
 		public function __construct() {
-			$this->min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '' : '.min';
 			add_action( 'init', array( $this, 'gutenberg_shortcode_block' ) );
 			add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_assets' ) );
+			add_action( 'enqueue_block_assets', array( $this, 'block_canvas_assets' ) );
 		}
 
 		/**
 		 * Register block editor script for backend.
 		 */
 		public function block_editor_assets() {
+			$asset_file = plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
+			$asset      = file_exists( $asset_file ) ? require $asset_file : array(
+				'dependencies' => array( 'wp-block-editor', 'wp-blocks', 'wp-components', 'wp-element', 'wp-escape-html', 'wp-i18n', 'wp-server-side-render' ),
+				'version'      => Constants::VERSION,
+			);
+
 			wp_enqueue_script(
 				'wp-tabs-free-shortcode-block',
 				plugins_url( '/GutenbergBlock/build/index.js', __DIR__ ),
-				array( 'jquery', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components' ),
-				Constants::VERSION,
+				array_merge( $asset['dependencies'], array( 'jquery' ) ),
+				$asset['version'],
 				true
 			);
 
-			/**
-			 * Register block editor css file enqueue for backend.
-			 */
-			wp_enqueue_style( 'sptpro-accordion-style' );
-			wp_enqueue_style( 'sptpro-style' );
+			wp_localize_script(
+				'wp-tabs-free-shortcode-block',
+				'sp_tab_free_gb_block',
+				array(
+					'url'           => Constants::url() . 'src/Integration/GutenbergBlock/',
+					'loadPublic'    => Constants::wp_tabs_url() . 'Frontend/Assets/js/wp-tabs-public.min.js',
+					'link'          => admin_url( 'post-new.php?post_type=sp_wp_tabs' ),
+					'shortCodeList' => $this->post_list(),
+				)
+			);
+		}
+
+		/**
+		 * Enqueue the tabs runtime assets inside the block editor canvas.
+		 *
+		 * Since WordPress 7.1 the post editor canvas is always an iframe and that
+		 * iframe document is built only from the assets collected on
+		 * `enqueue_block_assets`. Styles and scripts hooked to
+		 * `enqueue_block_editor_assets` only reach the outer admin document, so the
+		 * server side rendered tabs preview stayed unstyled and uninitialized.
+		 */
+		public function block_canvas_assets() {
+			if ( ! is_admin() ) {
+				return;
+			}
 
 			// Get the existing shortcode id from the current page.
 			$get_page_data      = Helper::get_page_data();
@@ -71,7 +88,19 @@ if ( ! class_exists( 'ShapedPlugin\SmartTabsFree\Integration\GutenbergBlock\Gute
 			if ( $accordion_mode ) {
 				wp_enqueue_style( 'sptpro-accordion-style' );
 			}
+			wp_enqueue_style( 'sptpro-style' );
 			wp_add_inline_style( 'sptpro-style', $dynamic_style['dynamic_css'] );
+
+			wp_enqueue_script( 'sptpro-tab' );
+			wp_enqueue_script( 'sptpro-collapse' );
+			wp_enqueue_script( 'sptpro-script' );
+
+			// The editor chrome styles live in the admin stylesheet, which only loads
+			// on the outer document, so the canvas needs its own copy.
+			wp_add_inline_style(
+				'sptpro-style',
+				'.sptabfree-gutenberg-shortcode{padding:0;line-height:24px;max-width:100%}div.sptabfree-gutenberg-shortcode:after{display:none}select.sptabfree-shortcode-selector{max-width:100%;padding: 6px 12px;}a.sp_wp_tabs_block_edit_button{display:inline-block;font-size:16px;margin:10px 0}'
+			);
 		}
 
 		/**
@@ -108,26 +137,12 @@ if ( ! class_exists( 'ShapedPlugin\SmartTabsFree\Integration\GutenbergBlock\Gute
 		 */
 		public function gutenberg_shortcode_block() {
 			/**
-			 * Register block editor js file enqueue for backend.
-			 */
-			wp_register_script( 'sptpro-script', esc_url( Constants::wp_tabs_url() . 'Frontend/Assets/js/wp-tabs-public' . $this->min . '.js' ), array( 'jquery' ), Constants::VERSION, true );
-
-			wp_localize_script(
-				'sptpro-script',
-				'sp_tab_free_gb_block',
-				array(
-					'url'           => Constants::url() . 'src/Integration/GutenbergBlock/',
-					'loadPublic'    => Constants::wp_tabs_url() . 'Frontend/Assets/js/wp-tabs-public.min.js',
-					'link'          => admin_url( 'post-new.php?post_type=sp_wp_tabs' ),
-					'shortCodeList' => $this->post_list(),
-				)
-			);
-			/**
 			 * Register Gutenberg block on server-side.
 			 */
 			register_block_type(
 				'sp-wp-tabs-pro/shortcode',
 				array(
+					'api_version'     => 3,
 					'attributes'      => array(
 						'shortcode'          => array(
 							'type'    => 'string',
@@ -151,15 +166,6 @@ if ( ! class_exists( 'ShapedPlugin\SmartTabsFree\Integration\GutenbergBlock\Gute
 							'preview' => true,
 						),
 					),
-					// Enqueue blocks.editor.build.js in the editor only.
-					'editor_script'   => array(
-						'sptpro-tab',
-						'sptpro-collapse',
-						'sptpro-script',
-						'sptpro-tabs-type',
-					),
-					// Enqueue blocks.editor.build.css in the editor only.
-					'editor_style'    => array(),
 					'render_callback' => array( $this, 'render_shortcode' ),
 				)
 			);
@@ -177,7 +183,7 @@ if ( ! class_exists( 'ShapedPlugin\SmartTabsFree\Integration\GutenbergBlock\Gute
 			if ( ! empty( $attributes['className'] ) ) {
 				$class_name = 'class="' . esc_attr( $attributes['className'] ) . '"';
 			}
-			if ( ! $attributes['is_admin'] ) {
+			if ( empty( $attributes['is_admin'] ) ) {
 				return '<div ' . $class_name . '>' . do_shortcode( '[wptabs id="' . sanitize_text_field( $attributes['shortcode'] ) . '"]' ) . '</div>';
 			}
 			$edit_page_link = get_edit_post_link( sanitize_text_field( $attributes['shortcode'] ) );
