@@ -45,7 +45,7 @@ class SharedAssetsLoader {
 		// ---- Styles ----
 		wp_register_style(
 			'smart-tabs-shared-fontawesome-css',
-			Constants::shared_assets() . '/font-awesome.min.css',
+			Constants::shared_assets() . 'font-awesome.min.css',
 			array(),
 			Constants::VERSION
 		);
@@ -68,14 +68,14 @@ class SharedAssetsLoader {
 		// ---- Admin Styles ----
 		wp_enqueue_style(
 			'smart-tabs-shared-fontawesome-css',
-			Constants::shared_assets() . '/font-awesome.min.css',
+			Constants::shared_assets() . 'font-awesome.min.css',
 			array(),
 			Constants::VERSION
 		);
 
 		wp_enqueue_style(
 			'smart-tabs-shared-style-css',
-			Constants::shared_assets() . '/wp-tabs-admin' . self::$min . '.css',
+			Constants::shared_assets() . 'wp-tabs-admin' . self::$min . '.css',
 			array(),
 			Constants::VERSION
 		);

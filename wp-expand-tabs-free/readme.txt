@@ -3,7 +3,7 @@ Contributors: shapedplugin, khalilu, rubel_miah, shamimmiashuhagh
 Tags: WooCommerce product tabs, WooCommerce custom product tabs, WooCommerce tabs plugin, product tabs, tabs
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 3.1.7
+Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -235,6 +235,11 @@ The WordPress codex contains <a href="https://codex.wordpress.org/Managing_Plugi
 
 
 == Changelog ==
+
+= 3.1.8 - Oct 29, 2026 =
+* Improved: Only published tab groups are now displayed to visitors.
+* Improved: Overall plugin security has been strengthened.
+* Fixed: Icons now display correctly when CSS optimization plugins are active.
 
 = 3.1.7 - Sep 01, 2026 =
 * Fixed: The Smart Tabs block now works correctly in WordPress 7.1 iframed editor.

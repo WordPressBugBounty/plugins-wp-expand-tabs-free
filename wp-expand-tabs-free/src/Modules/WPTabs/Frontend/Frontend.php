@@ -175,6 +175,8 @@ class Frontend {
 
 		// Initialize Parsedown class.
 		$markdown = new Parsedown();
+		// Block raw markup inside Markdown content from being rendered as HTML.
+		$markdown->setSafeMode( true );
 		// Convert Markdown to HTML.
 		$html = $markdown->text( $html );
 		return $html;

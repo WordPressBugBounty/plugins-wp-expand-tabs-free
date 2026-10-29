@@ -156,9 +156,21 @@ class ShapedPlugin_Offer_Banner {
 	 */
 	public function dismiss_offer_banner() {
 		check_ajax_referer( 'smart_tabs_offer_dismiss', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'error' => esc_html__( 'You do not have permission to do that.', 'wp-expand-tabs-free' ) ) );
+		}
+
 		$offer_id = isset( $_POST['offer_id'] ) ? sanitize_text_field( wp_unslash( $_POST['offer_id'] ) ) : '';
 
-		update_option( 'shapedplugin_offer_banner_dismissed_' . $offer_id, true );
+		// Only a currently active offer id may be dismissed.
+		$active_offer_ids = wp_list_pluck( $this->get_active_offers(), 'id' );
+
+		if ( ! $offer_id || ! in_array( $offer_id, $active_offer_ids, true ) ) {
+			wp_send_json_error( array( 'error' => esc_html__( 'Invalid offer.', 'wp-expand-tabs-free' ) ) );
+		}
+
+		update_option( 'shapedplugin_offer_banner_dismissed_' . sanitize_key( $offer_id ), true );
 
 		wp_send_json_success();
 	}

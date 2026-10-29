@@ -218,6 +218,199 @@ if ( ! function_exists( 'wptabspro_allowed_description_tags' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wptabspro_sanitize_css_color' ) ) {
+	/**
+	 * Sanitize a CSS color value.
+	 *
+	 * Allows hex colors (#rgb, #rgba, #rrggbb, #rrggbbaa), rgb()/rgba()/hsl()/hsla()
+	 * functional notations and a few safe keywords. Everything else is discarded
+	 * so no CSS declaration or selector injection is possible through color fields.
+	 *
+	 * @param  mixed $color The color value.
+	 * @return string
+	 */
+	function wptabspro_sanitize_css_color( $color ) {
+		$color = trim( (string) $color );
+
+		if ( '' === $color ) {
+			return '';
+		}
+
+		// Hex notation.
+		if ( preg_match( '/^#([0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})$/i', $color ) ) {
+			return $color;
+		}
+
+		// Functional notation, e.g. rgba( 255, 255, 255, 0.5 ), hsl( 0, 100%, 50% ) or rgb( 0 0 0 / 50% ).
+		if ( preg_match( '/^(rgba?|hsla?)\(\s*[-\d.,%\s\/]{1,64}\)$/i', $color ) ) {
+			return $color;
+		}
+
+		// Safe keywords.
+		if ( in_array( strtolower( $color ), array( 'transparent', 'inherit', 'initial', 'currentcolor', 'none' ), true ) ) {
+			return $color;
+		}
+
+		return '';
+	}
+}
+
+if ( ! function_exists( 'wptabspro_sanitize_css_number' ) ) {
+	/**
+	 * Sanitize a numeric CSS value (unitless).
+	 *
+	 * Keeps an optional minus sign and decimal point only, e.g. "-10.5".
+	 *
+	 * @param  mixed $value The numeric value.
+	 * @return string
+	 */
+	function wptabspro_sanitize_css_number( $value ) {
+		$value = trim( (string) $value );
+
+		if ( '' === $value ) {
+			return '';
+		}
+
+		$number = filter_var( $value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
+
+		// Discard values that carried anything else besides the number itself.
+		return ( (string) $number === $value ) ? $value : '';
+	}
+}
+
+if ( ! function_exists( 'wptabspro_sanitize_font_family' ) ) {
+	/**
+	 * Sanitize a CSS font-family value.
+	 *
+	 * @param  mixed $value The font family.
+	 * @return string
+	 */
+	function wptabspro_sanitize_font_family( $value ) {
+		return preg_replace( '/[^a-zA-Z0-9 _,\-\']/', '', (string) $value );
+	}
+}
+
+if ( ! function_exists( 'wptabspro_sanitize_css_bound_array' ) ) {
+	/**
+	 * Recursively sanitize an array of CSS-bound values by key name.
+	 *
+	 * @param  array $value The value array.
+	 * @return array
+	 */
+	function wptabspro_sanitize_css_bound_array( $value ) {
+		foreach ( $value as $key => $item ) {
+			if ( is_array( $item ) ) {
+				$value[ $key ] = wptabspro_sanitize_css_bound_array( $item );
+				continue;
+			}
+
+			$stripped_key = (string) $key;
+
+			if ( false !== stripos( $stripped_key, 'color' ) ) {
+				$value[ $key ] = wptabspro_sanitize_css_color( $item );
+			} elseif ( 'font-family' === $stripped_key ) {
+				$value[ $key ] = wptabspro_sanitize_font_family( $item );
+			} elseif ( 'font-weight' === $stripped_key ) {
+				$weight        = wptabspro_sanitize_css_number( $item );
+				$value[ $key ] = ( '' === $weight && in_array( strtolower( (string) $item ), array( 'normal', 'bold', 'bolder', 'lighter' ), true ) ) ? strtolower( (string) $item ) : $weight;
+			} elseif ( 'font-style' === $stripped_key ) {
+				$value[ $key ] = ( in_array( strtolower( (string) $item ), array( 'normal', 'italic', 'oblique' ), true ) ) ? strtolower( (string) $item ) : '';
+			} elseif ( 'style' === $stripped_key ) {
+				// Border style select value.
+				$value[ $key ] = ( in_array( strtolower( (string) $item ), array( 'solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden' ), true ) ) ? strtolower( (string) $item ) : '';
+			} elseif ( 'unit' === $stripped_key ) {
+				$value[ $key ] = ( in_array( (string) $item, array( 'px', '%', 'em', 'rem', 'pt' ), true ) ) ? (string) $item : '';
+			} elseif ( preg_match( '/(size|height|width|spacing|margin|padding|radius|top|right|bottom|left|^all$|time|duration|delay)/i', $stripped_key ) ) {
+				// Purely numeric values pass through the number sanitizer; keyword values (e.g. `cover`) keep the conservative strip below.
+				$value[ $key ] = preg_match( '/^-?\d*\.?\d+$/', trim( (string) $item ) ) ? wptabspro_sanitize_css_number( $item ) : preg_replace( '/[{};<>]/', '', (string) $item );
+			} else {
+				// Unclassified scalar: remove characters that could break out into new CSS declarations or selectors.
+				$value[ $key ] = preg_replace( '/[{};<>]/', '', (string) $item );
+			}
+		}
+
+		return $value;
+	}
+}
+
+if ( ! function_exists( 'wptabspro_sanitize_css_bound_value' ) ) {
+	/**
+	 * Sanitize a field value whose value is interpolated into dynamic CSS output.
+	 *
+	 * Runs after the default kses sanitization for the CSS-bound field types so a
+	 * forged value such as `red; } body { display:none }` can never reach the
+	 * generated stylesheet.
+	 *
+	 * @param  mixed $value The sanitized field value.
+	 * @param  array $field The field configuration.
+	 * @return mixed
+	 */
+	function wptabspro_sanitize_css_bound_value( $value, $field ) {
+		$type = isset( $field['type'] ) ? $field['type'] : '';
+
+		switch ( $type ) {
+			case 'color':
+				return is_array( $value ) ? $value : wptabspro_sanitize_css_color( $value );
+
+			case 'color_group':
+			case 'spacing':
+			case 'border':
+			case 'background':
+			case 'typography':
+			case 'google':
+				return is_array( $value ) ? wptabspro_sanitize_css_bound_array( $value ) : wptabspro_sanitize_css_number( $value );
+
+			case 'spinner':
+			case 'slider':
+			case 'number':
+				return is_array( $value ) ? $value : wptabspro_sanitize_css_number( $value );
+
+			case 'select':
+			case 'button_set':
+			case 'image_select':
+			case 'radio':
+				// Enforce the configured options when they are a plain flat array.
+				if ( empty( $field['options'] ) || ! is_array( $field['options'] ) ) {
+					return $value;
+				}
+				$first_option = reset( $field['options'] );
+				if ( ! is_scalar( $first_option ) && ! is_null( $first_option ) ) {
+					return $value;
+				}
+				$allowed = array_merge( array_keys( $field['options'] ), array_filter( $field['options'], 'is_scalar' ) );
+				if ( is_array( $value ) ) {
+					return $value; // Multi-selects whose options come from callbacks keep the kses-passed value.
+				}
+				if ( in_array( (string) $value, array_map( 'strval', $allowed ), true ) ) {
+					return $value;
+				}
+				// Fall back to the field default, otherwise discard the forged value.
+				return isset( $field['default'] ) && is_scalar( $field['default'] ) ? $field['default'] : '';
+
+			default:
+				return $value;
+		}
+	}
+}
+
+if ( ! function_exists( 'wptabspro_sanitize_inline_css' ) ) {
+	/**
+	 * Harden a CSS string before it is printed inside a <style> element.
+	 *
+	 * Every "<" is replaced with its CSS escape "\3c " so no markup (such as
+	 * a closing </style> tag or an HTML comment) can be formed. Unlike stripping
+	 * matched sequences, this cannot be bypassed by nesting, e.g.
+	 * "</sty</stylele>". Valid CSS never needs a literal "<" outside strings,
+	 * and inside strings "\3c " still renders as "<".
+	 *
+	 * @param  string $css The CSS string.
+	 * @return string
+	 */
+	function wptabspro_sanitize_inline_css( $css ) {
+		return str_replace( '<', '\3c ', (string) $css );
+	}
+}
+
 if ( ! function_exists( 'wptabspro_sanitize_tab_title_content' ) ) {
 	/**
 	 *

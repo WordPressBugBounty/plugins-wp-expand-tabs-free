@@ -82,6 +82,7 @@ class WPTabs {
 	 */
 	private function register_cpt_hooks( Loader $loader, TabsPostType $cpt ): void {
 		$loader->add_action( 'init', $cpt, 'register' );
+		$loader->add_filter( 'map_meta_cap', $cpt, 'restrict_caps_to_capability', 10, 4 );
 		$loader->add_filter( 'post_updated_messages', $cpt, 'updated_messages', 10, 2 );
 		$loader->add_filter( 'manage_sp_wp_tabs_posts_columns', $cpt, 'columns' );
 		$loader->add_action( 'manage_sp_wp_tabs_posts_custom_column', $cpt, 'custom_column', 10, 2 );

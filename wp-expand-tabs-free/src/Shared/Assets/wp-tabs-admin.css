@@ -227,7 +227,7 @@ body.wp-admin #adminmenu .wp-submenu li:has(a[href*="page=tab_advanced"]) {
 
 .sp-wp-tabs-go-pro-icon,
 #adminmenu #menu-posts-sp_wp_tabs li a .sp-wp-tabs-upgrade-btn .sp-wp-tabs-go-pro-icon {
-    background-image: url(../img/premium-light.svg);
+    background-image: url(img/premium-light.svg);
     background-repeat: no-repeat;
     background-position: center;
     width: 16px;

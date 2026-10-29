@@ -439,6 +439,11 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 				return false;
 			}
 
+			// The user must be able to access the options page this form belongs to.
+			if ( ! current_user_can( $this->args['menu_capability'] ) ) {
+				return false;
+			}
+
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach.
 			// @codingStandardsIgnoreLine
@@ -499,11 +504,11 @@ if ( ! class_exists( 'SP_WP_TABS_Options' ) ) {
 
 							if ( is_array( $field_value ) ) {
 
-								$data[ $field_id ] = wp_kses_post_deep( $field_value );
+								$data[ $field_id ] = wptabspro_sanitize_css_bound_value( wp_kses_post_deep( $field_value ), $field );
 
 							} else {
 
-								$data[ $field_id ] = wp_kses_post( $field_value );
+								$data[ $field_id ] = wptabspro_sanitize_css_bound_value( wp_kses_post( $field_value ), $field );
 							}
 						} elseif ( isset( $field['sanitize'] ) && function_exists( $field['sanitize'] ) ) {
 

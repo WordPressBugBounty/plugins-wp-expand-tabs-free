@@ -71,6 +71,33 @@ class Shortcode {
 	}
 
 	/**
+	 * Whether a tab group may be rendered for the current visitor.
+	 *
+	 * A tab group renders publicly only when it is published and not
+	 * password-protected. Any other status (draft, pending, private,
+	 * scheduled) or a password requirement renders solely for users who
+	 * can read the post, so embedding [wptabs id=N] cannot be used to
+	 * disclose tab groups an administrator has not published.
+	 *
+	 * @since 3.1.8
+	 * @param int|string $post_id The tab group post ID.
+	 * @return bool True when the tab group may be rendered.
+	 */
+	public static function is_viewable( $post_id ) {
+		$post_id = absint( $post_id );
+
+		if ( ! $post_id ) {
+			return false;
+		}
+
+		if ( 'publish' === get_post_status( $post_id ) && ! post_password_required( $post_id ) ) {
+			return true;
+		}
+
+		return current_user_can( 'read_post', $post_id );
+	}
+
+	/**
 	 * ShortCode of the Plugin.
 	 *
 	 * @since 2.0.0
@@ -80,7 +107,10 @@ class Shortcode {
 	public function execute_tabs_shortcode( $attributes, $content = null ) {
 		static $rendered_tabs = array();
 
-		if ( empty( $attributes['id'] ) || 'sp_wp_tabs' !== get_post_type( $attributes['id'] ) || ( get_post_status( $attributes['id'] ) === 'trash' ) ) {
+		if ( empty( $attributes['id'] )
+			|| 'sp_wp_tabs' !== get_post_type( $attributes['id'] )
+			|| 'trash' === get_post_status( $attributes['id'] )
+			|| ! self::is_viewable( $attributes['id'] ) ) {
 			return;
 		}
 		$post_id                  = esc_attr( intval( $attributes['id'] ) );

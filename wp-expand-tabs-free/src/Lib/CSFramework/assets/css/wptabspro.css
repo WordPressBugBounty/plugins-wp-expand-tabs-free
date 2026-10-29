@@ -5562,10 +5562,6 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   color: #343434;
 }
 
-.post-type-sp_products_tabs #the-list tr.sp-woo-default-tab th.check-column {
-  border-bottom: 1px solid #C3C4C7;
-}
-
 .post-type-sp_products_tabs .type-sp_products_tabs td.last_modified .product-tabs-table-data {
   color: #8B9494;
 }
@@ -5588,11 +5584,8 @@ div:is(#sp_tab_promotional_notice_sidebar, #sp_tab_support_builder_sidebar, #sp_
   padding-left: 82px;
 }
 
-.post-type-sp_products_tabs td {
-  border-bottom: 1px solid #C3C4C7;
-}
-
-.post-type-sp_products_tabs tr:not(:last-child, .sp-woo-default-tab) .check-column label {
+.post-type-sp_products_tabs td,
+.post-type-sp_products_tabs #the-list th {
   border-bottom: 1px solid #C3C4C7;
 }
 

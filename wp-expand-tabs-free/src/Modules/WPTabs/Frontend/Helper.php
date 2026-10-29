@@ -58,7 +58,7 @@ class Helper {
 			$sptpro_dynamic_style .= $sptpro_custom_css;
 		}
 		$dynamic_style = array(
-			'dynamic_css' => self::minify_output( $sptpro_dynamic_style ),
+			'dynamic_css' => wptabspro_sanitize_inline_css( self::minify_output( $sptpro_dynamic_style ) ),
 			'accordion'   => $accordion_mode,
 		);
 		return $dynamic_style;

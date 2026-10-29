@@ -396,6 +396,16 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 				return $post_id;
 			}
 
+			// Only save for the post types this metabox is assigned to.
+			if ( ! in_array( get_post_type( $post_id ), $this->post_type, true ) ) {
+				return $post_id;
+			}
+
+			// The user must be able to edit this post to change its meta.
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				return $post_id;
+			}
+
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach.
 			// @codingStandardsIgnoreLine
@@ -421,9 +431,9 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 										// Sanitize "post" request of field.
 										if ( ! isset( $field['sanitize'] ) ) {
 											if ( is_array( $field_value ) ) {
-												$data[ $field_id ] = wp_kses_post_deep( $field_value );
+												$data[ $field_id ] = wptabspro_sanitize_css_bound_value( wp_kses_post_deep( $field_value ), $field );
 											} else {
-												$data[ $field_id ] = wp_kses_post( $field_value );
+												$data[ $field_id ] = wptabspro_sanitize_css_bound_value( wp_kses_post( $field_value ), $field );
 											}
 										} elseif ( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
 											$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
@@ -454,9 +464,9 @@ if ( ! class_exists( 'SP_WP_TABS_Metabox' ) ) {
 								if ( ! empty( $field['sanitize'] ) ) {
 									$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
 								} elseif ( $field_value && is_array( $field_value ) ) {
-										$data[ $field_id ] = wp_kses_post_deep( $field_value );
+										$data[ $field_id ] = wptabspro_sanitize_css_bound_value( wp_kses_post_deep( $field_value ), $field );
 								} else {
-									$data[ $field_id ] = $field_value ? wp_kses_post( $field_value ) : $field_value;
+									$data[ $field_id ] = $field_value ? wptabspro_sanitize_css_bound_value( wp_kses_post( $field_value ), $field ) : $field_value;
 								}
 
 								// Validate "post" request of field.

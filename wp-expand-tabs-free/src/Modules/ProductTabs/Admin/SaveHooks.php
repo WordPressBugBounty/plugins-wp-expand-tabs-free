@@ -348,19 +348,19 @@ class SaveHooks {
 			return;
 		}
 
-		// Get the unique switcher ID.
-		$switcher_id = isset( $_POST['switcher_id'] ) ? sanitize_text_field( wp_unslash( $_POST['switcher_id'] ) ) : '';
+		// Get the unique switcher ID (a Product Tabs post ID rendered in the admin list table).
+		$switcher_id = isset( $_POST['switcher_id'] ) ? absint( wp_unslash( $_POST['switcher_id'] ) ) : 0;
 
 		// Determine the state.
 		$state = isset( $_POST['state'] ) && 'enabled' === $_POST['state'] ? true : false;
 
-		if ( $switcher_id ) {
+		if ( $switcher_id && 'sp_products_tabs' === get_post_type( $switcher_id ) ) {
 			// Save the state using a meta key specific to the switcher ID.
 			update_post_meta( $switcher_id, 'show_product_tabs', $state );
 		}
 
 		// Respond to the AJAX request.
-		wp_send_json_success( $switcher_id );
+		wp_send_json_success( (string) $switcher_id );
 	}
 
 	/**

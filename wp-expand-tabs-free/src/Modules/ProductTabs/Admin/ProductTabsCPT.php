@@ -43,6 +43,7 @@ class ProductTabsCPT {
 	 */
 	public function register() {
 		$this->loader->add_action( 'init', $this, 'register_cpt' );
+		$this->loader->add_filter( 'map_meta_cap', $this, 'restrict_caps_to_capability', 10, 4 );
 		$this->loader->add_action( 'edit_form_top', $this, 'back_to_all_product_tabs' );
 		$this->loader->add_filter( 'post_updated_messages', $this, 'updated_messages', 10, 2 );
 	}
@@ -87,6 +88,36 @@ class ProductTabsCPT {
 		);
 
 		register_post_type( 'sp_products_tabs', $args );
+	}
+
+	/**
+	 * Require the plugin's admin capability for per-post actions on the Product Tabs post type.
+	 *
+	 * Mapping meta capabilities (edit_post, read_post, delete_post) to a shared
+	 * primitive capability such as manage_options via the post type's `capabilities`
+	 * argument is not possible: register_post_type() would register that primitive as
+	 * a meta-capability alias in the global $post_type_meta_caps map and break every
+	 * capability check for it on the site, causing infinite recursion. Enforcing the
+	 * boundary here keeps the check scoped to this post type only.
+	 *
+	 * @param string[] $caps    The mapped primitive capabilities.
+	 * @param string   $cap     The meta capability being checked.
+	 * @param int      $user_id The user ID.
+	 * @param array    $args    The arguments passed to the capability check.
+	 * @return string[]
+	 */
+	public function restrict_caps_to_capability( $caps, $cap, $user_id, $args ) {
+		if ( empty( $args[0] ) || ! in_array( $cap, array( 'edit_post', 'read_post', 'delete_post' ), true ) ) {
+			return $caps;
+		}
+
+		$post = get_post( $args[0] );
+
+		if ( ! $post || 'sp_products_tabs' !== $post->post_type ) {
+			return $caps;
+		}
+
+		return array( apply_filters( 'sp_wp_tab_pro_ui_permission', 'manage_options' ) );
 	}
 
 

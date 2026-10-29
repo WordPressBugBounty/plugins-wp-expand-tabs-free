@@ -512,12 +512,13 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 					break;
 
 				default:
-					if ( function_exists( $type ) ) {
-						if ( ! empty( $term ) ) {
-							$options = call_user_func( $type, $query_args );
-						} else {
-							$options = call_user_func( $type, $term, $query_args );
-						}
+					/**
+					 * Only allow-listed query functions may be invoked by name, and
+					 * only with an empty, server-defined argument list: nothing
+					 * derived from the request ever reaches call_user_func() here.
+					 */
+					if ( in_array( $type, self::get_allowed_query_callables(), true ) && function_exists( $type ) ) {
+						$options = call_user_func( $type, array() );
 					}
 
 					break;
@@ -541,6 +542,17 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 			}
 
 			return $options;
+		}
+
+		/**
+		 * The only query functions the fields and the chosen AJAX endpoint
+		 * may invoke by name.
+		 *
+		 * @since 3.1.8
+		 * @return string[]
+		 */
+		public static function get_allowed_query_callables() {
+			return apply_filters( 'wptabspro_chosen_allowed_callables', array( 'get_pages', 'get_posts', 'get_terms', 'get_users' ) );
 		}
 
 		/**
@@ -633,7 +645,7 @@ if ( ! class_exists( 'SP_WP_TABS_Fields' ) ) {
 							break;
 
 						default:
-							if ( function_exists( $type . '_title' ) ) {
+							if ( in_array( $type, self::get_allowed_query_callables(), true ) && function_exists( $type . '_title' ) ) {
 								$options[ $value ] = call_user_func( $type . '_title', $value );
 							} else {
 								$options[ $value ] = ucfirst( $value );

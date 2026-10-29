@@ -91,6 +91,36 @@ class TabsPostType {
 	}
 
 	/**
+	 * Require the plugin's admin capability for per-post actions on the Tabs post type.
+	 *
+	 * Mapping meta capabilities (edit_post, read_post, delete_post) to a shared
+	 * primitive capability such as manage_options via the post type's `capabilities`
+	 * argument is not possible: register_post_type() would register that primitive as
+	 * a meta-capability alias in the global $post_type_meta_caps map and break every
+	 * capability check for it on the site, causing infinite recursion. Enforcing the
+	 * boundary here keeps the check scoped to this post type only.
+	 *
+	 * @param string[] $caps    The mapped primitive capabilities.
+	 * @param string   $cap     The meta capability being checked.
+	 * @param int      $user_id The user ID.
+	 * @param array    $args    The arguments passed to the capability check.
+	 * @return string[]
+	 */
+	public function restrict_caps_to_capability( $caps, $cap, $user_id, $args ) {
+		if ( empty( $args[0] ) || ! in_array( $cap, array( 'edit_post', 'read_post', 'delete_post' ), true ) ) {
+			return $caps;
+		}
+
+		$post = get_post( $args[0] );
+
+		if ( ! $post || 'sp_wp_tabs' !== $post->post_type ) {
+			return $caps;
+		}
+
+		return array( apply_filters( 'sp_wp_tabs_ui_permission', 'manage_options' ) );
+	}
+
+	/**
 	 * Change Tabs updated messages.
 	 *
 	 * @param string $messages The Update messages.

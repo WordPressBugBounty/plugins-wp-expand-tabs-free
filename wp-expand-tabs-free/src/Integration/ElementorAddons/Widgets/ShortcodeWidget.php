@@ -169,7 +169,13 @@ class ShortcodeWidget extends \Elementor\Widget_Base {
 
 		if ( \Elementor\Plugin::$instance->editor
 			&& \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
-			$post_id = esc_attr( $generator_id );
+			$post_id = absint( $generator_id );
+
+			// Render in the editor only what the shortcode itself would render.
+			if ( 'sp_wp_tabs' !== get_post_type( $post_id ) || ! Shortcode::is_viewable( $post_id ) ) {
+				echo '<div style="text-align: center; margin-top: 0; padding: 10px" class="elementor-add-section-drag-title">' . esc_html__( 'This tabs group is not published.', 'wp-expand-tabs-free' ) . '</div>';
+				return;
+			}
 			// Content Accordion.
 			$sptpro_data_src          = get_post_meta( $post_id, 'sp_tab_source_options', true );
 			$sptpro_shortcode_options = get_post_meta( $post_id, 'sp_tab_shortcode_options', true );

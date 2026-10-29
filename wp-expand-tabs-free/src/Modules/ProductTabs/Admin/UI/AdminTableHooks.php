@@ -87,6 +87,11 @@ class AdminTableHooks {
 			return $data;
 		}
 
+		// The user must be able to edit this post to override its title.
+		if ( ! empty( $postarr['ID'] ) && ! current_user_can( 'edit_post', (int) $postarr['ID'] ) ) {
+			return $data;
+		}
+
 		// Get the custom tab title from the POST data.
 		$tab_title = $_POST['sptpro_woo_product_tabs_settings']['product_tab_title_section']['tab_title'] ?? ''; // phpcs:ignore -- This is sanitized later.
 		// Sanitize and validate.
