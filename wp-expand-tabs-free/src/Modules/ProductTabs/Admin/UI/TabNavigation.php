@@ -62,6 +62,11 @@ class TabNavigation {
 		if ( is_admin() && ( ( $is_target_base && $is_product_tabs ) || ( $is_target_base && 'sp_wp_tabs' === $screen->post_type ) ) ) {
 			remove_all_actions( 'admin_notices' );
 			remove_all_actions( 'all_admin_notices' );
+
+			// Keep the shared ShapedPlugin BFCM notice on the plugin's own screens.
+			if ( class_exists( 'ShapedPlugin_BFCM_Notice_2026' ) ) {
+				add_action( 'admin_notices', array( \ShapedPlugin_BFCM_Notice_2026::instance(), 'render' ) );
+			}
 		}
 
 		$allowed_screens = array( 'sp_wp_tabs_page_tab_advanced', 'sp_wp_tabs_page_tab_styles' );

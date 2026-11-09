@@ -28,7 +28,6 @@ use ShapedPlugin\SmartTabsFree\Core\Notices\Review;
 use ShapedPlugin\SmartTabsFree\Core\AdminMenus\AdminMenus;
 use ShapedPlugin\SmartTabsFree\Integration\GutenbergBlock\GutenbergBlock;
 use ShapedPlugin\SmartTabsFree\Integration\ElementorAddons\Elementor_Addon;
-use ShapedPlugin\SmartTabsFree\Core\Notices\ShapedPlugin_Offer_Banner;
 use ShapedPlugin\SmartTabsFree\Shared\DependencyChecker;
 
 use ShapedPlugin\SmartTabsFree\Shared\SharedAssetsLoader;
@@ -110,12 +109,22 @@ class Plugin {
 
 		( new Review() )->register_hooks( $this->loader );
 
-		if ( ! defined( 'SHAPEDPLIUGIN_OFFER_BANNER_LOADED' ) ) {
-			define( 'SHAPEDPLIUGIN_OFFER_BANNER_LOADED', true );
+		if ( is_admin() ) {
 			/**
-			 * The file is responsible for generating admin offer banner.
+			 * Shared ShapedPlugin BFCM notice. Only one notice renders even when
+			 * several ShapedPlugin free plugins are active.
 			 */
-			ShapedPlugin_Offer_Banner::instance();
+			require_once Constants::src_path() . 'Core/Notices/shapedplugin-bfcm-notice.php';
+
+			\ShapedPlugin_BFCM_Notice_2026::register(
+				array(
+					'slug'       => 'wp-expand-tabs-free',
+					'name'       => 'Smart Tabs Pro',
+					'image'      => Constants::url() . 'src/Core/Notices/Images/bfcm-notice-2026.webp',
+					'link'       => 'https://wptabs.com/pricing/?utm_source=dashboard&utm_medium=wpt_dealbutton&utm_campaign=bfcm26',
+					'post_types' => array( 'sp_wp_tabs', 'sp_products_tabs' ),
+				)
+			);
 		}
 
 		/**
